@@ -1,0 +1,531 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Loan Calculator WP\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-09-03 10:37+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: \n"
+"Language: \n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.5.3; wp-5.8\n"
+"X-Domain: loan-calculator-wp"
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:112
+msgid " Loan Calculator"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:206
+msgid "About Calculator Popup Content"
+msgstr ""
+
+#: loan-calculator-wp.php:137
+msgid "About this calculator"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:197
+msgid "About This Calculator Label"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:433
+msgid "Application Fee"
+msgstr ""
+
+#: loan-calculator-wp.php:97
+msgid "Application fee"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:500
+msgid "Application Fee Label"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:257
+msgid "Background Color"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:273
+msgid "Background Light Color"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-loan-process-form.php:283
+msgid "Balance"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:393
+msgid "Ballon Percentage"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-loan-process-form.php:187
+msgid "Balloon Amount"
+msgstr ""
+
+#: loan-calculator-wp.php:123
+msgid "Balloon amount"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:472
+msgid "Balloon Amount Label"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:281
+msgid "Border Color"
+msgstr ""
+
+#: loan-calculator-wp.php:130
+#: includes/admin/forms/ww-loan-calculator-setting.php:654
+msgid "Calculator Disclaimer"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:662
+msgid "Calculator Disclaimer Description"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:646
+msgid "Calculator Disclaimer Settings "
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:188
+msgid "Calculator Heading Title"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:695
+msgid ""
+"Check this box if you want to delete all settings data on plugin uninstall"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:703
+msgid ""
+"Check this box if you want to disable font awesome css on plugin install"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:230
+msgid ""
+"Check this box to enable print option. It will be visible on top right of "
+"the calculator"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:172
+msgid "Configure calculator general settings."
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:637
+msgid "Contact Form Content"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:614
+msgid "Contact form setting."
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:621
+msgid "Contact Info Label"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:629
+msgid "Contact Popup Button Label"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:141
+msgid "Contact Us / Disclaimer"
+msgstr ""
+
+#: loan-calculator-wp.php:129
+msgid "Contact us now for a quote"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:612
+msgid "Contact Us Settings - Setup Contact Form"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:183
+msgid "Copy this shortcode and add in any post or page"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:250
+msgid ""
+"Customize the calculator look. Change the background color, hover color, "
+"border color etc..."
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:448
+msgid "Default Text for Calculation Result"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:292
+msgid "Default Value for Amount Text Field"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:137
+msgid "Default Value Settings"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:692
+msgid "Delete Data On Uninstall"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:700
+msgid "Disable Font Awesome CSS"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:495
+msgid ""
+"Display Application fees, monthly fees, total regular fees and total fees "
+"below calculator result"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:192
+msgid "Display calculator heading title"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:248
+msgid "Display Color Settings"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:201
+msgid "Display on top right of the calculator"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:135
+msgid "Display Settings"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:491
+#: includes/admin/forms/ww-loan-calculator-setting.php:495
+msgid "Enable Fee Calculation"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:539
+msgid "Enable individual tab based on your need"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:568
+#: includes/admin/forms/ww-loan-calculator-setting.php:571
+msgid "Enable Loan Mortisation Tab"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:224
+#: includes/admin/forms/ww-loan-calculator-setting.php:228
+msgid "Enable Print Option"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:546
+#: includes/admin/forms/ww-loan-calculator-setting.php:549
+msgid "Enable Repayment Chart Tab"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:584
+#: includes/admin/forms/ww-loan-calculator-setting.php:587
+msgid "Enable Video Tab"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:219
+msgid ""
+"Enter the about calculator information which will be displayed on click of "
+"About us calculator label"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:480
+msgid "Fee Calculation Settings "
+msgstr ""
+
+#: loan-calculator-wp.php:138
+msgid "Feel free to use our Equipment Finance Calculator"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:133
+#: includes/admin/forms/ww-loan-calculator-setting.php:170
+msgid "General Settings"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:641
+msgid ""
+"Here you can enter any contact form shortcode. If you are using contact form "
+"7, then enter contact form 7 shotcode"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "http://www.worldwebtechnology.com"
+msgstr ""
+
+#. URI of the plugin
+msgid "http://www.worldwebtechnology.com/"
+msgstr ""
+
+#: loan-calculator-wp.php:96
+msgid "I want a"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-loan-process-form.php:282
+msgid "Interest"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-loan-process-form.php:179
+msgid "Interest Rate"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:417
+msgid "Interest Rate Max Value"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:409
+msgid "Interest Rate Min Value"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:425
+msgid "Interest Rates Tooltip"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:401
+msgid "Interested Rate"
+msgstr ""
+
+#. Description of the plugin
+msgid "Loan / EMI Calculator for Home Loan and Personal Loan"
+msgstr ""
+
+#: loan-calculator-wp.php:127
+msgid "Loan Amortisation Table"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:576
+msgid "Loan Amortisation Table Tooltip"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-loan-process-form.php:146
+#: includes/admin/forms/ww-loan-calculator-setting.php:301
+msgid "Loan Amount"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:317
+msgid "Loan Amount Max Value"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:309
+msgid "Loan Amount Min Value"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:326
+msgid "Loan Amount Tooltip"
+msgstr ""
+
+#: includes/admin/class-loan-calculator-admin.php:33
+msgid "Loan Calculator"
+msgstr ""
+
+#. Name of the plugin
+msgid "Loan Calculator WP"
+msgstr ""
+
+#: loan-calculator-wp.php:124
+msgid "Loan Product Features"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:335
+msgid "Loan Term"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:368
+msgid "Loan Term Max Value"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:352
+msgid "Loan Term Min Value"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-loan-process-form.php:156
+msgid "Loan Terms"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:384
+msgid "Loan Terms Tooltip"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:143
+#: includes/admin/forms/ww-loan-calculator-setting.php:686
+msgid "Misc Settings"
+msgstr ""
+
+#: loan-calculator-wp.php:98
+msgid "Monthly fee"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:509
+msgid "Monthly Fee Label"
+msgstr ""
+
+#: loan-calculator-wp.php:118
+msgid "Monthly Payment (incl fees)"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:441
+msgid "Monthly Rate"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-loan-process-form.php:158
+msgid "Months"
+msgstr ""
+
+#: loan-calculator-wp.php:122
+#: includes/admin/forms/ww-loan-calculator-loan-process-form.php:309
+msgid "over"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-loan-process-form.php:281
+msgid "Payment"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-loan-process-form.php:169
+msgid "Payment Mode"
+msgstr ""
+
+#: loan-calculator-wp.php:119
+#: includes/admin/forms/ww-loan-calculator-loan-process-form.php:301
+msgid "per month for"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-loan-process-form.php:280
+msgid "Period"
+msgstr ""
+
+#: loan-calculator-wp.php:133
+msgid "Please enter the number of years in which you plan to repay the loan."
+msgstr ""
+
+#: loan-calculator-wp.php:132
+msgid "Please enter your loan amount here."
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:684
+msgid "Plugin Misc Settings."
+msgstr ""
+
+#: loan-calculator-wp.php:136 loan-calculator-wp.php:163
+msgid "Print"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:235
+msgid "Print Option Label"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:456
+msgid "Regular Repayment Label"
+msgstr ""
+
+#: loan-calculator-wp.php:126
+msgid "Repayment Chart"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:559
+msgid "Repayment Chart Tooltip"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-loan-process-form.php:165
+msgid "Repayment Frequency"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:265
+msgid "Selected Color"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:450
+msgid "Set the calculation results labels"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:294
+msgid "Set the default value for all amount text fields"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:179
+msgid "Shortcode"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:482
+msgid ""
+"Show application fees, monthly fees, total regular fees and total fees. "
+"Customize each fees label."
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:648
+msgid "Show disclaimer notice at the end of calculator."
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-loan-process-form.php:269
+msgid "Sorry"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:139
+msgid "Tab Field"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:537
+msgid "Tab Settings Field"
+msgstr ""
+
+#: loan-calculator-wp.php:134
+msgid ""
+"The interest rate will default to the product you selected. You can also "
+"change the rate up or down to understand the effect on your repayments and "
+"total interest payable."
+msgstr ""
+
+#: loan-calculator-wp.php:131
+msgid ""
+"The repayment amount shown using this calculator is an estimate, based on "
+"information you have provided. It is provided for illustrative purposes only "
+"and actual repayment amounts may vary. To find out actual repayment amounts, "
+"contact us. This calculation does not constitute a quote, loan approval, "
+"agreement or advice by Yakka Finance. It does not take into account your "
+"personal or financial circumstances."
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-loan-process-form.php:270
+msgid "This video does not exist."
+msgstr ""
+
+#: loan-calculator-wp.php:100
+msgid "Total fees"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:525
+msgid "Total Fees Label"
+msgstr ""
+
+#: loan-calculator-wp.php:121
+msgid "Total interest payable"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:464
+msgid "Total Interest Payable Label"
+msgstr ""
+
+#: loan-calculator-wp.php:99
+msgid "Total regular fees"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:517
+msgid "Total Regular Fees Label"
+msgstr ""
+
+#: loan-calculator-wp.php:125
+msgid "Video"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:592
+msgid "Video Tab Tooltip"
+msgstr ""
+
+#. Author of the plugin
+msgid "World Web Technology"
+msgstr ""
+
+#: loan-calculator-wp.php:120
+msgid "years"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:600
+msgid "Youtube Video Link"
+msgstr ""
