@@ -64,5 +64,8 @@ https://www.youtube.com/watch?v=3p3IhovVffs
 
 == Changelog ==
 
-= 1.0 =
+= 1.0.0 =
 * Initial release.
+
+= 1.0.1 =
+* Added multi currency support

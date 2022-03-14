@@ -93,6 +93,11 @@ $enable_video_tab = isset( $loan_all_setting_data['enable_video_tab'] ) ? $loan_
 $enable_loan_mortisation_tab = isset( $loan_all_setting_data['enable_loan_mortisation_tab'] ) ? $loan_all_setting_data['enable_loan_mortisation_tab'] : "";
 $print_option_enable = isset( $loan_all_setting_data['print_option_enable'] ) ? $loan_all_setting_data['print_option_enable'] : "";
 $print_option_heading = isset( $loan_all_setting_data['print_option_heading'] ) ? $loan_all_setting_data['print_option_heading'] : "";
+$ww_loan_currency = isset( $loan_all_setting_data['ww_loan_currency'] ) ? $loan_all_setting_data['ww_loan_currency'] : "";
+
+
+$currency_symbols = ww_loan_get_currency_symbol();
+
 
 /* END : Tab Enable Settings */
 
@@ -148,7 +153,7 @@ $print_option_heading = isset( $loan_all_setting_data['print_option_heading'] ) 
                         <label for="loan_amt" class="loan-text" ><?php esc_html_e( 'Loan Amount', 'loan-calculator-wp' ); ?> <i class="fa fa-info-circle" aria-hidden="true" tabindex="1"></i><span class="text-tooltip-disp"><?php esc_html_e( $loan_amount_tooltip, 'loan-calculator-wp' ); ?></span></label>
 
                         <div class="loan-text-dis">
-                            <span class="extra-info">$</span>                           
+                            <span class="extra-info"><?php echo $currency_symbols;?></span>                           
                             <input type="text" name="loan_amount" id="loan_amount" value="" tabindex="2" />
                         </div>
                         <input type="range" min="<?php esc_attr_e( $loan_amount_min_value,'loan-calculator-wp' );?>" max="<?php esc_attr_e( $loan_amount_max_value,'loan-calculator-wp' );?>" value="<?php esc_attr_e( $loan_amount,'loan-calculator-wp' );?>" class="slider" id="loan_amount_range" tabindex="3" step="1000">
@@ -187,7 +192,7 @@ $print_option_heading = isset( $loan_all_setting_data['print_option_heading'] ) 
                     <div class="second-row-sub-child">
                         <label for="loan_amt" class="loan-text" ><?php esc_html_e( 'Balloon Amount', 'loan-calculator-wp' ); ?></label>
                         <div class="loan-text-dis">
-                            <span class="extra-info">$</span>
+                            <span class="extra-info"><?php echo $currency_symbols;?></span>
                             <input type="text" name="ballon_amounts" id="ballon_amounts" value="" tabindex="11" onkeydown="return onlyNos(event,'ballon_amounts')"/>
 
                             <input type="text" name="ballon_amounts_per" id="ballon_amounts_per" value="" tabindex="12" onkeydown="return onlyNos(event,'ballon_amounts_per')"/>
@@ -293,7 +298,7 @@ $print_option_heading = isset( $loan_all_setting_data['print_option_heading'] ) 
                             <label><strong><?php esc_html_e( $regular_repayment_heading, 'loan-calculator-wp' ); ?></strong></label>
                         </div>
                         <div class="loan-cal-desc-val">
-                        <label><span><small><?php echo esc_html('$'); ?></small><span id="per_month_amount"></span></span>  <?php esc_html_e( 'per month for', 'loan-calculator-wp' ); ?><span id="loan_amount_year"></span> </span></label>
+                        <label><span><small><?php echo esc_html($currency_symbols); ?></small><span id="per_month_amount"></span></span>  <?php esc_html_e( 'per month for', 'loan-calculator-wp' ); ?><span id="loan_amount_year"></span> </span></label>
                         </div>
                     </div>
                 <div class="loan-cal-desc">
@@ -301,7 +306,7 @@ $print_option_heading = isset( $loan_all_setting_data['print_option_heading'] ) 
                             <label><strong><?php esc_html_e( $total_interests_payable_heading, 'loan-calculator-wp' ); ?></strong></label>
                         </div>
                         <div class="loan-cal-desc-val">
-                        <label><small><?php echo esc_html('$'); ?></small><span id="total_interests_amt"></span>  <?php esc_html_e( 'over', 'loan-calculator-wp' ); ?> <span id="total_interests_years"></span> </label>
+                        <label><small><?php echo esc_html($currency_symbols); ?></small><span id="total_interests_amt"></span>  <?php esc_html_e( 'over', 'loan-calculator-wp' ); ?> <span id="total_interests_years"></span> </label>
                         </div>
 
                     </div>
@@ -310,7 +315,7 @@ $print_option_heading = isset( $loan_all_setting_data['print_option_heading'] ) 
                             <label><strong><?php esc_html_e( $ballon_amt_heading, 'loan-calculator-wp' ); ?> (<span id="bill_ballon_per"><?php esc_attr_e(number_format( $ballon_per,2 ),'loan-calculator-wp'); ?></span>%)</strong></label>
                         </div>
                         <div class="loan-cal-desc-val">
-                        <label><small><?php echo esc_html('$'); ?></small><strong><span id="bill_ballon_amt"><?php esc_attr_e(number_format( ( $loan_amount*$ballon_per/100 ),2 ),'loan-calculator-wp' ); ?></span></strong></label>
+                        <label><small><?php echo esc_html($currency_symbols); ?></small><strong><span id="bill_ballon_amt"><?php esc_attr_e(number_format( ( $loan_amount*$ballon_per/100 ),2 ),'loan-calculator-wp' ); ?></span></strong></label>
                         </div>
 
                     </div>

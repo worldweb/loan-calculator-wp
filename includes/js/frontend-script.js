@@ -148,6 +148,9 @@ jQuery(document).ready(function ($) {
 		jQuery("#loan_amount_rate").html(interest_rates.toFixed(2));
 		jQuery("#total_interests_amt").html(addCommas(Math.round(parseFloat(total_interests)-parseFloat(loan_advance_interest))));
 		jQuery("#total_interests_years").html(display_year_str);
+
+		var currency_symbols =setting_data.currency_symbols;
+
 		/* END : Interests Field Fill*/
 
 		/* START : Loan Table Section */
@@ -172,8 +175,8 @@ jQuery(document).ready(function ($) {
 				table_data +='<td>0.00</td>';
 				table_data +='<td>0.00</td>';
 			}else{
-				table_data +='<td>-$'+display_monthly_payment+'</td>';
-				table_data +='<td>$'+interest.toFixed(2)+'</td>';
+				table_data +='<td>-'+currency_symbols+display_monthly_payment+'</td>';
+				table_data +='<td>'+currency_symbols+interest.toFixed(2)+'</td>';
 			}
 			if(i  == loan_terms_month){
 				balance =balance - ballon_amounts;
@@ -183,7 +186,7 @@ jQuery(document).ready(function ($) {
 				display_balance =0.00
 			}
 			display_balance=display_balance.toFixed(2);		
-			table_data +='<td>$'+display_balance+'</td>';
+			table_data +='<td>'+currency_symbols+display_balance+'</td>';
 			table_data +='</tr>';
 			balance =balance - principal;
 			
@@ -551,9 +554,9 @@ jQuery(document).ready(function ($) {
 function addCommas(nStr)
 {
     nStr += '';
-    x = nStr.split('.');
-    x1 = x[0];
-    x2 = x.length > 1 ? '.' + x[1] : '';
+  var  x = nStr.split('.');
+   var  x1 = x[0];
+   var x2 = x.length > 1 ? '.' + x[1] : '';
     var rgx = /(\d+)(\d{3})/;
     while (rgx.test(x1)) {
         x1 = x1.replace(rgx, '$1' + ',' + '$2');
