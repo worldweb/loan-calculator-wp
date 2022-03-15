@@ -40,7 +40,10 @@ class WW_Loan_Calculator_Script {
 	 * @package Loan Calculator
 	 * @since 1.0.0
 	 */
-	function ww_loan_calculator_front_scripts() {				
+	function ww_loan_calculator_front_scripts() {	
+
+	  
+	  
 
 		// CHART JS
 		wp_register_script( 'loan-calculator-chart-js', WW_LOAN_CALCULATOR_URL . 'includes/js/chart-js/chart.js', array(), WW_LOAN_CALCULATOR_VERSION, true );
@@ -57,7 +60,49 @@ class WW_Loan_Calculator_Script {
 
 		// Custom CSS and JS
 		wp_register_style( 'loan-calculator-frontend-style', WW_LOAN_CALCULATOR_URL . 'includes/css/frontend-style.css', array(), WW_LOAN_CALCULATOR_VERSION );		
-		wp_register_script( 'loan-calculator-frontend-script', WW_LOAN_CALCULATOR_URL . 'includes/js/frontend-script.js', array('jquery'), WW_LOAN_CALCULATOR_VERSION, true );						
+		wp_register_script( 'loan-calculator-frontend-script', WW_LOAN_CALCULATOR_URL . 'includes/js/frontend-script.js', array('jquery'), WW_LOAN_CALCULATOR_VERSION, true );	
+
+		// Fetch Loan Calculator setting data from option table and pass in script.
+		$loan_all_setting_data = get_option( "ww_loan_option" );
+
+		$loan_amount_min_value = isset( $loan_all_setting_data['loan_amount_min_value'] ) ? $loan_all_setting_data['loan_amount_min_value'] : "";
+
+		$loan_amount_max_value = isset( $loan_all_setting_data['loan_amount_max_value'] ) ? $loan_all_setting_data['loan_amount_max_value'] : "";
+
+		$loan_term_min_value = isset( $loan_all_setting_data['loan_term_min_value'] ) ? $loan_all_setting_data['loan_term_min_value'] : "";
+
+		$loan_term_max_value = isset( $loan_all_setting_data['loan_term_max_value'] ) ? $loan_all_setting_data['loan_term_max_value'] : "";
+
+		$monthly_rate = isset( $loan_all_setting_data['monthly_rate'] ) ? $loan_all_setting_data['monthly_rate'] : "";
+
+		$application_fee = isset( $loan_all_setting_data['application_fee'] )? $loan_all_setting_data['application_fee'] : "";
+
+		$back_ground_color = isset( $loan_all_setting_data['back_ground_color'] ) ? $loan_all_setting_data['back_ground_color'] : "";
+
+		$interest_rate_min_value = isset( $loan_all_setting_data['interest_rate_min_value'] ) ? $loan_all_setting_data['interest_rate_min_value'] : "";
+
+		$interest_rate_max_value = isset( $loan_all_setting_data['interest_rate_max_value'] ) ? $loan_all_setting_data['interest_rate_max_value'] : "";
+
+		$calculation_fee_setting_enable = isset( $loan_all_setting_data['calculation_fee_setting_enable'] ) ? $loan_all_setting_data['calculation_fee_setting_enable'] : "";
+
+		$currency_symbols = ww_loan_get_currency_symbol();
+
+		// Setting data is passed in js file using Localize 
+		$setting_data = array(
+			'loan_amount_min_value' =>  $loan_amount_min_value,
+			'loan_amount_max_value'   => $loan_amount_max_value,
+			'loan_term_min_value'      => $loan_term_min_value,
+			'loan_term_max_value' => $loan_term_max_value,
+			'monthly_rate' => $monthly_rate,
+			'application_fee' => $application_fee,
+			'back_ground_color' => $back_ground_color,
+			'interest_rate_min_value'=> $interest_rate_min_value,
+			'interest_rate_max_value' => $interest_rate_max_value,
+			'calculation_fee_setting_enable'=> $calculation_fee_setting_enable,
+			'currency_symbols' =>$currency_symbols
+		);
+		
+		wp_localize_script( 'loan-calculator-frontend-script', 'setting_data', $setting_data );	
 	}
 
 	/**

@@ -478,7 +478,7 @@ msgid ""
 "information you have provided. It is provided for illustrative purposes only "
 "and actual repayment amounts may vary. To find out actual repayment amounts, "
 "contact us. This calculation does not constitute a quote, loan approval, "
-"agreement or advice by Yakka Finance. It does not take into account your "
+"agreement or advice by My Finance. It does not take into account your "
 "personal or financial circumstances."
 msgstr ""
 

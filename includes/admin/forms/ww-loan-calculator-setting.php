@@ -227,7 +227,39 @@ $delete_Screen = ( isset( $_GET['action'] ) && 'misc_setting' == $_GET['action']
                     <td width="300">
                         <input type='text' name='ww_loan_option[print_option_heading]' id='print_option_heading' value='<?php esc_attr_e ($print_option_heading,'loan-calculator-wp' );?>' class="regular-text"> 
                     </td>
-                </tr>                                    
+                </tr> 
+                 <tr>
+                    <th scope="row">
+                        <label for="about_this_calculator"><strong><?php esc_html_e( 'Currency ', 'loan-calculator-wp' ); ?></strong></label>                                            
+                    </th>
+                    <td width="300">
+                        <?php
+                            $ww_loan_get_currencies = ww_loan_get_currencies();
+                            $selected_currency = ww_loan_get_currency();
+
+                        ?>
+                        <select name="ww_loan_option[ww_loan_currency]" id="ww_loan_option" class="regular-text">
+                            <?php
+                                    if( !empty($ww_loan_get_currencies)){
+                                        foreach( $ww_loan_get_currencies as $key_currencies => $val_currencies) {
+
+                                            $currency_symbol = ww_loan_get_currency_symbol( $key_currencies );
+
+                                            if( !empty( $currency_symbol ) ) {
+                                                $currency_symbol = " ( " . $currency_symbol . " )";
+                                            }
+
+                                            ?>
+                                            <option value="<?php echo $key_currencies; ?>" <?php echo ($selected_currency == $key_currencies) ?"selected":""; ?>><?php echo $val_currencies . $currency_symbol;?></option>
+                                            <?php
+                                        }
+                                    }
+                            ?>
+                            
+                        </select>
+
+                    </td>
+                </tr>                                 
             </tbody>
         </table>
 

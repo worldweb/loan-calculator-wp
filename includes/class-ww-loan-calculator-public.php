@@ -68,23 +68,9 @@ class WW_Loan_Calculator_Public {
 		// Custom CSS
 		wp_enqueue_style( 'loan-calculator-frontend-style' );
 
-		// Setting data is passed in js file using Localize 
-		$setting_data = array(
-			'loan_amount_min_value' =>  $loan_amount_min_value,
-			'loan_amount_max_value'   => $loan_amount_max_value,
-			'loan_term_min_value'      => $loan_term_min_value,
-			'loan_term_max_value' => $loan_term_max_value,
-			'monthly_rate' => $monthly_rate,
-			'application_fee' => $application_fee,
-			'back_ground_color' => $back_ground_color,
-			'interest_rate_min_value'=> $interest_rate_min_value,
-			'interest_rate_max_value' => $interest_rate_max_value,
-			'calculation_fee_setting_enable'=> $calculation_fee_setting_enable
-		);
-
-		wp_localize_script( 'loan-calculator-frontend-script', 'setting_data', $setting_data );
+		
 		wp_enqueue_script( 'loan-calculator-frontend-script' );
-
+		
 		ob_start();
 		include_once( WW_LOAN_CALCULATOR_ADMIN . '/forms/ww-loan-calculator-loan-process-form.php');
 		$html = ob_get_clean();
