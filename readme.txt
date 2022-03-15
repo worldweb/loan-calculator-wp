@@ -8,11 +8,11 @@ Tags:              loan calculator, emi calculator, home loan, personal loan, ba
 Author URI:        https://worldwebtechnology.com
 Requires at least: 5.0
 Requires PHP:      5.6
-Tested up to:      5.8
-Stable tag:        1.0.0
+Tested up to:      5.9.2
+Stable tag:        1.0.1
 License:           GPLv2 or later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
-Version:           1.0.0
+Version:           1.0.1
 
 Loan / EMI Calculator for Home Loan and Personal Loan
 
