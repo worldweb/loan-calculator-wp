@@ -3,7 +3,7 @@
  * Plugin Name: Loan Calculator WP
  * Plugin URI: http://www.worldwebtechnology.com/
  * Description:  Loan / EMI Calculator for Home Loan and Personal Loan
- * Version: 1.0.1
+ * Version: 1.0.4
  * Author: World Web Technology
  * Author URI: http://www.worldwebtechnology.com
  * Text Domain: loan-calculator-wp
@@ -24,7 +24,7 @@ if ( !defined( 'ABSPATH' ) ) exit;
  * @since 1.0.0
  */
 if( !defined( 'WW_LOAN_CALCULATOR_VERSION' ) ) {
-	define( 'WW_LOAN_CALCULATOR_VERSION', '1.0.1' ); //version of plugin
+	define( 'WW_LOAN_CALCULATOR_VERSION', '1.0.4' ); //version of plugin
 }
 if (!defined('WW_LOAN_CALCULATOR_TEXT_DOMAIN')) { //check if variable is not defined previous then define it
     define( 'WW_LOAN_CALCULATOR_TEXT_DOMAIN', 'loan-calculator-wp' ); //this is for multi language support in plugin
