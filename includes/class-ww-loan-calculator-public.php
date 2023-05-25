@@ -50,6 +50,8 @@ class WW_Loan_Calculator_Public {
 
 		$calculation_fee_setting_enable = isset( $loan_all_setting_data['calculation_fee_setting_enable'] ) ? $loan_all_setting_data['calculation_fee_setting_enable'] : "";
 
+		$select_theme = isset( $loan_all_setting_data['select_theme'] ) ? $loan_all_setting_data['select_theme'] : "";
+
 		// If repayment chat is enabled then only enqueue chart js
 		if( isset( $loan_all_setting_data['enable_repayment_chart'] ) && $loan_all_setting_data['enable_repayment_chart'] == 1 ) {
 
@@ -65,17 +67,39 @@ class WW_Loan_Calculator_Public {
 			wp_enqueue_style('loan-calculator-font-awesome-script');
 		}
 
-		// Custom CSS
-		wp_enqueue_style( 'loan-calculator-frontend-style' );
-
+		
+		
 		
 		wp_enqueue_script( 'loan-calculator-frontend-script' );
 		
-		ob_start();
-		include_once( WW_LOAN_CALCULATOR_ADMIN . '/forms/ww-loan-calculator-loan-process-form.php');
-		$html = ob_get_clean();
+		if($select_theme=='default_theme'){
+			
+			// Custom CSS
+		    wp_enqueue_style( 'loan-calculator-frontend-style' );
 
-		return $html;
+			ob_start();
+			include_once( WW_LOAN_CALCULATOR_ADMIN . '/forms/theme-templates/default-theme/ww-loan-calculator-loan-default-theme-form.php');
+			$html = ob_get_clean();
+
+			return $html;
+		
+		}else{
+			// Custom JS
+			wp_enqueue_script( 'loan-calculator-new-theme-script' );
+
+			// Custom CSS
+			wp_enqueue_style( 'loan-calculator-new-theme-style' );
+
+			// Custom CSS for Print
+			wp_enqueue_style( 'loan-calculator-new-theme-print-styles' );
+
+			ob_start();
+			include_once( WW_LOAN_CALCULATOR_ADMIN . '/forms/theme-templates/new-theme/ww-loan-calculator-loan-new-theme-form.php');
+			$html = ob_get_clean();
+
+			return $html;
+		}
+		
 	}
 
 	/**

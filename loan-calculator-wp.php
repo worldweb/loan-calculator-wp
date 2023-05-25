@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: Loan Calculator WP
+ * Plugin Name: Loan Calculator WP Latest
  * Plugin URI: http://www.worldwebtechnology.com/
  * Description:  Loan / EMI Calculator for Home Loan and Personal Loan
  * Version: 1.0.4
@@ -106,6 +106,7 @@ function ww_loan_calculator_register_activation() {
         $loan_calculator_default_options['selected_color'] = '#404245';
         $loan_calculator_default_options['background_light_color'] = '#fff7d7';
         $loan_calculator_default_options['border_color'] = '#000000';
+        $loan_calculator_default_options['select_theme'] = 'default_theme';
         $loan_calculator_default_options['loan_amount'] = '10000';
         $loan_calculator_default_options['loan_amount_min_value'] = '1000';
         $loan_calculator_default_options['loan_amount_max_value'] = '1000000';
