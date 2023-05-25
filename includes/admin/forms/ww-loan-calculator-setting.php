@@ -22,11 +22,13 @@ if( $disable_ballon_amt == 1){
      $loan_all_setting_data['ballon_per'] = 0;
     update_option( "ww_loan_option",$loan_all_setting_data );
     $loan_all_setting_data = get_option( "ww_loan_option" );
-
 }
 
 
 
+/* START : Fetch Selected Theme Setting */
+$select_theme = isset( $loan_all_setting_data['select_theme'] ) ? $loan_all_setting_data['select_theme'] : "";
+/* END : Fetch Selected Theme Setting */
 
 /* START : Fetch Color Setting */
 $back_ground_color = isset( $loan_all_setting_data['back_ground_color'] ) ? $loan_all_setting_data['back_ground_color'] : "";
@@ -257,6 +259,7 @@ $delete_Screen = ( isset( $_GET['action'] ) && 'misc_setting' == $_GET['action']
                         <?php esc_html_e( 'Check this box to enable print option. It will be visible on top right of the calculator', 'loan-calculator-wp' ); ?>
                     </td>
                 </tr>
+               <?php if($print_option_enable == 1){ ?>
                 <tr class='print-option-heading' <?php esc_attr_e( $print_option_display_heading,'loan-calculator-wp' );?>>
                     <th scope="row">
                         <label for="print_option_heading"><strong><?php esc_html_e( 'Print Option Label', 'loan-calculator-wp' ); ?></strong></label>
@@ -264,7 +267,7 @@ $delete_Screen = ( isset( $_GET['action'] ) && 'misc_setting' == $_GET['action']
                     <td width="300">
                         <input type='text' name='ww_loan_option[print_option_heading]' id='print_option_heading' value='<?php esc_attr_e ($print_option_heading,'loan-calculator-wp' );?>' class="regular-text"> 
                     </td>
-                </tr> 
+                </tr> <?php } ?>
                  <tr>
                     <th scope="row">
                         <label for="about_this_calculator"><strong><?php esc_html_e( 'Currency ', 'loan-calculator-wp' ); ?></strong></label>                                            
@@ -348,6 +351,17 @@ $delete_Screen = ( isset( $_GET['action'] ) && 'misc_setting' == $_GET['action']
                     </th>
                     <td width="300">
                         <input type='color' name='ww_loan_option[border_color]' id='border_color' value='<?php esc_attr_e( $border_color,'loan-calculator-wp' );?>' class="regular-text">
+                    </td>
+                </tr>
+                <tr id="border-color" >
+                    <th scope="row">
+                        <label for="border_color"><strong><?php esc_html_e( 'Select Theme', 'loan-calculator-wp' ); ?></strong></label>
+                    </th>
+                    <td width="300">
+                        <select name='ww_loan_option[select_theme]' id='select_theme' style="width: 49%;">
+                            <option value="default_theme" <?php if($select_theme == 'default_theme'){echo 'selected';}; ?>>Default Theme</option>
+                            <option value="new_theme" <?php if($select_theme == 'new_theme'){echo 'selected';}; ?>>New Theme</option>
+                        </select>
                     </td>
                 </tr>
             </tbody>

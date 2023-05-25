@@ -48,6 +48,7 @@ class WW_Loan_Calculator_Script {
 		// CHART JS
 		wp_register_script( 'loan-calculator-chart-js', WW_LOAN_CALCULATOR_URL . 'includes/js/chart-js/chart.js', array(), WW_LOAN_CALCULATOR_VERSION, true );
 		wp_register_script( 'loan-calculator-chart-bundle-script', WW_LOAN_CALCULATOR_URL . 'includes/js/chart-js/chart-bundle.js', array(), WW_LOAN_CALCULATOR_VERSION, true );
+
 		
 		// Font awesome
 		$loan_all_setting_data = get_option( "ww_loan_option" );
@@ -59,7 +60,15 @@ class WW_Loan_Calculator_Script {
 		}		
 
 		// Custom CSS and JS
-		wp_register_style( 'loan-calculator-frontend-style', WW_LOAN_CALCULATOR_URL . 'includes/css/frontend-style.css', array(), WW_LOAN_CALCULATOR_VERSION );		
+		//01/05/23
+		wp_register_style( 'loan-calculator-new-theme-style', WW_LOAN_CALCULATOR_URL . 'includes/admin/forms/theme-templates/new-theme/css/style.css', array(), WW_LOAN_CALCULATOR_VERSION );	
+
+		 wp_register_style( 'loan-calculator-new-theme-print-styles', WW_LOAN_CALCULATOR_URL .'includes/admin/forms/theme-templates/new-theme/css/print.css', array(), WW_LOAN_CALCULATOR_VERSION, 'print' );
+
+		wp_register_script( 'loan-calculator-new-theme-script', WW_LOAN_CALCULATOR_URL . 'includes/admin/forms/theme-templates/new-theme/js/new-theme-script.js', array('jquery'), WW_LOAN_CALCULATOR_VERSION, true );	
+
+		wp_register_style( 'loan-calculator-frontend-style', WW_LOAN_CALCULATOR_URL . 'includes/css/frontend-style.css', array(), WW_LOAN_CALCULATOR_VERSION );	
+
 		wp_register_script( 'loan-calculator-frontend-script', WW_LOAN_CALCULATOR_URL . 'includes/js/frontend-script.js', array('jquery'), WW_LOAN_CALCULATOR_VERSION, true );	
 
 		// Fetch Loan Calculator setting data from option table and pass in script.
