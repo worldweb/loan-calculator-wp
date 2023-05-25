@@ -15,6 +15,8 @@ global $ww_loan_calculator_model;
 
 $loan_all_setting_data =get_option('ww_loan_option');
 
+
+
 $back_ground_color = isset( $loan_all_setting_data['back_ground_color'] ) ? $loan_all_setting_data['back_ground_color'] : "#1f497d";
 $selected_color = isset( $loan_all_setting_data['selected_color'] ) ? $loan_all_setting_data['selected_color'] : "#1f497d";
 $background_light_color = isset( $loan_all_setting_data['background_light_color'] ) ? $loan_all_setting_data['background_light_color'] : "";
@@ -22,6 +24,7 @@ $border_color = isset( $loan_all_setting_data['border_color'] ) ? $loan_all_sett
 $interested_rate = isset( $loan_all_setting_data['interested_rate'] ) ? $loan_all_setting_data['interested_rate'] : "";
 $ballon_per = isset( $loan_all_setting_data['ballon_per'] ) ? floatval( $loan_all_setting_data['ballon_per'] ) : "10";
 $loan_term = isset( $loan_all_setting_data['loan_term'] ) ? $loan_all_setting_data['loan_term'] : "";
+
 $loan_amount = isset( $loan_all_setting_data['loan_amount'] ) ? $loan_all_setting_data['loan_amount'] : "10000";
 $monthly_rate = isset( $loan_all_setting_data['monthly_rate'] ) ? $loan_all_setting_data['monthly_rate'] : "";
 $application_fee = isset( $loan_all_setting_data['application_fee'] ) ? $loan_all_setting_data['application_fee'] : "";
@@ -69,6 +72,10 @@ $calculator_disclaimer_heading = isset( $loan_all_setting_data['calculator_discl
 $calculator_disclaimer_description = isset( $loan_all_setting_data['calculator_disclaimer_description'] ) ? $loan_all_setting_data['calculator_disclaimer_description'] :"";
 $contact_popup_content = isset( $loan_all_setting_data['contact_popup_content'] ) ? $loan_all_setting_data['contact_popup_content'] :"";
 
+$contact_type = isset( $loan_all_setting_data['contact_type'] ) ? $loan_all_setting_data['contact_type'] : "popup";
+$contact_url = isset( $loan_all_setting_data['contact_url'] ) ? $loan_all_setting_data['contact_url'] : "";
+
+
 /* END :  Calculator Disclaimer Setting*/
 
 /* START : Tooltip Setting */ 
@@ -99,7 +106,22 @@ $ww_loan_currency = isset( $loan_all_setting_data['ww_loan_currency'] ) ? $loan_
 $currency_symbols = ww_loan_get_currency_symbol();
 
 
+
 /* END : Tab Enable Settings */
+
+
+/* START : NEW SETTINGS ADDED */
+$disable_ballon_amt = isset( $loan_all_setting_data['disable_ballon_amt'] ) ? $loan_all_setting_data['disable_ballon_amt'] : "";
+$disable_repayment_frequency=isset( $loan_all_setting_data['disable_repayment_frequency'] ) ? $loan_all_setting_data['disable_repayment_frequency'] : "";
+
+$disable_contactus_section=isset( $loan_all_setting_data['disable_contactus_section'] ) ? $loan_all_setting_data['disable_contactus_section'] : "";
+
+$disable_calculator_disclaimer_section=isset( $loan_all_setting_data['disable_calculator_disclaimer_section'] ) ? $loan_all_setting_data['disable_calculator_disclaimer_section'] : "";
+
+$disable_tabs_icon=isset( $loan_all_setting_data['disable_tabs_icon'] ) ? $loan_all_setting_data['disable_tabs_icon'] : "";
+
+/* END : NEW SETTING ADDED */
+
 
 ?>
 
@@ -164,13 +186,20 @@ $currency_symbols = ww_loan_get_currency_symbol();
                             <span class="extra-info"><?php esc_html_e( 'Months', 'loan-calculator-wp' ); ?></span>
                             <input type="text" name="loan_terms" id="loan_terms" value="" tabindex="5" onkeydown="return onlyNos(event,'loan_terms')"/>
                         </div>
-                        <input type="range" min="<?php esc_attr_e( $loan_term_min_value,'loan-calculator-wp' );?>" max="<?php esc_attr_e($loan_term_max_value,'loan-calculator-wp');?>" value="<?php esc_attr_e($loan_term,'loan-calculator-wp');?>" class="slider" id="loan_terms_range" tabindex="6" step="12">
+
+                        <input type="range" min="<?php esc_attr_e( $loan_term_min_value,'loan-calculator-wp' );?>" max="<?php esc_attr_e($loan_term_max_value,'loan-calculator-wp');?>" value="<?php esc_attr_e($loan_term,'loan-calculator-wp');?>" class="slider" id="loan_terms_range" tabindex="6" step="1">
                     </div>
                     <div class="first-row-sub-child">
+                         <?php 
+                                    if( $disable_repayment_frequency != 1){
+                            ?>
                         <div class="first-row-main-child">
+                           
                             <label for="loan_amt" class="loan-text" ><?php esc_html_e(  'Repayment Frequency', 'loan-calculator-wp' ); ?></label>
-                            <input type="button" name="monthly" id="loan_terms" value="Monthly" tabindex="7"/>
+                            <input type="button" name="monthly" id="loan_terms" value="<?php esc_attr_e( 'Monthly','loan-calculator-wp' );?>" tabindex="7"/>
+                           
                         </div>
+                         <?php } ?>
                         <div class="first-row-main-child">
                             <label for="loan_amt" class="loan-text" ><?php esc_html_e(  'Payment Mode', 'loan-calculator-wp' ); ?></label>
                             <select name="payment_type" id="payment_type" class="payment-opt-drop" onchange="return loan_calculation_process();">
@@ -189,7 +218,21 @@ $currency_symbols = ww_loan_get_currency_symbol();
                         </div>
                         <input type="range" min="<?php esc_attr_e( $interest_rate_min_value,'loan-calculator-wp' );?>" max="<?php esc_attr_e( $interest_rate_max_value,'loan-calculator-wp' );?>" value="<?php esc_attr_e($interested_rate,'loan-calculator-wp');?>" class="slider" id="interest_rate_range" tabindex="10" step="0.25">
                     </div>
+                    <?php if ( $disable_ballon_amt == 1){ ?>
                     <div class="second-row-sub-child">
+                       
+                        <div class="loan-text-dis">
+                            <input type="hidden" name="ballon_amounts" id="ballon_amounts" value="" tabindex="11" onkeydown="return onlyNos(event,'ballon_amounts')"/>
+
+                            <input type="hidden" name="ballon_amounts_per" id="ballon_amounts_per" value="<?php esc_attr_e($ballon_per);?>" tabindex="12" />
+
+
+                        </div>
+                        <input type="hidden" id="ballon_amount_range" tabindex="13" step="1" value ="<?php esc_attr_e($ballon_per);?>">
+                    </div>
+                <?php } else{
+                    ?>
+                      <div class="second-row-sub-child">
                         <label for="loan_amt" class="loan-text" ><?php esc_html_e( 'Balloon Amount', 'loan-calculator-wp' ); ?></label>
                         <div class="loan-text-dis">
                             <span class="extra-info"><?php echo $currency_symbols;?></span>
@@ -200,6 +243,8 @@ $currency_symbols = ww_loan_get_currency_symbol();
                         </div>
                         <input type="range" min="0" max="50" value="<?php esc_attr_e($ballon_per);?>" class="slider" id="ballon_amount_range" tabindex="13" step="1">
                     </div>
+              <?php  } ?>
+
                 </div>
             </div>
         </div>
@@ -232,8 +277,12 @@ $currency_symbols = ww_loan_get_currency_symbol();
                         ?>
                         <input type="radio" name="tabs" id="tab1" <?php esc_attr_e($tab1_checked);?>>
                         <label for="tab1">
-                            <i class="fa fa-chart-bar"></i>
-                            <span class="tooltip-disp"><?php esc_html_e($repayment_chart_heading,'loan-calculator-wp');?></span>
+                            <?php if( $disable_tabs_icon == ""){ ?>
+                                <i class="fa fa-chart-bar"></i>
+                                <span class="tooltip-disp"><?php esc_html_e($repayment_chart_heading,'loan-calculator-wp');?></span>
+                            <?php } else { ?>
+                                <span><?php esc_html_e($repayment_chart_heading,'loan-calculator-wp');?></span>
+                            <?php } ?>
                         </label>
                         <?php  } ?>
                     
@@ -242,8 +291,12 @@ $currency_symbols = ww_loan_get_currency_symbol();
                         ?>
                         <input type="radio" name="tabs" id="tab3" <?php esc_attr_e($tab3_checked);?>>
                         <label for="tab3">
-                            <i class="fa fa-tasks"></i>
-                            <span class="tooltip-disp"><?php esc_html_e($loan_table_heading,'loan-calculator-wp');?></span>
+                            <?php if( $disable_tabs_icon == ""){ ?>
+                                <i class="fa fa-tasks"></i>
+                                <span class="tooltip-disp"><?php esc_html_e($loan_table_heading,'loan-calculator-wp');?></span>
+                            <?php } else { ?>
+                                 <span class=""><?php esc_html_e($loan_table_heading,'loan-calculator-wp');?></span>
+                            <?php } ?>   
                         </label>
                         <?php  } ?>
                         <?php
@@ -251,8 +304,12 @@ $currency_symbols = ww_loan_get_currency_symbol();
                         ?>
                         <input type="radio" name="tabs" id="tab2" <?php esc_attr_e( $tab2_checked);?>>
                         <label for="tab2">
-                            <i class="fa fa-play"></i>
-                            <span class="tooltip-disp"><?php esc_html_e( $video_heading,'loan-calculator-wp' );?></span>
+                            <?php if( $disable_tabs_icon == ""){ ?>
+                                <i class="fa fa-play"></i>
+                                <span class="tooltip-disp"><?php esc_html_e( $video_heading,'loan-calculator-wp' );?></span>
+                            <?php } else { ?>
+                                 <span><?php esc_html_e( $video_heading,'loan-calculator-wp' );?></span>
+                             <?php } ?>   
                         </label>
                         <?php  } ?>
                         <div id="tab-content1" class="tab-content">
@@ -347,18 +404,29 @@ $currency_symbols = ww_loan_get_currency_symbol();
             </div>
         </div>
     </section>
-    <div class="contact-us-section">
-        <h3><?php esc_html_e( $contact_info_heading,'loan-calculator-wp' );?></h3>
-        <button class="contact-book-btn"><?php esc_html_e( $contact_popup_button_heading,'loan-calculator-wp' );?></button>
-    </div>
+    <?php if ( $disable_contactus_section == ""){ ?>
+         <div class="contact-us-section">
+            <h3><?php esc_html_e( $contact_info_heading,'loan-calculator-wp' );?></h3>
+            <?php if( $contact_type == "popup"){ ?>
+            <button class="contact-book-btn"><?php esc_html_e( $contact_popup_button_heading,'loan-calculator-wp' );?></button>
+        <?php } else {  ?>
+             <a href="<?php echo $contact_url;?>" target="_blank"><?php esc_html_e( $contact_popup_button_heading,'loan-calculator-wp' );?></a>  
+        <?php } ?>
+        </div>
+    <?php } ?>
+
     <div class="contact-us-popup" style="display:none;">
         <div class="contact-us-popup-body">
          <a href="javascript:;" class="close-button" onclick="jQuery('.contact-us-popup').hide();jQuery('body').removeClass('body-overflow-hidden');">X</a>
-            <?php echo do_shortcode( esc_html( $contact_popup_content ) ); ?>
+            <?php echo do_shortcode( $contact_popup_content ) ; ?>
         </div>
     </div>
+  
+
+     <?php if ( $disable_calculator_disclaimer_section == ""){ ?>
     <div class="calculator-disclaimer-section">
         <h4><?php esc_html_e( $calculator_disclaimer_heading, 'loan-calculator-wp' );?></h4>
         <p><?php esc_html_e( $calculator_disclaimer_description, 'loan-calculator-wp' );?></p>
     </div>
+    <?php } ?>
 </section>

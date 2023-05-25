@@ -44,4 +44,14 @@ jQuery(document).ready(function ($) {
 			}
 		}
 	});
+	$(document).on('click','.contact-type-btn',function(){
+		if($(this).val() == "popup"){
+			jQuery("#contact-popup-section").show();
+			jQuery("#contact-url-section").hide();
+		}else{
+			jQuery("#contact-popup-section").hide();
+			jQuery("#contact-url-section").show();
+		}
+
+	});
 });

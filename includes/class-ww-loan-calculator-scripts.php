@@ -84,8 +84,17 @@ class WW_Loan_Calculator_Script {
 		$interest_rate_max_value = isset( $loan_all_setting_data['interest_rate_max_value'] ) ? $loan_all_setting_data['interest_rate_max_value'] : "";
 
 		$calculation_fee_setting_enable = isset( $loan_all_setting_data['calculation_fee_setting_enable'] ) ? $loan_all_setting_data['calculation_fee_setting_enable'] : "";
+		$remove_decimal_point = isset( $loan_all_setting_data['remove_decimal_point'] ) ? $loan_all_setting_data['remove_decimal_point'] : "";
+
+
+
 
 		$currency_symbols = ww_loan_get_currency_symbol();
+
+		$month_label = __( 'Months','loan-calculator-wp' );
+		$year_label = __( 'Years','loan-calculator-wp' );
+		$interest_label = __( 'Interest','loan-calculator-wp' );
+		$principal_label = __( 'Principal','loan-calculator-wp' );
 
 		// Setting data is passed in js file using Localize 
 		$setting_data = array(
@@ -99,7 +108,13 @@ class WW_Loan_Calculator_Script {
 			'interest_rate_min_value'=> $interest_rate_min_value,
 			'interest_rate_max_value' => $interest_rate_max_value,
 			'calculation_fee_setting_enable'=> $calculation_fee_setting_enable,
-			'currency_symbols' =>$currency_symbols
+			'currency_symbols' =>$currency_symbols,
+			'remove_decimal_point'=>$remove_decimal_point,
+			'month_label' =>$month_label,
+			'year_label' =>$year_label,
+			'interest_label' =>$interest_label,
+			'principal_label' =>$principal_label,
+
 		);
 		
 		wp_localize_script( 'loan-calculator-frontend-script', 'setting_data', $setting_data );	

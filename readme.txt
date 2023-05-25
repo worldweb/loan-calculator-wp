@@ -8,11 +8,11 @@ Tags:              loan calculator, emi calculator, home loan, personal loan, ba
 Author URI:        https://worldwebtechnology.com
 Requires at least: 5.0
 Requires PHP:      5.6
-Tested up to:      5.8
-Stable tag:        1.0.0
+Tested up to:      6.1.1
+Stable tag:        1.0.4
 License:           GPLv2 or later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
-Version:           1.0.0
+Version:           1.0.4
 
 Loan / EMI Calculator for Home Loan and Personal Loan
 
@@ -64,8 +64,24 @@ https://www.youtube.com/watch?v=3p3IhovVffs
 
 == Changelog ==
 
-= 1.0.0 =
-* Initial release.
+= 1.0.4 =
+* Allow user to Disable Balloon setting in backend.
+* Allow user to Disable Tabs Icon setting in checkbox, It will show label instead of icon
+* Allow user to Disable Repayment Frequency setting in backend.
+* Allow user to Disable ContactUs section
+* Allow user to add link on ContactUs button in place of popup.
+* Allow user to Disable Disclaimer section from backend setting.
+
+= 1.0.3 =
+* Added Multiple currency support.
+* Increase Loan Max Amount Value in backend setting.
+* Disallow decimal points from the baked setting.
+
+= 1.0.2 =
+* Check WordPress Version 6.1 compatibility.
 
 = 1.0.1 =
 * Added multi currency support
+
+= 1.0.0 =
+* Initial release.

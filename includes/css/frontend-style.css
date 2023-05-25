@@ -907,7 +907,7 @@ input#loan_calculator_setting {
     background: #ffffff;
     width: 50%;
     margin: 0 auto;
-    text-align: center;
+  /*  text-align: center; */
     padding: 50px;
     position: relative;
     top: 0;
