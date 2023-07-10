@@ -192,7 +192,7 @@
     margin: 0 -15px 15px;
 }
 .loan-option-text-info .loan-option-text-info-section .loan-option-text-info-block .first-row .first-row-sub-child {
-    width: 33.33%;
+    width: 30%;
     padding: 0 15px;
     position: relative;
 }
@@ -281,11 +281,11 @@
     margin: 0 -15px 15px;
 }
 .loan-option-text-info .loan-option-text-info-section .loan-option-text-info-block .second-row .second-row-sub-child {
-    width: 50%;
+    width: 47%;
     padding: 0 15px;
 }
 .loan-option-text-info .loan-option-text-info-section .loan-option-text-info-block .second-row .second-row-sub-child:first-child {
-    width: 33.33%;
+    width: 46%;
 }
 .loan-option-text-info .loan-option-text-info-section .loan-option-text-info-block .second-row .second-row-sub-child label {
     color: rgb(77,79,83);
@@ -375,12 +375,12 @@
 }
 .loan-option-text-info .loan-detail-section .loan-detail-section-child:first-child {
     width: 60%;
-    padding: 15px 15px 0;
+    /*padding: 15px 15px 0;*/
     background: white;
 }
 .loan-option-text-info .loan-detail-section .loan-detail-section-child:last-child {
     width: 40%;
-    padding: 0 15px;
+    padding-top:15px;
 }
 .loan-option-text-info .loan-detail-section .loan-detail-section-child:last-child .loan-detail-cal-desc {
     padding: 15px 0;
@@ -945,10 +945,10 @@ input#loan_calculator_setting {
     display: inline-flex;
 }
 .loan-option-text-info .loan-option-text-info-section .loan-option-text-info-block .first-row .first-row-sub-child:last-child .first-row-main-child {
-    padding-right: 15px;
-    width: 50%;
+    padding-right: 0px;
+    width: 100%;
 }
-.loan-option-text-info .loan-option-text-info-section .loan-option-text-info-block .first-row .first-row-sub-child:last-child .first-row-main-child:last-child select {
+.loan-option-text-info .loan-option-text-info-section .loan-option-text-info-block .first-row .first-row-sub-child:last-child .first-row-main-child select {
     width: 100%;
     border: 1px solid var(--calc-border-color);
     background: #ffffff;
@@ -982,7 +982,7 @@ section#main-sec {
     margin: 0 !important;
     max-width: 100%;
     display: block;
-    padding: 0 30px;
+    /*padding: 0 30px;*/
 }
 #toplevel_page_ww_loan_calculator_page .wp-menu-image img {
     width: 18px;
@@ -1001,6 +1001,10 @@ section#main-sec {
 #toplevel_page_ww_loan_calculator_page.current:hover .wp-menu-image img {
     content: url(http://localhost/wordpress/wp-content/plugins/loan-calculator/includes/images/calculator1.png);
 }
+
+
+
+
 @media (min-width: 768px) {
     .loan-option-text-info .loan-detail-section .loan-detail-section-child .sub-main-tab .tabs i {
         padding: 5px;
@@ -1150,3 +1154,28 @@ section#main-sec {
         padding-bottom: 0;
     }
 }
+
+
+/*6-7-2023*/
+
+body .wp-loan-calculator-main {
+    /*max-width: 900px;*/
+}
+select#repayment_freq{
+    width: 100px;
+    background-color: var(--calc-bg-light-color);
+    height: 36px;
+    line-height: 34px;
+    text-align: center;
+    border: 1px solid var(--calc-border-color);
+    border-left: 0;
+    border-bottom-right-radius: 4px;
+    border-top-right-radius: 4px;
+    font-size: 14px;
+}
+select.single-val-option {
+    appearance: none;
+    pointer-events: none;
+   
+}
+

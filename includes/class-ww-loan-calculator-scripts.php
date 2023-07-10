@@ -45,6 +45,9 @@ class WW_Loan_Calculator_Script {
 	  
 	  
 
+		wp_register_script( 'loan-calculator-jquery-ui', 'https://code.jquery.com/ui/1.12.1/jquery-ui.min.js', array(), WW_LOAN_CALCULATOR_VERSION, true );
+
+
 		// CHART JS
 		wp_register_script( 'loan-calculator-chart-js', WW_LOAN_CALCULATOR_URL . 'includes/js/chart-js/chart.js', array(), WW_LOAN_CALCULATOR_VERSION, true );
 		wp_register_script( 'loan-calculator-chart-bundle-script', WW_LOAN_CALCULATOR_URL . 'includes/js/chart-js/chart-bundle.js', array(), WW_LOAN_CALCULATOR_VERSION, true );
@@ -70,6 +73,8 @@ class WW_Loan_Calculator_Script {
 		wp_register_style( 'loan-calculator-frontend-style', WW_LOAN_CALCULATOR_URL . 'includes/css/frontend-style.css', array(), WW_LOAN_CALCULATOR_VERSION );	
 
 		wp_register_script( 'loan-calculator-frontend-script', WW_LOAN_CALCULATOR_URL . 'includes/js/frontend-script.js', array('jquery'), WW_LOAN_CALCULATOR_VERSION, true );	
+
+		wp_register_script( 'loan-calculator-frequency-payment', WW_LOAN_CALCULATOR_URL . 'includes/js/frequency_payment.js', array('jquery'), WW_LOAN_CALCULATOR_VERSION, true );	
 
 		// Fetch Loan Calculator setting data from option table and pass in script.
 		$loan_all_setting_data = get_option( "ww_loan_option" );

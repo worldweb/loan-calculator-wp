@@ -9,10 +9,10 @@ Author URI:        https://worldwebtechnology.com
 Requires at least: 5.0
 Requires PHP:      5.6
 Tested up to:      6.1.1
-Stable tag:        1.0.4
+Stable tag:        1.0.7
 License:           GPLv2 or later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
-Version:           1.0.4
+Version:           1.0.7
 
 Loan / EMI Calculator for Home Loan and Personal Loan
 
@@ -63,6 +63,12 @@ https://www.youtube.com/watch?v=3p3IhovVffs
 4. Frontend view with Video tab enabled
 
 == Changelog ==
+
+= 1.0.7 =
+* Added Repayment Frequency option (Monthly, Quarterly & Yearly)
+
+= 1.0.5 =
+* Added setting to change graph colors.
 
 = 1.0.4 =
 * Allow user to Disable Balloon setting in backend.

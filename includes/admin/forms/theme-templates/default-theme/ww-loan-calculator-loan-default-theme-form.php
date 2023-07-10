@@ -21,6 +21,11 @@ $back_ground_color = isset( $loan_all_setting_data['back_ground_color'] ) ? $loa
 $selected_color = isset( $loan_all_setting_data['selected_color'] ) ? $loan_all_setting_data['selected_color'] : "#1f497d";
 $background_light_color = isset( $loan_all_setting_data['background_light_color'] ) ? $loan_all_setting_data['background_light_color'] : "";
 $border_color = isset( $loan_all_setting_data['border_color'] ) ? $loan_all_setting_data['border_color'] : "";
+$graph_color = isset( $loan_all_setting_data['graph_color'] ) ? $loan_all_setting_data['graph_color'] : "";
+$graph_color_sub = isset( $loan_all_setting_data['graph_color_sub'] ) ? $loan_all_setting_data['graph_color_sub'] : "";
+$graph_border_color = isset( $loan_all_setting_data['graph_border_color'] ) ? $loan_all_setting_data['graph_border_color'] : "";
+$graph_border_color_sub = isset( $loan_all_setting_data['graph_border_color_sub'] ) ? $loan_all_setting_data['graph_border_color_sub'] : "";
+
 $interested_rate = isset( $loan_all_setting_data['interested_rate'] ) ? $loan_all_setting_data['interested_rate'] : "";
 $ballon_per = isset( $loan_all_setting_data['ballon_per'] ) ? floatval( $loan_all_setting_data['ballon_per'] ) : "10";
 $loan_term = isset( $loan_all_setting_data['loan_term'] ) ? $loan_all_setting_data['loan_term'] : "";
@@ -114,6 +119,16 @@ $currency_symbols = ww_loan_get_currency_symbol();
 $disable_ballon_amt = isset( $loan_all_setting_data['disable_ballon_amt'] ) ? $loan_all_setting_data['disable_ballon_amt'] : "";
 $disable_repayment_frequency=isset( $loan_all_setting_data['disable_repayment_frequency'] ) ? $loan_all_setting_data['disable_repayment_frequency'] : "";
 
+$disable_repayment_frequency_monthly=isset( $loan_all_setting_data['disable_repayment_frequency_monthly'] ) ? $loan_all_setting_data['disable_repayment_frequency_monthly'] : "";
+
+$disable_repayment_frequency_quarterly=isset( $loan_all_setting_data['disable_repayment_frequency_quarterly'] ) ? $loan_all_setting_data['disable_repayment_frequency_quarterly'] : "";
+
+$disable_repayment_frequency_yearly=isset( $loan_all_setting_data['disable_repayment_frequency_yearly'] ) ? $loan_all_setting_data['disable_repayment_frequency_yearly'] : "";
+
+/* Repayment Frequency options */
+$get_repayment_frequency = (isset( $loan_all_setting_data['repayment_frequency'] ) ? $loan_all_setting_data['repayment_frequency'] : "");
+
+
 $disable_contactus_section=isset( $loan_all_setting_data['disable_contactus_section'] ) ? $loan_all_setting_data['disable_contactus_section'] : "";
 
 $disable_calculator_disclaimer_section=isset( $loan_all_setting_data['disable_calculator_disclaimer_section'] ) ? $loan_all_setting_data['disable_calculator_disclaimer_section'] : "";
@@ -124,13 +139,17 @@ $disable_tabs_icon=isset( $loan_all_setting_data['disable_tabs_icon'] ) ? $loan_
 
 
 ?>
-
+<div class="wp-loan-calculator-main">
 <style type="text/css">
     :root{
         --calc-background-color: <?php echo esc_html( $back_ground_color );?>;
         --calc-select-color: <?php echo esc_html( $selected_color );?>;
         --calc-bg-light-color:<?php echo esc_html( $background_light_color );?>;
-        --calc-border-color:<?php echo esc_html( $border_color );?>
+        --calc-border-color:<?php echo esc_html( $border_color );?>;
+        --calc-graph-color:<?php echo esc_html( $graph_color );?>;
+        --calc-graph-color-sub:<?php echo esc_html( $graph_color_sub );?>;
+        --calc-graph-border-color:<?php echo esc_html( $graph_border_color );?>;
+        --calc-graph-border-color-sub:<?php echo esc_html( $graph_border_color_sub );?>;
     }
 </style>
 <section class="heading-section">
@@ -181,25 +200,37 @@ $disable_tabs_icon=isset( $loan_all_setting_data['disable_tabs_icon'] ) ? $loan_
                         <input type="range" min="<?php esc_attr_e( $loan_amount_min_value,'loan-calculator-wp' );?>" max="<?php esc_attr_e( $loan_amount_max_value,'loan-calculator-wp' );?>" value="<?php esc_attr_e( $loan_amount,'loan-calculator-wp' );?>" class="slider" id="loan_amount_range" tabindex="3" step="1000">
                     </div>
                     <div class="first-row-sub-child">
-                        <label for="loan_terms" class="loan-text" ><?php esc_html_e( 'Loan Terms', 'loan-calculator-wp' ); ?><i class="fa fa-info-circle" aria-hidden="true" tabindex="4"></i><span class="text-tooltip-disp"><?php esc_html_e( $loan_terms_tooltip, 'loan-calculator-wp' ); ?></span></label>
+                        <label for="loan_terms" class="loan-text" ><?php esc_html_e( 'No. of Payments', 'loan-calculator-wp' ); ?><i class="fa fa-info-circle" aria-hidden="true" tabindex="4"></i><span class="text-tooltip-disp"><?php esc_html_e( $loan_terms_tooltip, 'loan-calculator-wp' ); ?></span></label>
                         <div class="loan-text-dis">
-                            <span class="extra-info"><?php esc_html_e( 'Months', 'loan-calculator-wp' ); ?></span>
+                            <!-- <span class="extra-info"><?php esc_html_e( 'Months', 'loan-calculator-wp' ); ?></span> -->
+                            <?php if(!empty($get_repayment_frequency)){ 
+                                    $rpfclass= (count($get_repayment_frequency) == 1?'single-val-option':''); 
+                            ?>
+                                <select name="repayment_freq" id="repayment_freq" class="payment-opt-drop <?php echo $rpfclass; ?>">
+                                        <?php
+                                            foreach ($get_repayment_frequency as $key => $value) {
+                                                $selected = ($key==0?'selected':'');
+                                                ?>
+                                                 <option value="<?php echo $value;?>" <?php echo $selected; ?> ><?php echo $value; ?></option>    
+                                                <?php
+                                            }
+                                        ?>
+                                     </select>
+                            <?php }else{ ?>
+                                     <select name="repayment_freq" id="repayment_freq" class="payment-opt-drop single-val-option">
+                                        <option value="Monthly" selected >Monthly</option>    
+                                    </select>
+                            <?php } ?>
                             <input type="text" name="loan_terms" id="loan_terms" value="" tabindex="5" onkeydown="return onlyNos(event,'loan_terms')"/>
                         </div>
 
                         <input type="range" min="<?php esc_attr_e( $loan_term_min_value,'loan-calculator-wp' );?>" max="<?php esc_attr_e($loan_term_max_value,'loan-calculator-wp');?>" value="<?php esc_attr_e($loan_term,'loan-calculator-wp');?>" class="slider" id="loan_terms_range" tabindex="6" step="1">
+                        <input type="hidden" name="default_value" value="<?php esc_attr_e($loan_term,'loan-calculator-wp');?>">
+                        <input type="hidden" name="min_value" value="<?php esc_attr_e($loan_term_min_value,'loan-calculator-wp');?>">
+                        <input type="hidden" name="max_value" value="<?php esc_attr_e($loan_term_max_value,'loan-calculator-wp');?>">
+                         <input type="hidden" name="current_repayment_freq" value="">
                     </div>
                     <div class="first-row-sub-child">
-                         <?php 
-                                    if( $disable_repayment_frequency != 1){
-                            ?>
-                        <div class="first-row-main-child">
-                           
-                            <label for="loan_amt" class="loan-text" ><?php esc_html_e(  'Repayment Frequency', 'loan-calculator-wp' ); ?></label>
-                            <input type="button" name="monthly" id="loan_terms" value="<?php esc_attr_e( 'Monthly','loan-calculator-wp' );?>" tabindex="7"/>
-                           
-                        </div>
-                         <?php } ?>
                         <div class="first-row-main-child">
                             <label for="loan_amt" class="loan-text" ><?php esc_html_e(  'Payment Mode', 'loan-calculator-wp' ); ?></label>
                             <select name="payment_type" id="payment_type" class="payment-opt-drop">
@@ -351,11 +382,12 @@ $disable_tabs_icon=isset( $loan_all_setting_data['disable_tabs_icon'] ) ? $loan_
             <div class="loan-detail-section-child">
             <div class="loan-detail-cal-desc">
                     <div class="loan-cal-desc">
-                        <div class="loan-cal-desc-heading">
-                            <label><strong><?php esc_html_e( $regular_repayment_heading, 'loan-calculator-wp' ); ?></strong></label>
+                        <div class="loan-cal-desc-heading main-heading">
+                            <!-- <label><strong><?php //esc_html_e( $regular_repayment_heading, 'loan-calculator-wp' ); ?></strong></label> -->
+                            <label><strong></strong></label>
                         </div>
                         <div class="loan-cal-desc-val">
-                        <label><span><small><?php echo esc_html($currency_symbols); ?></small><span id="per_month_amount"></span></span>  <?php esc_html_e( 'per month for', 'loan-calculator-wp' ); ?><span id="loan_amount_year"></span> </span></label>
+                        <label><span><small><?php echo esc_html($currency_symbols); ?></small><span id="per_month_amount"></span></span>  <strong id="loan_amount_term_label"></strong><span id="loan_amount_year"></span> </span></label>
                         </div>
                     </div>
                 <div class="loan-cal-desc">
@@ -430,3 +462,4 @@ $disable_tabs_icon=isset( $loan_all_setting_data['disable_tabs_icon'] ) ? $loan_
     </div>
     <?php } ?>
 </section>
+</div>

@@ -35,6 +35,12 @@ $back_ground_color = isset( $loan_all_setting_data['back_ground_color'] ) ? $loa
 $selected_color = isset( $loan_all_setting_data['selected_color'] ) ? $loan_all_setting_data['selected_color'] : "";
 $background_light_color = isset( $loan_all_setting_data['background_light_color'] ) ? $loan_all_setting_data['background_light_color'] : "";
 $border_color = isset( $loan_all_setting_data['border_color'] ) ? $loan_all_setting_data['border_color'] : "";
+$graph_color = isset( $loan_all_setting_data['graph_color'] ) ? $loan_all_setting_data['graph_color'] : "";
+$graph_color_sub = isset( $loan_all_setting_data['graph_color_sub'] ) ? $loan_all_setting_data['graph_color_sub'] : "";
+$graph_border_color = isset( $loan_all_setting_data['graph_border_color'] ) ? $loan_all_setting_data['graph_border_color'] : "";
+$graph_border_color_sub = isset( $loan_all_setting_data['graph_border_color_sub'] ) ? $loan_all_setting_data['graph_border_color_sub'] : "";
+
+
 /* END : Fetch Color Setting */
 
 /* START : Amount Field Value Setting */
@@ -126,7 +132,10 @@ $enable_loan_mortisation_tab =isset( $loan_all_setting_data['enable_loan_mortisa
 
 /* START : NEW SETTINGS ADDED */
 $disable_ballon_amt = isset( $loan_all_setting_data['disable_ballon_amt'] ) ? $loan_all_setting_data['disable_ballon_amt'] : "";
-$disable_repayment_frequency=isset( $loan_all_setting_data['disable_repayment_frequency'] ) ? $loan_all_setting_data['disable_repayment_frequency'] : "";
+
+/* Repayment Frequency options */
+$get_repayment_frequency = (isset( $loan_all_setting_data['repayment_frequency'] ) ? $loan_all_setting_data['repayment_frequency'] : "");
+
 
 $disable_contactus_section=isset( $loan_all_setting_data['disable_contactus_section'] ) ? $loan_all_setting_data['disable_contactus_section'] : "";
 
@@ -301,14 +310,21 @@ $delete_Screen = ( isset( $_GET['action'] ) && 'misc_setting' == $_GET['action']
                     </td>
                 </tr> 
 
-                <tr id="disable_repayment_frequency_row" >
+                <tr id="repayment_frequency_option_row" >
                     <th scope="row">
-                        <label for="disable_ballon_per"><strong><?php esc_html_e( 'Disable Repayment Frequency', 'loan-calculator-wp' ); ?></strong></label>
+                        <label for="disable_ballon_per"><strong><?php esc_html_e( 'Enable Repayment Frequency Options', 'loan-calculator-wp' ); ?></strong></label>
                     </th>
                     <td width="300">
-                        <input type="checkbox" name="ww_loan_option[disable_repayment_frequency]" id="disable_ballon_amt" value="1" class="regular-text" <?php echo ($disable_repayment_frequency == "1")?"checked":"" ;?> > &nbsp;&nbsp;<label for="disable_repayment_frequency">Check this box if you want to remove Repayment Frequency in loan calculator form</label>
+                        <input type="checkbox" name="ww_loan_option[repayment_frequency][]" id="repayment_frequency_option" value="Monthly" class="regular-text" <?php echo  ((!empty($get_repayment_frequency) && in_array('Monthly', $get_repayment_frequency)) ? "checked" : ""); ?>   > &nbsp;&nbsp;<label for="repayment_frequency_monthly">Monthly</label>
+                         &nbsp;&nbsp;|&nbsp;&nbsp;
+                        <input type="checkbox" name="ww_loan_option[repayment_frequency][]" id="repayment_frequency_option" value="Quarterly" class="regular-text" <?php echo  ((!empty($get_repayment_frequency) && in_array('Quarterly', $get_repayment_frequency)) ? "checked" : ""); ?>  > &nbsp;&nbsp;<label for="repayment_frequency_quarterly">Quarterly</label>
+                        &nbsp;&nbsp;|&nbsp;&nbsp;
+                        <input type="checkbox" name="ww_loan_option[repayment_frequency][]" id="repayment_frequency_option" value="Yearly" class="regular-text" <?php echo  ((!empty($get_repayment_frequency) && in_array('Yearly', $get_repayment_frequency)) ? "checked" : ""); ?>  > &nbsp;&nbsp;<label for="repayment_frequency_yearly">Yearly</label>
+                    </br>
+                    </br>
+                    By default, the monthly option on frontend will appear when it does not select any Repayment Frequency Options.
                     </td>
-                </tr>                                
+                </tr>
             </tbody>
         </table>
 
@@ -353,9 +369,44 @@ $delete_Screen = ( isset( $_GET['action'] ) && 'misc_setting' == $_GET['action']
                         <input type='color' name='ww_loan_option[border_color]' id='border_color' value='<?php esc_attr_e( $border_color,'loan-calculator-wp' );?>' class="regular-text">
                     </td>
                 </tr>
-                <tr id="border-color" >
+                 <tr id="Graph-color" >
                     <th scope="row">
-                        <label for="border_color"><strong><?php esc_html_e( 'Select Theme', 'loan-calculator-wp' ); ?></strong></label>
+                        <label for="border_color"><strong><?php esc_html_e( 'Graph Color', 'loan-calculator-wp' ); ?></strong></label>
+                    </th>
+                    <td width="300">
+                        <input type='color' name='ww_loan_option[graph_color]' id='graph_color' value='<?php esc_attr_e( $graph_color,'loan-calculator-wp' );?>' class="regular-text">
+                    </td>
+                </tr>
+                <tr id="Graph-border-color" >
+                    <th scope="row">
+                        <label for="graph_border_color"><strong><?php esc_html_e( 'Graph Border Color', 'loan-calculator-wp' ); ?></strong></label>
+                    </th>
+                    <td width="300">
+                        <input type='color' name='ww_loan_option[graph_border_color]' id='graph_border_color' value='<?php esc_attr_e( $graph_border_color,'loan-calculator-wp' );?>' class="regular-text">
+                    </td>
+                </tr>
+                <tr id="Graph-color-sub" >
+                    <th scope="row">
+                        <label for="graph_color_sub"><strong><?php esc_html_e( 'Graph Sub Color ', 'loan-calculator-wp' ); ?></strong></label>
+                    </th>
+                    <td width="300">
+                        <input type='color' name='ww_loan_option[graph_color_sub]' id='graph_color_sub' value='<?php esc_attr_e( $graph_color_sub,'loan-calculator-wp' );?>' class="regular-text">
+                    </td>
+                </tr>
+                 <tr id="graph-border-color-sub" >
+                    <th scope="row">
+                        <label for="graph_border_color_sub"><strong><?php esc_html_e( 'Graph Sub Border Color', 'loan-calculator-wp' ); ?></strong></label>
+                    </th>
+                    <td width="300">
+                        <input type='color' name='ww_loan_option[graph_border_color_sub]' id='graph_border_color_sub' value='<?php esc_attr_e( $graph_border_color_sub,'loan-calculator-wp' );?>' class="regular-text">
+                    </td>
+                </tr>
+                
+                <input type="hidden" name="ww_loan_option[select_theme]" value="default_theme" />
+                
+                <!--<tr id="select_theme" >
+                    <th scope="row">
+                        <label for="select_theme"><strong><?php esc_html_e( 'Select Theme', 'loan-calculator-wp' ); ?></strong></label>
                     </th>
                     <td width="300">
                         <select name='ww_loan_option[select_theme]' id='select_theme' style="width: 49%;">
@@ -363,7 +414,7 @@ $delete_Screen = ( isset( $_GET['action'] ) && 'misc_setting' == $_GET['action']
                             <option value="new_theme" <?php if($select_theme == 'new_theme'){echo 'selected';}; ?>>New Theme</option>
                         </select>
                     </td>
-                </tr>
+                </tr>-->
             </tbody>
         </table>
                 
@@ -521,7 +572,7 @@ $delete_Screen = ( isset( $_GET['action'] ) && 'misc_setting' == $_GET['action']
                         <label for="interested_rate"><strong><?php esc_html_e( 'Interested Rate', 'loan-calculator-wp' ); ?></strong></label>
                     </th>
                     <td width="300">
-                        <input type='number' name='ww_loan_option[interested_rate]' id='interested_rate'min="<?php esc_attr_e( '1' ,'loan-calculator-wp' ); ?>" max="<?php esc_attr_e( '100' ,'loan-calculator-wp' ); ?>"  value='<?php esc_attr_e($interested_rate,'loan-calculator-wp'); ?>' class="regular-text" step="0.1">
+                        <input type='number' name='ww_loan_option[interested_rate]' id='interested_rate'min="<?php esc_attr_e( '1' ,'loan-calculator-wp' ); ?>" max="<?php esc_attr_e( '100' ,'loan-calculator-wp' ); ?>"  value='<?php esc_attr_e($interested_rate,'loan-calculator-wp'); ?>' class="regular-text" step="0.01">
                     </td>
                 </tr> 
                 <tr id="interest_rate_min_value" >

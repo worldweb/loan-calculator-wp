@@ -1,9 +1,9 @@
 <?php
 /**
- * Plugin Name: Loan Calculator WP Latest
+ * Plugin Name: Loan Calculator WP
  * Plugin URI: http://www.worldwebtechnology.com/
  * Description:  Loan / EMI Calculator for Home Loan and Personal Loan
- * Version: 1.0.4
+ * Version: 1.0.7
  * Author: World Web Technology
  * Author URI: http://www.worldwebtechnology.com
  * Text Domain: loan-calculator-wp
@@ -24,7 +24,7 @@ if ( !defined( 'ABSPATH' ) ) exit;
  * @since 1.0.0
  */
 if( !defined( 'WW_LOAN_CALCULATOR_VERSION' ) ) {
-	define( 'WW_LOAN_CALCULATOR_VERSION', '1.0.4' ); //version of plugin
+	define( 'WW_LOAN_CALCULATOR_VERSION', '1.0.7' ); //version of plugin
 }
 if (!defined('WW_LOAN_CALCULATOR_TEXT_DOMAIN')) { //check if variable is not defined previous then define it
     define( 'WW_LOAN_CALCULATOR_TEXT_DOMAIN', 'loan-calculator-wp' ); //this is for multi language support in plugin
@@ -106,6 +106,10 @@ function ww_loan_calculator_register_activation() {
         $loan_calculator_default_options['selected_color'] = '#404245';
         $loan_calculator_default_options['background_light_color'] = '#fff7d7';
         $loan_calculator_default_options['border_color'] = '#000000';
+        $loan_calculator_default_options['graph_color'] = '#b3b2b2';
+        $loan_calculator_default_options['graph_border_color'] = '#545454';
+        $loan_calculator_default_options['graph_color_sub'] = '#ead1d1';
+        $loan_calculator_default_options['graph_border_color_sub'] = '#aaa1a1';
         $loan_calculator_default_options['select_theme'] = 'default_theme';
         $loan_calculator_default_options['loan_amount'] = '10000';
         $loan_calculator_default_options['loan_amount_min_value'] = '1000';
