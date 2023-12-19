@@ -39,7 +39,7 @@ jQuery(document).ready(function ($) {
 	});
 	$(document).on('click','#delete_setting',function(){
 		if(jQuery('input[id="delete_setting"]').is(':checked') ) {
-			if(!confirm("Are you sure you want to delete data on plugin uninstall/deactivae?")){
+			if(!confirm("Are you sure you want to delete data on plugin uninstall/deactivate?")){
 				return false;
 			}
 		}
@@ -54,4 +54,16 @@ jQuery(document).ready(function ($) {
 		}
 
 	});
+	$(document).on('click', '.choose_default_payment_mode', function() {    
+	jQuery('.choose_default_payment_mode').not(this).prop('checked', false);
+});
+
+var choose_default_payment_mode = $('.choose_default_payment_mode')
+if ($('#payment_mode_enable').is(":checked")) {
+	choose_default_payment_mode
+} else {
+	
+}
+$(document).on('change','#payment_mode_enable')
+
 });

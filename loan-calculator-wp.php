@@ -3,7 +3,7 @@
  * Plugin Name: Loan Calculator WP
  * Plugin URI: http://www.worldwebtechnology.com/
  * Description:  Loan / EMI Calculator for Home Loan and Personal Loan
- * Version: 1.0.7
+ * Version: 1.2.2
  * Author: World Web Technology
  * Author URI: http://www.worldwebtechnology.com
  * Text Domain: loan-calculator-wp
@@ -24,7 +24,7 @@ if ( !defined( 'ABSPATH' ) ) exit;
  * @since 1.0.0
  */
 if( !defined( 'WW_LOAN_CALCULATOR_VERSION' ) ) {
-	define( 'WW_LOAN_CALCULATOR_VERSION', '1.0.7' ); //version of plugin
+	define( 'WW_LOAN_CALCULATOR_VERSION', '1.2.2' ); //version of plugin
 }
 if (!defined('WW_LOAN_CALCULATOR_TEXT_DOMAIN')) { //check if variable is not defined previous then define it
     define( 'WW_LOAN_CALCULATOR_TEXT_DOMAIN', 'loan-calculator-wp' ); //this is for multi language support in plugin
@@ -123,7 +123,8 @@ function ww_loan_calculator_register_activation() {
         $loan_calculator_default_options['interest_rate_max_value'] = '15.00';
         $loan_calculator_default_options['application_fee'] = '500';
         $loan_calculator_default_options['monthly_rate'] = '10';
-        $loan_calculator_default_options['regular_repayment_heading'] = esc_html__( 'Monthly Payment (incl fees)', 'loan-calculator-wp');
+        $loan_calculator_default_options['regular_repayment_heading'] = esc_html__('Monthly Payment (incl fees)', 'loan-calculator-wp');
+        $loan_calculator_default_options['total_payouts_heading'] = esc_html__('Total Payment', 'loan-calculator-wp');
         $loan_calculator_default_options['per_month_heading'] = esc_html__( 'per month for', 'loan-calculator-wp');
         $loan_calculator_default_options['years_heading'] = esc_html__( 'years', 'loan-calculator-wp'); 
         $loan_calculator_default_options['total_interests_payable_heading'] = esc_html__( 'Total interest payable', 'loan-calculator-wp');

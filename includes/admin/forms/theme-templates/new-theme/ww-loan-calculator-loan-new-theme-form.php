@@ -346,7 +346,7 @@ $disable_tabs_icon=isset( $loan_all_setting_data['disable_tabs_icon'] ) ? $loan_
             <div class="loan-detail-section <?php esc_attr_e( $full_width_cls );?>">
                 <div class="loan-detail-section-child">
                     <div class="sub-main-tab">
-                        <div class="container">
+                        <div class="ww-loan-container">
                             <div class="tabs">
                                <?php
                                $tab1_checked = $tab2_checked =$tab3_checked ="";

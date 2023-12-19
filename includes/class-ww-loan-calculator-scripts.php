@@ -100,7 +100,9 @@ class WW_Loan_Calculator_Script {
 		$calculation_fee_setting_enable = isset( $loan_all_setting_data['calculation_fee_setting_enable'] ) ? $loan_all_setting_data['calculation_fee_setting_enable'] : "";
 		$remove_decimal_point = isset( $loan_all_setting_data['remove_decimal_point'] ) ? $loan_all_setting_data['remove_decimal_point'] : "";
 
+		$payment_mode_enable = isset( $loan_all_setting_data['payment_mode_enable'] ) ? $loan_all_setting_data['payment_mode_enable'] : "";  
 
+		$total_payouts_heading = isset( $loan_all_setting_data['total_payouts_heading'] ) ? $loan_all_setting_data['total_payouts_heading'] : "";
 
 
 		$currency_symbols = ww_loan_get_currency_symbol();
@@ -128,6 +130,8 @@ class WW_Loan_Calculator_Script {
 			'year_label' =>$year_label,
 			'interest_label' =>$interest_label,
 			'principal_label' =>$principal_label,
+			'payment_mode_enable' =>$payment_mode_enable,
+			'total_payouts_heading' =>$total_payouts_heading,
 
 		);
 		

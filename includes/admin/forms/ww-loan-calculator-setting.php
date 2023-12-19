@@ -12,19 +12,18 @@ if (!defined('ABSPATH')) exit;
  */
 
 // Get Loan Calculator Setting From Option Table.
-$loan_all_setting_data = get_option( "ww_loan_option" );
-
-
+$loan_all_setting_data = get_option("ww_loan_option");
 
 $disable_ballon_amt = isset( $loan_all_setting_data['disable_ballon_amt'] ) ? $loan_all_setting_data['disable_ballon_amt'] : "";
+
+$payment_mode_enable = isset( $loan_all_setting_data['payment_mode_enable'] ) ? $loan_all_setting_data['payment_mode_enable'] : "";  
+$choose_default_payment_mode = isset( $loan_all_setting_data['choose_default_payment_mode'] ) ? $loan_all_setting_data['choose_default_payment_mode'] : "";
 
 if( $disable_ballon_amt == 1){
      $loan_all_setting_data['ballon_per'] = 0;
     update_option( "ww_loan_option",$loan_all_setting_data );
-    $loan_all_setting_data = get_option( "ww_loan_option" );
+    $loan_all_setting_data = get_option( "ww_loan_option");
 }
-
-
 
 /* START : Fetch Selected Theme Setting */
 $select_theme = isset( $loan_all_setting_data['select_theme'] ) ? $loan_all_setting_data['select_theme'] : "";
@@ -66,6 +65,7 @@ $total_fees = isset( $loan_all_setting_data['total_fees'] ) ? $loan_all_setting_
 
 /* START : Calculation Result */
 $regular_repayment_heading = isset( $loan_all_setting_data['regular_repayment_heading'] ) ? $loan_all_setting_data['regular_repayment_heading'] : "";
+$total_payouts_heading = isset( $loan_all_setting_data['total_payouts_heading'] ) ? $loan_all_setting_data['total_payouts_heading'] : "";
 $per_month_heading = isset( $loan_all_setting_data['per_month_heading'] ) ? $loan_all_setting_data['per_month_heading'] : "";
 $years_heading = isset( $loan_all_setting_data['years_heading'] ) ? $loan_all_setting_data['years_heading'] : "";
 $total_interests_payable_heading = isset( $loan_all_setting_data['total_interests_payable_heading'] ) ? $loan_all_setting_data['total_interests_payable_heading'] : "";
@@ -144,13 +144,7 @@ $disable_calculator_disclaimer_section=isset( $loan_all_setting_data['disable_ca
 $disable_tabs_icon=isset( $loan_all_setting_data['disable_tabs_icon'] ) ? $loan_all_setting_data['disable_tabs_icon'] : "";
 
 
-
-
-
-
-
 /* END : NEW SETTING ADDED */
-
 
 ?>
 
@@ -169,7 +163,6 @@ $calculation_Screen = ( isset($_GET['action'] ) && 'calculation' == $_GET['actio
 $tab_setting_Screen = ( isset( $_GET['action'] ) && 'tab_setting' == $_GET['action'] ) ? true : false;
 $calculator_disclaimer_Screen = ( isset($_GET['action'] ) && 'calculator_disclaimer' == $_GET['action'] ) ? true : false;
 $tooltip_Screen = ( isset( $_GET['action'] ) && 'tooltip' == $_GET['action'] ) ? true : false;
-
 $delete_Screen = ( isset( $_GET['action'] ) && 'misc_setting' == $_GET['action'] ) ? true : false;
 
 /* END : Tab Setting Active */
@@ -190,8 +183,8 @@ $delete_Screen = ( isset( $_GET['action'] ) && 'misc_setting' == $_GET['action']
         <!-- START : Loan Calculator Form -->
     <form name="loan_calculator_form" action="options.php" method="POST" >
         <?php
-        settings_fields( 'ww_loan_calculaor_option' );
-        do_settings_sections( 'ww_loan_calculaor_option' );
+        settings_fields('ww_loan_calculaor_option');
+        do_settings_sections('ww_loan_calculaor_option');
         ?>  
         <table class="form-table sa-manage-level-product-box" id="calculation_fee" style="display: <?php echo ($general_settings_Screen) ? esc_html( 'table' ): esc_html( 'none' ); ?>"> 
             <tbody>
@@ -207,43 +200,43 @@ $delete_Screen = ( isset( $_GET['action'] ) && 'misc_setting' == $_GET['action']
                 ?>      
                 <tr>
                     <td colspan="2"><h2><?php esc_html_e( 'General Settings', 'loan-calculator-wp' ); ?>  </h2>
-                        <div class="heading-tooltip-section">
+                        <span class="heading-tooltip-section">
                             <?php esc_html_e( 'Configure calculator general settings.','loan-calculator-wp'  ); ?>
-                        </div>
+            </span>
                     </td>
                 </tr>
                 <tr>
                     <th scope="row">
                         <label for="calculation_fee_setting_enable_lbl"><strong><?php esc_html_e( 'Shortcode', 'loan-calculator-wp' ); ?></strong></label>
                     </th>
-                    <td width="300">
-                        <code><?php esc_html_e('[loan_calculator]', 'loan-calculator-wp'); ?></code><br />
-                        <?php esc_html_e( 'Copy this shortcode and add in any post or page', 'loan-calculator-wp' ); ?>
+                    <td>
+                        <code style="font-size: large;"><b><?php esc_html_e('[loan_calculator]', 'loan-calculator-wp'); ?></b></code><br /><br />
+                        <i><b style="color:red"><?php esc_html_e('Note', 'loan-calculator-wp') ?></b><?php esc_html_e(': Copy this shortcode and add in any post or page', 'loan-calculator-wp' ); ?></i>
                     </td>
                 </tr>
                 <tr>
                     <th scope="row">
                         <label for="calculator_heading"><strong><?php esc_html_e( 'Calculator Heading Title', 'loan-calculator-wp' ); ?></strong></label>
                     </th>
-                    <td width="300">
-                        <input type='text' name='ww_loan_option[calculator_heading]' id='calculator_heading' maxlength="300" value='<?php esc_attr_e( $calculator_heading,'loan-calculator-wp' );?>' class="regular-text" /> <br />
-                        <span class="description"><?php esc_html_e( 'Display calculator heading title', 'loan-calculator-wp' ); ?></span>
+                    <td>
+                        <input type='text' name='ww_loan_option[calculator_heading]' id='calculator_heading' maxlength="300" value='<?php esc_attr_e( $calculator_heading,'loan-calculator-wp' );?>' class="regular-text" /> <br /><br />
+                        <span class="description"><i><b style="color:red"><?php esc_html_e('Note', 'loan-calculator-wp') ?></b><?php esc_html_e( ': Display calculator heading title', 'loan-calculator-wp' ); ?></i></span>
                     </td>
                 </tr>
                 <tr>
                     <th scope="row">
                         <label for="about_this_calculator"><strong><?php esc_html_e( 'About This Calculator Label', 'loan-calculator-wp' ); ?></strong></label>                                            
                     </th>
-                    <td width="300">
-                        <input type='text' name='ww_loan_option[about_this_calculator]' id='about_this_calculator' maxlength="100" value='<?php esc_attr_e( $about_this_calculator,'loan-calculator-wp' );?>' class="regular-text" /><br />
-                        <span class="description"><?php esc_html_e( 'Display on top right of the calculator', 'loan-calculator-wp' ); ?></span>
+                    <td>
+                        <input type='text' name='ww_loan_option[about_this_calculator]' id='about_this_calculator' maxlength="100" value='<?php esc_attr_e( $about_this_calculator,'loan-calculator-wp' );?>' class="regular-text" /><br /><br />
+                        <span class="description"><i><b style="color:red"><?php esc_html_e('Note', 'loan-calculator-wp') ?></b><?php esc_html_e( ': Display on top right of the calculator', 'loan-calculator-wp' ); ?></i></span>
                     </td>
                 </tr>
                 <tr>
                     <th scope="row">
                         <label for="calculator_popup_content"><strong><?php esc_html_e( 'About Calculator Popup Content', 'loan-calculator-wp' ); ?></strong></label>
                     </th>
-                    <td width="300">
+                    <td>
                         <?php
                         $settings = array(
                             'textarea_name' => 'ww_loan_option[calculator_popup_content]',
@@ -253,19 +246,19 @@ $delete_Screen = ( isset( $_GET['action'] ) && 'misc_setting' == $_GET['action']
                             'wpautop' => true,
                         );
                         wp_editor( $calculator_popup_content, 'ww_loan_option_calculator_popup_content', $settings );
-                        ?><br />
-                        <span class="description"><?php esc_html_e( 'Enter the about calculator information which will be displayed on click of About us calculator label', 'loan-calculator-wp' ); ?></span>
+                        ?><br /><br />
+                        <span class="description"><i><b style="color:red"><?php esc_html_e('Note', 'loan-calculator-wp') ?></b><?php esc_html_e(': Enter the about calculator information which will be displayed on click of About us calculator label', 'loan-calculator-wp' ); ?></i></span>
                     </td>
                 </tr>
                 <tr>
                     <th scope="row">
                         <label for="print_option_enable"><strong><?php esc_html_e('Enable Print Option', 'loan-calculator-wp'); ?></strong></label>
                     </th>
-                    <td width="300">
+                    <td>
                         <input type='checkbox' name='ww_loan_option[print_option_enable]' id='print_option_enable' value='<?php esc_attr_e( '1','loan-calculator-wp' );?>' <?php echo ( $print_option_enable == 1) ? esc_html( "checked" ) : ""; ?> class="regular-text">
                         <label for="print_option_enable"><?php esc_html_e('Enable Print Option', 'loan-calculator-wp'); ?></label>
-                        <br />
-                        <?php esc_html_e( 'Check this box to enable print option. It will be visible on top right of the calculator', 'loan-calculator-wp' ); ?>
+                        <br /><br />
+                        <i><b style="color:red"><?php esc_html_e('Note', 'loan-calculator-wp') ?></b><?php esc_html_e(': Check this box to enable print option. It will be visible on top right of the calculator', 'loan-calculator-wp' ); ?></i>
                     </td>
                 </tr>
                <?php if($print_option_enable == 1){ ?>
@@ -273,7 +266,7 @@ $delete_Screen = ( isset( $_GET['action'] ) && 'misc_setting' == $_GET['action']
                     <th scope="row">
                         <label for="print_option_heading"><strong><?php esc_html_e( 'Print Option Label', 'loan-calculator-wp' ); ?></strong></label>
                     </th>
-                    <td width="300">
+                    <td>
                         <input type='text' name='ww_loan_option[print_option_heading]' id='print_option_heading' value='<?php esc_attr_e ($print_option_heading,'loan-calculator-wp' );?>' class="regular-text"> 
                     </td>
                 </tr> <?php } ?>
@@ -281,7 +274,7 @@ $delete_Screen = ( isset( $_GET['action'] ) && 'misc_setting' == $_GET['action']
                     <th scope="row">
                         <label for="about_this_calculator"><strong><?php esc_html_e( 'Currency ', 'loan-calculator-wp' ); ?></strong></label>                                            
                     </th>
-                    <td width="300">
+                    <td>
                         <?php
                             $ww_loan_get_currencies = ww_loan_get_currencies();
                             $selected_currency = ww_loan_get_currency();
@@ -314,15 +307,15 @@ $delete_Screen = ( isset( $_GET['action'] ) && 'misc_setting' == $_GET['action']
                     <th scope="row">
                         <label for="disable_ballon_per"><strong><?php esc_html_e( 'Enable Repayment Frequency Options', 'loan-calculator-wp' ); ?></strong></label>
                     </th>
-                    <td width="300">
-                        <input type="checkbox" name="ww_loan_option[repayment_frequency][]" id="repayment_frequency_option" value="Monthly" class="regular-text" <?php echo  ((!empty($get_repayment_frequency) && in_array('Monthly', $get_repayment_frequency)) ? "checked" : ""); ?>   > &nbsp;&nbsp;<label for="repayment_frequency_monthly">Monthly</label>
+                    <td>
+                        <input type="checkbox" name="ww_loan_option[repayment_frequency][]" id="repayment_frequency_option" value="Monthly" class="regular-text" <?php echo  ((!empty($get_repayment_frequency) && in_array('Monthly', $get_repayment_frequency)) ? "checked" : ""); ?>> <label for="repayment_frequency_monthly">Monthly</label>
                          &nbsp;&nbsp;|&nbsp;&nbsp;
-                        <input type="checkbox" name="ww_loan_option[repayment_frequency][]" id="repayment_frequency_option" value="Quarterly" class="regular-text" <?php echo  ((!empty($get_repayment_frequency) && in_array('Quarterly', $get_repayment_frequency)) ? "checked" : ""); ?>  > &nbsp;&nbsp;<label for="repayment_frequency_quarterly">Quarterly</label>
+                        <input type="checkbox" name="ww_loan_option[repayment_frequency][]" id="repayment_frequency_option" value="Quarterly" class="regular-text" <?php echo  ((!empty($get_repayment_frequency) && in_array('Quarterly', $get_repayment_frequency)) ? "checked" : ""); ?>  > <label for="repayment_frequency_quarterly">Quarterly</label>
                         &nbsp;&nbsp;|&nbsp;&nbsp;
-                        <input type="checkbox" name="ww_loan_option[repayment_frequency][]" id="repayment_frequency_option" value="Yearly" class="regular-text" <?php echo  ((!empty($get_repayment_frequency) && in_array('Yearly', $get_repayment_frequency)) ? "checked" : ""); ?>  > &nbsp;&nbsp;<label for="repayment_frequency_yearly">Yearly</label>
+                        <input type="checkbox" name="ww_loan_option[repayment_frequency][]" id="repayment_frequency_option" value="Yearly" class="regular-text" <?php echo  ((!empty($get_repayment_frequency) && in_array('Yearly', $get_repayment_frequency)) ? "checked" : ""); ?> > <label for="repayment_frequency_yearly">Yearly</label>
                     </br>
                     </br>
-                    By default, the monthly option on frontend will appear when it does not select any Repayment Frequency Options.
+                    <i><b style="color:red"><?php esc_html_e('Note', 'loan-calculator-wp') ?></b><?php esc_attr_e(": By default, the monthly option on frontend will appear when it does not select any Repayment Frequency Options.",'loan-calculator-wp') ?></i>
                     </td>
                 </tr>
             </tbody>
@@ -332,16 +325,16 @@ $delete_Screen = ( isset( $_GET['action'] ) && 'misc_setting' == $_GET['action']
             <tbody>
                 <tr>
                     <td colspan="2"><h2><?php esc_html_e( 'Display Color Settings', 'loan-calculator-wp' ); ?></h2>
-                            <div class="heading-tooltip-section">
+                            <span class="heading-tooltip-section">
                             <?php esc_html_e( 'Customize the calculator look. Change the background color, hover color, border color etc...','loan-calculator-wp'  ); ?>
-                        </div>
+                            </span>
                     </td>
                 </tr>
                 <tr id="backbround-color-section" >
                     <th scope="row">
                         <label for="back_ground_color"><strong><?php esc_html_e( 'Background Color', 'loan-calculator-wp' ); ?></strong></label>
                     </th>
-                    <td width="300">
+                    <td>
                         <input type='color' name='ww_loan_option[back_ground_color]' id='back_ground_color' value='<?php esc_attr_e( $back_ground_color,'loan-calculator-wp' );?>' class="regular-text">
                     </td>
                 </tr>
@@ -349,7 +342,7 @@ $delete_Screen = ( isset( $_GET['action'] ) && 'misc_setting' == $_GET['action']
                     <th scope="row">
                         <label for="selected_color"><strong><?php esc_html_e( 'Selected Color', 'loan-calculator-wp' ); ?></strong></label>
                     </th>
-                    <td width="300">
+                    <td>
                         <input type='color' name='ww_loan_option[selected_color]' id='selected_color' value='<?php esc_attr_e( $selected_color, 'loan-calculator-wp' );?>' class="regular-text">
                     </td>
                 </tr>
@@ -357,7 +350,7 @@ $delete_Screen = ( isset( $_GET['action'] ) && 'misc_setting' == $_GET['action']
                     <th scope="row">
                         <label for="background_light_color"><strong><?php esc_html_e( 'Background Light Color', 'loan-calculator-wp' ); ?></strong></label>
                     </th>
-                    <td width="300">
+                    <td>
                         <input type='color' name='ww_loan_option[background_light_color]' id='background_light_color' value='<?php esc_attr_e( $background_light_color,'loan-calculator-wp' );?>' class="regular-text">
                     </td>
                 </tr>
@@ -365,7 +358,7 @@ $delete_Screen = ( isset( $_GET['action'] ) && 'misc_setting' == $_GET['action']
                     <th scope="row">
                         <label for="border_color"><strong><?php esc_html_e( 'Border Color', 'loan-calculator-wp' ); ?></strong></label>
                     </th>
-                    <td width="300">
+                    <td>
                         <input type='color' name='ww_loan_option[border_color]' id='border_color' value='<?php esc_attr_e( $border_color,'loan-calculator-wp' );?>' class="regular-text">
                     </td>
                 </tr>
@@ -373,7 +366,7 @@ $delete_Screen = ( isset( $_GET['action'] ) && 'misc_setting' == $_GET['action']
                     <th scope="row">
                         <label for="border_color"><strong><?php esc_html_e( 'Graph Color', 'loan-calculator-wp' ); ?></strong></label>
                     </th>
-                    <td width="300">
+                    <td>
                         <input type='color' name='ww_loan_option[graph_color]' id='graph_color' value='<?php esc_attr_e( $graph_color,'loan-calculator-wp' );?>' class="regular-text">
                     </td>
                 </tr>
@@ -381,7 +374,7 @@ $delete_Screen = ( isset( $_GET['action'] ) && 'misc_setting' == $_GET['action']
                     <th scope="row">
                         <label for="graph_border_color"><strong><?php esc_html_e( 'Graph Border Color', 'loan-calculator-wp' ); ?></strong></label>
                     </th>
-                    <td width="300">
+                    <td>
                         <input type='color' name='ww_loan_option[graph_border_color]' id='graph_border_color' value='<?php esc_attr_e( $graph_border_color,'loan-calculator-wp' );?>' class="regular-text">
                     </td>
                 </tr>
@@ -389,7 +382,7 @@ $delete_Screen = ( isset( $_GET['action'] ) && 'misc_setting' == $_GET['action']
                     <th scope="row">
                         <label for="graph_color_sub"><strong><?php esc_html_e( 'Graph Sub Color ', 'loan-calculator-wp' ); ?></strong></label>
                     </th>
-                    <td width="300">
+                    <td>
                         <input type='color' name='ww_loan_option[graph_color_sub]' id='graph_color_sub' value='<?php esc_attr_e( $graph_color_sub,'loan-calculator-wp' );?>' class="regular-text">
                     </td>
                 </tr>
@@ -397,7 +390,7 @@ $delete_Screen = ( isset( $_GET['action'] ) && 'misc_setting' == $_GET['action']
                     <th scope="row">
                         <label for="graph_border_color_sub"><strong><?php esc_html_e( 'Graph Sub Border Color', 'loan-calculator-wp' ); ?></strong></label>
                     </th>
-                    <td width="300">
+                    <td>
                         <input type='color' name='ww_loan_option[graph_border_color_sub]' id='graph_border_color_sub' value='<?php esc_attr_e( $graph_border_color_sub,'loan-calculator-wp' );?>' class="regular-text">
                     </td>
                 </tr>
@@ -408,7 +401,7 @@ $delete_Screen = ( isset( $_GET['action'] ) && 'misc_setting' == $_GET['action']
                     <th scope="row">
                         <label for="select_theme"><strong><?php esc_html_e( 'Select Theme', 'loan-calculator-wp' ); ?></strong></label>
                     </th>
-                    <td width="300">
+                    <td>
                         <select name='ww_loan_option[select_theme]' id='select_theme' style="width: 49%;">
                             <option value="default_theme" <?php if($select_theme == 'default_theme'){echo 'selected';}; ?>>Default Theme</option>
                             <option value="new_theme" <?php if($select_theme == 'new_theme'){echo 'selected';}; ?>>New Theme</option>
@@ -422,16 +415,16 @@ $delete_Screen = ( isset( $_GET['action'] ) && 'misc_setting' == $_GET['action']
             <tbody>
                 <tr>
                     <td colspan="2"><h2><?php esc_html_e('Default Value for Amount Text Field', 'loan-calculator-wp'); ?></h2>
-                            <div class="heading-tooltip-section">
+                            <span class="heading-tooltip-section">
                             <?php esc_html_e('Set the default value for all amount text fields','loan-calculator-wp'  ); ?>
-                        </div>
+                            </span>
                     </td>
                 </tr>
                 <tr id="loan-amount" >
                     <th scope="row">
                         <label for="loan_amount"><strong><?php esc_html_e('Loan Amount', 'loan-calculator-wp' ); ?></strong></label>
                     </th>
-                    <td width="300">
+                    <td>
                         <input type='number' name='ww_loan_option[loan_amount]' id='loan_amount' min="1000" max="100000000000" value='<?php esc_attr_e($loan_amount,'loan-calculator-wp' );?>' class="regular-text">
                     </td>
                 </tr>
@@ -439,7 +432,7 @@ $delete_Screen = ( isset( $_GET['action'] ) && 'misc_setting' == $_GET['action']
                     <th scope="row">
                         <label for="loan_amount_min_value"><strong><?php esc_html_e('Loan Amount Min Value', 'loan-calculator-wp' ); ?></strong></label>
                     </th>
-                    <td width="300">
+                    <td>
                         <input type='number' name='ww_loan_option[loan_amount_min_value]' id='loan_amount_min_value' min="1000" max="100000000000"   value='<?php esc_attr_e( $loan_amount_min_value,'loan-calculator-wp' );?>' class="regular-text" > 
                     </td>
                 </tr>
@@ -447,7 +440,7 @@ $delete_Screen = ( isset( $_GET['action'] ) && 'misc_setting' == $_GET['action']
                     <th scope="row">
                         <label for="loan-amount-max_lbl"><strong><?php esc_html_e( 'Loan Amount Max Value', 'loan-calculator-wp' ); ?></strong></label>
                     </th>
-                    <td width="300">
+                    <td>
                         <input type='number' name='ww_loan_option[loan_amount_max_value]' id='loan_amount_max_value' maxlength="10"  value='<?php esc_attr_e( $loan_amount_max_value,'loan-calculator-wp' );?>' class="regular-text" min="1000" max="100000000000" > 
                     </td>
                 </tr>
@@ -455,7 +448,7 @@ $delete_Screen = ( isset( $_GET['action'] ) && 'misc_setting' == $_GET['action']
                     <th scope="row">
                         <label for="loan_amount_tooltip"><strong><?php esc_html_e( 'Loan Amount Tooltip', 'loan-calculator-wp' ); ?></strong></label>
                     </th>
-                    <td width="300">
+                    <td>
                         <textarea name="ww_loan_option[loan_amount_tooltip]" id="loan_amount_tooltip" rows="4" cols="50"><?php esc_attr_e( $loan_amount_tooltip,'loan-calculator-wp' );?></textarea>
                         
                     </td>
@@ -464,7 +457,7 @@ $delete_Screen = ( isset( $_GET['action'] ) && 'misc_setting' == $_GET['action']
                     <th scope="row">
                         <label for="loan_term"><strong><?php esc_html_e( 'Loan Term', 'loan-calculator-wp' ); ?></strong></label>
                     </th>
-                    <td width="300">
+                    <td>
                         <!--  <input type='number' name='ww_loan_option[loan_term]' id='loan_term' min="1" max="999" value='<?php echo $loan_term; ?>' class="regular-text">-->
                         <?php
                             $loan_term_month =480;
@@ -497,7 +490,7 @@ $delete_Screen = ( isset( $_GET['action'] ) && 'misc_setting' == $_GET['action']
                     <th scope="row">
                         <label for="loan_term_min_value"><strong><?php esc_html_e('Loan Term Min Value', 'loan-calculator-wp'); ?></strong></label>
                     </th>
-                    <td width="300">
+                    <td>
                         <select name="ww_loan_option[loan_term_min_value]" id="loan_term_min_value" class="regular-text" >
                             <option value="<?php esc_attr_e('1','loan-calculator-wp');?>" <?php echo ( $loan_term_min_value == '1' ) ?  esc_html( "selected" ) : ""; ?>><?php esc_html_e('1' ,'loan-calculator-wp');?></option>
 
@@ -520,7 +513,7 @@ $delete_Screen = ( isset( $_GET['action'] ) && 'misc_setting' == $_GET['action']
                     <th scope="row">
                         <label for="loan_term_max_value"><strong><?php esc_html_e('Loan Term Max Value', 'loan-calculator-wp'); ?></strong></label>
                     </th>
-                    <td width="300">
+                    <td>
                         <select name="ww_loan_option[loan_term_max_value]" id="loan_term_max_value" class="regular-text" >
                               <option value="<?php esc_attr_e('1','loan-calculator-wp');?>" <?php echo ( $loan_term_max_value == '1' ) ?  esc_html( "selected" ) : ""; ?>><?php esc_html_e('1' ,'loan-calculator-wp');?></option>
 
@@ -546,7 +539,7 @@ $delete_Screen = ( isset( $_GET['action'] ) && 'misc_setting' == $_GET['action']
                     <th scope="row">
                         <label for="loan_terms_tooltip"><strong><?php esc_html_e( 'Loan Terms Tooltip', 'loan-calculator-wp' ); ?></strong></label>
                     </th>
-                    <td width="300">
+                    <td>
                         <textarea name="ww_loan_option[loan_terms_tooltip]" id="loan_terms_tooltip" rows="4" cols="50"><?php esc_attr_e( $loan_terms_tooltip,'loan-calculator-wp' ); ?></textarea>
                         
                     </td>
@@ -555,15 +548,15 @@ $delete_Screen = ( isset( $_GET['action'] ) && 'misc_setting' == $_GET['action']
                     <th scope="row">
                         <label for="disable_ballon_per"><strong><?php esc_html_e( 'Disable Ballon', 'loan-calculator-wp' ); ?></strong></label>
                     </th>
-                    <td width="300">
-                        <input type="checkbox" name="ww_loan_option[disable_ballon_amt]" id="disable_ballon_amt" value="1" class="regular-text" <?php echo ($disable_ballon_amt == "1")?"checked":"" ;?> > &nbsp;&nbsp;<label for="disable_ballon_amt">Check this box if you want to remove ballon amount in loan calculator form</label>
+                    <td>
+                        <input type="checkbox" name="ww_loan_option[disable_ballon_amt]" id="disable_ballon_amt" value="1" class="regular-text" <?php echo ($disable_ballon_amt == "1")?"checked":"" ;?> > <?php esc_html_e('Check this box if you want to remove ballon amount in loan calculator form', 'loan-calculator-wp')?>
                     </td>
                 </tr>
                 <tr id="ballon_amt_per" >
                     <th scope="row">
                         <label for="ballon_per"><strong><?php esc_html_e( 'Ballon Percentage', 'loan-calculator-wp' ); ?></strong></label>
                     </th>
-                    <td width="300">
+                    <td>
                         <input type='number' name='ww_loan_option[ballon_per]' id='ballon_per'  min="<?php esc_attr_e( '0' ,'loan-calculator-wp' ); ?>" max="<?php esc_attr_e( '100' ,'loan-calculator-wp' ); ?>" value='<?php esc_attr_e( $ballon_per,'loan-calculator-wp' ); ?>' class="regular-text">
                     </td>
                 </tr>
@@ -571,7 +564,7 @@ $delete_Screen = ( isset( $_GET['action'] ) && 'misc_setting' == $_GET['action']
                     <th scope="row">
                         <label for="interested_rate"><strong><?php esc_html_e( 'Interested Rate', 'loan-calculator-wp' ); ?></strong></label>
                     </th>
-                    <td width="300">
+                    <td>
                         <input type='number' name='ww_loan_option[interested_rate]' id='interested_rate'min="<?php esc_attr_e( '1' ,'loan-calculator-wp' ); ?>" max="<?php esc_attr_e( '100' ,'loan-calculator-wp' ); ?>"  value='<?php esc_attr_e($interested_rate,'loan-calculator-wp'); ?>' class="regular-text" step="0.01">
                     </td>
                 </tr> 
@@ -579,7 +572,7 @@ $delete_Screen = ( isset( $_GET['action'] ) && 'misc_setting' == $_GET['action']
                     <th scope="row">
                         <label for="interest-rate-min_lbl"><strong><?php esc_html_e('Interest Rate Min Value', 'loan-calculator-wp'); ?></strong></label>
                     </th>
-                    <td width="300">
+                    <td>
                         <input type='number' name='ww_loan_option[interest_rate_min_value]' id='interest_rate_min_value' maxlength="7"  value='<?php esc_attr_e(
                         $interest_rate_min_value,'loan-calculator-wp' ); ?>' class="regular-text" step="0.1"> 
                     </td>
@@ -588,7 +581,7 @@ $delete_Screen = ( isset( $_GET['action'] ) && 'misc_setting' == $_GET['action']
                     <th scope="row">
                         <label for="interest_rate_max_value"><strong><?php esc_html_e( 'Interest Rate Max Value', 'loan-calculator-wp' ); ?></strong></label>
                     </th>
-                    <td width="300">
+                    <td>
                         <input type='number' name='ww_loan_option[interest_rate_max_value]' id='interest_rate_max_value' maxlength="7"  value='<?php esc_attr_e( $interest_rate_max_value,'loan-calculator-wp' ); ?>' class="regular-text" step="0.1"> 
                     </td>
                 </tr>
@@ -596,7 +589,7 @@ $delete_Screen = ( isset( $_GET['action'] ) && 'misc_setting' == $_GET['action']
                     <th scope="row">
                         <label for="interest_rates_tooltip"><strong><?php esc_html_e( 'Interest Rates Tooltip', 'loan-calculator-wp' ); ?></strong></label>
                     </th>
-                    <td width="300">
+                    <td>
                         <textarea name="ww_loan_option[interest_rates_tooltip]" id="interest_rates_tooltip" rows="4" cols="50"><?php esc_attr_e( $interest_rates_tooltip,'loan-calculator-wp' ); ?></textarea>
                     </td>
                 </tr>
@@ -604,7 +597,7 @@ $delete_Screen = ( isset( $_GET['action'] ) && 'misc_setting' == $_GET['action']
                     <th scope="row">
                         <label for="application_fee"><strong><?php esc_html_e( 'Application Fee', 'loan-calculator-wp' ); ?></strong></label>
                     </th>
-                    <td width="300">
+                    <td>
                         <input type='number' name='ww_loan_option[application_fee]' id='application_fee'  min="1" max="50000" value='<?php esc_attr_e( $application_fee,'loan-calculator-wp' ); ?>' class="regular-text">
                     </td>
                 </tr>
@@ -612,30 +605,58 @@ $delete_Screen = ( isset( $_GET['action'] ) && 'misc_setting' == $_GET['action']
                     <th scope="row">
                         <label for="monthly_rate"><strong><?php esc_html_e( 'Monthly Rate', 'loan-calculator-wp' ); ?></strong></label>
                     </th>
-                    <td width="300">
+                    <td>
                         <input type='number' name='ww_loan_option[monthly_rate]' id='monthly_rate'  min="1" max="50000" value='<?php esc_attr_e( $monthly_rate,'loan-calculator-wp' ); ?>' class="regular-text" > 
                     </td>
                 </tr>
+                 <tr id="payment-mode" >
+                    <th scope="row">
+                        <label for="payment_mode"><strong><?php esc_html_e('Hide Payment Mode', 'loan-calculator-wp' ); ?></strong></label>
+                    </th>
+                    <td>
+                    <input type='checkbox' name='ww_loan_option[payment_mode_enable]' id='payment_mode_enable' value='1' <?php checked($payment_mode_enable, 1) ?> class="regular-text" > <br><br>
+                    <i><b style="color:red"><?php esc_html_e('Note', 'loan-calculator-wp') ?></b><?php esc_html_e(': If you want to display a specific payment mode that you have chosen from the options below, check this box.', 'loan-calculator-wp' ); ?> </i>
+                    </td>
+                </tr> 
+                <tr id="default_payment-mode" >
+                    <th scope="row">
+                        <label for="default_payment"><strong><?php esc_html_e('Default Payment Mode', 'loan-calculator-wp' ); ?></strong></label>
+                    </th>
+                    <td>
+                    <input type='radio' name='ww_loan_option[choose_default_payment_mode]' value='In Advanced' <?php checked('In Advanced',$choose_default_payment_mode) ?> class="regular-text choose_default_payment_mode"><?php esc_attr_e('In Advance', 'loan-calculator-wp') ?>&nbsp; &nbsp;
+                    <input type='radio' name='ww_loan_option[choose_default_payment_mode]' value='In Arrears' <?php checked('In Arrears',$choose_default_payment_mode) ?> class="regular-text choose_default_payment_mode"><?php esc_attr_e('In Arrears', 'loan-calculator-wp') ?>&nbsp; &nbsp; &nbsp; <br><br>
+                    <i><b style="color:red"><?php esc_html_e('Note', 'loan-calculator-wp') ?></b><?php esc_html_e(': If you enable the setting, it will use "In Advance" or "In Arrears" payment mode based on "Default Payment method" setting. ', 'loan-calculator-wp'); ?></i>
+                </td>
+                
+                </tr>
                 <tr>
                     <td colspan="2"><h2><?php esc_html_e( 'Default Text for Calculation Result', 'loan-calculator-wp' ); ?></h2> 
-                        <div class="heading-tooltip-section">
+                        <span class="heading-tooltip-section">
                             <?php esc_html_e( 'Set the calculation results labels','loan-calculator-wp'  ); ?>
-                        </div>
+                            </span>
                     </td>
                 </tr>
                 <tr>
                     <th scope="row">
                         <label for="regular_repayment_heading"><strong><?php esc_html_e( 'Regular Repayment Label', 'loan-calculator-wp' ); ?></strong></label>
                     </th>
-                    <td width="300">
-                        <input type='text' name='ww_loan_option[regular_repayment_heading]' id='regular_repayment_heading' maxlength="200" value='<?php esc_attr_e( $regular_repayment_heading,'loan-calculator-wp' ); ?>' class="regular-text" > 
+                    <td>
+                        <input type='text' name='ww_loan_option[regular_repayment_heading]' id='regular_repayment_heading' maxlength="200" value='<?php esc_attr_e($regular_repayment_heading,'loan-calculator-wp' ); ?>' class="regular-text" > 
+                    </td>
+                </tr> 
+                <tr>
+                    <th scope="row">
+                        <label for="total_payouts_heading"><strong><?php esc_html_e( 'Total Payment Label', 'loan-calculator-wp' ); ?></strong></label>
+                    </th>
+                    <td>
+                        <input type='text' name='ww_loan_option[total_payouts_heading]' id='total_payouts_heading' maxlength="200" value='<?php esc_attr_e($total_payouts_heading,'loan-calculator-wp' ); ?>' class="regular-text" > 
                     </td>
                 </tr>
                 <tr>
                     <th scope="row">
                         <label for="total_interests_payable_heading"><strong><?php esc_html_e( 'Total Interest Payable Label', 'loan-calculator-wp' ); ?></strong></label>
                     </th>
-                    <td width="300">
+                    <td>
                         <input type='text' name='ww_loan_option[total_interests_payable_heading]' id='total_interests_payable_heading' maxlength="200" value='<?php esc_attr_e( $total_interests_payable_heading,'loan-calculator-wp' ); ?>' class="regular-text" > 
                     </td>
                 </tr>
@@ -643,15 +664,15 @@ $delete_Screen = ( isset( $_GET['action'] ) && 'misc_setting' == $_GET['action']
                     <th scope="row">
                         <label for="ballon_amt_heading"><strong><?php esc_html_e( 'Balloon Amount Label', 'loan-calculator-wp' ); ?></strong></label>
                     </th>
-                    <td width="300">
+                    <td>
                         <input type='text' name='ww_loan_option[ballon_amt_heading]' id='ballon_amt_heading' maxlength="200" value='<?php esc_attr_e( $ballon_amt_heading,'loan-calculator-wp' ); ?>' class="regular-text" > 
                     </td>
                 </tr>
                 <tr>
                     <td colspan="2"><h2><?php esc_html_e( 'Fee Calculation Settings ', 'loan-calculator-wp' ); ?>  </h2>
-                        <div class="heading-tooltip-section">
+                        <span class="heading-tooltip-section">
                             <?php esc_html_e( 'Show application fees, monthly fees, total regular fees and total fees. Customize each fees label.','loan-calculator-wp'  ); ?>
-                        </div>
+                            </span>
                     </td>
 
                 </tr>
@@ -659,24 +680,24 @@ $delete_Screen = ( isset( $_GET['action'] ) && 'misc_setting' == $_GET['action']
                     <th scope="row">
                         <label for="calculation_fee_setting_enable_lbl"><strong><?php esc_html_e( 'Enable Fee Calculation', 'loan-calculator-wp' ); ?></strong></label>
                     </th>
-                    <td width="300">
+                    <td>
                         <input type='checkbox' name='ww_loan_option[calculation_fee_setting_enable]' id='calculation_fee_setting_enable' value='1' <?php echo ($calculation_fee_setting_enable == 1) ?  esc_html( 'checked' ): ""; ?> class="regular-text" >
-                        <label for="calculation_fee_setting_enable"><?php esc_html_e( 'Enable Fee Calculation', 'loan-calculator-wp' ); ?></label><br /><?php esc_html_e( 'Display Application fees, monthly fees, total regular fees and total fees below calculator result', 'loan-calculator-wp' ); ?>
+                        <label for="calculation_fee_setting_enable"><?php esc_html_e( 'Enable Fee Calculation', 'loan-calculator-wp' ); ?></label><br /><br /><i><b style="color:red"><?php esc_html_e('Note', 'loan-calculator-wp') ?></b><?php esc_html_e(': Display Application fees, monthly fees, total regular fees and total fees below calculator result', 'loan-calculator-wp' ); ?></i>
                     </td>
                 </tr>
                 <tr id="application_fee_heading_lbl" <?php esc_attr_e( $calculation_fee_display,'loan-calculator-wp' ); ?> class='calculation-fee-display-section'>
                     <th scope="row">
                         <label for="application_fee_heading"><strong><?php esc_html_e( 'Application Fee Label', 'loan-calculator-wp' ); ?></strong></label>
                     </th>
-                    <td width="300">
+                    <td>
                         <input type='text' name='ww_loan_option[application_fee_heading]' id='application_fee_heading' value='<?php esc_attr_e( $application_fee_heading,'loan-calculator-wp' ); ?>' maxlength="50" class="regular-text">
                     </td>
                 </tr>
-                <tr id="common-heading" <?php esc_attr_e( $calculation_fee_display,'loan-calculator-wp' ); ?> class='calculation-fee-display-section'>
+                <tr id="common-heading" <?php esc_attr_e( $calculation_fee_display,'loan-calculator-wp'); ?> class='calculation-fee-display-section'>
                     <th scope="row">
                         <label for="monthly_fee_heading"><strong><?php esc_html_e( 'Monthly Fee Label', 'loan-calculator-wp' ); ?></strong></label>
                     </th>
-                    <td width="300">
+                    <td>
                         <input type='text' name='ww_loan_option[monthly_fee_heading]' id='monthly_fee_heading' value='<?php esc_attr_e( $monthly_fee_heading,'loan-calculator-wp' ); ?>' maxlength="50" class="regular-text">
                     </td>
                 </tr>
@@ -684,7 +705,7 @@ $delete_Screen = ( isset( $_GET['action'] ) && 'misc_setting' == $_GET['action']
                     <th scope="row">
                         <label for="total_regular_fees"><strong><?php esc_html_e('Total Regular Fees Label', 'loan-calculator-wp'); ?></strong></label>
                     </th>
-                    <td width="300">
+                    <td>
                         <input type='text' name='ww_loan_option[total_regular_fees]' id='total_regular_fees' value='<?php esc_attr_e( $total_regular_fees,'loan-calculator-wp' ); ?>' maxlength="50" class="regular-text">
                     </td>
                 </tr>
@@ -692,7 +713,7 @@ $delete_Screen = ( isset( $_GET['action'] ) && 'misc_setting' == $_GET['action']
                     <th scope="row">
                         <label for="total_fees"><strong><?php esc_html_e( 'Total Fees Label', 'loan-calculator-wp' ); ?></strong></label>
                     </th>
-                    <td width="300">
+                    <td>
                         <input type='text' name='ww_loan_option[total_fees]' id='total_fees' value='<?php esc_attr_e( $total_fees,'loan-calculator-wp' ); ?>' maxlength="50" class="regular-text">                    
                     </td>
                 </tr>
@@ -703,9 +724,9 @@ $delete_Screen = ( isset( $_GET['action'] ) && 'misc_setting' == $_GET['action']
             <tbody>
                 <tr>
                     <td colspan="2"><h2><?php esc_html_e( 'Tab Settings Field', 'loan-calculator-wp' ); ?> </h2>
-                        <div class="heading-tooltip-section">
+                        <span class="heading-tooltip-section">
                             <?php esc_html_e( 'Enable individual tab based on your need','loan-calculator-wp'  ); ?>
-                        </div>
+                            </span>
                     </td>
                 </tr>
 
@@ -713,8 +734,8 @@ $delete_Screen = ( isset( $_GET['action'] ) && 'misc_setting' == $_GET['action']
                     <th scope="row">
                         <label for="disable_tabs_icon_section_lbl"><strong><?php esc_html_e( 'Disable Tabs Icon', 'loan-calculator-wp' ); ?></strong></label>
                     </th>
-                    <td width="300">
-                        <input type="checkbox" name="ww_loan_option[disable_tabs_icon]" id="disable_tabs_icon" value="1" class="regular-text" <?php echo ($disable_tabs_icon == "1")?"checked":"" ;?> > &nbsp;&nbsp;<label for="disable_tabs_icon">Check this box if you want to remove tab icon section in loan calculator form</label>
+                    <td>
+                        <input type="checkbox" name="ww_loan_option[disable_tabs_icon]" id="disable_tabs_icon" value="1" class="regular-text" <?php echo ($disable_tabs_icon == "1")?"checked":"" ;?> ><label for="disable_tabs_icon"><?php esc_html_e('Check this box if you want to remove tab icon section in loan calculator form', 'loan-calculator-wp')?></label>
                     </td>
                 </tr>
 
@@ -722,8 +743,8 @@ $delete_Screen = ( isset( $_GET['action'] ) && 'misc_setting' == $_GET['action']
                     <th scope="row">
                         <label for="enable_repayment_chart"><strong><?php esc_html_e( 'Enable Repayment Chart Tab', 'loan-calculator-wp' ); ?></strong></label>
                     </th>
-                    <td width="300">
-                        <input type='checkbox' name='ww_loan_option[enable_repayment_chart]' id='enable_repayment_chart' value='1' <?php echo ($enable_repayment_chart == 1) ? esc_html( 'checked' ) : ""; ?> class="regular-text"  > &nbsp;<label for="enable_repayment_chart"><?php esc_html_e( 'Enable Repayment Chart Tab', 'loan-calculator-wp' ); ?></label>
+                    <td>
+                        <input type='checkbox' name='ww_loan_option[enable_repayment_chart]' id='enable_repayment_chart' value='1' <?php echo ($enable_repayment_chart == 1) ? esc_html( 'checked' ) : ""; ?> class="regular-text"  > <label for="enable_repayment_chart"><?php esc_html_e( 'Enable Repayment Chart Tab', 'loan-calculator-wp' ); ?></label>
                     </td>
                 </tr>
                 <?php
@@ -735,7 +756,7 @@ $delete_Screen = ( isset( $_GET['action'] ) && 'misc_setting' == $_GET['action']
                     <th scope="row" class="enable_repayment_lbl">
                         <label for="repayment_chart_heading"><strong><?php esc_html_e('Repayment Chart Tooltip', 'loan-calculator-wp'); ?></strong></label>
                     </th>
-                    <td width="300" >
+                    <td >
                         <input type='text' name='ww_loan_option[repayment_chart_heading]' id='repayment_chart_heading' maxlength="60" value='<?php esc_attr_e( $repayment_chart_heading,'loan-calculator-wp' );?>' class="regular-text" > 
                     </td>
                 </tr>                    
@@ -743,15 +764,15 @@ $delete_Screen = ( isset( $_GET['action'] ) && 'misc_setting' == $_GET['action']
                     <th scope="row">
                         <label for="enable_loan_mortisation_tab"><strong><?php esc_html_e( 'Enable Loan Mortisation Tab', 'loan-calculator-wp' ); ?></strong></label>
                     </th>
-                    <td width="300">
-                        <input type='checkbox' name='ww_loan_option[enable_loan_mortisation_tab]' id='enable_loan_mortisation_tab' value='1' <?php echo ($enable_loan_mortisation_tab == 1) ? esc_html( 'checked' ) : ""; ?> class="regular-text" onclick="return hideshow_loan_table_field();"> &nbsp;<label for="enable_loan_mortisation_tab"><?php esc_html_e( 'Enable Loan Mortisation Tab', 'loan-calculator-wp' ); ?></label>
+                    <td>
+                        <input type='checkbox' name='ww_loan_option[enable_loan_mortisation_tab]' id='enable_loan_mortisation_tab' value='1' <?php echo ($enable_loan_mortisation_tab == 1) ? esc_html( 'checked' ) : ""; ?> class="regular-text" onclick="return hideshow_loan_table_field();"> <label for="enable_loan_mortisation_tab"><?php esc_html_e( 'Enable Loan Mortisation Tab', 'loan-calculator-wp' ); ?></label>
                     </td>
                 </tr>
                 <tr class="loan_table_heading_lbl" <?php esc_attr_e( $enable_loan_mortisation_tab_display,'loan-calculator-wp' );?>>
                     <th scope="row">
                         <label for="loan_table_heading"><strong><?php esc_html_e( 'Loan Amortisation Table Tooltip', 'loan-calculator-wp' ); ?></strong></label>
                     </th>
-                    <td width="300">
+                    <td>
                         <input type='text' name='ww_loan_option[loan_table_heading]' id='loan_table_heading' maxlength="60" value='<?php esc_attr_e( $loan_table_heading,'loan-calculator-wp' );?>' class="regular-text" > 
                     </td>
                 </tr>
@@ -759,15 +780,15 @@ $delete_Screen = ( isset( $_GET['action'] ) && 'misc_setting' == $_GET['action']
                     <th scope="row">
                         <label for="enable_video_tab"><strong><?php esc_html_e( 'Enable Video Tab', 'loan-calculator-wp' ); ?></strong></label>
                     </th>
-                    <td width="300">
-                        <input type='checkbox' name='ww_loan_option[enable_video_tab]' id='enable_video_tab' value='1' <?php echo ($enable_video_tab == 1) ? esc_html( 'checked' ) : ""; ?> class="regular-text" >&nbsp; <label for="enable_video_tab"><?php esc_html_e('Enable Video Tab', 'loan-calculator-wp'); ?></label>
+                    <td>
+                        <input type='checkbox' name='ww_loan_option[enable_video_tab]' id='enable_video_tab' value='1' <?php echo ($enable_video_tab == 1) ? esc_html( 'checked' ) : ""; ?> class="regular-text" > <label for="enable_video_tab"><?php esc_html_e('Enable Video Tab', 'loan-calculator-wp'); ?></label>
                     </td>
                 </tr>
                 <tr class="video_heading_lbl" <?php echo esc_attr( $enable_video_tab_display);?>>
                     <th scope="row">
                         <label for="video_heading"><strong><?php esc_html_e( 'Video Tab Tooltip', 'loan-calculator-wp' ); ?></strong></label>
                     </th>
-                    <td width="300">
+                    <td>
                         <input type='text' name='ww_loan_option[video_heading]' id='video_heading' maxlength="60" value='<?php esc_attr_e( $video_heading,'loan-calculator-wp' );?>' class="regular-text" > 
                     </td>
                 </tr>
@@ -775,7 +796,7 @@ $delete_Screen = ( isset( $_GET['action'] ) && 'misc_setting' == $_GET['action']
                     <th scope="row">
                         <label for="youtube_video_link"><strong><?php esc_html_e( 'Youtube Video Link', 'loan-calculator-wp' ); ?></strong></label>
                     </th>
-                    <td width="300">
+                    <td>
                         <input type='text' name='ww_loan_option[youtube_video_link]' id='youtube_video_link' maxlength="200" value='<?php esc_attr_e( $youtube_video_link,'loan-calculator-wp' );?>' class="regular-text" > 
                     </td>
                 </tr>                
@@ -785,10 +806,10 @@ $delete_Screen = ( isset( $_GET['action'] ) && 'misc_setting' == $_GET['action']
         <table class="form-table sa-manage-level-product-box" id="calculator_disclaimer" style="display: <?php echo ($calculator_disclaimer_Screen) ? esc_html( 'table' ) : esc_html( 'none' ); ?>"> 
             <tbody>
                 <tr>
-                    <td colspan="2"><h2><?php esc_html_e( 'Contact Us Settings - Setup Contact Form', 'loan-calculator-wp' ); ?> </h2>
-                        <div class="heading-tooltip-section">
+                    <td colspan="2"><h2><?php esc_html_e('Contact Us Settings - Setup Contact Form', 'loan-calculator-wp' ); ?> </h2>
+                        <span class="heading-tooltip-section">
                             <?php esc_html_e('Contact form setting.','loan-calculator-wp'  ); ?>
-                        </div>
+                            </span>
                     </td>
                 </tr>  
 
@@ -796,8 +817,8 @@ $delete_Screen = ( isset( $_GET['action'] ) && 'misc_setting' == $_GET['action']
                     <th scope="row">
                         <label for="disable_contactus_section_lbl"><strong><?php esc_html_e( 'Disable Contact Us Section', 'loan-calculator-wp' ); ?></strong></label>
                     </th>
-                    <td width="300">
-                        <input type="checkbox" name="ww_loan_option[disable_contactus_section]" id="disable_contactus_section" value="1" class="regular-text" <?php echo ($disable_contactus_section == "1")?"checked":"" ;?> > &nbsp;&nbsp;<label for="disable_repayment_frequency">Check this box if you want to remove contact us section in loan calculator form</label>
+                    <td>
+                        <input type="checkbox" name="ww_loan_option[disable_contactus_section]" id="disable_contactus_section" value="1" class="regular-text" <?php echo ($disable_contactus_section == "1")?"checked":"" ;?> > <label for="disable_repayment_frequency"><?php esc_html_e('Check this box if you want to remove contact us section in loan calculator form','loan-calculator-wp')?></label>
                     </td>
                 </tr>
 
@@ -806,7 +827,7 @@ $delete_Screen = ( isset( $_GET['action'] ) && 'misc_setting' == $_GET['action']
                     <th scope="row">
                         <label for="contact_info_heading"><strong><?php esc_html_e( 'Contact Info Label', 'loan-calculator-wp' ); ?></strong></label>
                     </th>
-                    <td width="300">
+                    <td>
                         <input type='text' name='ww_loan_option[contact_info_heading]' id='contact_info_heading' maxlength="150" value='<?php esc_attr_e( $contact_info_heading,'loan-calculator-wp' );?>' class="regular-text" > 
                     </td>
                 </tr>
@@ -814,7 +835,7 @@ $delete_Screen = ( isset( $_GET['action'] ) && 'misc_setting' == $_GET['action']
                     <th scope="row">
                         <label for="contact_popup_button_heading"><strong><?php esc_html_e( 'Contact Popup Button Label', 'loan-calculator-wp' ); ?></strong></label>
                     </th>
-                    <td width="300">
+                    <td>
                         <input type='text' name='ww_loan_option[contact_popup_button_heading]' id='contact_popup_button_heading' maxlength="200" value='<?php esc_attr_e( $contact_popup_button_heading,'loan-calculator-wp' );?>' class="regular-text" > 
                     </td>
                 </tr>
@@ -822,7 +843,7 @@ $delete_Screen = ( isset( $_GET['action'] ) && 'misc_setting' == $_GET['action']
                     <th scope="row">
                         <label for="contact_popup_button_heading"><strong><?php esc_html_e( 'Contact Type', 'loan-calculator-wp' ); ?></strong></label>
                     </th>
-                    <td width="300">
+                    <td>
                        <label for="popup-type">
                          <input type="radio" name="ww_loan_option[contact_type]" id="popup-type" value="popup"  <?php echo ($contact_type == "popup" )? "checked": "" ;?> class="contact-type-btn" />
                          <?php esc_html_e( 'Popup', 'loan-calculator-wp' ); ?>
@@ -837,9 +858,9 @@ $delete_Screen = ( isset( $_GET['action'] ) && 'misc_setting' == $_GET['action']
                     <th scope="row">
                         <label for="contact_popup_content"><strong><?php esc_html_e('Contact Form Content', 'loan-calculator-wp'); ?></strong></label>
                     </th>
-                    <td width="300">
-                        <textarea name="ww_loan_option[contact_popup_content]" id="contact_popup_content" rows="4" cols="50"><?php esc_attr_e( $contact_popup_content,'loan-calculator-wp' );?></textarea><br />
-                        <?php esc_html_e( 'Here you can enter any contact form shortcode. If you are using contact form 7, then enter contact form 7 shotcode', 'loan-calculator-wp' ); ?>
+                    <td>
+                        <textarea name="ww_loan_option[contact_popup_content]" id="contact_popup_content" rows="4" cols="50"><?php esc_attr_e( $contact_popup_content,'loan-calculator-wp' );?></textarea><br /><br />
+                        <i><b style="color:red"><?php esc_html_e('Note', 'loan-calculator-wp') ?></b><?php esc_html_e( ': Here you can enter any contact form shortcode. If you are using contact form 7, then enter contact form 7 shotcode', 'loan-calculator-wp' ); ?></i>
                         
                     </td>
                 </tr>
@@ -848,16 +869,16 @@ $delete_Screen = ( isset( $_GET['action'] ) && 'misc_setting' == $_GET['action']
                     <th scope="row">
                         <label for="contact_popup_content"><strong><?php esc_html_e('Contact URL', 'loan-calculator-wp'); ?></strong></label>
                     </th>
-                    <td width="300">
+                    <td>
                          <input type="text" name="ww_loan_option[contact_url]" id="popup-type" value="<?php echo $contact_url;?>"  class="regular-text"/>
                         
                     </td>
                 </tr>
                 <tr>
                     <td colspan="2"><h2><?php esc_html_e( 'Calculator Disclaimer Settings ', 'loan-calculator-wp' ); ?> </h2>
-                        <div class="heading-tooltip-section">
+                        <span class="heading-tooltip-section">
                             <?php esc_html_e( 'Show disclaimer notice at the end of calculator.','loan-calculator-wp'  ); ?>
-                        </div>
+                            </span>
                     </td>
                 </tr>
 
@@ -865,8 +886,8 @@ $delete_Screen = ( isset( $_GET['action'] ) && 'misc_setting' == $_GET['action']
                     <th scope="row">
                         <label for="disable_calculator_disclaimer_section_lbl"><strong><?php esc_html_e( 'Disable Calculator Disclaimer Section', 'loan-calculator-wp' ); ?></strong></label>
                     </th>
-                    <td width="300">
-                        <input type="checkbox" name="ww_loan_option[disable_calculator_disclaimer_section]" id="disable_calculator_disclaimer_section" value="1" class="regular-text" <?php echo ($disable_calculator_disclaimer_section == "1")?"checked":"" ;?> > &nbsp;&nbsp;<label for="disable_repayment_frequency">Check this box if you want to remove Calculator Disclaimer section in loan calculator form</label>
+                    <td>
+                        <input type="checkbox" name="ww_loan_option[disable_calculator_disclaimer_section]" id="disable_calculator_disclaimer_section" value="1" class="regular-text" <?php echo ($disable_calculator_disclaimer_section == "1")?"checked":"" ;?> > <label for="disable_repayment_frequency"><?php esc_html_e('Check this box if you want to remove Calculator Disclaimer section in loan calculator form','loan-calculator-wp') ?></label>
                     </td>
                 </tr>
 
@@ -874,7 +895,7 @@ $delete_Screen = ( isset( $_GET['action'] ) && 'misc_setting' == $_GET['action']
                     <th scope="row">
                         <label for="calculator_disclaimer_heading"><strong><?php esc_html_e( 'Calculator Disclaimer', 'loan-calculator-wp' ); ?></strong></label>
                     </th>
-                    <td width="300">
+                    <td>
                         <input type='text' name='ww_loan_option[calculator_disclaimer_heading]' id='calculator_disclaimer_heading' maxlength="50" value='<?php esc_attr_e( $calculator_disclaimer_heading,'loan-calculator-wp' );?>' class="regular-text" > 
                     </td>
                 </tr>
@@ -882,7 +903,7 @@ $delete_Screen = ( isset( $_GET['action'] ) && 'misc_setting' == $_GET['action']
                     <th scope="row">
                         <label for="calculator_disclaimer_description"><strong><?php esc_html_e( 'Calculator Disclaimer Description', 'loan-calculator-wp' ); ?></strong></label>
                     </th>
-                    <td width="300">
+                    <td>
                         <?php
                         $settings = array(
                             'textarea_name' => 'ww_loan_option[calculator_disclaimer_description]',
@@ -901,34 +922,34 @@ $delete_Screen = ( isset( $_GET['action'] ) && 'misc_setting' == $_GET['action']
         <table class="form-table sa-manage-level-product-box" id="delete_settings" style="display: <?php echo ( $delete_Screen ) ? esc_html( 'table' ) : esc_html( 'none' ); ?>"> 
             <tbody>
                 <tr>
-                    <td colspan="2"><h2><?php esc_html_e( 'Plugin Misc Settings.', 'loan-calculator-wp' ); ?> </h2>
-                        <div class="heading-tooltip-section">
+                    <td><h2><?php esc_html_e( 'Plugin Misc Settings.', 'loan-calculator-wp' ); ?> </h2>
+                        <span class="heading-tooltip-section">
                             <?php esc_html_e( 'Misc Settings','loan-calculator-wp'  ); ?>
-                        </div>
+                            </span>
                     </td>
                 </tr>
                     <tr>
                     <th scope="row">
                         <label for="delete_setting_enable_lbl"><strong><?php esc_html_e( 'Delete Data On Uninstall', 'loan-calculator-wp' ); ?></strong></label>
                     </th>
-                    <td width="300">
-                        <input type='checkbox' name='ww_loan_option[delete_data_enable]' id='delete_setting' value='1' <?php echo ( $delete_data_enable == 1 ) ? esc_html( 'checked' ) : ""; ?> class="regular-text" > &nbsp;&nbsp;<label for="delete_setting"><?php esc_html_e( 'Check this box if you want to delete all settings data on plugin uninstall', 'loan-calculator-wp' ); ?></label>
+                    <td>
+                        <input type='checkbox' name='ww_loan_option[delete_data_enable]' id='delete_setting' value='1' <?php echo ( $delete_data_enable == 1 ) ? esc_html( 'checked' ) : ""; ?> class="regular-text" > <label for="delete_setting"><?php esc_html_e( 'Check this box if you want to delete all settings data on plugin uninstall', 'loan-calculator-wp' ); ?></label>
                     </td>
                 </tr>
                 <tr>
                     <th scope="row">
                         <label for="delete_setting_enable_lbl"><strong><?php esc_html_e( 'Disable Font Awesome CSS', 'loan-calculator-wp' ); ?></strong></label>
                     </th>
-                    <td width="300">
-                        <input type='checkbox' name='ww_loan_option[disable_font_awesome]' id='disable_font_awesome' value='1' <?php echo ( $disable_font_awesome == 1 ) ? esc_html( 'checked' ) : ""; ?> class="regular-text" > &nbsp;&nbsp;<label for="disable_font_awesome"><?php esc_html_e( 'Check this box if you want to disable font awesome css on plugin install', 'loan-calculator-wp' ); ?></label>
+                    <td>
+                        <input type='checkbox' name='ww_loan_option[disable_font_awesome]' id='disable_font_awesome' value='1' <?php echo ( $disable_font_awesome == 1 ) ? esc_html( 'checked' ) : ""; ?> class="regular-text" > <label for="disable_font_awesome"><?php esc_html_e( 'Check this box if you want to disable font awesome css on plugin install', 'loan-calculator-wp' ); ?></label>
                     </td>
                 </tr>
                 <tr>
                     <th scope="row">
                         <label for="delete_setting_enable_lbl"><strong><?php esc_html_e( 'Remove Decimal Points', 'loan-calculator-wp' ); ?></strong></label>
                     </th>
-                    <td width="300">
-                        <input type='checkbox' name='ww_loan_option[remove_decimal_point]' id='remove_decimal_point' value='1' <?php echo ( $remove_decimal_point == 1 ) ? esc_html( 'checked' ) : ""; ?> class="regular-text" > &nbsp;&nbsp;<label for="remove_decimal_point"><?php esc_html_e( 'Check this box if you want to remove decimal point in loan calculator form', 'loan-calculator-wp' ); ?></label>
+                    <td>
+                        <input type='checkbox' name='ww_loan_option[remove_decimal_point]' id='remove_decimal_point' value='1' <?php echo ( $remove_decimal_point == 1 ) ? esc_html( 'checked' ) : ""; ?> class="regular-text" > <label for="remove_decimal_point"><?php esc_html_e( 'Check this box if you want to remove decimal point in loan calculator form', 'loan-calculator-wp' ); ?></label>
                     </td>
                 </tr>
 
@@ -939,7 +960,7 @@ $delete_Screen = ( isset( $_GET['action'] ) && 'misc_setting' == $_GET['action']
         <table class="form-table sa-manage-level-product-box" id="save_setting"> 
             <tbody>
                 <tr>
-                    <td colspan="2">
+                    <td>
                         <input type="submit" class="button button-primary loan-submit-btn" name="loan_calculator_setting" value="Save Changes" id="loan_calculator_setting" onclick="return check_selected_type();">
                     </td>
                 </tr>

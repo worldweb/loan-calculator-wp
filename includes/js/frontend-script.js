@@ -8,7 +8,7 @@ jQuery(document).ready(function ($){
 		jQuery('body').addClass('body-overflow-hidden');
 	});
 
-	jQuery( ".main-heading" ).find('strong').html( jQuery('#repayment_freq option:selected').text() + ' Payment (incl fees)');
+	// jQuery( ".main-heading" ).find('strong').html( jQuery('#repayment_freq option:selected').text() + ' Payment (incl fees)');
 
 
 	/*****************************************************************************************/
@@ -37,6 +37,7 @@ jQuery(document).ready(function ($){
 			if (!ballon_amounts_per_sign.endsWith('%')) {
 				jQuery("#ballon_amounts_per").val(ballon_amounts_per_sign + "%" );
 			}
+			
 
 			var interest_rates_sign = jQuery("#interest_rates").val();
 			if (!interest_rates_sign.endsWith('% p.a.')) {
@@ -892,11 +893,11 @@ jQuery(document).ready(function ($){
 			  var repayment_freq = jQuery('#repayment_freq option:selected').text();
 			}
 		
-		  	jQuery( ".main-heading" ).find('strong').html(repayment_freq + ' Payment (incl fees)');
+		  	// jQuery( ".main-heading" ).find('strong').html(repayment_freq + ' Payment (incl fees)');
 		  		loan_calculation_process();
 		  });
 		
-		jQuery( ".main-heading" ).find('strong').html(jQuery('#repayment_freq').val() + ' Payment (incl fees)');
+		// jQuery( ".main-heading" ).find('strong').html(jQuery('#repayment_freq').val() + ' Payment (incl fees)');
 
 		loan_calculation_process(); // call function
 
@@ -1087,7 +1088,7 @@ jQuery(document).ready(function ($){
 					monthly_payment = emi_cal.emi_amount;
 					
 					var total_interests = (monthly_payment * loan_terms_month) - loan_amount;
-					
+
 					var per_month_ballon_amt = 0;
 					var ballon_amt_interest = 0;
 					if (ballon_amounts > 0) {
@@ -1096,8 +1097,16 @@ jQuery(document).ready(function ($){
 					}
 
 				}
-			
+				
+				
 				var loan_terms =jQuery("#loan_terms").val();
+				// if (setting_data.total_payouts_heading!='') {
+					
+				// 	jQuery("#total_payouts").html(setting_data.total_payouts_heading + '  ' + '(' + 'No. of Payments:' +' ' + loan_terms + ')');
+				// } else {
+				// 	jQuery("#total_payouts").html('Total Payment' + '  ' + '(' + 'No. of Payments:' +' ' + loan_terms + ')');
+				// }
+				
 				if( setting_data.remove_decimal_point == 1){
 					loan_terms =parseInt(loan_terms/12);
 					loan_terms =parseInt(loan_terms);
@@ -1138,19 +1147,34 @@ jQuery(document).ready(function ($){
 
 			/* STRAT : Interests Field Fill*/
 			if( setting_data.remove_decimal_point == 1){
-				if( setting_data.calculation_fee_setting_enable ==1 ) {
-					jQuery("#per_month_amount").html(addCommas(Math.round(parseInt(monthly_payment)+parseInt(monthly_fee))));
+				if(setting_data.calculation_fee_setting_enable ==1 ) {
+					
+					jQuery("#per_month_amount").html(addCommas(Math.round(parseInt(monthly_payment + Number(monthly_fee)))));
+					
 				} else {
+					
 					jQuery("#per_month_amount").html(addCommas(Math.round(parseInt(monthly_payment))));
 				}
 			}
 			else{
+				
 				if( setting_data.calculation_fee_setting_enable ==1 ) {
-					jQuery("#per_month_amount").html(addCommas(Math.round(parseFloat(monthly_payment)+parseFloat(monthly_fee))));
+
+					jQuery("#per_month_amount").html(addCommas((parseFloat(monthly_payment + Number(monthly_fee)).toFixed(2))));
+				
 				} else {
-					jQuery("#per_month_amount").html(addCommas(Math.round(parseFloat(monthly_payment))));
+					
+					jQuery("#per_month_amount").html(addCommas(parseFloat(monthly_payment).toFixed(2)));
+					
 				}
-			}		
+			}	
+			
+			var total_payouts = monthly_payment * loan_terms_month;
+			if (setting_data.remove_decimal_point == 1) {
+				jQuery("#total_payments").html(addCommas(Math.round(parseInt(total_payouts))));
+			} else {
+				jQuery("#total_payments").html(addCommas(parseFloat(total_payouts).toFixed(2)));
+			}	
 			
 
 			var display_year=total_months_terms/12;
@@ -1188,11 +1212,11 @@ jQuery(document).ready(function ($){
 				jQuery("#loan_amount_rate").html(interest_rates.toFixed(2));
 				if (interest_rates===0) {
 			        jQuery("#total_interests_amt").html(addCommas(Math.round(parseFloat(0)-parseFloat(0))));
-
+					
 			    }else{
-			    	var total_sum_interests = (total_interests < loan_advance_interest?total_interests:addCommas(Math.round(parseFloat(total_interests)-parseFloat(loan_advance_interest))));
+			    	var total_sum_interests = (total_interests < loan_advance_interest?total_interests:addCommas((parseFloat(total_interests)-parseFloat(loan_advance_interest)).toFixed(2)));
+				
 			    	jQuery("#total_interests_amt").html(total_sum_interests);
-		
 			    }
 			}
 			jQuery("#total_interests_years").html(display_year_str);
@@ -1205,15 +1229,21 @@ jQuery(document).ready(function ($){
 			var balance =loan_amount;
 			var table_data ="";
 			var rmv_decimal = 0;
-			
+			var is_advanced = '';
 			var count = loan_terms_month;
-			for(var i=0; i<=loan_terms_month; i++) {
+			for(var i=1; i<=loan_terms_month; i++) {
 				
 				 
 				if( setting_data.remove_decimal_point == 1){
 					rmv_decimal =1;
 				}else{
 					rmv_decimal =0;
+				}
+
+				if (payment_type == "In Advance" && i == 1) {
+					is_advanced = ' <span style="font-weight: bold;">(Advanced)</span>';
+				} else {
+					is_advanced = '';
 				}
 				
 				//var interest = balance * interest_rates / 1200;
@@ -1257,9 +1287,9 @@ jQuery(document).ready(function ($){
 					}
 
 					if( setting_data.remove_decimal_point == 1){
-						table_data +='<td>'+currency_symbols+parseInt(interest)+'</td>';
+						table_data +='<td>'+currency_symbols+parseInt(interest)+ is_advanced + '</td>';
 					}else{
-						table_data +='<td>'+currency_symbols+interest.toFixed(2)+'</td>';
+						table_data +='<td>'+currency_symbols+interest.toFixed(2)+ is_advanced + '</td>';
 					}
 				}
 				if(i  == loan_terms_month){
@@ -1814,18 +1844,24 @@ jQuery(document).ready(function ($){
 
 
 			/*========End 6-7-2023=========*/
-		  	jQuery( ".main-heading" ).find('strong').html(repayment_freq + ' Payment (incl fees)');
+		  	// jQuery( ".main-heading" ).find('strong').html(repayment_freq + ' Payment (incl fees)');
 		  		loan_calculation_process();
 		  });
 		
-		jQuery( ".main-heading" ).find('strong').html(jQuery('#repayment_freq').val() + ' Payment (incl fees)');
+		// jQuery( ".main-heading" ).find('strong').html(jQuery('#repayment_freq').val() + ' Payment (incl fees)');
 
 
 		loan_calculation_process();
 
 	}/********** END: This condition for Default theme and New theme change *************/
 
+	
 
+	// if (setting_data.payment_mode_enable==1) {
+	// 	$('.payment_mode_enable_disable').hide();
+	// } else {
+	// 	$('.payment_mode_enable_disable').show();
+	// }
 })//End jQuery(document).ready(function ($)
 
 
