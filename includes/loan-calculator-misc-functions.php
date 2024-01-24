@@ -1,5 +1,6 @@
-<?php 
+<?php
 
+if (!defined('ABSPATH')) exit;
 /**
  * Misc Functions
  * 
@@ -9,20 +10,29 @@
  * @since 1.0.1
  */
 
-
 /**
  * Get Base Currency Code.
  *
  * @package Loan Calculator
  * @since 1.0.1
  */
-function ww_loan_get_currency() {
 
-	$loan_calculator_option_data = get_option( 'ww_loan_option' );
-	
-	$ww_loan_currency = !empty( $loan_calculator_option_data['ww_loan_currency'] ) ? $loan_calculator_option_data['ww_loan_currency'] : 'USD';
-	
-	return apply_filters( 'ww_loan_currency', $ww_loan_currency );
+function ww_loan_get_currency()
+{
+	$post_content = get_post_field('post_content');
+
+	preg_match('/\[loan_calculator id=(\d+)(?: title=(?:"([^"]*)"|\'([^\']*)\'|([^"\']+))?)?]/', $post_content, $matches);
+
+	$post_id = isset($matches[1]) ? intval($matches[1]) : '';
+
+	if ($post_id) {
+		$loan_all_setting_data = get_post_meta($post_id, 'ww_loancalc_value', true);
+	} else {
+		$loan_all_setting_data = get_option('ww_loan_option');
+	}
+	$ww_loan_currency = !empty($loan_all_setting_data['ww_loan_currency']) ? $loan_all_setting_data['ww_loan_currency'] : 'USD';
+
+	return apply_filters('ww_loan_currency', $ww_loan_currency);
 }
 
 /**
@@ -31,178 +41,179 @@ function ww_loan_get_currency() {
  * @package Loan Calculator
  * @since 1.0.1
  */
-function ww_loan_get_currencies() {
+function ww_loan_get_currencies()
+{
 
 	static $currencies;
 
-	if ( ! isset( $currencies ) ) {
+	if (!isset($currencies)) {
 		$currencies = array_unique(
 			apply_filters(
 				'ww_loan_currencies',
 				array(
-					'AED' => __( 'United Arab Emirates dirham', 'loan-calculator-wp' ),
-					'AFN' => __( 'Afghan afghani', 'loan-calculator-wp' ),
-					'ALL' => __( 'Albanian lek', 'loan-calculator-wp' ),
-					'AMD' => __( 'Armenian dram', 'loan-calculator-wp' ),
-					'ANG' => __( 'Netherlands Antillean guilder', 'loan-calculator-wp' ),
-					'AOA' => __( 'Angolan kwanza', 'loan-calculator-wp' ),
-					'ARS' => __( 'Argentine peso', 'loan-calculator-wp' ),
-					'AUD' => __( 'Australian dollar', 'loan-calculator-wp' ),
-					'AWG' => __( 'Aruban florin', 'loan-calculator-wp' ),
-					'AZN' => __( 'Azerbaijani manat', 'loan-calculator-wp' ),
-					'BAM' => __( 'Bosnia and Herzegovina convertible mark', 'loan-calculator-wp' ),
-					'BBD' => __( 'Barbadian dollar', 'loan-calculator-wp' ),
-					'BDT' => __( 'Bangladeshi taka', 'loan-calculator-wp' ),
-					'BGN' => __( 'Bulgarian lev', 'loan-calculator-wp' ),
-					'BHD' => __( 'Bahraini dinar', 'loan-calculator-wp' ),
-					'BIF' => __( 'Burundian franc', 'loan-calculator-wp' ),
-					'BMD' => __( 'Bermudian dollar', 'loan-calculator-wp' ),
-					'BND' => __( 'Brunei dollar', 'loan-calculator-wp' ),
-					'BOB' => __( 'Bolivian boliviano', 'loan-calculator-wp' ),
-					'BRL' => __( 'Brazilian real', 'loan-calculator-wp' ),
-					'BSD' => __( 'Bahamian dollar', 'loan-calculator-wp' ),
-					'BTC' => __( 'Bitcoin', 'loan-calculator-wp' ),
-					'BTN' => __( 'Bhutanese ngultrum', 'loan-calculator-wp' ),
-					'BWP' => __( 'Botswana pula', 'loan-calculator-wp' ),
-					'BYR' => __( 'Belarusian ruble (old)', 'loan-calculator-wp' ),
-					'BYN' => __( 'Belarusian ruble', 'loan-calculator-wp' ),
-					'BZD' => __( 'Belize dollar', 'loan-calculator-wp' ),
-					'CAD' => __( 'Canadian dollar', 'loan-calculator-wp' ),
-					'CDF' => __( 'Congolese franc', 'loan-calculator-wp' ),
-					'CHF' => __( 'Swiss franc', 'loan-calculator-wp' ),
-					'CLP' => __( 'Chilean peso', 'loan-calculator-wp' ),
-					'CNY' => __( 'Chinese yuan', 'loan-calculator-wp' ),
-					'COP' => __( 'Colombian peso', 'loan-calculator-wp' ),
-					'CRC' => __( 'Costa Rican col&oacute;n', 'loan-calculator-wp' ),
-					'CUC' => __( 'Cuban convertible peso', 'loan-calculator-wp' ),
-					'CUP' => __( 'Cuban peso', 'loan-calculator-wp' ),
-					'CVE' => __( 'Cape Verdean escudo', 'loan-calculator-wp' ),
-					'CZK' => __( 'Czech koruna', 'loan-calculator-wp' ),
-					'DJF' => __( 'Djiboutian franc', 'loan-calculator-wp' ),
-					'DKK' => __( 'Danish krone', 'loan-calculator-wp' ),
-					'DOP' => __( 'Dominican peso', 'loan-calculator-wp' ),
-					'DZD' => __( 'Algerian dinar', 'loan-calculator-wp' ),
-					'EGP' => __( 'Egyptian pound', 'loan-calculator-wp' ),
-					'ERN' => __( 'Eritrean nakfa', 'loan-calculator-wp' ),
-					'ETB' => __( 'Ethiopian birr', 'loan-calculator-wp' ),
-					'EUR' => __( 'Euro', 'loan-calculator-wp' ),
-					'FJD' => __( 'Fijian dollar', 'loan-calculator-wp' ),
-					'FKP' => __( 'Falkland Islands pound', 'loan-calculator-wp' ),
-					'GBP' => __( 'Pound sterling', 'loan-calculator-wp' ),
-					'GEL' => __( 'Georgian lari', 'loan-calculator-wp' ),
-					'GGP' => __( 'Guernsey pound', 'loan-calculator-wp' ),
-					'GHS' => __( 'Ghana cedi', 'loan-calculator-wp' ),
-					'GIP' => __( 'Gibraltar pound', 'loan-calculator-wp' ),
-					'GMD' => __( 'Gambian dalasi', 'loan-calculator-wp' ),
-					'GNF' => __( 'Guinean franc', 'loan-calculator-wp' ),
-					'GTQ' => __( 'Guatemalan quetzal', 'loan-calculator-wp' ),
-					'GYD' => __( 'Guyanese dollar', 'loan-calculator-wp' ),
-					'HKD' => __( 'Hong Kong dollar', 'loan-calculator-wp' ),
-					'HNL' => __( 'Honduran lempira', 'loan-calculator-wp' ),
-					'HRK' => __( 'Croatian kuna', 'loan-calculator-wp' ),
-					'HTG' => __( 'Haitian gourde', 'loan-calculator-wp' ),
-					'HUF' => __( 'Hungarian forint', 'loan-calculator-wp' ),
-					'IDR' => __( 'Indonesian rupiah', 'loan-calculator-wp' ),
-					'ILS' => __( 'Israeli new shekel', 'loan-calculator-wp' ),
-					'IMP' => __( 'Manx pound', 'loan-calculator-wp' ),
-					'INR' => __( 'Indian rupee', 'loan-calculator-wp' ),
-					'IQD' => __( 'Iraqi dinar', 'loan-calculator-wp' ),
-					'IRR' => __( 'Iranian rial', 'loan-calculator-wp' ),
-					'IRT' => __( 'Iranian toman', 'loan-calculator-wp' ),
-					'ISK' => __( 'Icelandic kr&oacute;na', 'loan-calculator-wp' ),
-					'JEP' => __( 'Jersey pound', 'loan-calculator-wp' ),
-					'JMD' => __( 'Jamaican dollar', 'loan-calculator-wp' ),
-					'JOD' => __( 'Jordanian dinar', 'loan-calculator-wp' ),
-					'JPY' => __( 'Japanese yen', 'loan-calculator-wp' ),
-					'KES' => __( 'Kenyan shilling', 'loan-calculator-wp' ),
-					'KGS' => __( 'Kyrgyzstani som', 'loan-calculator-wp' ),
-					'KHR' => __( 'Cambodian riel', 'loan-calculator-wp' ),
-					'KMF' => __( 'Comorian franc', 'loan-calculator-wp' ),
-					'KPW' => __( 'North Korean won', 'loan-calculator-wp' ),
-					'KRW' => __( 'South Korean won', 'loan-calculator-wp' ),
-					'KWD' => __( 'Kuwaiti dinar', 'loan-calculator-wp' ),
-					'KYD' => __( 'Cayman Islands dollar', 'loan-calculator-wp' ),
-					'KZT' => __( 'Kazakhstani tenge', 'loan-calculator-wp' ),
-					'LAK' => __( 'Lao kip', 'loan-calculator-wp' ),
-					'LBP' => __( 'Lebanese pound', 'loan-calculator-wp' ),
-					'LKR' => __( 'Sri Lankan rupee', 'loan-calculator-wp' ),
-					'LRD' => __( 'Liberian dollar', 'loan-calculator-wp' ),
-					'LSL' => __( 'Lesotho loti', 'loan-calculator-wp' ),
-					'LYD' => __( 'Libyan dinar', 'loan-calculator-wp' ),
-					'MAD' => __( 'Moroccan dirham', 'loan-calculator-wp' ),
-					'MDL' => __( 'Moldovan leu', 'loan-calculator-wp' ),
-					'MGA' => __( 'Malagasy ariary', 'loan-calculator-wp' ),
-					'MKD' => __( 'Macedonian denar', 'loan-calculator-wp' ),
-					'MMK' => __( 'Burmese kyat', 'loan-calculator-wp' ),
-					'MNT' => __( 'Mongolian t&ouml;gr&ouml;g', 'loan-calculator-wp' ),
-					'MOP' => __( 'Macanese pataca', 'loan-calculator-wp' ),
-					'MRU' => __( 'Mauritanian ouguiya', 'loan-calculator-wp' ),
-					'MUR' => __( 'Mauritian rupee', 'loan-calculator-wp' ),
-					'MVR' => __( 'Maldivian rufiyaa', 'loan-calculator-wp' ),
-					'MWK' => __( 'Malawian kwacha', 'loan-calculator-wp' ),
-					'MXN' => __( 'Mexican peso', 'loan-calculator-wp' ),
-					'MYR' => __( 'Malaysian ringgit', 'loan-calculator-wp' ),
-					'MZN' => __( 'Mozambican metical', 'loan-calculator-wp' ),
-					'NAD' => __( 'Namibian dollar', 'loan-calculator-wp' ),
-					'NGN' => __( 'Nigerian naira', 'loan-calculator-wp' ),
-					'NIO' => __( 'Nicaraguan c&oacute;rdoba', 'loan-calculator-wp' ),
-					'NOK' => __( 'Norwegian krone', 'loan-calculator-wp' ),
-					'NPR' => __( 'Nepalese rupee', 'loan-calculator-wp' ),
-					'NZD' => __( 'New Zealand dollar', 'loan-calculator-wp' ),
-					'OMR' => __( 'Omani rial', 'loan-calculator-wp' ),
-					'PAB' => __( 'Panamanian balboa', 'loan-calculator-wp' ),
-					'PEN' => __( 'Sol', 'loan-calculator-wp' ),
-					'PGK' => __( 'Papua New Guinean kina', 'loan-calculator-wp' ),
-					'PHP' => __( 'Philippine peso', 'loan-calculator-wp' ),
-					'PKR' => __( 'Pakistani rupee', 'loan-calculator-wp' ),
-					'PLN' => __( 'Polish z&#x142;oty', 'loan-calculator-wp' ),
-					'PRB' => __( 'Transnistrian ruble', 'loan-calculator-wp' ),
-					'PYG' => __( 'Paraguayan guaran&iacute;', 'loan-calculator-wp' ),
-					'QAR' => __( 'Qatari riyal', 'loan-calculator-wp' ),
-					'RON' => __( 'Romanian leu', 'loan-calculator-wp' ),
-					'RSD' => __( 'Serbian dinar', 'loan-calculator-wp' ),
-					'RUB' => __( 'Russian ruble', 'loan-calculator-wp' ),
-					'RWF' => __( 'Rwandan franc', 'loan-calculator-wp' ),
-					'SAR' => __( 'Saudi riyal', 'loan-calculator-wp' ),
-					'SBD' => __( 'Solomon Islands dollar', 'loan-calculator-wp' ),
-					'SCR' => __( 'Seychellois rupee', 'loan-calculator-wp' ),
-					'SDG' => __( 'Sudanese pound', 'loan-calculator-wp' ),
-					'SEK' => __( 'Swedish krona', 'loan-calculator-wp' ),
-					'SGD' => __( 'Singapore dollar', 'loan-calculator-wp' ),
-					'SHP' => __( 'Saint Helena pound', 'loan-calculator-wp' ),
-					'SLL' => __( 'Sierra Leonean leone', 'loan-calculator-wp' ),
-					'SOS' => __( 'Somali shilling', 'loan-calculator-wp' ),
-					'SRD' => __( 'Surinamese dollar', 'loan-calculator-wp' ),
-					'SSP' => __( 'South Sudanese pound', 'loan-calculator-wp' ),
-					'STN' => __( 'S&atilde;o Tom&eacute; and Pr&iacute;ncipe dobra', 'loan-calculator-wp' ),
-					'SYP' => __( 'Syrian pound', 'loan-calculator-wp' ),
-					'SZL' => __( 'Swazi lilangeni', 'loan-calculator-wp' ),
-					'THB' => __( 'Thai baht', 'loan-calculator-wp' ),
-					'TJS' => __( 'Tajikistani somoni', 'loan-calculator-wp' ),
-					'TMT' => __( 'Turkmenistan manat', 'loan-calculator-wp' ),
-					'TND' => __( 'Tunisian dinar', 'loan-calculator-wp' ),
-					'TOP' => __( 'Tongan pa&#x2bb;anga', 'loan-calculator-wp' ),
-					'TRY' => __( 'Turkish lira', 'loan-calculator-wp' ),
-					'TTD' => __( 'Trinidad and Tobago dollar', 'loan-calculator-wp' ),
-					'TWD' => __( 'New Taiwan dollar', 'loan-calculator-wp' ),
-					'TZS' => __( 'Tanzanian shilling', 'loan-calculator-wp' ),
-					'UAH' => __( 'Ukrainian hryvnia', 'loan-calculator-wp' ),
-					'UGX' => __( 'Ugandan shilling', 'loan-calculator-wp' ),
-					'USD' => __( 'United States (US) dollar', 'loan-calculator-wp' ),
-					'UYU' => __( 'Uruguayan peso', 'loan-calculator-wp' ),
-					'UZS' => __( 'Uzbekistani som', 'loan-calculator-wp' ),
-					'VEF' => __( 'Venezuelan bol&iacute;var', 'loan-calculator-wp' ),
-					'VES' => __( 'Bol&iacute;var soberano', 'loan-calculator-wp' ),
-					'VND' => __( 'Vietnamese &#x111;&#x1ed3;ng', 'loan-calculator-wp' ),
-					'VUV' => __( 'Vanuatu vatu', 'loan-calculator-wp' ),
-					'WST' => __( 'Samoan t&#x101;l&#x101;', 'loan-calculator-wp' ),
-					'XAF' => __( 'Central African CFA franc', 'loan-calculator-wp' ),
-					'XCD' => __( 'East Caribbean dollar', 'loan-calculator-wp' ),
-					'XOF' => __( 'West African CFA franc', 'loan-calculator-wp' ),
-					'XPF' => __( 'CFP franc', 'loan-calculator-wp' ),
-					'YER' => __( 'Yemeni rial', 'loan-calculator-wp' ),
-					'ZAR' => __( 'South African rand', 'loan-calculator-wp' ),
-					'ZMW' => __( 'Zambian kwacha', 'loan-calculator-wp' ),
+					'AED' => __('United Arab Emirates dirham', 'loan-calculator-wp'),
+					'AFN' => __('Afghan afghani', 'loan-calculator-wp'),
+					'ALL' => __('Albanian lek', 'loan-calculator-wp'),
+					'AMD' => __('Armenian dram', 'loan-calculator-wp'),
+					'ANG' => __('Netherlands Antillean guilder', 'loan-calculator-wp'),
+					'AOA' => __('Angolan kwanza', 'loan-calculator-wp'),
+					'ARS' => __('Argentine peso', 'loan-calculator-wp'),
+					'AUD' => __('Australian dollar', 'loan-calculator-wp'),
+					'AWG' => __('Aruban florin', 'loan-calculator-wp'),
+					'AZN' => __('Azerbaijani manat', 'loan-calculator-wp'),
+					'BAM' => __('Bosnia and Herzegovina convertible mark', 'loan-calculator-wp'),
+					'BBD' => __('Barbadian dollar', 'loan-calculator-wp'),
+					'BDT' => __('Bangladeshi taka', 'loan-calculator-wp'),
+					'BGN' => __('Bulgarian lev', 'loan-calculator-wp'),
+					'BHD' => __('Bahraini dinar', 'loan-calculator-wp'),
+					'BIF' => __('Burundian franc', 'loan-calculator-wp'),
+					'BMD' => __('Bermudian dollar', 'loan-calculator-wp'),
+					'BND' => __('Brunei dollar', 'loan-calculator-wp'),
+					'BOB' => __('Bolivian boliviano', 'loan-calculator-wp'),
+					'BRL' => __('Brazilian real', 'loan-calculator-wp'),
+					'BSD' => __('Bahamian dollar', 'loan-calculator-wp'),
+					'BTC' => __('Bitcoin', 'loan-calculator-wp'),
+					'BTN' => __('Bhutanese ngultrum', 'loan-calculator-wp'),
+					'BWP' => __('Botswana pula', 'loan-calculator-wp'),
+					'BYR' => __('Belarusian ruble (old)', 'loan-calculator-wp'),
+					'BYN' => __('Belarusian ruble', 'loan-calculator-wp'),
+					'BZD' => __('Belize dollar', 'loan-calculator-wp'),
+					'CAD' => __('Canadian dollar', 'loan-calculator-wp'),
+					'CDF' => __('Congolese franc', 'loan-calculator-wp'),
+					'CHF' => __('Swiss franc', 'loan-calculator-wp'),
+					'CLP' => __('Chilean peso', 'loan-calculator-wp'),
+					'CNY' => __('Chinese yuan', 'loan-calculator-wp'),
+					'COP' => __('Colombian peso', 'loan-calculator-wp'),
+					'CRC' => __('Costa Rican col&oacute;n', 'loan-calculator-wp'),
+					'CUC' => __('Cuban convertible peso', 'loan-calculator-wp'),
+					'CUP' => __('Cuban peso', 'loan-calculator-wp'),
+					'CVE' => __('Cape Verdean escudo', 'loan-calculator-wp'),
+					'CZK' => __('Czech koruna', 'loan-calculator-wp'),
+					'DJF' => __('Djiboutian franc', 'loan-calculator-wp'),
+					'DKK' => __('Danish krone', 'loan-calculator-wp'),
+					'DOP' => __('Dominican peso', 'loan-calculator-wp'),
+					'DZD' => __('Algerian dinar', 'loan-calculator-wp'),
+					'EGP' => __('Egyptian pound', 'loan-calculator-wp'),
+					'ERN' => __('Eritrean nakfa', 'loan-calculator-wp'),
+					'ETB' => __('Ethiopian birr', 'loan-calculator-wp'),
+					'EUR' => __('Euro', 'loan-calculator-wp'),
+					'FJD' => __('Fijian dollar', 'loan-calculator-wp'),
+					'FKP' => __('Falkland Islands pound', 'loan-calculator-wp'),
+					'GBP' => __('Pound sterling', 'loan-calculator-wp'),
+					'GEL' => __('Georgian lari', 'loan-calculator-wp'),
+					'GGP' => __('Guernsey pound', 'loan-calculator-wp'),
+					'GHS' => __('Ghana cedi', 'loan-calculator-wp'),
+					'GIP' => __('Gibraltar pound', 'loan-calculator-wp'),
+					'GMD' => __('Gambian dalasi', 'loan-calculator-wp'),
+					'GNF' => __('Guinean franc', 'loan-calculator-wp'),
+					'GTQ' => __('Guatemalan quetzal', 'loan-calculator-wp'),
+					'GYD' => __('Guyanese dollar', 'loan-calculator-wp'),
+					'HKD' => __('Hong Kong dollar', 'loan-calculator-wp'),
+					'HNL' => __('Honduran lempira', 'loan-calculator-wp'),
+					'HRK' => __('Croatian kuna', 'loan-calculator-wp'),
+					'HTG' => __('Haitian gourde', 'loan-calculator-wp'),
+					'HUF' => __('Hungarian forint', 'loan-calculator-wp'),
+					'IDR' => __('Indonesian rupiah', 'loan-calculator-wp'),
+					'ILS' => __('Israeli new shekel', 'loan-calculator-wp'),
+					'IMP' => __('Manx pound', 'loan-calculator-wp'),
+					'INR' => __('Indian rupee', 'loan-calculator-wp'),
+					'IQD' => __('Iraqi dinar', 'loan-calculator-wp'),
+					'IRR' => __('Iranian rial', 'loan-calculator-wp'),
+					'IRT' => __('Iranian toman', 'loan-calculator-wp'),
+					'ISK' => __('Icelandic kr&oacute;na', 'loan-calculator-wp'),
+					'JEP' => __('Jersey pound', 'loan-calculator-wp'),
+					'JMD' => __('Jamaican dollar', 'loan-calculator-wp'),
+					'JOD' => __('Jordanian dinar', 'loan-calculator-wp'),
+					'JPY' => __('Japanese yen', 'loan-calculator-wp'),
+					'KES' => __('Kenyan shilling', 'loan-calculator-wp'),
+					'KGS' => __('Kyrgyzstani som', 'loan-calculator-wp'),
+					'KHR' => __('Cambodian riel', 'loan-calculator-wp'),
+					'KMF' => __('Comorian franc', 'loan-calculator-wp'),
+					'KPW' => __('North Korean won', 'loan-calculator-wp'),
+					'KRW' => __('South Korean won', 'loan-calculator-wp'),
+					'KWD' => __('Kuwaiti dinar', 'loan-calculator-wp'),
+					'KYD' => __('Cayman Islands dollar', 'loan-calculator-wp'),
+					'KZT' => __('Kazakhstani tenge', 'loan-calculator-wp'),
+					'LAK' => __('Lao kip', 'loan-calculator-wp'),
+					'LBP' => __('Lebanese pound', 'loan-calculator-wp'),
+					'LKR' => __('Sri Lankan rupee', 'loan-calculator-wp'),
+					'LRD' => __('Liberian dollar', 'loan-calculator-wp'),
+					'LSL' => __('Lesotho loti', 'loan-calculator-wp'),
+					'LYD' => __('Libyan dinar', 'loan-calculator-wp'),
+					'MAD' => __('Moroccan dirham', 'loan-calculator-wp'),
+					'MDL' => __('Moldovan leu', 'loan-calculator-wp'),
+					'MGA' => __('Malagasy ariary', 'loan-calculator-wp'),
+					'MKD' => __('Macedonian denar', 'loan-calculator-wp'),
+					'MMK' => __('Burmese kyat', 'loan-calculator-wp'),
+					'MNT' => __('Mongolian t&ouml;gr&ouml;g', 'loan-calculator-wp'),
+					'MOP' => __('Macanese pataca', 'loan-calculator-wp'),
+					'MRU' => __('Mauritanian ouguiya', 'loan-calculator-wp'),
+					'MUR' => __('Mauritian rupee', 'loan-calculator-wp'),
+					'MVR' => __('Maldivian rufiyaa', 'loan-calculator-wp'),
+					'MWK' => __('Malawian kwacha', 'loan-calculator-wp'),
+					'MXN' => __('Mexican peso', 'loan-calculator-wp'),
+					'MYR' => __('Malaysian ringgit', 'loan-calculator-wp'),
+					'MZN' => __('Mozambican metical', 'loan-calculator-wp'),
+					'NAD' => __('Namibian dollar', 'loan-calculator-wp'),
+					'NGN' => __('Nigerian naira', 'loan-calculator-wp'),
+					'NIO' => __('Nicaraguan c&oacute;rdoba', 'loan-calculator-wp'),
+					'NOK' => __('Norwegian krone', 'loan-calculator-wp'),
+					'NPR' => __('Nepalese rupee', 'loan-calculator-wp'),
+					'NZD' => __('New Zealand dollar', 'loan-calculator-wp'),
+					'OMR' => __('Omani rial', 'loan-calculator-wp'),
+					'PAB' => __('Panamanian balboa', 'loan-calculator-wp'),
+					'PEN' => __('Sol', 'loan-calculator-wp'),
+					'PGK' => __('Papua New Guinean kina', 'loan-calculator-wp'),
+					'PHP' => __('Philippine peso', 'loan-calculator-wp'),
+					'PKR' => __('Pakistani rupee', 'loan-calculator-wp'),
+					'PLN' => __('Polish z&#x142;oty', 'loan-calculator-wp'),
+					'PRB' => __('Transnistrian ruble', 'loan-calculator-wp'),
+					'PYG' => __('Paraguayan guaran&iacute;', 'loan-calculator-wp'),
+					'QAR' => __('Qatari riyal', 'loan-calculator-wp'),
+					'RON' => __('Romanian leu', 'loan-calculator-wp'),
+					'RSD' => __('Serbian dinar', 'loan-calculator-wp'),
+					'RUB' => __('Russian ruble', 'loan-calculator-wp'),
+					'RWF' => __('Rwandan franc', 'loan-calculator-wp'),
+					'SAR' => __('Saudi riyal', 'loan-calculator-wp'),
+					'SBD' => __('Solomon Islands dollar', 'loan-calculator-wp'),
+					'SCR' => __('Seychellois rupee', 'loan-calculator-wp'),
+					'SDG' => __('Sudanese pound', 'loan-calculator-wp'),
+					'SEK' => __('Swedish krona', 'loan-calculator-wp'),
+					'SGD' => __('Singapore dollar', 'loan-calculator-wp'),
+					'SHP' => __('Saint Helena pound', 'loan-calculator-wp'),
+					'SLL' => __('Sierra Leonean leone', 'loan-calculator-wp'),
+					'SOS' => __('Somali shilling', 'loan-calculator-wp'),
+					'SRD' => __('Surinamese dollar', 'loan-calculator-wp'),
+					'SSP' => __('South Sudanese pound', 'loan-calculator-wp'),
+					'STN' => __('S&atilde;o Tom&eacute; and Pr&iacute;ncipe dobra', 'loan-calculator-wp'),
+					'SYP' => __('Syrian pound', 'loan-calculator-wp'),
+					'SZL' => __('Swazi lilangeni', 'loan-calculator-wp'),
+					'THB' => __('Thai baht', 'loan-calculator-wp'),
+					'TJS' => __('Tajikistani somoni', 'loan-calculator-wp'),
+					'TMT' => __('Turkmenistan manat', 'loan-calculator-wp'),
+					'TND' => __('Tunisian dinar', 'loan-calculator-wp'),
+					'TOP' => __('Tongan pa&#x2bb;anga', 'loan-calculator-wp'),
+					'TRY' => __('Turkish lira', 'loan-calculator-wp'),
+					'TTD' => __('Trinidad and Tobago dollar', 'loan-calculator-wp'),
+					'TWD' => __('New Taiwan dollar', 'loan-calculator-wp'),
+					'TZS' => __('Tanzanian shilling', 'loan-calculator-wp'),
+					'UAH' => __('Ukrainian hryvnia', 'loan-calculator-wp'),
+					'UGX' => __('Ugandan shilling', 'loan-calculator-wp'),
+					'USD' => __('United States (US) dollar', 'loan-calculator-wp'),
+					'UYU' => __('Uruguayan peso', 'loan-calculator-wp'),
+					'UZS' => __('Uzbekistani som', 'loan-calculator-wp'),
+					'VEF' => __('Venezuelan bol&iacute;var', 'loan-calculator-wp'),
+					'VES' => __('Bol&iacute;var soberano', 'loan-calculator-wp'),
+					'VND' => __('Vietnamese &#x111;&#x1ed3;ng', 'loan-calculator-wp'),
+					'VUV' => __('Vanuatu vatu', 'loan-calculator-wp'),
+					'WST' => __('Samoan t&#x101;l&#x101;', 'loan-calculator-wp'),
+					'XAF' => __('Central African CFA franc', 'loan-calculator-wp'),
+					'XCD' => __('East Caribbean dollar', 'loan-calculator-wp'),
+					'XOF' => __('West African CFA franc', 'loan-calculator-wp'),
+					'XPF' => __('CFP franc', 'loan-calculator-wp'),
+					'YER' => __('Yemeni rial', 'loan-calculator-wp'),
+					'ZAR' => __('South African rand', 'loan-calculator-wp'),
+					'ZMW' => __('Zambian kwacha', 'loan-calculator-wp'),
 				)
 			)
 		);
@@ -219,7 +230,8 @@ function ww_loan_get_currencies() {
  * @since 4.1.0
  * @return array
  */
-function ww_loan_get_currency_symbols() {
+function ww_loan_get_currency_symbols()
+{
 
 	$symbols = apply_filters(
 		'ww_loan_currency_symbols',
@@ -400,15 +412,116 @@ function ww_loan_get_currency_symbols() {
  * @package Loan Calculator
  * @since 1.0.1
  */
-function ww_loan_get_currency_symbol( $currency = '' ) {
 
-	if ( ! $currency ) {
+function ww_loan_get_currency_symbol($currency = '')
+{
+	if (!$currency) {
 		$currency = ww_loan_get_currency();
 	}
-
 	$symbols = ww_loan_get_currency_symbols();
 
-	$currency_symbol = isset( $symbols[ $currency ] ) ? $symbols[ $currency ] : '';
+	$currency_symbol = isset($symbols[$currency]) ? $symbols[$currency] : '';
 
-	return apply_filters( 'ww_loan_currency_symbol', $currency_symbol, $currency );
+	return apply_filters('ww_loan_currency_symbol', $currency_symbol, $currency);
+}
+
+
+function ww_get_google_fonts()
+{
+	$ww_get_google_fonts = apply_filters(
+		'ww_get_fonts',
+		array(
+			'Arial' => "font-family: Arial, sans-serif",
+			'Helvetica' => "font-family: Helvetica, sans-serif",
+			'Georgia' => "font-family: Georgia, serif",
+			'Times New Roman' => "font-family: 'Times New Roman', serif",
+			'Courier New' => "font-family: 'Courier New', monospace",
+			'Tahoma' => "font-family: Tahoma, sans-serif",
+			'Verdana' => "font-family: Verdana, sans-serif",
+			'Geneva' => "font-family: Geneva, sans-serif",
+			'Trebuchet MS' => "font-family: 'Trebuchet MS', sans-serif",
+			'Lucida Sans Unicode' => "font-family: 'Lucida Sans Unicode', sans-serif",
+			'Lucida Grande' => "font-family: 'Lucida Grande', sans-serif",
+			'Arial Black' => "font-family: 'Arial Black', sans-serif",
+			'Palatino' => "font-family: Palatino, serif",
+			'Palatino Linotype' => "font-family: 'Palatino Linotype', Palatino, serif",
+			'Book Antiqua' => "font-family: 'Book Antiqua', Palatino, serif",
+			'Garamond' => "font-family: Garamond, serif",
+			'Courier' => "font-family: 'Courier', monospace",
+			'Lucida Console' => "font-family: 'Lucida Console', monospace",
+			'Andale Mono' => "font-family: 'Andale Mono', monospace",
+			'Comic Sans MS' => "font-family: 'Comic Sans MS', cursive",
+			'Impact' => "font-family: Impact, sans-serif",
+			'Lucida Sans' => "font-family: 'Lucida Sans', sans-serif",
+			'Sans-Serif' => "font-family: sans-serif",
+			'Serif' => "font-family: serif",
+			'Monospace' => "font-family: monospace",
+			'Fantasy' => "font-family: fantasy",
+			'Cursive' => "font-family: cursive",
+			'Fira Sans' => "font-family: 'Fira Sans', sans-serif",
+			'Nunito' => "font-family: Nunito, sans-serif",
+			'PT Sans' => "font-family: 'PT Sans', sans-serif",
+			'Ubuntu Condensed' => "font-family: 'Ubuntu Condensed', sans-serif",
+			'Cantarell' => "font-family: Cantarell, sans-serif",
+			'Titillium Web' => "font-family: 'Titillium Web', sans-serif",
+			'Work Sans' => "font-family: 'Work Sans', sans-serif",
+			'PT Serif' => "font-family: 'PT Serif', serif",
+			'Cormorant Garamond' => "font-family: 'Cormorant Garamond', serif",
+			'Abril Fatface' => "font-family: 'Abril Fatface', cursive",
+			'Pacifico' => "font-family: Pacifico, cursive",
+			'Merriweather' => "font-family: Merriweather, serif",
+			'Playfair Display' => "font-family: 'Playfair Display', serif",
+			'Josefin Sans' => "font-family: 'Josefin Sans', sans-serif",
+			'Raleway' => "font-family: Raleway, sans-serif",
+			'Open Sans' => "font-family: 'Open Sans', sans-serif",
+			'Space Mono' => "font-family: 'Space Mono', monospace",
+			'Lobster' => "font-family: Lobster, cursive",
+			'Archivo' => "font-family: Archivo, sans-serif",
+			'Noto Sans' => "font-family: 'Noto Sans', sans-serif",
+			'Noto Serif' => "font-family: 'Noto Serif', serif",
+			'Quicksand' => "font-family: Quicksand, sans-serif",
+			'Exo' => "font-family: Exo, sans-serif",
+			'Exo 2' => "font-family: 'Exo 2', sans-serif",
+			'Muli' => "font-family: Muli, sans-serif",
+			'Dancing Script' => "font-family: 'Dancing Script', cursive",
+			'Shadows Into Light' => "font-family: 'Shadows Into Light', cursive",
+			'Permanent Marker' => "font-family: 'Permanent Marker', cursive",
+			'Homemade Apple' => "font-family: 'Homemade Apple', cursive",
+			'Tangerine' => "font-family: Tangerine, cursive",
+			'Akronim' => "font-family: Akronim, cursive",
+			'Courgette' => "font-family: Courgette, cursive",
+			'Bad Script' => "font-family: 'Bad Script', cursive",
+			'Allura' => "font-family: Allura, cursive",
+			'Trattatello' => "font-family: Trattatello, cursive",
+			'Handlee' => "font-family: Handlee, cursive",
+			'Sacramento' => "font-family: Sacramento, cursive",
+			'Kalam' => "font-family: Kalam, cursive",
+			'Rancho' => "font-family: Rancho, cursive",
+			'Indie Flower' => "font-family: 'Indie Flower', cursive",
+			'Caveat' => "font-family: Caveat, cursive",
+			'Arial Narrow' => "font-family: 'Arial Narrow', sans-serif",
+			'Bradley Hand' => "font-family: 'Bradley Hand', cursive",
+			'Brush Script MT' => "font-family: 'Brush Script MT', cursive",
+			'Century Gothic' => "font-family: 'Century Gothic', sans-serif",
+			'Copperplate' => "font-family: Copperplate, fantasy",
+			'Futura' => "font-family: Futura, sans-serif",
+			'Gill Sans' => "font-family: 'Gill Sans', sans-serif",
+			'Helvetica Neue' => "font-family: 'Helvetica Neue', sans-serif",
+			'Apple Chancery' => "font-family: 'Apple Chancery', cursive",
+			'Apple Casual' => "font-family: 'Apple Casual', cursive",
+			'Apple Garamond' => "font-family: 'Apple Garamond', serif",
+			'Apple LiGothic' => "font-family: 'Apple LiGothic', sans-serif",
+			'Apple LiSung' => "font-family: 'Apple LiSung', sans-serif",
+			'Apple Myungjo' => "font-family: 'Apple Myungjo', serif",
+			'Apple Symbols' => "font-family: 'Apple Symbols', sans-serif",
+			'Charter' => "font-family: Charter, serif",
+			'Hoefler Text' => "font-family: 'Hoefler Text', serif",
+			'Iowan Old Style' => "font-family: 'Iowan Old Style', serif",
+			'Menlo' => "font-family: Menlo, monospace",
+			'Monaco' => "font-family: Monaco, monospace",
+			'Noteworthy' => "font-family: Noteworthy, sans-serif",
+			'Standard Symbols L' => "font-family: 'Standard Symbols L', sans-serif"
+		)
+	);
+	return $ww_get_google_fonts;
 }
