@@ -29,10 +29,14 @@ function cal_emi_amount_frequency_payment_options(frp_option,lamount, interest_r
 
 function cal_loan_terms_by_frequency_payment_option(frp_option, loan_terms_months) {
   if (frp_option === 'Quarterly') {
+    jQuery("#regular_repayment_heading").html("Quarterly Payment");
      return parseInt(loan_terms_months * 3);
   } else if (frp_option === 'Monthly') {
+    jQuery("#regular_repayment_heading").html("Monthly Payment");
+			
     return parseInt(loan_terms_months);
   } else if (frp_option === 'Yearly') {
+			jQuery("#regular_repayment_heading").html("Yearly Payment");
     return parseInt(loan_terms_months * 12);
   }
 }
@@ -122,7 +126,7 @@ function cal_numbers_of_payment_by_frequency_val(frp_option,old_repayment_freq,d
           nop_max_value = parseInt(max_nop / 1);
           nop_default_value = default_nop;
         }
-  }
+      }
 
   if (frp_option === 'Quarterly') {
         //nop_default_value = parseInt(default_nop / 3);
@@ -168,21 +172,19 @@ function cal_numbers_of_payment_by_frequency_val(frp_option,old_repayment_freq,d
   nop_values_array['nop_max_value'] = nop_max_value;
 
   return nop_values_array;
-
-
 }
 
 
 function cal_advance_loan_amount_by_frequency_val(frp_option,actual_loan_amount,interest_rates){
    var adv_loan_amount = 0;
     if(frp_option == 'Monthly'){
-     adv_loan_amount = actual_loan_amount- parseInt(actual_loan_amount*interest_rates/(100 *12));
+     adv_loan_amount = actual_loan_amount- parseInt(actual_loan_amount*interest_rates/(100 * 12));
     }
     if(frp_option == 'Quarterly'){
-     adv_loan_amount = actual_loan_amount- parseInt(actual_loan_amount*interest_rates/(100 *4));
+     adv_loan_amount = actual_loan_amount- parseInt(actual_loan_amount*interest_rates/(100 * 4));
     }
      if(frp_option == 'Yearly'){
-     adv_loan_amount = actual_loan_amount- parseInt(actual_loan_amount*interest_rates/(100 *1));
+     adv_loan_amount = actual_loan_amount- parseInt(actual_loan_amount*interest_rates/(100 * 1));
     }
 
     return adv_loan_amount;

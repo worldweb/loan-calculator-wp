@@ -98,6 +98,11 @@ Plugin provide an option for contact form so that user can use contact form if t
 
 == Changelog ==
 
+= 1.2.3 (Dec 21, 2023) =
+- Added Change theme option
+- Added change font-family option with search functionality
+- Added search functionality in exiting currency option
+
 = 1.2.2 (Nov 27, 2023) =
 - Added option to manage "Payment Mode" default and Hide from frontend. 
 - Calculation issues and default text changes. 

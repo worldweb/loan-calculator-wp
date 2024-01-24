@@ -1,11 +1,11 @@
 <?php
 /**
  * Plugin Name: Loan Calculator WP
- * Plugin URI: http://www.worldwebtechnology.com/
- * Description:  Loan / EMI Calculator for Home Loan and Personal Loan
- * Version: 1.2.2
+ * Plugin URI: https://www.worldwebtechnology.com/
+ * Description:  Advanced Loan Calculator for Home Loans, Personal Loans, and various other types of loans. Includes features like a repayment chart, amortization table, video tab, balloon payment option, and supports all currencies. Use the contact form shortcode for easy access.
+ * Version: 1.2.3
  * Author: World Web Technology
- * Author URI: http://www.worldwebtechnology.com
+ * Author URI: https://www.worldwebtechnology.com/
  * Text Domain: loan-calculator-wp
  * Domain Path: languages
  * 
@@ -15,7 +15,7 @@
  */
 
 // Exit if accessed directly
-if ( !defined( 'ABSPATH' ) ) exit;
+if (!defined('ABSPATH')) exit;
 
 /**
  * Define Some needed predefined variables
@@ -23,36 +23,37 @@ if ( !defined( 'ABSPATH' ) ) exit;
  * @package Loan Calculator
  * @since 1.0.0
  */
-if( !defined( 'WW_LOAN_CALCULATOR_VERSION' ) ) {
-	define( 'WW_LOAN_CALCULATOR_VERSION', '1.2.2' ); //version of plugin
+if (!defined('WW_LOAN_CALCULATOR_VERSION')) {
+    define('WW_LOAN_CALCULATOR_VERSION', '1.2.2'); //version of plugin
 }
 if (!defined('WW_LOAN_CALCULATOR_TEXT_DOMAIN')) { //check if variable is not defined previous then define it
-    define( 'WW_LOAN_CALCULATOR_TEXT_DOMAIN', 'loan-calculator-wp' ); //this is for multi language support in plugin
+    define('WW_LOAN_CALCULATOR_TEXT_DOMAIN', 'loan-calculator-wp'); //this is for multi language support in plugin
 }
-if( !defined( 'WW_LOAN_CALCULATOR_DIR' ) ) {
-	define( 'WW_LOAN_CALCULATOR_DIR', dirname( __FILE__ ) ); // plugin dir
+if (!defined('WW_LOAN_CALCULATOR_DIR')) {
+    define('WW_LOAN_CALCULATOR_DIR', dirname(__FILE__)); // plugin dir
 }
-if( !defined( 'WW_LOAN_CALCULATOR_ADMIN' ) ) {
-	define( 'WW_LOAN_CALCULATOR_ADMIN', WW_LOAN_CALCULATOR_DIR . '/includes/admin' ); // plugin admin dir
+
+if (!defined('WW_LOAN_CALCULATOR_ADMIN')) {
+    define('WW_LOAN_CALCULATOR_ADMIN', WW_LOAN_CALCULATOR_DIR . '/includes/admin'); // plugin admin dir
 }
-if( !defined( 'WW_LOAN_CALCULATOR_LEVEL' ) ) { //check if variable is not defined previous then define its
-	define( 'WW_LOAN_CALCULATOR_LEVEL','manage_options' ); //this is capability in plugin
+if (!defined('WW_LOAN_CALCULATOR_LEVEL')) { //check if variable is not defined previous then define its
+    define('WW_LOAN_CALCULATOR_LEVEL', 'manage_options'); //this is capability in plugin
 }
-if( !defined( 'WW_LOAN_CALCULATOR_URL' ) ) {
-	define( 'WW_LOAN_CALCULATOR_URL',plugin_dir_url( __FILE__ ) ); // plugin url
+if (!defined('WW_LOAN_CALCULATOR_URL')) {
+    define('WW_LOAN_CALCULATOR_URL', plugin_dir_url(__FILE__)); // plugin url
 }
-if ( !defined( 'WW_LOAN_CALCULATOR_OPTION' ) ) {
-    define( 'WW_LOAN_CALCULATOR_OPTION', 'ww_loan_calculaor_option' ); // Option Name
+if (!defined('WW_LOAN_CALCULATOR_OPTION')) {
+    define('WW_LOAN_CALCULATOR_OPTION', 'ww_loan_calculaor_option'); // Option Name
 }
-if( !defined( 'WW_LOAN_CALCULATOR_BASENAME' ) ) {
-	define( 'WW_LOAN_CALCULATOR_BASENAME', basename( WW_LOAN_CALCULATOR_DIR ) ); // base name
+if (!defined('WW_LOAN_CALCULATOR_BASENAME')) {
+    define('WW_LOAN_CALCULATOR_BASENAME', basename(WW_LOAN_CALCULATOR_DIR)); // base name
 }
 
 //add action to load plugin
-add_action( 'plugins_loaded', 'ww_loan_calculator_load_plugin_textdomain' );
+add_action('plugins_loaded', 'ww_loan_calculator_load_plugin_textdomain');
 
 // Includes admin File
-require_once( WW_LOAN_CALCULATOR_DIR . '/includes/loan-calculator-misc-functions.php' );
+require_once(WW_LOAN_CALCULATOR_DIR . '/includes/loan-calculator-misc-functions.php');
 
 /**
  * Load Text Domain
@@ -62,45 +63,46 @@ require_once( WW_LOAN_CALCULATOR_DIR . '/includes/loan-calculator-misc-functions
  * @package Loan Calculator
  * @since 1.0.0
  **/
-function ww_loan_calculator_load_plugin_textdomain() {
-	
-	// Set filter for plugin's languages directory
-	$ww_lc_lang_dir	= dirname( plugin_basename( __FILE__ ) ) . '/languages/';
-	$ww_lc_lang_dir	= apply_filters( 'ww_loan_calculator_languages_directory', $ww_lc_lang_dir );
-	
-	// Traditional WordPress plugin locale filter
-	$locale	= apply_filters( 'plugin_locale',  get_locale(), 'loan-calculator-wp' );
-	$mofile	= sprintf( '%1$s-%2$s.mo', 'loan-calculator-wp', $locale );
-	
-	// Setup paths to current locale file
-	$mofile_local	= $ww_lc_lang_dir . $mofile;
-	$mofile_global	= WP_LANG_DIR . '/' . WW_LOAN_CALCULATOR_BASENAME . '/' . $mofile;
-	
-	if ( file_exists( $mofile_global ) ) { // Look in global /wp-content/languages/loan-calculator folder
-		load_textdomain( 'loan-calculator-wp', $mofile_global );
-	} elseif ( file_exists( $mofile_local ) ) { // Look in local /wp-content/plugins/loan-calculator/languages/ folder
-		load_textdomain( 'loan-calculator-wp', $mofile_local );
-	} else { // Load the default language files
-		load_plugin_textdomain( 'loan-calculator-wp', false, $ww_lc_lang_dir );
-	}
+function ww_loan_calculator_load_plugin_textdomain()
+{
+
+    // Set filter for plugin's languages directory
+    $ww_lc_lang_dir    = dirname(plugin_basename(__FILE__)) . '/languages/';
+    $ww_lc_lang_dir    = apply_filters('ww_loan_calculator_languages_directory', $ww_lc_lang_dir);
+
+    // Traditional WordPress plugin locale filter
+    $locale    = apply_filters('plugin_locale',  get_locale(), 'loan-calculator-wp');
+    $mofile    = sprintf('%1$s-%2$s.mo', 'loan-calculator-wp', $locale);
+
+    // Setup paths to current locale file
+    $mofile_local    = $ww_lc_lang_dir . $mofile;
+    $mofile_global    = WP_LANG_DIR . '/' . WW_LOAN_CALCULATOR_BASENAME . '/' . $mofile;
+
+    if (file_exists($mofile_global)) { // Look in global /wp-content/languages/loan-calculator folder
+        load_textdomain('loan-calculator-wp', $mofile_global);
+    } elseif (file_exists($mofile_local)) { // Look in local /wp-content/plugins/loan-calculator/languages/ folder
+        load_textdomain('loan-calculator-wp', $mofile_local);
+    } else { // Load the default language files
+        load_plugin_textdomain('loan-calculator-wp', false, $ww_lc_lang_dir);
+    }
 }
 
 /**
  * Plugin Activation Hook
  */
-register_activation_hook( __FILE__, 'ww_loan_calculator_register_activation' );
-function ww_loan_calculator_register_activation() {
-    
-    $loan_calculator_db_version = get_option( 'loan_calculator_db_version' );
-    if( empty( $loan_calculator_db_version ) ) {
+register_activation_hook(__FILE__, 'ww_loan_calculator_register_activation');
+function ww_loan_calculator_register_activation()
+{
+    $loan_calculator_db_version = get_option('loan_calculator_db_version');
+    if (empty($loan_calculator_db_version)) {
 
         // Set default data
         $loan_calculator_default_options = array();
-        $loan_calculator_default_options['first_heading_lbl'] = esc_html__( 'I want a', 'loan-calculator-wp');
-        $loan_calculator_default_options['application_fee_heading'] = esc_html__( 'Application fee', 'loan-calculator-wp');
-        $loan_calculator_default_options['monthly_fee_heading'] = esc_html__( 'Monthly fee', 'loan-calculator-wp');
-        $loan_calculator_default_options['total_regular_fees'] = esc_html__( 'Total regular fees', 'loan-calculator-wp');
-        $loan_calculator_default_options['total_fees'] = esc_html__( 'Total fees', 'loan-calculator-wp');
+        $loan_calculator_default_options['first_heading_lbl'] = esc_html__('I want a', 'loan-calculator-wp');
+        $loan_calculator_default_options['application_fee_heading'] = esc_html__('Application fee', 'loan-calculator-wp');
+        $loan_calculator_default_options['monthly_fee_heading'] = esc_html__('Monthly fee', 'loan-calculator-wp');
+        $loan_calculator_default_options['total_regular_fees'] = esc_html__('Total regular fees', 'loan-calculator-wp');
+        $loan_calculator_default_options['total_fees'] = esc_html__('Total fees', 'loan-calculator-wp');
         $loan_calculator_default_options['back_ground_color'] = '#fad712';
         $loan_calculator_default_options['hover_color'] = '#08e71f';
         $loan_calculator_default_options['selected_color'] = '#404245';
@@ -119,32 +121,35 @@ function ww_loan_calculator_register_activation() {
         $loan_calculator_default_options['loan_term_max_value'] = '84';
         $loan_calculator_default_options['ballon_per'] = '30';
         $loan_calculator_default_options['interested_rate'] = '4.5';
-        $loan_calculator_default_options['interest_rate_min_value'] = '0.25';
+        $loan_calculator_default_options['interest_rate_min_value'] = '1.25';
         $loan_calculator_default_options['interest_rate_max_value'] = '15.00';
         $loan_calculator_default_options['application_fee'] = '500';
         $loan_calculator_default_options['monthly_rate'] = '10';
         $loan_calculator_default_options['regular_repayment_heading'] = esc_html__('Monthly Payment (incl fees)', 'loan-calculator-wp');
-        $loan_calculator_default_options['total_payouts_heading'] = esc_html__('Total Payment', 'loan-calculator-wp');
-        $loan_calculator_default_options['per_month_heading'] = esc_html__( 'per month for', 'loan-calculator-wp');
-        $loan_calculator_default_options['years_heading'] = esc_html__( 'years', 'loan-calculator-wp'); 
-        $loan_calculator_default_options['total_interests_payable_heading'] = esc_html__( 'Total interest payable', 'loan-calculator-wp');
-        $loan_calculator_default_options['over_heading'] = esc_html__( 'over', 'loan-calculator-wp');
-        $loan_calculator_default_options['ballon_amt_heading'] = esc_html__( 'Balloon amount', 'loan-calculator-wp');
-        $loan_calculator_default_options['loan_feature_product_heading'] = esc_html__( 'Loan Product Features', 'loan-calculator-wp');
-        $loan_calculator_default_options['video_heading'] = esc_html__( 'Video', 'loan-calculator-wp');
-        $loan_calculator_default_options['repayment_chart_heading'] = esc_html__( 'Repayment Chart', 'loan-calculator-wp');
-        $loan_calculator_default_options['loan_table_heading'] = esc_html__( 'Loan Amortisation Table', 'loan-calculator-wp');
+        $loan_calculator_default_options['per_month_heading'] = esc_html__('Per month for', 'loan-calculator-wp');
+        $loan_calculator_default_options['years_heading'] = esc_html__('years', 'loan-calculator-wp');
+        $loan_calculator_default_options['total_interests_payable_heading'] = esc_html__('Total interest payable', 'loan-calculator-wp');
+        $loan_calculator_default_options['over_heading'] = esc_html__('over', 'loan-calculator-wp');
+        $loan_calculator_default_options['ballon_amt_heading'] = esc_html__('Balloon amount', 'loan-calculator-wp');
+        $loan_calculator_default_options['loan_feature_product_heading'] = esc_html__('Loan Product Features', 'loan-calculator-wp');
+        $loan_calculator_default_options['video_heading'] = esc_html__('Video', 'loan-calculator-wp');
+        $loan_calculator_default_options['repayment_chart_heading'] = esc_html__('Repayment Chart', 'loan-calculator-wp');
+        $loan_calculator_default_options['loan_table_heading'] = esc_html__('Loan Amortisation Table', 'loan-calculator-wp');
         $loan_calculator_default_options['youtube_video_link'] = '';
-        $loan_calculator_default_options['contact_popup_button_heading'] = esc_html__( 'Contact us now for a quote', 'loan-calculator-wp');
-        $loan_calculator_default_options['calculator_disclaimer_heading'] = esc_html__( 'Calculator Disclaimer', 'loan-calculator-wp');
-        $loan_calculator_default_options['calculator_disclaimer_description'] = esc_html__( 'The repayment amount shown using this calculator is an estimate, based on information you have provided. It is provided for illustrative purposes only and actual repayment amounts may vary. To find out actual repayment amounts, contact us. This calculation does not constitute a quote, loan approval, agreement or advice by My Finance. It does not take into account your personal or financial circumstances.', 'loan-calculator-wp');
-        $loan_calculator_default_options['loan_amount_tooltip'] = esc_html__( 'Please enter your loan amount here.', 'loan-calculator-wp');
-        $loan_calculator_default_options['loan_terms_tooltip'] = esc_html__( 'Please enter the number of years in which you plan to repay the loan.', 'loan-calculator-wp');
-        $loan_calculator_default_options['interest_rates_tooltip'] = esc_html__( 'The interest rate will default to the product you selected. You can also change the rate up or down to understand the effect on your repayments and total interest payable.', 'loan-calculator-wp');
+        $loan_calculator_default_options['contact_popup_button_heading'] = esc_html__('Contact us now for a quote', 'loan-calculator-wp');
+        $loan_calculator_default_options['calculator_disclaimer_heading'] = esc_html__('Calculator Disclaimer', 'loan-calculator-wp');
+        $loan_calculator_default_options['calculator_disclaimer_description'] = esc_html__('The repayment amount shown using this calculator is an estimate, based on information you have provided. It is provided for illustrative purposes only and actual repayment amounts may vary. To find out actual repayment amounts, contact us. This calculation does not constitute a quote, loan approval, agreement or advice by My Finance. It does not take into account your personal or financial circumstances.', 'loan-calculator-wp');
+        $loan_calculator_default_options['loan_amount_tooltip'] = esc_html__('Please enter your loan amount here.', 'loan-calculator-wp');
+        $loan_calculator_default_options['loan_terms_tooltip'] = esc_html__('Please enter the number of years in which you plan to repay the loan.', 'loan-calculator-wp');
+        $loan_calculator_default_options['payment_mode_tooltip'] = esc_html__('Please choose payment mode of the loan.', 'loan-calculator-wp');
+
+        $loan_calculator_default_options['interest_rates_tooltip'] = esc_html__('The interest rate will default to the product you selected. You can also change the rate up or down to understand the effect on your repayments and total interest payable.', 'loan-calculator-wp');
+        $loan_calculator_default_options['balloon_amount_tooltip'] = esc_html__('Please enter the balloon amount of the loan.', 'loan-calculator-wp');
+
         $loan_calculator_default_options['print_option_enable'] = '1';
-        $loan_calculator_default_options['print_label'] = esc_html__( 'Print', 'loan-calculator-wp'); 
-        $loan_calculator_default_options['about_this_calculator'] = esc_html__( 'About this calculator', 'loan-calculator-wp');
-        $loan_calculator_default_options['calculator_heading'] = esc_html__( 'Feel free to use our Equipment Finance Calculator', 'loan-calculator-wp');
+        $loan_calculator_default_options['print_label'] = esc_html__('Print', 'loan-calculator-wp');
+        $loan_calculator_default_options['about_this_calculator'] = esc_html__('About this calculator', 'loan-calculator-wp');
+        $loan_calculator_default_options['calculator_heading'] = esc_html__('Feel free to use our Equipment Finance Calculator', 'loan-calculator-wp');
         $loan_calculator_default_options['calculator_popup_content'] = '<h1>Calculator Information</h1>
 The Equipment Finance Calculator calculates the type of repayment required, at the frequency requested, in respect of the loan parameters entered, namely amount, term and interest rate. The Product selected determines the default interest rate for personal loan product.
 
@@ -169,71 +174,79 @@ The results from this calculator should be used as an indication only. Results d
         $loan_calculator_default_options['enable_repayment_chart'] = '1';
         $loan_calculator_default_options['enable_video_tab'] = '0';
         $loan_calculator_default_options['enable_loan_mortisation_tab'] = '1';
-        $loan_calculator_default_options['print_option_heading'] = esc_html__( 'Print', 'loan-calculator-wp'); 
-        $loan_calculator_default_options['disable_font_awesome'] = '1';   
-        $loan_calculator_default_options['ww_loan_currency'] = 'USD';   
-        
-        //update loan calculator default option 
-        update_option( 'ww_loan_option', $loan_calculator_default_options );
+        $loan_calculator_default_options['print_option_heading'] = esc_html__('Print', 'loan-calculator-wp');
+        $loan_calculator_default_options['disable_font_awesome'] = '1';
+        $loan_calculator_default_options['ww_loan_currency'] = 'USD';
 
+        //update loan calculator default option 
+        update_option('ww_loan_option', $loan_calculator_default_options);
         // update db version 
-        update_option( 'loan_calculator_db_version', '1.0.1' );
+        update_option('loan_calculator_db_version', '1.0.1');
     }
 
-    $loan_calculator_db_version = get_option( 'loan_calculator_db_version' );
-    if( $loan_calculator_db_version == '1.0.1' ) {
+    $loan_calculator_db_version = get_option('loan_calculator_db_version');
+    if ($loan_calculator_db_version == '1.0.1') {
 
         // Get option & update currency option
-        $loan_calculator_default_options = get_option( 'ww_loan_option' );
+        $loan_calculator_default_options = get_option('ww_loan_option');
         $loan_calculator_default_options['ww_loan_currency'] = 'USD';
-        update_option( 'ww_loan_option', $loan_calculator_default_options );
-
-        update_option( 'loan_calculator_db_version', '1.0.2' );
+        update_option('ww_loan_option', $loan_calculator_default_options);
+        update_option('loan_calculator_db_version', '1.0.2');
     }
 
-    $loan_calculator_db_version = get_option( 'loan_calculator_db_version' );
-    if( $loan_calculator_db_version == '1.0.2' ) {
+    $loan_calculator_db_version = get_option('loan_calculator_db_version');
+    if ($loan_calculator_db_version == '1.0.2') {
         // Next update should be here.
     }
+    $plugin_activate_time =  strtotime("now");
+    update_option('plugin_activation_time', $plugin_activate_time);
+    update_option('lc_avoid_notice', 0);
+    update_option('lc_rating_notice', 0);
+    update_option('last_notice_timestamp', 0);
 }
 
 /**
  * Plugin Deactivation Hook
  */
-register_deactivation_hook( __FILE__, 'deactivate_ww_loan_calculator' );
-function deactivate_ww_loan_calculator() {
-    
-    // Check Delete Data flag enable true or not
-    $loan_calculator_option_data = get_option( 'ww_loan_option' );
+register_deactivation_hook(__FILE__, 'deactivate_ww_loan_calculator');
+function deactivate_ww_loan_calculator()
+{
 
-    if( isset( $loan_calculator_option_data['delete_data_enable'] ) && $loan_calculator_option_data['delete_data_enable'] == 1 ) {
+    // Check Delete Data flag enable true or not
+    $loan_calculator_option_data = get_option('ww_loan_option');
+
+    if (isset($loan_calculator_option_data['delete_data_enable']) && $loan_calculator_option_data['delete_data_enable'] == 1) {
 
         // Delete all plugin setting data
-        delete_option( 'ww_loan_option' );
-        delete_option( 'delete_data_enable' );
-        delete_option( 'loan_calculator_db_version' );
+        delete_option('ww_loan_option');
+        delete_option('delete_data_enable');
+        delete_option('loan_calculator_db_version');
     }
 }
+
 
 // global variables
 global $ww_loan_calculator_admin,  $ww_loan_calculator_public, $ww_loan_calculator_script;
 
 // Includes admin File
-require_once( WW_LOAN_CALCULATOR_ADMIN . '/class-loan-calculator-admin.php');
+require_once(WW_LOAN_CALCULATOR_ADMIN . '/class-loan-calculator-admin.php');
 $ww_loan_calculator_admin = new WW_Loan_Calculator_Admin_Pages();
 $ww_loan_calculator_admin->add_hooks();
 
 // Includes Public File
-require_once( WW_LOAN_CALCULATOR_DIR . '/includes/class-ww-loan-calculator-public.php');
+require_once(WW_LOAN_CALCULATOR_DIR . '/includes/class-ww-loan-calculator-public.php');
 $ww_loan_calculator_public = new WW_Loan_Calculator_Public();
 $ww_loan_calculator_public->add_hooks();
 
 // Includes Scripts File
-require_once( WW_LOAN_CALCULATOR_DIR . '/includes/class-ww-loan-calculator-scripts.php');
+require_once(WW_LOAN_CALCULATOR_DIR . '/includes/class-ww-loan-calculator-scripts.php');
 $ww_loan_calculator_script = new WW_Loan_Calculator_Script();
 $ww_loan_calculator_script->add_hooks();
 
 
 // Includes Misc File
-require_once( WW_LOAN_CALCULATOR_DIR . '/includes/loan-calculator-misc-functions.php');
-$loan_currency=ww_loan_get_currencies();
+require_once(WW_LOAN_CALCULATOR_DIR . '/includes/loan-calculator-misc-functions.php');
+$loan_currency = ww_loan_get_currencies();
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
