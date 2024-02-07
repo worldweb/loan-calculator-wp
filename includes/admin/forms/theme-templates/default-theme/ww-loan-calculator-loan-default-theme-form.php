@@ -116,9 +116,8 @@ $enable_loan_mortisation_tab = isset($loan_all_setting_data['enable_loan_mortisa
 $print_option_enable = isset($loan_all_setting_data['print_option_enable']) ? $loan_all_setting_data['print_option_enable'] : "";
 $print_option_heading = isset($loan_all_setting_data['print_option_heading']) ? $loan_all_setting_data['print_option_heading'] : "";
 
-
-$currency_symbols = ww_loan_get_currency_symbol();
-
+$ww_loan_currency = isset($loan_all_setting_data['ww_loan_currency']) ? $loan_all_setting_data['ww_loan_currency'] : "";
+$currency_symbols = ww_loan_get_currency_symbol( $ww_loan_currency );
 
 /* END : Tab Enable Settings */
 
@@ -147,7 +146,7 @@ $disable_tabs_icon = isset($loan_all_setting_data['disable_tabs_icon']) ? $loan_
 /* END : NEW SETTING ADDED */
 
 ?>
-<div class="wp-loan-calculator-main">
+<div class="wp-loan-calculator-main wp-loan-mobile-view">
     <style type="text/css">
         :root {
             --calc-background-color: <?php echo esc_html($back_ground_color); ?>;

@@ -1531,7 +1531,6 @@ canvas#loan-process-graph {
     letter-spacing: 0.03em;
     color: #000000 !important;
     box-sizing: border-box;
-    padding: 5px !important;
     text-align: center !important;
     margin-bottom: 0;
 }
@@ -1827,8 +1826,10 @@ label.tab1_icon {
     font-size: 18px;
     text-align: center;;
     width: auto;
+    padding:  0 30px 0 30px;
     text-transform: uppercase;
     cursor: pointer;
+    border: none;
     vertical-align: middle !important;
 }
 
@@ -2038,7 +2039,7 @@ div#tab-content1 {
         /* color: #3f4864; */
         font-weight: 700;
         line-height: normal;
-        font-size: 16px;
+        font-size: 18px;
 
     }
 
@@ -2553,6 +2554,7 @@ label.tab3_icon {
     .second-section-new-theme .container.loan-detail-section-child-container .loan-detail-cal-desc {
         width: 88% !important;
         margin: 0 auto !important;
+        padding: 20px 0 20px 0;
     }
 }
 
@@ -2695,7 +2697,13 @@ label.tab3_icon {
         display: flex;
         align-items: initial;
         justify-content: unset;
-        flex-direction: column;
+        flex-direction: row;
+    }
+    #regular_repayment_heading,.loan-cal-desc-heading{
+        font-size: medium !important;
+    }
+    #per_month_amount,#total_interests_amt,#bill_ballon_amt{
+        font-size: 20px !important;
     }
 
     div#tab-content3 {
@@ -2932,8 +2940,7 @@ span#bill_ballon_amt {
 
 .second-section-new-theme .loan-detail-section-child {
     background-color: var(--calc-bg-light-color) !important;
-    padding-top: 20px !important;
-    padding-bottom: 10px !important;
+    padding: 20px 0 20px 0 !important;
 }
 
 span#per_month_amount,
@@ -2942,7 +2949,7 @@ span#total_interests_years,
 #total_payments,
 #total_interests_amt,
 #bill_ballon_amt {
-    font-size: 34px !important;
+    font-size: 34px;
     color: var(--calc-background-color);
 }
 .loan-detail-section-child .loan-detail-cal-desc,small{

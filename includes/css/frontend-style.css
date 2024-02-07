@@ -704,7 +704,7 @@ input#loan_calculator_setting {
 .contact-us-section {
     background-color: var(--calc-background-color);
     text-align: center;
-    padding: 16px 16px 26px;
+    padding: 16px;
     margin-bottom: 16px;
 }
 

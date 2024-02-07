@@ -1972,6 +1972,12 @@ function onlyNos(evt, txt_name) {
 	if (keyCode == 37 || keyCode == 39) {
 		return;
 	}
+
+	if (keyCode == 67 || keyCode == 86 || keyCode == 88 || keyCode == 65) {
+		return;
+	}
+
+
 	if (theEvent.key == "!" || theEvent.key == "@" || theEvent.key == "#" || theEvent.key == "$" || theEvent.key == "&" || theEvent.key == "%" || theEvent.key == "^" || theEvent.key == "*" || theEvent.key == ")" || theEvent.key == "(") {
 		return false;
 	}

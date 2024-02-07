@@ -246,7 +246,3 @@ $ww_loan_calculator_script->add_hooks();
 
 // Includes Misc File
 require_once(WW_LOAN_CALCULATOR_DIR . '/includes/loan-calculator-misc-functions.php');
-$loan_currency = ww_loan_get_currencies();
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);

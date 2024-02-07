@@ -1,10 +1,10 @@
 === Loan Calculator WP ===
 
-Author:            Loan Calculator WP
+Author:            World Web Technology
 Contributors:      worldweb
-Plugin Name:       Loan / EMI Calculator for Home Loan and Personal Loan
+Plugin Name:       Loan Calculator WP
 Plugin URI:        https://wordpress.org/plugins/loan-calculator-wp
-Tags:              loan calculator, emi calculator, home loan, personal loan, bank loan, car loan, emi plugin
+Tags:              loan calculator, calculator, emi calculator, home loan, personal loan, education loan, business loan, bank loan, car loan
 Author URI:        https://worldwebtechnology.com
 Requires at least: 5.8
 Requires PHP:      7.2
@@ -12,7 +12,7 @@ Tested up to:      6.4
 Stable tag:        1.2.2
 License:           GPLv2 or later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
-Version:           1.2.2
+Version:           1.2.3
 
 Loan / EMI Calculator for Home Loan and Personal Loan
 

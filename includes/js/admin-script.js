@@ -96,22 +96,6 @@ jQuery(document).ready(function (jQuery) {
 		}
 	});
 
-	var loan_amount = jQuery('#loan_amount').val();
-	var loan_amount_min_value = jQuery('#loan_amount_min_value').val();
-	var loan_amount_max_value = jQuery('#loan_amount_max_value').val();
-	var application_fee = jQuery('#application_fee').val();
-	var monthly_rate = jQuery('#monthly_rate').val();
-
-	jQuery(document).on('keydown, input','#loan_amount,#loan_amount_min_value,#loan_amount_max_value,#application_fee,#monthly_rate' )
-
-	if (loan_amount=='.' || loan_amount_min_value == '.' || loan_amount_max_value == '.' || application_fee == '.' || monthly_rate == '.') {
-		return;
-	}	
-	if (loan_amount==',' || loan_amount_min_value == ',' || loan_amount_max_value == ',' || application_fee == ',' || monthly_rate == ',') {
-		return;
-	}	
-	
-
 	// loan_term_min_value and loan_term_max_value validation end
 
 	/**
@@ -206,6 +190,11 @@ function onlyNos(evt, txt_name) {
 	if (theEvent.key == "!" || theEvent.key == "@" || theEvent.key == "#" || theEvent.key == "$" || theEvent.key == "&" || theEvent.key == "%" || theEvent.key == "^" || theEvent.key == "*" || theEvent.key == ")" || theEvent.key == "(") {
 		return false;
 	}
+
+	if (keyCode == 67 || keyCode == 86 || keyCode == 88 || keyCode == 65) {
+		return;
+	}
+
 	var txt_value = jQuery("#" + txt_name).val();
 	if (txt_value.length >= 1 && txt_value.charAt(0) == "." && theEvent.key == ".") {
 		return false;
