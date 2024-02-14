@@ -414,7 +414,7 @@ $disable_tabs_icon = isset($loan_all_setting_data['disable_tabs_icon']) ? $loan_
                 </tr>
                 <tr id="Graph-color">
                     <th scope="row">
-                        <label for="border_color"><strong><?php esc_html_e('Graph Color', 'loan-calculator-wp'); ?></strong></label>
+                        <label for="border_color"><strong><?php esc_html_e('Principal Graph Fill Color', 'loan-calculator-wp'); ?></strong></label>
                     </th>
                     <td>
                         <input type='color' name='ww_loan_option[graph_color]' id='graph_color' value='<?php esc_attr_e($graph_color, 'loan-calculator-wp'); ?>' class="regular-text">
@@ -422,7 +422,7 @@ $disable_tabs_icon = isset($loan_all_setting_data['disable_tabs_icon']) ? $loan_
                 </tr>
                 <tr id="Graph-border-color">
                     <th scope="row">
-                        <label for="graph_border_color"><strong><?php esc_html_e('Graph Border Color', 'loan-calculator-wp'); ?></strong></label>
+                        <label for="graph_border_color"><strong><?php esc_html_e('Principal Graph Border Color', 'loan-calculator-wp'); ?></strong></label>
                     </th>
                     <td>
                         <input type='color' name='ww_loan_option[graph_border_color]' id='graph_border_color' value='<?php esc_attr_e($graph_border_color, 'loan-calculator-wp'); ?>' class="regular-text">
@@ -430,7 +430,7 @@ $disable_tabs_icon = isset($loan_all_setting_data['disable_tabs_icon']) ? $loan_
                 </tr>
                 <tr id="Graph-color-sub">
                     <th scope="row">
-                        <label for="graph_color_sub"><strong><?php esc_html_e('Graph Sub Color ', 'loan-calculator-wp'); ?></strong></label>
+                        <label for="graph_color_sub"><strong><?php esc_html_e('Interest Graph Fill Color', 'loan-calculator-wp'); ?></strong></label>
                     </th>
                     <td>
                         <input type='color' name='ww_loan_option[graph_color_sub]' id='graph_color_sub' value='<?php esc_attr_e($graph_color_sub, 'loan-calculator-wp'); ?>' class="regular-text">
@@ -438,7 +438,7 @@ $disable_tabs_icon = isset($loan_all_setting_data['disable_tabs_icon']) ? $loan_
                 </tr>
                 <tr id="graph-border-color-sub">
                     <th scope="row">
-                        <label for="graph_border_color_sub"><strong><?php esc_html_e('Graph Sub Border Color', 'loan-calculator-wp'); ?></strong></label>
+                        <label for="graph_border_color_sub"><strong><?php esc_html_e('Interest Graph Border Color', 'loan-calculator-wp'); ?></strong></label>
                     </th>
                     <td>
                         <input type='color' name='ww_loan_option[graph_border_color_sub]' id='graph_border_color_sub' value='<?php esc_attr_e($graph_border_color_sub, 'loan-calculator-wp'); ?>' class="regular-text">
@@ -476,7 +476,7 @@ $disable_tabs_icon = isset($loan_all_setting_data['disable_tabs_icon']) ? $loan_
                         <label for="loan_amount"><strong><?php esc_html_e('Loan Amount', 'loan-calculator-wp'); ?></strong></label>
                     </th>
                     <td>
-                        <input type='text' name='ww_loan_option[loan_amount]' id='loan_amount' maxlength="20" min="1000" max="10000000000" value='<?php esc_attr_e($loan_amount, 'loan-calculator-wp'); ?>' class="regular-text" required onkeydown="return onlyNos(event,'loan_amount')">
+                        <input type='text' name='ww_loan_option[loan_amount]' id='loan_amount' maxlength="20" value='<?php esc_attr_e($loan_amount, 'loan-calculator-wp'); ?>' class="regular-text" required onkeydown="return onlyNos(event,'loan_amount')">
                     </td>
                 </tr>
                 <tr id="loan-amount-min">
@@ -485,7 +485,7 @@ $disable_tabs_icon = isset($loan_all_setting_data['disable_tabs_icon']) ? $loan_
 
                     </th>
                     <td>
-                        <input type='text' name='ww_loan_option[loan_amount_min_value]' id='loan_amount_min_value' maxlength="20" min="1000" max="10000000000" value='<?php esc_attr_e($loan_amount_min_value, 'loan-calculator-wp'); ?>' class="regular-text" required onkeydown="return onlyNos(event,'loan_amount_min_value')">
+                        <input type='text' name='ww_loan_option[loan_amount_min_value]' id='loan_amount_min_value' maxlength="20" value='<?php esc_attr_e($loan_amount_min_value, 'loan-calculator-wp'); ?>' class="regular-text" required onkeydown="return onlyNos(event,'loan_amount_min_value')">
                     </td>
                 </tr>
                 <tr id="loan-amount-max">
@@ -494,7 +494,7 @@ $disable_tabs_icon = isset($loan_all_setting_data['disable_tabs_icon']) ? $loan_
 
                     </th>
                     <td>
-                        <input type='text' name='ww_loan_option[loan_amount_max_value]' id='loan_amount_max_value' maxlength="20" value='<?php esc_attr_e($loan_amount_max_value, 'loan-calculator-wp'); ?>' class="regular-text" min="1000" max="10000000000" required onkeydown="return onlyNos(event,'loan_amount_max_value')">
+                        <input type='text' name='ww_loan_option[loan_amount_max_value]' id='loan_amount_max_value' maxlength="20" value='<?php esc_attr_e($loan_amount_max_value, 'loan-calculator-wp'); ?>' class="regular-text" required onkeydown="return onlyNos(event,'loan_amount_max_value')">
                     </td>
                 </tr>
                 <tr>
@@ -606,10 +606,10 @@ $disable_tabs_icon = isset($loan_all_setting_data['disable_tabs_icon']) ? $loan_
 
                 <tr>
                     <th scope="row">
-                        <label for="interested_rate"><strong><?php esc_html_e('Interested Rate', 'loan-calculator-wp'); ?></strong></label>
+                        <label for="interested_rate"><strong><?php esc_html_e('Interest Rate', 'loan-calculator-wp'); ?></strong></label>
                     </th>
                     <td>
-                        <input type='number' name='ww_loan_option[interested_rate]' id='interested_rate' step = "any" min="0.5" max="40" value='<?php esc_attr_e($interested_rate, 'loan-calculator-wp'); ?>' maxlength="2" class="regular-text" required onkeydown="return onlyNos(event,'interested_rate')">
+                        <input type='number' name='ww_loan_option[interested_rate]' id='interested_rate' step = "any" min="1" max="40" value='<?php esc_attr_e($interested_rate, 'loan-calculator-wp'); ?>' maxlength="5" class="regular-text" required onkeydown="return onlyNos(event,'interested_rate')">
                     </td>
                 </tr>
                 <tr>
@@ -617,7 +617,7 @@ $disable_tabs_icon = isset($loan_all_setting_data['disable_tabs_icon']) ? $loan_
                         <label for="interest-rate-min_lbl"><strong><?php esc_html_e('Interest Rate Min Value', 'loan-calculator-wp'); ?></strong></label>
                     </th>
                     <td>
-                        <input type='number' name='ww_loan_option[interest_rate_min_value]' step = "any" min="0.5" max="40" id='interest_rate_min_value' maxlength="2" value='<?php esc_attr_e($interest_rate_min_value,'loan-calculator-wp'); ?>' class="regular-text" required onkeydown="return onlyNos(event,'interest_rate_min_value')">
+                        <input type='number' name='ww_loan_option[interest_rate_min_value]' step = "any" min="1" max="40" id='interest_rate_min_value' maxlength="5" value='<?php esc_attr_e($interest_rate_min_value,'loan-calculator-wp'); ?>' class="regular-text" required onkeydown="return onlyNos(event,'interest_rate_min_value')">
                     </td>
                 </tr>
                 <tr>
@@ -625,25 +625,16 @@ $disable_tabs_icon = isset($loan_all_setting_data['disable_tabs_icon']) ? $loan_
                         <label for="interest_rate_max_value"><strong><?php esc_html_e('Interest Rate Max Value', 'loan-calculator-wp'); ?></strong></label>
                     </th>
                     <td>
-                        <input type='number' name='ww_loan_option[interest_rate_max_value]' step = "any" min="0.5" max="40" id='interest_rate_max_value' maxlength="2" value='<?php esc_attr_e($interest_rate_max_value, 'loan-calculator-wp'); ?>' class="regular-text" required onkeydown="return onlyNos(event,'interest_rate_max_value')">
+                        <input type='number' name='ww_loan_option[interest_rate_max_value]' step = "any" min="1" max="40" id='interest_rate_max_value' maxlength="5" value='<?php esc_attr_e($interest_rate_max_value, 'loan-calculator-wp'); ?>' class="regular-text" required onkeydown="return onlyNos(event,'interest_rate_max_value')">
                     </td>
                 </tr>
 
                 <tr>
                     <th scope="row">
-                        <label for="interest_rates_tooltip"><strong><?php esc_html_e('Interest Rates Tooltip', 'loan-calculator-wp'); ?></strong></label>
+                        <label for="interest_rates_tooltip"><strong><?php esc_html_e('Interest Rate Tooltip', 'loan-calculator-wp'); ?></strong></label>
                     </th>
                     <td>
                         <textarea name="ww_loan_option[interest_rates_tooltip]" id="interest_rates_tooltip" rows="4" cols="50"><?php esc_attr_e($interest_rates_tooltip, 'loan-calculator-wp'); ?></textarea>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">
-                        <label for="payment_mode_tooltip"><strong><?php esc_html_e('Payment Mode Tooltip', 'loan-calculator-wp'); ?></strong></label>
-                    </th>
-                    <td>
-                        <textarea name="ww_loan_option[payment_mode_tooltip]" id="payment_mode_tooltip" rows="4" cols="50"><?php esc_attr_e($payment_mode_tooltip, 'loan-calculator-wp'); ?></textarea>
-
                     </td>
                 </tr>
                 <tr id="application-fee">
@@ -662,13 +653,22 @@ $disable_tabs_icon = isset($loan_all_setting_data['disable_tabs_icon']) ? $loan_
                         <input type='text' name='ww_loan_option[monthly_rate]' id='monthly_rate' min="1" max="50000" value='<?php esc_attr_e($monthly_rate, 'loan-calculator-wp'); ?>' class="regular-text" onkeydown="return onlyNos(event,'monthly_rate')">
                     </td>
                 </tr>
+                <tr>
+                    <th scope="row">
+                        <label for="payment_mode_tooltip"><strong><?php esc_html_e('Payment Mode Tooltip', 'loan-calculator-wp'); ?></strong></label>
+                    </th>
+                    <td>
+                        <textarea name="ww_loan_option[payment_mode_tooltip]" id="payment_mode_tooltip" rows="4" cols="50"><?php esc_attr_e($payment_mode_tooltip, 'loan-calculator-wp'); ?></textarea>
+
+                    </td>
+                </tr>
                 <tr id="payment-mode">
                     <th scope="row">
-                        <label for="payment_mode"><strong><?php esc_html_e('Hide Payment Mode', 'loan-calculator-wp'); ?></strong></label>
+                        <label for="payment_mode"><strong><?php esc_html_e('Display Specific Payment Mode', 'loan-calculator-wp'); ?></strong></label>
                     </th>
                     <td>
                         <input type='checkbox' name='ww_loan_option[payment_mode_enable]' id='payment_mode_enable' value='1' <?php checked($payment_mode_enable, 1) ?> class="regular-text"> <br><br>
-                        <i><b style="color:red"><?php esc_html_e('Note', 'loan-calculator-wp') ?></b><?php esc_html_e(': If you want to display a specific payment mode that you have chosen from the options below, check this box.', 'loan-calculator-wp'); ?> </i>
+                        <i><b style="color:red"><?php esc_html_e('Note', 'loan-calculator-wp') ?></b><?php esc_html_e(': If you wish to showcase a particular payment mode selected from the options provided below, please mark the checkbox. In the absence of selection, both modes will be displayed.', 'loan-calculator-wp'); ?> </i>
                     </td>
                 </tr>
                 <tr id="default_payment-mode">
@@ -925,7 +925,7 @@ $disable_tabs_icon = isset($loan_all_setting_data['disable_tabs_icon']) ? $loan_
                     </td>
                 </tr>
                 <tr>
-                    <td>
+                    <td colspan="2">
                         <h2><?php esc_html_e('Calculator Disclaimer Settings ', 'loan-calculator-wp'); ?> </h2>
                         <span class="heading-tooltip-section">
                             <?php esc_html_e('Show disclaimer notice at the end of calculator.', 'loan-calculator-wp'); ?>

@@ -116,11 +116,9 @@ $enable_loan_mortisation_tab = isset($loan_all_setting_data['enable_loan_mortisa
 $print_option_enable = isset($loan_all_setting_data['print_option_enable']) ? $loan_all_setting_data['print_option_enable'] : "";
 $print_option_heading = isset($loan_all_setting_data['print_option_heading']) ? $loan_all_setting_data['print_option_heading'] : "";
 
-$ww_loan_currency = isset($loan_all_setting_data['ww_loan_currency']) ? $loan_all_setting_data['ww_loan_currency'] : "";
-$currency_symbols = ww_loan_get_currency_symbol( $ww_loan_currency );
+$currency_symbols = ww_loan_get_currency_symbol();
 
 /* END : Tab Enable Settings */
-
 
 /* START : NEW SETTINGS ADDED */
 $disable_ballon_amt = isset($loan_all_setting_data['disable_ballon_amt']) ? $loan_all_setting_data['disable_ballon_amt'] : "";
@@ -146,7 +144,7 @@ $disable_tabs_icon = isset($loan_all_setting_data['disable_tabs_icon']) ? $loan_
 /* END : NEW SETTING ADDED */
 
 ?>
-<div class="wp-loan-calculator-main wp-loan-mobile-view">
+<div class="wp-loan-calculator-main">
     <style type="text/css">
         :root {
             --calc-background-color: <?php echo esc_html($back_ground_color); ?>;
@@ -189,7 +187,7 @@ $disable_tabs_icon = isset($loan_all_setting_data['disable_tabs_icon']) ? $loan_
         </div>
     </section>
 
-    <section id="main-sec">
+    <section id="main-sec" class="ctm_main_wrap">
         <section class="calculator-heading-section calculator-heading-block">
             <div class="calculator-child-heading">
                 <h2>
@@ -206,7 +204,7 @@ $disable_tabs_icon = isset($loan_all_setting_data['disable_tabs_icon']) ? $loan_
 
                             <label for="loan_amt" class="loan-text"><?php esc_html_e('Loan Amount', 'loan-calculator-wp'); ?> <i class="fa fa-info-circle" aria-hidden="true" tabindex="1"></i><span class="text-tooltip-disp"><?php esc_html_e($loan_amount_tooltip, 'loan-calculator-wp'); ?></span></label>
 
-                            <div class="loan-text-dis">
+                            <div class="loan-text-dis loan-amount">
                                 <span class="extra-info"><?php echo $currency_symbols; ?></span>
                                 <input type="text" name="loan_amount" id="loan_amount" value="" tabindex="2" oninput="validateInputLoanRate(this)" onkeydown="return onlyNos(event,'loan_amount')" />
                             </div>
@@ -214,7 +212,7 @@ $disable_tabs_icon = isset($loan_all_setting_data['disable_tabs_icon']) ? $loan_
                         </div>
                         <div class="first-row-sub-child">
                             <label for="loan_terms" class="loan-text"><?php esc_html_e('No. of Payments', 'loan-calculator-wp'); ?><i class="fa fa-info-circle" aria-hidden="true" tabindex="4"></i><span class="text-tooltip-disp"><?php esc_html_e($loan_terms_tooltip, 'loan-calculator-wp'); ?></span></label>
-                            <div class="loan-text-dis">
+                            <div class="loan-text-dis no-payment">
                                 <!-- <span class="extra-info"><?php esc_html_e('Months', 'loan-calculator-wp'); ?></span> -->
                                 <?php if (!empty($get_repayment_frequency)) {
                                     $rpfclass = (count($get_repayment_frequency) == 1 ? 'single-val-option' : '');
@@ -300,9 +298,10 @@ $disable_tabs_icon = isset($loan_all_setting_data['disable_tabs_icon']) ? $loan_
                                     <div class="loan-text-dis">
                                         <span class="extra-info"><?php echo $currency_symbols; ?></span>
                                         <input type="text" name="ballon_amounts" id="ballon_amounts" value="" tabindex="11" onkeydown="return onlyNos(event,'ballon_amounts')" readonly />
-
-                                        <input type="text" name="ballon_amounts_per" id="ballon_amounts_per" value="" tabindex="12" oninput="validateInputBallon(this)" onkeydown="return onlyNos(event,'ballon_amounts_per')">
-                                        <span id="ballon_amounts_per_dis" min="0" max="<?php esc_attr_e($ballon_per); ?>" class="rate_disp"></span>
+                                        <span class="relative ballon_items">
+                                            <input type="text" name="ballon_amounts_per" id="ballon_amounts_per" value="" tabindex="12" maxlength="5" onkeydown="return onlyNos(event,'ballon_amounts_per')">
+                                            <span id="ballon_amounts_per_dis" min="0" max="<?php esc_attr_e($ballon_per); ?>" class="rate_disp"></span>
+                                        </span>
                                     </div>
                                     <input type="range" min="0" value="<?php esc_attr_e($ballon_per); ?>" class="slider" id="ballon_amount_range" tabindex="13" step="1">
                                 </div>
@@ -315,7 +314,6 @@ $disable_tabs_icon = isset($loan_all_setting_data['disable_tabs_icon']) ? $loan_
                     </div>
                 </div>
             </div>
-            <br>
             <?php
             $full_width_cls = '';
             if ($enable_repayment_chart != 1 && $enable_video_tab != 1 && $enable_loan_mortisation_tab != 1) {

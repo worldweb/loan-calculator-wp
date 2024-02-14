@@ -92,6 +92,7 @@ function ww_loan_get_currencies()
 					'FJD' => __('Fijian dollar', 'loan-calculator-wp'),
 					'FKP' => __('Falkland Islands pound', 'loan-calculator-wp'),
 					'GBP' => __('Pound sterling', 'loan-calculator-wp'),
+					'GBP' => __('United Kingdom (UK) pound', 'loan-calculator-wp'),
 					'GEL' => __('Georgian lari', 'loan-calculator-wp'),
 					'GGP' => __('Guernsey pound', 'loan-calculator-wp'),
 					'GHS' => __('Ghana cedi', 'loan-calculator-wp'),

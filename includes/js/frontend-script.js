@@ -66,7 +66,7 @@ jQuery(document).ready(function ($) {
 				loan_terms_month = loan_terms;
 			}
 
-			document.getElementById("ballon_amount_range").max = setting_data.default_balloon_amount;
+			document.getElementById("ballon_amount_range").max = 80;
 
 			// if(loan_terms > 36 ){
 			// 	if(ballon_amounts_per >20 ){
@@ -966,7 +966,7 @@ jQuery(document).ready(function ($) {
 				loan_terms_month = loan_terms;
 			}
 
-			document.getElementById("ballon_amount_range").max = setting_data.default_balloon_amount;
+			document.getElementById("ballon_amount_range").max = 80;
 
 			var payment_type = jQuery("#payment_type").val();
 			var loan_advance_interest = 0;
@@ -1632,41 +1632,6 @@ jQuery(document).ready(function ($) {
 
 			loan_calculation_process();
 		});
-
-		// jQuery("#ballon_amounts_per").blur(function () {
-		// 	var currency_symbol = setting_data.currency_symbols;
-		// 	jQuery("#ballon_amount_range").val(jQuery("#ballon_amounts_per").val().replaceAll("%", ""));
-		// 	var loan_amount = jQuery("#loan_amount").val().replaceAll(currency_symbol, "");
-		// 	loan_amount = loan_amount.replaceAll(",", "");
-		// 	var ballon_amounts_per = jQuery("#ballon_amounts_per").val().replaceAll("%", "");
-
-		// 	if (setting_data.remove_decimal_point == 1) {
-		// 		var ballon_amounts = parseInt(parseInt(loan_amount) * parseInt(ballon_amounts_per)) / 100;
-		// 	} else {
-		// 		var ballon_amounts = parseFloat(parseFloat(loan_amount) * parseFloat(ballon_amounts_per)) / 100;
-		// 	}
-
-		// 	var ballon_amount_range = document.getElementById("ballon_amount_range")
-		// 	if (parseFloat(ballon_amount_range.value) == 0 || parseInt(ballon_amount_range.value) == 0) {
-		// 		document.getElementById("ballon_amounts").value = 0 + "%"
-		// 		document.getElementById("ballon_amounts_per").value = 0 + "%"
-		// 		document.getElementById("ballon_amounts_per_dis").text = 0 + "%"
-		// 	}
-
-		// 	if (ballon_amounts_per == "" || ballon_amounts_per == ".") {
-		// 		jQuery("#ballon_amounts_per").val(0 + '%');
-		// 		jQuery("#ballon_amount_range").val(0);
-		// 		ballon_amounts_per = 0;
-		// 	}
-
-		// 	jQuery("#ballon_amounts").val(ballon_amounts);
-		// 	jQuery("#bill_ballon_amt").html(ballon_amounts);
-		// 	jQuery("#interest_rate_range_dis").html(jQuery("#interest_rates").val() + "% p.a.");
-		// 	jQuery("#ballon_amounts_per_dis").html(ballon_amounts_per + "%");
-		// 	console.log(ballon_amounts_per);
-		// 	loan_calculation_process();
-		// });
-
 
 		jQuery("#ballon_amounts_per").blur(function () {
 			var currency_symbol = setting_data.currency_symbols;

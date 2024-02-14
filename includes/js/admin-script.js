@@ -1,5 +1,6 @@
 'use strict';
 
+
 jQuery(document).ready(function (jQuery) {
 
 	jQuery(document).on('click', '#calculation_fee_setting_enable', function () {
@@ -191,7 +192,7 @@ function onlyNos(evt, txt_name) {
 		return false;
 	}
 
-	if (keyCode == 67 || keyCode == 86 || keyCode == 88 || keyCode == 65) {
+	if (keyCode == 67 || keyCode == 86 || keyCode == 88 || keyCode == 65 || keyCode==38 || keyCode == 40) {
 		return;
 	}
 
