@@ -32,7 +32,7 @@ if (!class_exists('WW_Loan_Calculator_Script')) {
 				true
 			);
 
-			wp_enqueue_script('post_type_admin_js', WW_LOAN_CALCULATOR_URL . 'includes/js/post_type_admin.js', array(), WW_LOAN_CALCULATOR_VERSION, true);
+			wp_enqueue_script('post_type_admin_js', WW_LOAN_CALCULATOR_URL . 'includes/js/post_type_admin.js', array('jquery'), WW_LOAN_CALCULATOR_VERSION, true);
 			WW_LOAN_CALCULATOR_URL . 'includes/js/post_type_admin.js';
 
 			wp_enqueue_script('fstdropdown', WW_LOAN_CALCULATOR_URL . 'includes/js/fstdropdown.js', array('jquery'), WW_LOAN_CALCULATOR_VERSION, true);
