@@ -115,10 +115,10 @@ $enable_video_tab = isset($loan_all_setting_data['enable_video_tab']) ? $loan_al
 $enable_loan_mortisation_tab = isset($loan_all_setting_data['enable_loan_mortisation_tab']) ? $loan_all_setting_data['enable_loan_mortisation_tab'] : "";
 $print_option_enable = isset($loan_all_setting_data['print_option_enable']) ? $loan_all_setting_data['print_option_enable'] : "";
 $print_option_heading = isset($loan_all_setting_data['print_option_heading']) ? $loan_all_setting_data['print_option_heading'] : "";
-$ww_loan_currency = isset($loan_all_setting_data['ww_loan_currency']) ? $loan_all_setting_data['ww_loan_currency'] : "";
 
 $ww_loan_currency = isset($loan_all_setting_data['ww_loan_currency']) ? $loan_all_setting_data['ww_loan_currency'] : "";
-$currency_symbols = ww_loan_get_currency_symbol( $ww_loan_currency );
+$currency_symbols = ww_loan_get_currency_symbol( $ww_loan_currency);
+
 
 /* END : Tab Enable Settings */
 
@@ -277,7 +277,7 @@ $disable_tabs_icon = isset($loan_all_setting_data['disable_tabs_icon']) ? $loan_
                                                         <option value="Monthly" selected>Monthly</option>
                                                     </select>
                                                 <?php } ?>
-
+                                                <span class="select-arrow-main"><span class="select-arrow-wrap">❮</span></span>
                                                 <input type="hidden" name="default_value" value="<?php esc_attr_e($loan_term, 'loan-calculator-wp'); ?>">
                                                 <input type="hidden" name="min_value" value="<?php esc_attr_e($loan_term_min_value, 'loan-calculator-wp'); ?>">
                                                 <input type="hidden" name="max_value" value="<?php esc_attr_e($loan_term_max_value, 'loan-calculator-wp'); ?>">
