@@ -117,6 +117,7 @@ $print_option_enable = isset($loan_all_setting_data['print_option_enable']) ? $l
 $print_option_heading = isset($loan_all_setting_data['print_option_heading']) ? $loan_all_setting_data['print_option_heading'] : "";
 
 $ww_loan_currency = isset($loan_all_setting_data['ww_loan_currency']) ? $loan_all_setting_data['ww_loan_currency'] : "";
+$currency_symbols = ww_loan_get_currency_symbol($ww_loan_currency);
 
 /* END : Tab Enable Settings */
 
@@ -144,6 +145,7 @@ $disable_tabs_icon = isset($loan_all_setting_data['disable_tabs_icon']) ? $loan_
 /* END : NEW SETTING ADDED */
 
 ?>
+
 <div class="wp-loan-calculator-main">
     <style type="text/css">
         :root {
@@ -205,7 +207,7 @@ $disable_tabs_icon = isset($loan_all_setting_data['disable_tabs_icon']) ? $loan_
                             <label for="loan_amt" class="loan-text"><?php esc_html_e('Loan Amount', 'loan-calculator-wp'); ?> <i class="fa fa-info-circle" aria-hidden="true" tabindex="1"></i><span class="text-tooltip-disp"><?php esc_html_e($loan_amount_tooltip, 'loan-calculator-wp'); ?></span></label>
 
                             <div class="loan-text-dis loan-amount">
-                                <span class="extra-info"><?php echo $ww_loan_currency; ?></span>
+                                <span class="extra-info"><?php echo $currency_symbols; ?></span>
                                 <input type="text" name="loan_amount" id="loan_amount" value="" tabindex="2" oninput="validateInputLoanRate(this)" onkeydown="return onlyNos(event,'loan_amount')" />
                             </div>
                             <input type="range" min="<?php esc_attr_e($loan_amount_min_value, 'loan-calculator-wp'); ?>" max="<?php esc_attr_e($loan_amount_max_value, 'loan-calculator-wp'); ?>" value="<?php esc_attr_e($loan_amount, 'loan-calculator-wp'); ?>" class="slider" id="loan_amount_range" tabindex="3" step="1000">
@@ -296,7 +298,7 @@ $disable_tabs_icon = isset($loan_all_setting_data['disable_tabs_icon']) ? $loan_
                                 <div class="second-row-sub-child">
                                     <label for="loan_amt" class="loan-text"><?php esc_html_e('Balloon Amount', 'loan-calculator-wp'); ?><i class="fa fa-info-circle" aria-hidden="true" tabindex="8"></i><span class="text-tooltip-disp"><?php esc_attr_e($balloon_amount_tooltip, 'loan-calculator-wp'); ?></span></label>
                                     <div class="loan-text-dis">
-                                        <span class="extra-info"><?php echo $ww_loan_currency; ?></span>
+                                        <span class="extra-info"><?php echo $currency_symbols; ?></span>
                                         <input type="text" name="ballon_amounts" id="ballon_amounts" value="" tabindex="11" onkeydown="return onlyNos(event,'ballon_amounts')" readonly />
                                         <span class="relative ballon_items">
                                             <input type="text" name="ballon_amounts_per" id="ballon_amounts_per" value="" tabindex="12" maxlength="5" onkeydown="return onlyNos(event,'ballon_amounts_per')">
@@ -421,7 +423,7 @@ $disable_tabs_icon = isset($loan_all_setting_data['disable_tabs_icon']) ? $loan_
 
                             </div>
                             <div class="loan-cal-desc-val">
-                                <label><span><small><?php echo esc_html($ww_loan_currency); ?></small><span id="per_month_amount"></span></span> <strong id="loan_amount_term_label"></strong><span id="loan_amount_year"></span> </span></label>
+                                <label><span><small><?php echo esc_html($currency_symbols); ?></small><span id="per_month_amount"></span></span> <strong id="loan_amount_term_label"></strong><span id="loan_amount_year"></span> </span></label>
                             </div>
                         </div>
                         <div class="loan-cal-desc">
@@ -429,7 +431,7 @@ $disable_tabs_icon = isset($loan_all_setting_data['disable_tabs_icon']) ? $loan_
                                 <label><strong><?php esc_html_e($total_interests_payable_heading, 'loan-calculator-wp'); ?></strong></label>
                             </div>
                             <div class="loan-cal-desc-val">
-                                <label><small><?php echo esc_html($ww_loan_currency); ?></small><span id="total_interests_amt"></span> <?php esc_html_e('over', 'loan-calculator-wp'); ?> <span id="total_interests_years"></span> </label>
+                                <label><small><?php echo esc_html($currency_symbols); ?></small><span id="total_interests_amt"></span> <?php esc_html_e('over', 'loan-calculator-wp'); ?> <span id="total_interests_years"></span> </label>
                             </div>
 
                         </div>
@@ -438,7 +440,7 @@ $disable_tabs_icon = isset($loan_all_setting_data['disable_tabs_icon']) ? $loan_
                                 <label><strong><?php esc_html_e($ballon_amt_heading, 'loan-calculator-wp'); ?> (<span id="bill_ballon_per"><?php esc_attr_e(number_format($ballon_per, 2), 'loan-calculator-wp'); ?></span>%)</strong></label>
                             </div>
                             <div class="loan-cal-desc-val">
-                                <label><small><?php echo esc_html($ww_loan_currency); ?></small><strong><span id="bill_ballon_amt"><?php esc_attr_e(number_format(($loan_amount * $ballon_per / 100), 2), 'loan-calculator-wp'); ?></span></strong></label>
+                                <label><small><?php echo esc_html($currency_symbols); ?></small><strong><span id="bill_ballon_amt"><?php esc_attr_e(number_format(($loan_amount * $ballon_per / 100), 2), 'loan-calculator-wp'); ?></span></strong></label>
                             </div>
 
                         </div>
@@ -451,19 +453,19 @@ $disable_tabs_icon = isset($loan_all_setting_data['disable_tabs_icon']) ? $loan_
                         <div class="loan-detail-fee-desc">
                             <div class="loan-detail-fee-block">
                                 <h5><?php esc_html_e($application_fee_heading, 'loan-calculator-wp'); ?></h5>
-                                <p><small><?php echo esc_html($ww_loan_currency); ?></small><?php esc_html_e($application_fee, 'loan-calculator-wp'); ?></p>
+                                <p><small><?php echo esc_html($currency_symbols); ?></small><?php esc_html_e($application_fee, 'loan-calculator-wp'); ?></p>
                             </div>
                             <div class="loan-detail-fee-block">
                                 <h5><?php esc_html_e($monthly_fee_heading, 'loan-calculator-wp'); ?></h5>
-                                <p><small><?php echo esc_html($ww_loan_currency); ?></small><?php esc_html_e($monthly_rate, 'loan-calculator-wp'); ?></p>
+                                <p><small><?php echo esc_html($currency_symbols); ?></small><?php esc_html_e($monthly_rate, 'loan-calculator-wp'); ?></p>
                             </div>
                             <div class="loan-detail-fee-block">
                                 <h5><?php esc_html_e($total_regular_fees, 'loan-calculator-wp'); ?></h5>
-                                <p><small><?php echo esc_html($ww_loan_currency); ?></small><span id="total_regular_fee_amt"><?php esc_html_e(round($total_regular_fees_amt, 2), 'loan-calculator-wp'); ?></span></p>
+                                <p><small><?php echo esc_html($currency_symbols); ?></small><span id="total_regular_fee_amt"><?php esc_html_e(round($total_regular_fees_amt, 2), 'loan-calculator-wp'); ?></span></p>
                             </div>
                             <div class="loan-detail-fee-block">
                                 <h5><?php esc_html_e($total_fees, 'loan-calculator-wp'); ?></h5>
-                                <p><small><?php echo esc_html($ww_loan_currency); ?></small><span id="total_fee_amt"><?php esc_html_e($total_fees_amt, 'loan-calculator-wp'); ?></span></p>
+                                <p><small><?php echo esc_html($currency_symbols); ?></small><span id="total_fee_amt"><?php esc_html_e($total_fees_amt, 'loan-calculator-wp'); ?></span></p>
                             </div>
                         </div>
                     <?php } ?>

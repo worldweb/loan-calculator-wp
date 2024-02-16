@@ -31,7 +31,7 @@ if (!class_exists('WW_Loan_Calculator_Script')) {
 				WW_LOAN_CALCULATOR_VERSION,
 				true
 			);
-
+			
 			wp_enqueue_script('post_type_admin_js', WW_LOAN_CALCULATOR_URL . 'includes/js/post_type_admin.js', array('jquery'), WW_LOAN_CALCULATOR_VERSION, true);
 			WW_LOAN_CALCULATOR_URL . 'includes/js/post_type_admin.js';
 
@@ -77,6 +77,7 @@ if (!class_exists('WW_Loan_Calculator_Script')) {
 			wp_register_style('loan-calculator-frontend-style', WW_LOAN_CALCULATOR_URL . 'includes/css/frontend-style.css', array(), WW_LOAN_CALCULATOR_VERSION);
 			wp_register_script('loan-calculator-frontend-script', WW_LOAN_CALCULATOR_URL . 'includes/js/frontend-script.js', array('jquery'), WW_LOAN_CALCULATOR_VERSION, true);
 			wp_register_script('loan-calculator-frequency-payment', WW_LOAN_CALCULATOR_URL . 'includes/js/frequency_payment.js', array('jquery'), WW_LOAN_CALCULATOR_VERSION, true);
+
 		}
 
 		/**
