@@ -140,7 +140,7 @@ jQuery(document).ready(function ($) {
 			} else {
 				var value = (loan_amount_range.value - loan_amount_range.min) / (loan_amount_range.max - loan_amount_range.min) * 100;
 			}
-			loan_amount_range.style.background = 'linear-gradient(to right, #555555 0%, #555555 ' + value + '%, #fff ' + value + '%,  #c9a208 100%)'
+			loan_amount_range.style.background = 'linear-gradient(to right, #555555 0%, #555555 ' + value + '%, #fff ' + value + '%, '+ setting_data.back_ground_color +' 100%)'
 
 			var interest_rate_range = document.getElementById("interest_rate_range");
 			if (setting_data.remove_decimal_point == 1) {
@@ -148,7 +148,7 @@ jQuery(document).ready(function ($) {
 			} else {
 				var value = (interest_rate_range.value - interest_rate_range.min) / (interest_rate_range.max - interest_rate_range.min) * 100;
 			}
-			interest_rate_range.style.background = 'linear-gradient(to right, #555555 0%, #555555 ' + value + '%, #fff ' + value + '%,  #c9a208 100%)'
+			interest_rate_range.style.background = 'linear-gradient(to right, #555555 0%, #555555 ' + value + '%, #fff ' + value + '%, '+ setting_data.back_ground_color +' 100%)'
 
 			var loan_terms_range = document.getElementById("loan_terms_range");
 			if (setting_data.remove_decimal_point == 1) {
@@ -156,17 +156,17 @@ jQuery(document).ready(function ($) {
 			} else {
 				var value = (loan_terms_range.value - loan_terms_range.min) / (loan_terms_range.max - loan_terms_range.min) * 100;
 			}
-			loan_terms_range.style.background = 'linear-gradient(to right, #555555 0%, #555555 ' + value + '%, #fff ' + value + '%,  #c9a208 100%)'
+			loan_terms_range.style.background = 'linear-gradient(to right, #555555 0%, #555555 ' + value + '%, #fff ' + value + '%, '+ setting_data.back_ground_color +' 100%)'
 
 			var ballon_amount_range = document.getElementById("ballon_amount_range");
 			if (setting_data.remove_decimal_point == 1) {
 				var value = parseInt((ballon_amount_range.value - ballon_amount_range.min) / (ballon_amount_range.max - ballon_amount_range.min) * 100);
-				ballon_amount_range.style.background = 'linear-gradient(to right, #555555 0%, #555555 ' + value + '%, #fff ' + value + '%,  #c9a208 100%)'
+				ballon_amount_range.style.background = 'linear-gradient(to right, #555555 0%, #555555 ' + value + '%, #fff ' + value + '%, '+ setting_data.back_ground_color +' 100%)'
 				loan_terms = parseInt(loan_terms / 12);
 				loan_terms = parseInt(loan_terms);
 			} else {
 				var value = (ballon_amount_range.value - ballon_amount_range.min) / (ballon_amount_range.max - ballon_amount_range.min) * 100
-				ballon_amount_range.style.background = 'linear-gradient(to right, #555555 0%, #555555 ' + value + '%, #fff ' + value + '%,  #c9a208 100%)'
+				ballon_amount_range.style.background = 'linear-gradient(to right, #555555 0%, #555555 ' + value + '%, #fff ' + value + '%, '+ setting_data.back_ground_color +' 100%)'
 				loan_terms = parseFloat(loan_terms / 12).toFixed(2);
 				loan_terms = parseFloat(loan_terms);
 			}
@@ -780,7 +780,7 @@ jQuery(document).ready(function ($) {
 		} else {
 			var value = parseFloat((loan_amount_range.value - loan_amount_range.min) / (loan_amount_range.max - loan_amount_range.min) * 100);
 		}
-		loan_amount_range.style.background = 'linear-gradient(to right, #555555 0%, #555555 ' + value + '%, #fff ' + value + '%, white 100%)'
+		loan_amount_range.style.background = 'linear-gradient(to right, #555555 0%, #555555 ' + value + '%, #fff ' + value + '%, '+ setting_data.back_ground_color +' 100%)'
 
 		// Update the current slider value (each time you drag the slider handle)
 		loan_amount_range.oninput = function () {
@@ -795,7 +795,7 @@ jQuery(document).ready(function ($) {
 		} else {
 			var value = parseFloat((loan_terms_range.value - loan_terms_range.min) / (loan_terms_range.max - loan_terms_range.min) * 100);
 		}
-		loan_terms_range.style.background = 'linear-gradient(to right, #555555 0%, #555555 ' + value + '%, #fff ' + value + '%, white 100%)'
+		loan_terms_range.style.background = 'linear-gradient(to right, #555555 0%, #555555 ' + value + '%, #fff ' + value + '%, '+ setting_data.back_ground_color +' 100%)'
 
 		// Update the current slider value (each time you drag the slider handle)
 		loan_terms_range.oninput = function () {
@@ -805,7 +805,7 @@ jQuery(document).ready(function ($) {
 			} else {
 				var value = parseFloat((this.value - this.min) / (this.max - this.min) * 100);
 			}
-			this.style.background = 'linear-gradient(to right, #555555 0%, #555555 ' + value + '%, #fff ' + value + '%, white 100%)'
+			this.style.background = 'linear-gradient(to right, #555555 0%, #555555 ' + value + '%, #fff ' + value + '%, '+ setting_data.back_ground_color +' 100%)'
 			loan_calculation_process();
 		}
 
@@ -823,7 +823,7 @@ jQuery(document).ready(function ($) {
 		} else {
 			var value = parseFloat((interest_rate_range.value - interest_rate_range.min) / (interest_rate_range.max - interest_rate_range.min) * 100);
 		}
-		interest_rate_range.style.background = 'linear-gradient(to right, #555555 0%, #555555 ' + value + '%, #fff ' + value + '%, white 100%)'
+		interest_rate_range.style.background = 'linear-gradient(to right, #555555 0%, #555555 ' + value + '%, #fff ' + value + '%, '+ setting_data.back_ground_color +' 100%)'
 		// Update the current slider value (each time you drag the slider handle)
 		interest_rate_range.oninput = function () {
 
@@ -835,7 +835,7 @@ jQuery(document).ready(function ($) {
 			} else {
 				var value = parseFloat((this.value - this.min) / (this.max - this.min) * 100);
 			}
-			this.style.background = 'linear-gradient(to right, #555555 0%, #555555 ' + value + '%, #fff ' + value + '%, white 100%)'
+			this.style.background = 'linear-gradient(to right, #555555 0%, #555555 ' + value + '%, #fff ' + value + '%, '+ setting_data.back_ground_color +' 100%)'
 			loan_calculation_process();
 		}
 
@@ -847,7 +847,7 @@ jQuery(document).ready(function ($) {
 		} else {
 			var value = parseFloat((ballon_amount_range.value - ballon_amount_range.min) / (ballon_amount_range.max - ballon_amount_range.min) * 100);
 		}
-		ballon_amount_range.style.background = 'linear-gradient(to right, #555555 0%, #555555 ' + value + '%, #fff ' + value + '%, white 100%)'
+		ballon_amount_range.style.background = 'linear-gradient(to right, #555555 0%, #555555 ' + value + '%, #fff ' + value + '%, '+ setting_data.back_ground_color +' 100%)'
 
 		// Update the current slider value (each time you drag the slider handle)
 		ballon_amount_range.oninput = function () {
@@ -858,7 +858,7 @@ jQuery(document).ready(function ($) {
 			} else {
 				var value = parseFloat((this.value - this.min) / (this.max - this.min) * 100);
 			}
-			this.style.background = 'linear-gradient(to right, #555555 0%, #555555 ' + value + '%, #fff ' + value + '%, white 100%)'
+			this.style.background = 'linear-gradient(to right, #555555 0%, #555555 ' + value + '%, #fff ' + value + '%, '+ setting_data.back_ground_color +' 100%)'
 			loan_calculation_process();
 		}
 
@@ -904,7 +904,7 @@ jQuery(document).ready(function ($) {
 			var loan_terms_range = document.getElementById("loan_terms_range");
 			var value1 = (numbers_of_payments.nop_default_value - numbers_of_payments.nop_min_value) / (numbers_of_payments.nop_max_value - numbers_of_payments.nop_min_value) * 100;
 
-			loan_terms_range.style.background = 'linear-gradient(to right, #555555 0%, #555555 ' + value1 + '%, #fff ' + value1 + '%,  #c9a208 100%)'
+			loan_terms_range.style.background = 'linear-gradient(to right, #555555 0%, #555555 ' + value1 + '%, #fff ' + value1 + '%, '+ setting_data.back_ground_color +' 100%)'
 
 			/*========End 6-7-2023=========*/
 			loan_calculation_process();
@@ -1025,7 +1025,8 @@ jQuery(document).ready(function ($) {
 			} else {
 				var value = (loan_amount_range.value - loan_amount_range.min) / (loan_amount_range.max - loan_amount_range.min) * 100;
 			}
-			loan_amount_range.style.background = 'linear-gradient(to right, #555555 0%, #555555 ' + value + '%, #fff ' + value + '%,  #c9a208 100%)'
+			loan_amount_range.style.background = 'linear-gradient(to right, #555555 0%, #555555 ' + value + '%, #fff ' + value + '%, '+ setting_data.back_ground_color +' 100%)'
+			
 
 			var interest_rate_range = document.getElementById("interest_rate_range");
 			if (setting_data.remove_decimal_point == 1) {
@@ -1033,7 +1034,7 @@ jQuery(document).ready(function ($) {
 			} else {
 				var value = (interest_rate_range.value - interest_rate_range.min) / (interest_rate_range.max - interest_rate_range.min) * 100;
 			}
-			interest_rate_range.style.background = 'linear-gradient(to right, #555555 0%, #555555 ' + value + '%, #fff ' + value + '%,  #c9a208 100%)'
+			interest_rate_range.style.background = 'linear-gradient(to right, #555555 0%, #555555 ' + value + '%, #fff ' + value + '%, '+ setting_data.back_ground_color +' 100%)'
 
 			var loan_terms_range = document.getElementById("loan_terms_range");
 			if (setting_data.remove_decimal_point == 1) {
@@ -1041,17 +1042,17 @@ jQuery(document).ready(function ($) {
 			} else {
 				var value = (loan_terms_range.value - loan_terms_range.min) / (loan_terms_range.max - loan_terms_range.min) * 100;
 			}
-			loan_terms_range.style.background = 'linear-gradient(to right, #555555 0%, #555555 ' + value + '%, #fff ' + value + '%,  #c9a208 100%)'
+			loan_terms_range.style.background = 'linear-gradient(to right, #555555 0%, #555555 ' + value + '%, #fff ' + value + '%, '+ setting_data.back_ground_color +' 100%)'
 
 			var ballon_amount_range = document.getElementById("ballon_amount_range");
 			if (setting_data.remove_decimal_point == 1) {
 				var value = parseInt((ballon_amount_range.value - ballon_amount_range.min) / (ballon_amount_range.max - ballon_amount_range.min) * 100);
-				ballon_amount_range.style.background = 'linear-gradient(to right, #555555 0%, #555555 ' + value + '%, #fff ' + value + '%,  #c9a208 100%)'
+				ballon_amount_range.style.background = 'linear-gradient(to right, #555555 0%, #555555 ' + value + '%, #fff ' + value + '%, '+ setting_data.back_ground_color +' 100%)'
 				loan_terms = parseInt(loan_terms / 12);
 				loan_terms = parseInt(loan_terms);
 			} else {
 				var value = (ballon_amount_range.value - ballon_amount_range.min) / (ballon_amount_range.max - ballon_amount_range.min) * 100
-				ballon_amount_range.style.background = 'linear-gradient(to right, #555555 0%, #555555 ' + value + '%, #fff ' + value + '%,  #c9a208 100%)'
+				ballon_amount_range.style.background = 'linear-gradient(to right, #555555 0%, #555555 ' + value + '%, #fff ' + value + '%, '+ setting_data.back_ground_color +' 100%)'
 				loan_terms = parseFloat(loan_terms / 12).toFixed(2);
 				loan_terms = parseFloat(loan_terms);
 			}
@@ -1693,7 +1694,7 @@ jQuery(document).ready(function ($) {
 		} else {
 			var value = parseFloat((loan_amount_range.value - loan_amount_range.min) / (loan_amount_range.max - loan_amount_range.min) * 100);
 		}
-		loan_amount_range.style.background = 'linear-gradient(to right, #555555 0%, #555555 ' + value + '%, #fff ' + value + '%, white 100%)'
+		loan_amount_range.style.background = 'linear-gradient(to right, #555555 0%, #555555 ' + value + '%, #fff ' + value + '%, '+ setting_data.back_ground_color +' 100%)'
 
 		// Update the current slider value (each time you drag the slider handle)
 		loan_amount_range.oninput = function () {
