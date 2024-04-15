@@ -3,7 +3,7 @@
  * Plugin Name: Loan Calculator WP
  * Plugin URI: https://www.worldwebtechnology.com/
  * Description:  Advanced Loan Calculator for Home Loans, Personal Loans, and various other types of loans. Includes features like a repayment chart, amortization table, video tab, balloon payment option, and supports all currencies. Use the contact form shortcode for easy access.
- * Version: 1.2.3
+ * Version: 1.3.2
  * Author: World Web Technology
  * Author URI: https://www.worldwebtechnology.com/
  * Text Domain: loan-calculator-wp
@@ -24,7 +24,7 @@ if (!defined('ABSPATH')) exit;
  * @since 1.0.0
  */
 if (!defined('WW_LOAN_CALCULATOR_VERSION')) {
-    define('WW_LOAN_CALCULATOR_VERSION', '1.2.2'); //version of plugin
+    define('WW_LOAN_CALCULATOR_VERSION', '1.3.2'); //version of plugin
 }
 if (!defined('WW_LOAN_CALCULATOR_TEXT_DOMAIN')) { //check if variable is not defined previous then define it
     define('WW_LOAN_CALCULATOR_TEXT_DOMAIN', 'loan-calculator-wp'); //this is for multi language support in plugin
@@ -103,15 +103,15 @@ function ww_loan_calculator_register_activation()
         $loan_calculator_default_options['monthly_fee_heading'] = esc_html__('Monthly fee', 'loan-calculator-wp');
         $loan_calculator_default_options['total_regular_fees'] = esc_html__('Total regular fees', 'loan-calculator-wp');
         $loan_calculator_default_options['total_fees'] = esc_html__('Total fees', 'loan-calculator-wp');
-        $loan_calculator_default_options['back_ground_color'] = '#fad712';
+        $loan_calculator_default_options['back_ground_color'] = '#529150';
         $loan_calculator_default_options['hover_color'] = '#08e71f';
         $loan_calculator_default_options['selected_color'] = '#404245';
-        $loan_calculator_default_options['background_light_color'] = '#fff7d7';
+        $loan_calculator_default_options['background_light_color'] = '#D2D1D0';
         $loan_calculator_default_options['border_color'] = '#000000';
-        $loan_calculator_default_options['graph_color'] = '#b3b2b2';
-        $loan_calculator_default_options['graph_border_color'] = '#545454';
-        $loan_calculator_default_options['graph_color_sub'] = '#ead1d1';
-        $loan_calculator_default_options['graph_border_color_sub'] = '#aaa1a1';
+        $loan_calculator_default_options['graph_color'] = '#BBD8BB';
+        $loan_calculator_default_options['graph_border_color'] = '#529150';
+        $loan_calculator_default_options['graph_color_sub'] = '#529150';
+        $loan_calculator_default_options['graph_border_color_sub'] = '#fafafa';
         $loan_calculator_default_options['select_theme'] = 'default_theme';
         $loan_calculator_default_options['loan_amount'] = '10000';
         $loan_calculator_default_options['loan_amount_min_value'] = '1000';
@@ -128,6 +128,7 @@ function ww_loan_calculator_register_activation()
         $loan_calculator_default_options['regular_repayment_heading'] = esc_html__('Monthly Payment (incl fees)', 'loan-calculator-wp');
         $loan_calculator_default_options['per_month_heading'] = esc_html__('Per month for', 'loan-calculator-wp');
         $loan_calculator_default_options['years_heading'] = esc_html__('years', 'loan-calculator-wp');
+        $loan_calculator_default_options['repayment_frequency'] = array('Monthly', 'Quarterly','Yearly');
         $loan_calculator_default_options['total_interests_payable_heading'] = esc_html__('Total interest payable', 'loan-calculator-wp');
         $loan_calculator_default_options['over_heading'] = esc_html__('over', 'loan-calculator-wp');
         $loan_calculator_default_options['ballon_amt_heading'] = esc_html__('Balloon amount', 'loan-calculator-wp');
@@ -172,10 +173,10 @@ The results from this calculator should be used as an indication only. Results d
         $loan_calculator_default_options['calculation_fee_setting_enable'] = '0';
         $loan_calculator_default_options['delete_data_enable'] = '0';
         $loan_calculator_default_options['enable_repayment_chart'] = '1';
-        $loan_calculator_default_options['enable_video_tab'] = '0';
+        $loan_calculator_default_options['enable_video_tab'] = '1';
         $loan_calculator_default_options['enable_loan_mortisation_tab'] = '1';
         $loan_calculator_default_options['print_option_heading'] = esc_html__('Print', 'loan-calculator-wp');
-        $loan_calculator_default_options['disable_font_awesome'] = '1';
+        $loan_calculator_default_options['disable_font_awesome'] = '';
         $loan_calculator_default_options['ww_loan_currency'] = 'USD';
 
         //update loan calculator default option 

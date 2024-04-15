@@ -6,6 +6,7 @@
     margin: 0 auto;
 }
 
+
 .close {
     color: #aaaaaa;
     float: right;
@@ -127,10 +128,6 @@ select#repayment_freq:hover {
     .loan-new-theme-inner-block {
         display: flex;
         row-gap: 0px !important;
-    }
-
-    .container {
-        padding: 0px !important;
     }
 
     .loan-option-text-info .loan-detail-section .loan-detail-section-child:first-child {
@@ -2878,9 +2875,9 @@ div#tab-content1 {
     margin-top: 0;
 }
 
-div#tab-content3 {
+/* div#tab-content3 {
     overflow: auto;
-}
+} */
 
 div#tab-content2 {
     margin-top: 0;

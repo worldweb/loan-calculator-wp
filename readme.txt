@@ -4,15 +4,15 @@ Author:            World Web Technology
 Contributors:      worldweb
 Plugin Name:       Loan Calculator WP
 Plugin URI:        https://wordpress.org/plugins/loan-calculator-wp
-Tags:              loan calculator, calculator, EMI calculator, home loan, personal loan, education loan, business loan, bank loan, car loan
+Tags:              loan calculator, home loan calculator, car loan calculator, personal loan calculator, mortgage loan calculator
 Author URI:        https://worldwebtechnology.com
 Requires at least: 5.8
 Requires PHP:      7.2
-Tested up to:      6.4
-Stable tag:        1.2.2
+Tested up to:      6.5.2
+Stable tag:        1.3.2
 License:           GPLv2 or later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
-Version:           1.2.3
+Version:           1.3.2
 
 Loan / EMI Calculator for Home Loan and Personal Loan
 
@@ -100,15 +100,22 @@ The plugin provides an option for a contact form so that users can use the conta
 
 == Changelog ==
 
-= 1.2.3 (Dec 21, 2023) =
-- Added Change theme option
-- Added change font-family option with search functionality
-- Added search functionality in existing currency option
+1.3.2 (Apr 15, 2024)
+* Tested the plugin in Playground and launched blueprint.json.
+
+1.3.1 (Apr 15, 2024)
+* Resolved an issue with the default theme Twenty Twenty Four. 
+
+1.3.0 (Apr 02, 2024)
+* Added Change theme option
+* Added change font-family option with search functionality
+* Added search functionality in existing currency option
+* New theme added for the frontend calculator output.
 
 = 1.2.2 (Nov 27, 2023) =
-- Added option to manage "Payment Mode" default and Hide from the front. 
-- Calculation issues and default text changes. 
-- Added backend setting description for the fields. 
+* Added option to manage "Payment Mode" default and Hide from the front. 
+* Calculation issues and default text changes. 
+* Added backend setting description for the fields. 
 
 = 1.2.1 (Nov 20, 2023) =
 * Verified and ensured compatibility with WordPress version 6.4

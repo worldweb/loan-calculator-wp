@@ -380,6 +380,12 @@ jQuery(document).ready(function ($) {
 			}
 
 			jQuery("#loan_table_data").html(table_data);
+			
+			if (loan_terms_month > 12) {
+				jQuery('#tab-content3').css({'overflow-y': 'auto', 'max-height': '463px','margin-bottom': '15px'});
+			}
+
+			
 			/* END : Loan Table Section */
 
 			/* START : Loan Chart Section */
@@ -1270,8 +1276,14 @@ jQuery(document).ready(function ($) {
 				table_data += '</tr>';
 
 			}
-
+			
 			jQuery("#loan_table_data").html(table_data);
+
+			if (loan_terms_month > 12) {
+				jQuery('#tab-content3').css({'overflow-y': 'auto', 'max-height': '463px','margin-bottom': '15px'})
+			}
+
+
 			/* END : Loan Table Section */
 
 			/* START : Loan Chart Section */

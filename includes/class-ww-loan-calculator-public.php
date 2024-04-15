@@ -25,6 +25,7 @@ if (!class_exists('WW_Loan_Calculator_Public')) {
 		 */
 		public function ww_loan_calculator_shortcode_fn($atts, $content = null)
 		{
+			global $setting_data;
 
 			// Default attributes
 			$atts = shortcode_atts(
