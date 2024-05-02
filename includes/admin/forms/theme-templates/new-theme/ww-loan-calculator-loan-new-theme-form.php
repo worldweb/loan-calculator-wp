@@ -149,7 +149,7 @@ $disable_tabs_icon = isset($loan_all_setting_data['disable_tabs_icon']) ? $loan_
 /* END : NEW SETTING ADDED */
 
 ?>
-<div class="wp-loan-calculator-main-new wp-loan-mobile-view">
+<div class="wp-loan-calculator-main-new wp-loan-mobile-view" style="<?php esc_attr_e($font_family_new_theme, 'loan-calculator-wp') ?>">
     <style type="text/css">
         :root {
             --calc-font-family-new-theme: <?php echo esc_html($font_family_new_theme); ?>;
@@ -164,7 +164,7 @@ $disable_tabs_icon = isset($loan_all_setting_data['disable_tabs_icon']) ? $loan_
         }
     </style>
 
-    <section class="heading-section" style="<?php esc_attr_e($font_family_new_theme, 'loan-calculator-wp') ?>">
+    <section class="heading-section" >
         <div class="menu-sec-cls">
             <ul class="heading-sec-link">
                 <?php
@@ -564,9 +564,9 @@ $disable_tabs_icon = isset($loan_all_setting_data['disable_tabs_icon']) ? $loan_
                             <?php if ($disable_contactus_section == "") { ?>
                                 <div class="contact-us-section-new-theme">
                                     <?php if ($contact_type == "popup") { ?>
-                                        <button class="contact-book-btn"><?php esc_html_e($contact_popup_button_heading, 'loan-calculator-wp'); ?></button>
+                                        <button style="<?php esc_attr_e($font_family_new_theme, 'loan-calculator-wp') ?>" class="contact-book-btn"><?php esc_html_e($contact_popup_button_heading, 'loan-calculator-wp'); ?></button>
                                     <?php } else {  ?>
-                                        <a href="<?php echo $contact_url; ?>" target="_blank"><?php esc_html_e($contact_popup_button_heading, 'loan-calculator-wp'); ?></a>
+                                        <a style="<?php esc_attr_e($font_family_new_theme, 'loan-calculator-wp') ?>" href="<?php echo $contact_url; ?>" target="_blank"><?php esc_html_e($contact_popup_button_heading, 'loan-calculator-wp'); ?></a>
                                     <?php } ?>
                                 </div>
                             <?php } ?>

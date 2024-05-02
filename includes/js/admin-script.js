@@ -129,19 +129,19 @@ jQuery(document).ready(function (jQuery) {
 
 
 
-	jQuery('#disable_ballon_amt').on('change', function () {
+	// jQuery('#disable_ballon_amt').on('change', function () {
 
-		if (this.checked) {
+	// 	if (this.checked) {
 
-			jQuery('#ballon_amt_per_text_section').hide(); //checked
+	// 		jQuery('#ballon_amt_per_text_section').hide(); //checked
 
-		} else {
+	// 	} else {
 
-			jQuery('#ballon_amt_per_text_section').show(); //checked
+	// 		jQuery('#ballon_amt_per_text_section').show(); //checked
 
-		}
+	// 	}
 
-	}).trigger('change');
+	// }).trigger('change');
 
 
 

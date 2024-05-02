@@ -78,6 +78,7 @@ if (!class_exists('WW_Loan_Calculator_Script')) {
 			wp_register_style('loan-calculator-new-theme-style', WW_LOAN_CALCULATOR_URL . '/includes/admin/forms/theme-templates/new-theme/css/style.css', array(), WW_LOAN_CALCULATOR_VERSION);
 			wp_register_script('loan-calculator-print-script', WW_LOAN_CALCULATOR_URL . 'includes/js/jquery.print.js', array('jquery'), WW_LOAN_CALCULATOR_VERSION, true);
 			wp_register_style('loan-calculator-frontend-style', WW_LOAN_CALCULATOR_URL . 'includes/css/frontend-style.css', array(), WW_LOAN_CALCULATOR_VERSION);
+			wp_register_style('loan-calculator-frontend-style', WW_LOAN_CALCULATOR_URL . 'includes/css/frontend-style.css', array(), WW_LOAN_CALCULATOR_VERSION);
 			wp_register_script('loan-calculator-frontend-script', WW_LOAN_CALCULATOR_URL . 'includes/js/frontend-script.js', array('jquery'), WW_LOAN_CALCULATOR_VERSION, true);
 			wp_register_script('loan-calculator-frequency-payment', WW_LOAN_CALCULATOR_URL . 'includes/js/frequency_payment.js', array('jquery'), WW_LOAN_CALCULATOR_VERSION, true);
 

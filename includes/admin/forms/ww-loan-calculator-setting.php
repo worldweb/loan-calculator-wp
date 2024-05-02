@@ -4,346 +4,185 @@
 
 if (!defined('ABSPATH')) exit;
 
-
-
 /**
-
  * Settings Page
-
  *
-
  * Handle settings
-
  *
-
  * @package Loan Calculator
-
  * @since 1.0.0
-
  */
-
-
 
 // Get Loan Calculator Setting From Option Table.
 
 $loan_all_setting_data = get_option("ww_loan_option");
-
-
-
-$disable_ballon_amt = isset($loan_all_setting_data['disable_ballon_amt']) ? $loan_all_setting_data['disable_ballon_amt'] : "";
-
-
+ $disable_ballon_amt = isset($loan_all_setting_data['disable_ballon_amt']) ? $loan_all_setting_data['disable_ballon_amt'] : "";
 
 if ($disable_ballon_amt == 1) {
-
     $loan_all_setting_data['ballon_per'] = 0;
-
     update_option("ww_loan_option", $loan_all_setting_data);
-
     $loan_all_setting_data = get_option("ww_loan_option");
 }
 
-
-
 /* START : Fetch Selected Theme Setting */
-
 $select_theme = isset($loan_all_setting_data['select_theme']) ? $loan_all_setting_data['select_theme'] : "";
 
 /* END : Fetch Selected Theme Setting */
 
-
-
 /* START : Fetch Color Setting */
 
 $font_family_new_theme = isset($loan_all_setting_data['font_family_new_theme']) ?  ($loan_all_setting_data['font_family_new_theme']) : "";
-
-
-
 $back_ground_color = isset($loan_all_setting_data['back_ground_color']) ? $loan_all_setting_data['back_ground_color'] : "";
-
 $selected_color = isset($loan_all_setting_data['selected_color']) ? $loan_all_setting_data['selected_color'] : "";
-
 $background_light_color = isset($loan_all_setting_data['background_light_color']) ? $loan_all_setting_data['background_light_color'] : "";
-
 $border_color = isset($loan_all_setting_data['border_color']) ? $loan_all_setting_data['border_color'] : "";
-
 $graph_color = isset($loan_all_setting_data['graph_color']) ? $loan_all_setting_data['graph_color'] : "";
-
 $graph_color_sub = isset($loan_all_setting_data['graph_color_sub']) ? $loan_all_setting_data['graph_color_sub'] : "";
-
 $graph_border_color = isset($loan_all_setting_data['graph_border_color']) ? $loan_all_setting_data['graph_border_color'] : "";
-
 $graph_border_color_sub = isset($loan_all_setting_data['graph_border_color_sub']) ? $loan_all_setting_data['graph_border_color_sub'] : "";
 
-
-
 /* END : Fetch Color Setting */
-
-
 
 /* START : Amount Field Value Setting */
 
 $ballon_per = isset($loan_all_setting_data['ballon_per']) ? $loan_all_setting_data['ballon_per'] : "";
-
-
-
 $loan_term = isset($loan_all_setting_data['loan_term']) ? $loan_all_setting_data['loan_term'] : "";
-
 $loan_amount = isset($loan_all_setting_data['loan_amount']) ? $loan_all_setting_data['loan_amount'] : "";
-
 $loan_amount_min_value = isset($loan_all_setting_data['loan_amount_min_value']) ? $loan_all_setting_data['loan_amount_min_value'] : "";
-
 $loan_amount_max_value = isset($loan_all_setting_data['loan_amount_max_value']) ? $loan_all_setting_data['loan_amount_max_value'] : "";
-
-
-
 $loan_term_min_value = isset($loan_all_setting_data['loan_term_min_value']) ? $loan_all_setting_data['loan_term_min_value'] : "";
-
 $loan_term_max_value = isset($loan_all_setting_data['loan_term_max_value']) ? $loan_all_setting_data['loan_term_max_value'] : "";
-
 $interested_rate = isset($loan_all_setting_data['interested_rate']) ? $loan_all_setting_data['interested_rate'] : "";
-
 $interest_rate_min_value = isset($loan_all_setting_data['interest_rate_min_value']) ? $loan_all_setting_data['interest_rate_min_value'] : "";
-
 $interest_rate_max_value = isset($loan_all_setting_data['interest_rate_max_value']) ? $loan_all_setting_data['interest_rate_max_value'] : "";
-
-
-
 $monthly_rate = isset($loan_all_setting_data['monthly_rate']) ? $loan_all_setting_data['monthly_rate'] : "";
-
 $application_fee = isset($loan_all_setting_data['application_fee']) ? $loan_all_setting_data['application_fee'] : "";
-
 $application_fee_heading = isset($loan_all_setting_data['application_fee_heading']) ? $loan_all_setting_data['application_fee_heading'] : "";
-
 $monthly_fee_heading = isset($loan_all_setting_data['monthly_fee_heading']) ? $loan_all_setting_data['monthly_fee_heading'] : "";
-
 $total_regular_fees = isset($loan_all_setting_data['total_regular_fees']) ? $loan_all_setting_data['total_regular_fees'] : "";
-
 $total_fees = isset($loan_all_setting_data['total_fees']) ? $loan_all_setting_data['total_fees'] : "";
 
 /* END : Amount Field Value Setting */
 
-
-
-
-
 /* START : Calculation Result */
 
 $regular_repayment_heading = isset($loan_all_setting_data['regular_repayment_heading']) ? $loan_all_setting_data['regular_repayment_heading'] : "";
-
 $per_month_heading = isset($loan_all_setting_data['per_month_heading']) ? $loan_all_setting_data['per_month_heading'] : "";
-
 $years_heading = isset($loan_all_setting_data['years_heading']) ? $loan_all_setting_data['years_heading'] : "";
 
 $total_interests_payable_heading = isset($loan_all_setting_data['total_interests_payable_heading']) ? $loan_all_setting_data['total_interests_payable_heading'] : "";
-
 $over_heading = isset($loan_all_setting_data['over_heading']) ? $loan_all_setting_data['over_heading'] : "";
-
 $ballon_amt_heading = isset($loan_all_setting_data['ballon_amt_heading']) ? $loan_all_setting_data['ballon_amt_heading'] : "";
 
 /* END : Calculation Result */
 
-
-
 /* START : Tab Field Setting */
 
 $loan_feature_product_heading = isset($loan_all_setting_data['loan_feature_product_heading']) ? $loan_all_setting_data['loan_feature_product_heading'] : "";
-
 $video_heading = isset($loan_all_setting_data['video_heading']) ? $loan_all_setting_data['video_heading'] : "";
-
 $loan_table_heading = isset($loan_all_setting_data['loan_table_heading']) ? $loan_all_setting_data['loan_table_heading'] : "";
-
 $repayment_chart_heading = isset($loan_all_setting_data['repayment_chart_heading']) ? $loan_all_setting_data['repayment_chart_heading'] : "";
-
 $youtube_video_link = isset($loan_all_setting_data['youtube_video_link']) ? $loan_all_setting_data['youtube_video_link'] : "";
 
-
-
 /* END : Tab Field Setting */
-
-
 
 /* START : Calculator Disclaimer Setting*/
 
 $contact_info_heading = isset($loan_all_setting_data['contact_info_heading']) ? $loan_all_setting_data['contact_info_heading'] : "";
-
 $contact_popup_button_heading = isset($loan_all_setting_data['contact_popup_button_heading']) ? $loan_all_setting_data['contact_popup_button_heading'] : "";
-
 $calculator_disclaimer_heading = isset($loan_all_setting_data['calculator_disclaimer_heading']) ? $loan_all_setting_data['calculator_disclaimer_heading'] : "";
-
 $calculator_disclaimer_description = isset($loan_all_setting_data['calculator_disclaimer_description']) ? $loan_all_setting_data['calculator_disclaimer_description'] : "";
-
 $contact_popup_content = isset($loan_all_setting_data['contact_popup_content']) ? $loan_all_setting_data['contact_popup_content'] : "";
-
 $contact_type = isset($loan_all_setting_data['contact_type']) ? $loan_all_setting_data['contact_type'] : "popup";
-
 $contact_url = isset($loan_all_setting_data['contact_url']) ? $loan_all_setting_data['contact_url'] : "";
 
-
-
 /* END :  Calculator Disclaimer Setting*/
-
-
 
 /* START : Tooltip Setting */
 
 $loan_amount_tooltip = isset($loan_all_setting_data['loan_amount_tooltip']) ? $loan_all_setting_data['loan_amount_tooltip'] : "";
-
 $loan_terms_tooltip = isset($loan_all_setting_data['loan_terms_tooltip']) ? $loan_all_setting_data['loan_terms_tooltip'] : "";
-
 $payment_mode_tooltip = isset($loan_all_setting_data['payment_mode_tooltip']) ? $loan_all_setting_data['payment_mode_tooltip'] : "";
-
-
-
 $interest_rates_tooltip = isset($loan_all_setting_data['interest_rates_tooltip']) ? $loan_all_setting_data['interest_rates_tooltip'] : "";
-
 $balloon_amount_tooltip = isset($loan_all_setting_data['balloon_amount_tooltip']) ? $loan_all_setting_data['balloon_amount_tooltip'] : "";
-
-
 
 /* Disable Payment Mode*/
 
 $payment_mode_enable = isset($loan_all_setting_data['payment_mode_enable']) ? $loan_all_setting_data['payment_mode_enable'] : "";
-
 $choose_default_payment_mode = isset($loan_all_setting_data['choose_default_payment_mode']) ? $loan_all_setting_data['choose_default_payment_mode'] : "";
 
-
-
 /* END : Tooltip Setting */
-
-
 
 /* START : Header Link Section*/
 
 $print_label = isset($loan_all_setting_data['print_label']) ? $loan_all_setting_data['print_label'] : "";
-
 $about_this_calculator_disable = isset($loan_all_setting_data['about_this_calculator_disable']) ? $loan_all_setting_data['about_this_calculator_disable'] : "";
-
-
-
 $about_this_calculator = isset($loan_all_setting_data['about_this_calculator']) ? $loan_all_setting_data['about_this_calculator'] : "";
-
-
-
 $calculator_popup_content = isset($loan_all_setting_data['calculator_popup_content']) ? $loan_all_setting_data['calculator_popup_content'] : "";
-
 $print_option_heading = isset($loan_all_setting_data['print_option_heading']) ? $loan_all_setting_data['print_option_heading'] : "";
 
-
-
 /* END : Header Link Section */
-
-
 
 /* START : Calculation Fee Setting Enable */
 
 $calculation_fee_setting_enable = isset($loan_all_setting_data['calculation_fee_setting_enable']) ? $loan_all_setting_data['calculation_fee_setting_enable'] : "";
-
 $calculator_heading = isset($loan_all_setting_data['calculator_heading']) ? $loan_all_setting_data['calculator_heading'] : "";
-
 $print_option_enable = isset($loan_all_setting_data['print_option_enable']) ? $loan_all_setting_data['print_option_enable'] : "";
 
-
-
 /* END : Calculation Fee Setting Enable */
-
-
 
 /* START : Delete Setting */
 
 $delete_data_enable = isset($loan_all_setting_data['delete_data_enable']) ? $loan_all_setting_data['delete_data_enable'] : "";
-
 $disable_font_awesome = isset($loan_all_setting_data['disable_font_awesome']) ? $loan_all_setting_data['disable_font_awesome'] : "";
-
 $remove_decimal_point = isset($loan_all_setting_data['remove_decimal_point']) ? $loan_all_setting_data['remove_decimal_point'] : "";
 
-
-
 /* END : Delete Setting */
-
-
 
 /* START : Tab Enable Settings */
 
 $enable_repayment_chart = isset($loan_all_setting_data['enable_repayment_chart']) ? $loan_all_setting_data['enable_repayment_chart'] : "";
-
 $enable_video_tab = isset($loan_all_setting_data['enable_video_tab']) ? $loan_all_setting_data['enable_video_tab'] : "";
-
 $enable_loan_mortisation_tab = isset($loan_all_setting_data['enable_loan_mortisation_tab']) ? $loan_all_setting_data['enable_loan_mortisation_tab'] : "";
 
 /* END : Tab Enable Settings */
-
-
-
-
 
 /* START : NEW SETTINGS ADDED */
 
 $disable_ballon_amt = isset($loan_all_setting_data['disable_ballon_amt']) ? $loan_all_setting_data['disable_ballon_amt'] : "";
 
-
-
 /* Repayment Frequency options */
 
 $get_repayment_frequency = (isset($loan_all_setting_data['repayment_frequency']) ? $loan_all_setting_data['repayment_frequency'] : "");
 
-
-
 $disable_contactus_section = isset($loan_all_setting_data['disable_contactus_section']) ? $loan_all_setting_data['disable_contactus_section'] : "";
-
 $disable_calculator_disclaimer_section = isset($loan_all_setting_data['disable_calculator_disclaimer_section']) ? $loan_all_setting_data['disable_calculator_disclaimer_section'] : "";
-
 $disable_tabs_icon = isset($loan_all_setting_data['disable_tabs_icon']) ? $loan_all_setting_data['disable_tabs_icon'] : "";
 
-
+$get_chart_types = ww_loan_chart_types();
+$chart_types = isset($loan_all_setting_data['chart_types']) ? $loan_all_setting_data['chart_types'] : "line";
 
 /* END : NEW SETTING ADDED */
-
-
-
 ?>
-
-
-
 <!-- . begining of wrap -->
-
 <div class="wrap">
-
     <?php
-
     echo "<h2>" . esc_html__(' Loan Calculator', 'loan-calculator-wp') . "</h2>";
-
     ?>
-
     <?php
-
-
-
+    
     /* START : Tab Setting Active */
 
     $general_settings_Screen = ((!isset($_GET['action'])) || (isset($_GET['action']) && 'general_settings' == $_GET['action'])) ? true : false;
-
     $display_settings_Screen = (isset($_GET['action']) && 'display_settings' == $_GET['action']) ? true : false;
-
     $default_value_Screen = (isset($_GET['action']) && 'default_value' == $_GET['action']) ? true : false;
-
     $calculation_Screen = (isset($_GET['action']) && 'calculation' == $_GET['action']) ? true : false;
-
     $tab_setting_Screen = (isset($_GET['action']) && 'tab_setting' == $_GET['action']) ? true : false;
-
     $calculator_disclaimer_Screen = (isset($_GET['action']) && 'calculator_disclaimer' == $_GET['action']) ? true : false;
-
     $tooltip_Screen = (isset($_GET['action']) && 'tooltip' == $_GET['action']) ? true : false;
-
-
-
     $delete_Screen = (isset($_GET['action']) && 'misc_setting' == $_GET['action']) ? true : false;
 
-
-
     /* END : Tab Setting Active */
-
-
 
     ?>
 
@@ -368,63 +207,37 @@ $disable_tabs_icon = isset($loan_all_setting_data['disable_tabs_icon']) ? $loan_
     </h2>
 
     <!-- END : Loan Calculator Setting Tab -->
-
-
-
     <!-- START : Loan Calculator Form -->
 
-
-
     <form name="loan_calculator_form" action="options.php" method="POST">
-
         <?php
-
         settings_fields('ww_loan_calculaor_option');
-
         do_settings_sections('ww_loan_calculaor_option');
 
         ?>
-
         <table class="form-table sa-manage-level-product-box" id="calculation_fee" style="display: <?php echo ($general_settings_Screen) ? esc_html('table') : esc_html('none'); ?>">
 
             <tbody>
-
                 <?php
-
                 $calculation_fee_display = "style=display:none;";
 
                 if ($calculation_fee_setting_enable == 1) {
-
                     $calculation_fee_display = "";
                 }
-
                 $print_option_display_heading = "style=display:none;";
-
                 if ($print_option_enable == 1) {
-
                     $print_option_display_heading = "";
                 }
-
                 ?>
-
                 <tr>
-
                     <td colspan="2">
-
                         <h2><?php esc_html_e('General Settings', 'loan-calculator-wp'); ?> </h2>
-
                         <span class="heading-tooltip-section">
-
                             <?php esc_html_e('Configure calculator general settings.', 'loan-calculator-wp'); ?>
-
                         </span>
-
                     </td>
-
                 </tr>
-
                 <tr>
-
                     <th scope="row">
 
                         <label for="calculation_fee_setting_enable_lbl"><strong><?php esc_html_e('Shortcode', 'loan-calculator-wp'); ?></strong></label>
@@ -716,11 +529,8 @@ $disable_tabs_icon = isset($loan_all_setting_data['disable_tabs_icon']) ? $loan_
                             <select name="ww_loan_option[font_family_new_theme]" id="ww_loan_option" class="fstdropdown-select" searchdisable="false">
 
                                 <?php
-
                                 foreach ($google_fonts as $font_name => $font_style) {
-
                                 ?>
-
                                     <option value="<?php echo esc_attr($font_style); ?>" <?php selected($font_family_new_theme, $font_style, true); ?>>
 
                                         <?php echo esc_html($font_name); ?>
@@ -729,32 +539,35 @@ $disable_tabs_icon = isset($loan_all_setting_data['disable_tabs_icon']) ? $loan_
 
                                 <?php
 
-
-
-
-
                                 }
 
                                 ?>
-
                             </select>
-
                         </td>
-
                     </tr>
-
+                  
                 <?php
-
                 } else {
 
                     if ($select_theme == 'default_theme') {
-
                         update_option("ww_loan_option[font_family_new_theme]", $font_family_new_theme);
                     }
                 }
-
                 ?>
-
+                  
+                    <tr id="select_chart">
+                    <th scope="row">
+                        <label for="select_chart"><strong><?php esc_html_e('Change Chart', 'loan-calculator-wp'); ?></strong></label>
+                    </th>
+                    <td>
+                        <select name='ww_loan_option[chart_types]' id='chart_types' style="width: 100%;">
+                        <?php foreach ($get_chart_types as $chart_key => $chart_value) { ?>
+                            <option value="<?php echo $chart_key ?>" <?php esc_attr_e(selected($chart_types, $chart_key, true)); ?>><?php echo __($chart_value,'loan-calculator-wp') ?></option> 
+                       <?php } ?>
+                        </select>
+                    </td>
+                </tr>
+                
                 <tr id="backbround-color-section">
 
                     <th scope="row">
@@ -883,39 +696,23 @@ $disable_tabs_icon = isset($loan_all_setting_data['disable_tabs_icon']) ? $loan_
 
                 </tr>
 
-
-
                 <input type="hidden" name="ww_loan_option[select_theme]" value="default_theme" />
-
-
 
                 <tr id="select_theme">
 
                     <th scope="row">
 
                         <label for="select_theme"><strong><?php esc_html_e('Select Theme', 'loan-calculator-wp'); ?></strong></label>
-
                     </th>
-
                     <td>
-
-                        <select name='ww_loan_option[select_theme]' id='select_theme' style="width: 49%;">
-
+                        <select name='ww_loan_option[select_theme]' id='select_theme' style="width: 100%;">
                             <option value="default_theme" <?php esc_attr_e(selected($select_theme, "default_theme", true)); ?>><?php esc_attr_e("Default Theme") ?></option>
-
                             <option value="new_theme" <?php esc_attr_e(selected($select_theme, "new_theme", true)); ?>><?php esc_attr_e("New Theme") ?></option>
-
                         </select>
-
                     </td>
-
-                </tr>
-
+                </tr>  
             </tbody>
-
         </table>
-
-
 
         <table class="form-table sa-manage-level-product-box" id="amount" style="display: <?php echo ($default_value_Screen) ? esc_html('table') : esc_html('none'); ?>">
 
@@ -1160,13 +957,11 @@ $disable_tabs_icon = isset($loan_all_setting_data['disable_tabs_icon']) ? $loan_
                     </th>
 
                     <td>
-
-                        <input type="checkbox" name="ww_loan_option[disable_ballon_amt]" id="disable_ballon_amt" value="1" class="regular-text" <?php echo ($disable_ballon_amt == "1") ? "checked" : ""; ?>> <label for="disable_ballon_amt"><?php esc_attr_e("Check this box if you want to remove ballon amount in loan calculator form", "loan_calculator") ?></label>
-
+                        <input type="checkbox" name="ww_loan_option[disable_ballon_amt]" id="disable_ballon_amt" value="1" class="regular-text" <?php echo ($disable_ballon_amt == "1") ? "checked" : ""; ?>> <label for="disable_ballon_amt"><?php esc_attr_e("To enable the balloon amount in the loan calculator form, uncheck this box.", "loan_calculator") ?></label>
                     </td>
 
                 </tr>
-
+        
                 <tr id="ballon_amt_per_text_section">
 
                     <th scope="row">
@@ -1177,8 +972,7 @@ $disable_tabs_icon = isset($loan_all_setting_data['disable_tabs_icon']) ? $loan_
 
                     <td>
 
-                        <input type='number' name='ww_loan_option[ballon_per]' id='ballon_per' min="0" max="80" value='<?php esc_attr_e($ballon_per, 'loan-calculator-wp'); ?>' class="regular-text" onkeydown="return onlyNos(event,'ballon_per')" step="any">
-
+                        <input type='number' name='ww_loan_option[ballon_per]' id='ballon_per' min="0" max="80" value='<?php esc_attr_e($ballon_per, 'loan-calculator-wp'); ?>' class="regular-text" onkeydown="return onlyNos(event,'ballon_per')" step="any" placeholder="Enter ballon percentage between 0 to 80 (only number)">
                     </td>
 
                 </tr>
@@ -1200,9 +994,7 @@ $disable_tabs_icon = isset($loan_all_setting_data['disable_tabs_icon']) ? $loan_
                     </td>
 
                 </tr>
-
-
-
+                
                 <tr>
 
                     <th scope="row">
@@ -1678,13 +1470,9 @@ $disable_tabs_icon = isset($loan_all_setting_data['disable_tabs_icon']) ? $loan_
                 <tr class="video_heading_lbl" <?php esc_attr_e($enable_video_tab_display, 'loan-calculator-wp'); ?>>
 
                     <th scope="row">
-
                         <label for="youtube_video_link"><strong><?php esc_html_e('Youtube Video Link', 'loan-calculator-wp'); ?></strong></label>
-
                     </th>
-
                     <td>
-
                         <input type='text' name='ww_loan_option[youtube_video_link]' id='youtube_video_link' maxlength="200" value='<?php esc_attr_e($youtube_video_link, 'loan-calculator-wp'); ?>' class="regular-text">
 
                     </td>

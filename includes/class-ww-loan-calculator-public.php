@@ -58,6 +58,9 @@ if (!class_exists('WW_Loan_Calculator_Public')) {
 
 			$select_theme = isset($loan_all_setting_data['select_theme']) ? $loan_all_setting_data['select_theme'] : "";
 
+
+			$repay_freq_per_field_label = ww_loan_repayment_frequency_calc_label();
+
 			// Setting data is passed in js file using Localize
 			$setting_data = array(
 				'loan_amount_min_value' =>  isset($loan_all_setting_data['loan_amount_min_value']) ? $loan_all_setting_data['loan_amount_min_value'] : "",
@@ -81,7 +84,12 @@ if (!class_exists('WW_Loan_Calculator_Public')) {
 				'disable_ballon_amt' => isset($loan_all_setting_data['disable_ballon_amt']) ? $loan_all_setting_data['disable_ballon_amt'] : "",
 				'payment_mode_enable' => isset($loan_all_setting_data['payment_mode_enable']) ? $loan_all_setting_data['payment_mode_enable'] : "",
 				'select_theme' => $select_theme,
-				'regular_repayment_heading' => isset($loan_all_setting_data['regular_repayment_heading']) ? $loan_all_setting_data['regular_repayment_heading'] : ""
+				'regular_repayment_heading' => isset($loan_all_setting_data['regular_repayment_heading']) ? $loan_all_setting_data['regular_repayment_heading'] : "",
+				'repay_freq_per_month_label' => $repay_freq_per_field_label['Monthly'],
+				'repay_freq_per_quarter_label' => $repay_freq_per_field_label['Quarterly'],
+				'repay_freq_per_year_label' => $repay_freq_per_field_label['Yearly'],
+				'chart_types' => isset($loan_all_setting_data['chart_types']) ? $loan_all_setting_data['chart_types'] : "line"
+
 			);
 
 			wp_localize_script('loan-calculator-frontend-script', 'setting_data', $setting_data);
