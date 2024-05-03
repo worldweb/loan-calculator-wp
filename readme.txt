@@ -9,10 +9,10 @@ Author URI:        https://worldwebtechnology.com
 Requires at least: 5.8
 Requires PHP:      7.2
 Tested up to:      6.5.2
-Stable tag:        1.3.5
+Stable tag:        1.3.4
 License:           GPLv2 or later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
-Version:           1.3.5
+Version:           1.3.4
 
 Loan / EMI Calculator for Home Loan and Personal Loan
 
@@ -20,7 +20,7 @@ Loan / EMI Calculator for Home Loan and Personal Loan
 
 [youtube https://www.youtube.com/watch?v=VhvlcwYUyIg]
 
-[Video](https://www.youtube.com/watch?v=VhvlcwYUyIg)  |  [Docs](https://docs.worldwebtechnology.com/loan-calculator/)  |  [Support](mailto:help.worldweb@gmail.com)  | [Demo](https://demo.worldwebtechnology.com/) | [Website](https://www.worldwebtechnology.com/)
+[Video](https://www.youtube.com/watch?v=VhvlcwYUyIg)  |  [Docs](https://docs.worldwebtechnology.com/loan-calculator/)  |  [Support](mailto:help.worldweb@gmail.com)  | [Demo](https://demo.worldwebtechnology.com/loan-calculator/) | [Website](https://www.worldwebtechnology.com/)
 
 Loan Calculator creates a detailed amortization schedule with dates based on Payments. Users can see the chart and video as well. Visitors can also print it. 
 The plugin provides an option for a contact form so that users can use the contact form if there is any query. Display the loan disclaimer at the bottom of the loan section. Admin can customize the color to change the look of the loan calculator. All labels and values are managed from the backend
@@ -101,11 +101,15 @@ The plugin provides an option for a contact form so that users can use the conta
 
 == Changelog ==
 
+1.3.4 (Apr 24, 2024)
+* Resolved language translation issues. 
+
+1.3.3 (Apr 16, 2024)
+* Resolved issue with regular repayment label on frontend.
+
 1.3.2 (Apr 15, 2024)
 * Tested the plugin in Playground and launched blueprint.json.
-
-1.3.1 (Apr 15, 2024)
-* Resolved an issue with the default theme Twenty Twenty Four. 
+* Resolved an issue with the default theme Twenty Twenty Four. (V1.3.1)
 
 1.3.0 (Apr 02, 2024)
 * Added Change theme option

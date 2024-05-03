@@ -149,6 +149,19 @@ $disable_tabs_icon = isset($loan_all_setting_data['disable_tabs_icon']) ? $loan_
 ?>
 
 <div class="wp-loan-calculator-main" id="wp-loan-calculator-main">
+    <style type="text/css">
+        :root {
+            --calc-background-color: <?php echo __($back_ground_color); ?>;
+            --calc-select-color: <?php echo __($selected_color); ?>;
+            --calc-bg-light-color: <?php echo __($background_light_color); ?>;
+            --calc-border-color: <?php echo __($border_color); ?>;
+            --calc-graph-color: <?php echo __($graph_color); ?>;
+            --calc-graph-color-sub: <?php echo __($graph_color_sub); ?>;
+            --calc-graph-border-color: <?php echo __($graph_border_color); ?>;
+            --calc-graph-border-color-sub: <?php echo __($graph_border_color_sub); ?>;
+        }
+    </style>
+
     <section class="heading-section">
         <div class="menu-sec-cls">
             <ul class="heading-sec-link">
@@ -159,9 +172,9 @@ $disable_tabs_icon = isset($loan_all_setting_data['disable_tabs_icon']) ? $loan_
                     </li>
                 <?php  } ?>
                 <?php if ($about_this_calculator_disable == "") { ?>
-                    <li>
-                        <a href="javascript:void(0);" onclick="jQuery('.about-this-calculator-popup').show();jQuery('body').addClass('body-overflow-hidden');"><i class="fa fa-info-circle" aria-hidden="true"></i><?php echo __($about_this_calculator); ?></a>
-                    </li>
+                <li>
+                    <a href="javascript:void(0);" onclick="jQuery('.about-this-calculator-popup').show();jQuery('body').addClass('body-overflow-hidden');"><i class="fa fa-info-circle" aria-hidden="true"></i><?php echo __($about_this_calculator); ?></a>
+                </li>
                 <?php } ?>
             </ul>
         </div>
@@ -179,23 +192,10 @@ $disable_tabs_icon = isset($loan_all_setting_data['disable_tabs_icon']) ? $loan_
     </section>
 
     <section id="main-sec" class="ctm_main_wrap">
-    <style type="text/css" media="all">
-        :root {
-            --calc-background-color: <?php echo esc_html($back_ground_color); ?>;
-            --calc-select-color: <?php echo esc_html($selected_color); ?>;
-            --calc-bg-light-color: <?php echo esc_html($background_light_color); ?>;
-            --calc-border-color: <?php echo esc_html($border_color); ?>;
-            --calc-graph-color: <?php echo esc_html($graph_color); ?>;
-            --calc-graph-color-sub: <?php echo esc_html($graph_color_sub); ?>;
-            --calc-graph-border-color: <?php echo esc_html($graph_border_color); ?>;
-            --calc-graph-border-color-sub: <?php echo esc_html($graph_border_color_sub); ?>;
-        }
-    </style>
-        <div id="print_area">
         <section class="calculator-heading-section calculator-heading-block">
             <div class="calculator-child-heading">
                 <h2>
-                    <center><strong><?php echo __($calculator_heading); ?></strong></center>
+                <center><strong><?php echo __($calculator_heading); ?></strong></center>
                 </h2>
             </div>
         </section>
@@ -232,7 +232,7 @@ $disable_tabs_icon = isset($loan_all_setting_data['disable_tabs_icon']) ? $loan_
                                     </select>
                                 <?php } else { ?>
                                     <select name="repayment_freq" id="repayment_freq" class="payment-opt-drop single-val-option">
-                                        <option value="Monthly" selected><?php echo $repayment_frequency_label['Monthly']; ?></option>
+                                        <option value="Monthly" selected><?php echo $repayment_frequency_label['Monthly'];?></option>
                                     </select>
                                 <?php } ?>
                                 <input type="text" name="loan_terms" min="<?php esc_attr_e($loan_term_min_value, 'loan-calculator-wp'); ?>" max="<?php esc_attr_e($loan_term_max_value, 'loan-calculator-wp'); ?>" maxlength="3" id="loan_terms" value="" tabindex="5" onkeydown="return onlyNos(event,'loan_terms')" />
@@ -386,7 +386,7 @@ $disable_tabs_icon = isset($loan_all_setting_data['disable_tabs_icon']) ? $loan_
                                     <?php
                                     if (!empty($youtube_video_link)) {
                                     ?>
-                                        <iframe id="printframe" height="415" src="<?php echo esc_url($youtube_video_link); ?>" style="width:100%;" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+                                        <iframe height="415" src="<?php echo esc_url($youtube_video_link); ?>" style="width:100%;" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
                                     <?php } else { ?>
                                         <div class="no-video-exist-main">
                                             <div class="video-child-sec">
@@ -420,7 +420,7 @@ $disable_tabs_icon = isset($loan_all_setting_data['disable_tabs_icon']) ? $loan_
                         <div class="loan-cal-desc">
                             <div class="loan-cal-desc-heading main-heading">
                                 <label id="regular_repayment_heading"><strong><?php echo __($regular_repayment_heading, 'loan-calculator-wp');
-                                                                                ?></strong></label>
+                                                ?></strong></label>
 
                             </div>
                             <div class="loan-cal-desc-val">
@@ -490,7 +490,7 @@ $disable_tabs_icon = isset($loan_all_setting_data['disable_tabs_icon']) ? $loan_
                 <?php echo do_shortcode($contact_popup_content); ?>
             </div>
         </div>
-        </div>
+
 
         <?php if ($disable_calculator_disclaimer_section == "") { ?>
             <div class="calculator-disclaimer-section">

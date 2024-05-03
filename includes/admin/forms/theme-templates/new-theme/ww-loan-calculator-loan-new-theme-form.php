@@ -138,7 +138,8 @@ $disable_repayment_frequency_yearly = isset($loan_all_setting_data['disable_repa
 /* Repayment Frequency options */
 $get_repayment_frequency = (isset($loan_all_setting_data['repayment_frequency']) ? $loan_all_setting_data['repayment_frequency'] : "");
 
-
+// Dropdown Values
+$repayment_frequency_label = ww_loan_repayment_frequency_label();
 
 $disable_contactus_section = isset($loan_all_setting_data['disable_contactus_section']) ? $loan_all_setting_data['disable_contactus_section'] : "";
 
@@ -149,6 +150,7 @@ $disable_tabs_icon = isset($loan_all_setting_data['disable_tabs_icon']) ? $loan_
 /* END : NEW SETTING ADDED */
 
 ?>
+
 <div class="wp-loan-calculator-main-new wp-loan-mobile-view" style="<?php esc_attr_e($font_family_new_theme, 'loan-calculator-wp'); ?>">
     <style type="text/css">
         :root {
@@ -164,26 +166,26 @@ $disable_tabs_icon = isset($loan_all_setting_data['disable_tabs_icon']) ? $loan_
         }
     </style>
 
-    <section class="heading-section" >
+    <section class="heading-section">
         <div class="menu-sec-cls">
             <ul class="heading-sec-link">
                 <?php
                 if ($print_option_enable) { ?>
                     <li>
-                        <a href="javascript:void(0);" class="print-table"><i class="fa fa-print" aria-hidden="true"></i><?php echo esc_html($print_option_heading); ?></a>
+                    <a href="javascript:void(0);" class="print-table"><i class="fa fa-print" aria-hidden="true"></i><?php echo esc_html($print_option_heading); ?></a>
                     </li>
                 <?php  } ?>
                 <?php if ($about_this_calculator_disable == "") { ?>
                 
                 <li>
-                    <a href="javascript:;" onclick="jQuery('.about-this-calculator-popup').show();jQuery('body').addClass('body-overflow-hidden');"><i class="fa fa-info-circle" aria-hidden="true"></i><?php echo esc_html($about_this_calculator); ?></a>
+                    <a href="javascript:void(0);" onclick="jQuery('.about-this-calculator-popup').show();jQuery('body').addClass('body-overflow-hidden');"><i class="fa fa-info-circle" aria-hidden="true"></i><?php echo esc_html($about_this_calculator); ?></a>
                 </li>
                 <?php   } ?>
             </ul>
         </div>
         <div class="about-this-calculator-popup" style="display: none;">
             <div class="about-this-calculator-popup-body">
-                <a href="javascript:;" class="close-button" onclick="jQuery('.about-this-calculator-popup').hide();jQuery('body').removeClass('body-overflow-hidden');">X</a>
+                <a href="javascript:void(0);" class="close-button" onclick="jQuery('.about-this-calculator-popup').hide();jQuery('body').removeClass('body-overflow-hidden');">X</a>
                 <?php
                 // very permissive: allows pretty much all HTML to pass - same as what's normally applied to the_content by default
                 $allowed_html = wp_kses_allowed_html('post');
@@ -267,14 +269,14 @@ $disable_tabs_icon = isset($loan_all_setting_data['disable_tabs_icon']) ? $loan_
                                                         foreach ($get_repayment_frequency as $key => $value) {
                                                             $selected = ($key == 0 ? 'selected' : '');
                                                         ?>
-                                                            <option value="<?php echo $value; ?>" <?php echo $selected; ?>><?php echo $value; ?></option>
+                                                            <option value="<?php echo $value; ?>" <?php echo $selected; ?>><?php echo $repayment_frequency_label[$value]; ?></option>
                                                         <?php
                                                         }
                                                         ?>
                                                     </select>
                                                 <?php } else { ?>
                                                     <select name="repayment_freq" id="repayment_freq" class="payment-opt-drop single-val-option">
-                                                        <option value="Monthly" selected>Monthly</option>
+                                                        <option value="Monthly" selected><?php echo $repayment_frequency_label['Monthly'];?></option>
                                                     </select>
                                                 <?php } ?>
                                                 <span class="select-arrow-main"><span class="select-arrow-wrap">❮</span></span>
@@ -661,7 +663,7 @@ $disable_tabs_icon = isset($loan_all_setting_data['disable_tabs_icon']) ? $loan_
 
         <div class="contact-us-popup" style="display:none;">
             <div class="contact-us-popup-body">
-                <a href="javascript:;" class="close-button" onclick="jQuery('.contact-us-popup').hide();jQuery('body').removeClass('body-overflow-hidden');">X</a>
+                <a href="javascript:void(0);" class="close-button" onclick="jQuery('.contact-us-popup').hide();jQuery('body').removeClass('body-overflow-hidden');">X</a>
                 <?php echo do_shortcode($contact_popup_content); ?>
             </div>
         </div>

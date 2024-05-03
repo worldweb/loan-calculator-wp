@@ -29,14 +29,14 @@ function cal_emi_amount_frequency_payment_options(frp_option,lamount, interest_r
 
 function cal_loan_terms_by_frequency_payment_option(frp_option, loan_terms_months) {
   if (frp_option === 'Quarterly') {
-    jQuery("#regular_repayment_heading").html("Quarterly Payment");
+    jQuery("#regular_repayment_heading").html();
      return parseInt(loan_terms_months * 3);
   } else if (frp_option === 'Monthly') {
-    jQuery("#regular_repayment_heading").html("Monthly Payment");
+    jQuery("#regular_repayment_heading").html();
 			
     return parseInt(loan_terms_months);
   } else if (frp_option === 'Yearly') {
-			jQuery("#regular_repayment_heading").html("Yearly Payment");
+			jQuery("#regular_repayment_heading").html();
     return parseInt(loan_terms_months * 12);
   }
 }

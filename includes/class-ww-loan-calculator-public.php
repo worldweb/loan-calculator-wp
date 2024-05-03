@@ -50,7 +50,7 @@ if (!class_exists('WW_Loan_Calculator_Public')) {
 			// enqueue font awesome CSS
 			$disable_font_awesome = isset($loan_all_setting_data['disable_font_awesome']) ? $loan_all_setting_data['disable_font_awesome'] : "";
 			if (empty($disable_font_awesome)) { // If Disable font awesome is disable then only enqueue font awesome CSS
-				wp_enqueue_style('loan-calculator-font-awesome-css');
+				wp_enqueue_style('loan-calculator-font-awesome-script');
 			}
 
 			// Get all currency symbole
@@ -89,7 +89,6 @@ if (!class_exists('WW_Loan_Calculator_Public')) {
 				'repay_freq_per_quarter_label' => $repay_freq_per_field_label['Quarterly'],
 				'repay_freq_per_year_label' => $repay_freq_per_field_label['Yearly'],
 				'chart_types' => isset($loan_all_setting_data['chart_types']) ? $loan_all_setting_data['chart_types'] : "line"
-
 			);
 
 			wp_localize_script('loan-calculator-frontend-script', 'setting_data', $setting_data);

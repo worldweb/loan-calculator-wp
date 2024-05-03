@@ -3,7 +3,7 @@
  * Plugin Name: Loan Calculator WP
  * Plugin URI: https://www.worldwebtechnology.com/
  * Description:  Advanced Loan Calculator for Home Loans, Personal Loans, and various other types of loans. Includes features like a repayment chart, amortization table, video tab, balloon payment option, and supports all currencies. Use the contact form shortcode for easy access.
- * Version: 1.3.5
+ * Version: 1.3.4
  * Author: World Web Technology
  * Author URI: https://www.worldwebtechnology.com/
  * Text Domain: loan-calculator-wp
@@ -24,7 +24,7 @@ if (!defined('ABSPATH')) exit;
  * @since 1.0.0
  */
 if (!defined('WW_LOAN_CALCULATOR_VERSION')) {
-    define('WW_LOAN_CALCULATOR_VERSION', '1.3.5'); //version of plugin
+    define('WW_LOAN_CALCULATOR_VERSION', '1.3.4'); //version of plugin
 }
 if (!defined('WW_LOAN_CALCULATOR_TEXT_DOMAIN')) { //check if variable is not defined previous then define it
     define('WW_LOAN_CALCULATOR_TEXT_DOMAIN', 'loan-calculator-wp'); //this is for multi language support in plugin
@@ -130,9 +130,9 @@ function ww_loan_calculator_register_activation()
         $loan_calculator_default_options['years_heading'] = esc_html__('years', 'loan-calculator-wp');
         $loan_calculator_default_options['repayment_frequency'] = array('Monthly', 'Quarterly','Yearly');
         $loan_calculator_default_options['choose_default_payment_mode'] = 'In Arrears';
+        $loan_calculator_default_options['disable_ballon_amt'] = '1';
         $loan_calculator_default_options['total_interests_payable_heading'] = esc_html__('Total interest payable', 'loan-calculator-wp');
         $loan_calculator_default_options['over_heading'] = esc_html__('over', 'loan-calculator-wp');
-        $loan_calculator_default_options['disable_ballon_amt'] = '1';
         $loan_calculator_default_options['ballon_amt_heading'] = esc_html__('Balloon amount', 'loan-calculator-wp');
         $loan_calculator_default_options['loan_feature_product_heading'] = esc_html__('Loan Product Features', 'loan-calculator-wp');
         $loan_calculator_default_options['video_heading'] = esc_html__('Video', 'loan-calculator-wp');
