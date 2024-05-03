@@ -810,7 +810,6 @@ jQuery(document).ready(function ($) {
           },
         },
       });
-      console.log(graph_new_theme);
 
       /* END : PREPARE CHART JS DATA */
     } /* END : Loan Calculation Process */
@@ -1236,10 +1235,24 @@ jQuery(document).ready(function ($) {
 
     /*************** || Print Code [PDF] || *****************/
 
+    
     jQuery(".print-table").click(function () {
+      // Set the paper size to A3 using jQuery
+      jQuery("#main-sec").css({
+        "@media print": {
+          "@page": {size: "297mm 420mm",margin: "0.3in 1in 0.3in 1in !important"},
+          "-webkit-print-color-adjust": "exact !important",
+          "-moz-print-color-adjust": "exact !important",
+          "-ms-print-color-adjust": "exact !important",
+          "print-color-adjust": "exact !important",
+          "color-adjust": "exact !important"
+        }
+      });
       jQuery("#main-sec").print(/*options*/);
     });
-
+    
+  
+ 
     // Attach change event handler to the payment_type dropdown
     $("#payment_type").change(function () {
       // Call loan_calculation_process when the dropdown changes
@@ -2035,7 +2048,7 @@ jQuery(document).ready(function ($) {
       var ctx = $("#loan-process-graph").get(0).getContext("2d");
      
       var default_theme_chart = Chart.getChart("loan-process-graph");
-      console.log(ctx);
+    
 
       if (default_theme_chart) {
         default_theme_chart.destroy();
@@ -2634,6 +2647,17 @@ jQuery(document).ready(function ($) {
     /******************|| Print Code || **********************/
 
     jQuery(".print-table").click(function () {
+      // Set the paper size to A3 using jQuery
+      jQuery("#main-sec").css({
+        "@media print": {
+          "@page": {size: "297mm 420mm",margin: "0.3in 1in 0.3in 1in !important"},
+          "-webkit-print-color-adjust": "exact !important",
+          "-moz-print-color-adjust": "exact !important",
+          "-ms-print-color-adjust": "exact !important",
+          "print-color-adjust": "exact !important",
+          "color-adjust": "exact !important"
+        }
+      });
       jQuery("#main-sec").print(/*options*/);
     });
 

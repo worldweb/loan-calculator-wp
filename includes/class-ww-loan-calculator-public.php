@@ -50,7 +50,7 @@ if (!class_exists('WW_Loan_Calculator_Public')) {
 			// enqueue font awesome CSS
 			$disable_font_awesome = isset($loan_all_setting_data['disable_font_awesome']) ? $loan_all_setting_data['disable_font_awesome'] : "";
 			if (empty($disable_font_awesome)) { // If Disable font awesome is disable then only enqueue font awesome CSS
-				wp_enqueue_style('loan-calculator-font-awesome-script');
+				wp_enqueue_style('loan-calculator-font-awesome-css');
 			}
 
 			// Get all currency symbole

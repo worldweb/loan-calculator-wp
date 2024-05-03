@@ -66,21 +66,21 @@ if (!class_exists('WW_Loan_Calculator_Script')) {
 		 */
 		function ww_loan_calculator_front_scripts()
 		{
-			// global $setting_data;
-
-			// CHART JS
-			wp_register_script('loan-calculator-chart-js', WW_LOAN_CALCULATOR_URL . 'includes/js/chart-js/chart.js', array(), WW_LOAN_CALCULATOR_VERSION, true);
-
-			// Font awesome
-			wp_register_style('loan-calculator-font-awesome-script', WW_LOAN_CALCULATOR_URL . 'includes/css/all.min.css', array(), WW_LOAN_CALCULATOR_VERSION);
-
 			// Custom CSS and JS
+			
+			//All registered styles
+			wp_register_style('loan-calculator-font-awesome-css', WW_LOAN_CALCULATOR_URL . 'includes/css/all.min.css', array(), WW_LOAN_CALCULATOR_VERSION);
+
 			wp_register_style('loan-calculator-new-theme-style', WW_LOAN_CALCULATOR_URL . '/includes/admin/forms/theme-templates/new-theme/css/style.css', array(), WW_LOAN_CALCULATOR_VERSION);
+			wp_register_style('loan-calculator-frontend-style', WW_LOAN_CALCULATOR_URL . 'includes/css/frontend-style.css', array(), WW_LOAN_CALCULATOR_VERSION);
+
+			//All registered Scripts 
+
+			wp_register_script('loan-calculator-chart-js', WW_LOAN_CALCULATOR_URL . 'includes/js/chart-js/chart.js', array(), WW_LOAN_CALCULATOR_VERSION, true);
 			wp_register_script('loan-calculator-print-script', WW_LOAN_CALCULATOR_URL . 'includes/js/jquery.print.js', array('jquery'), WW_LOAN_CALCULATOR_VERSION, true);
-			wp_register_style('loan-calculator-frontend-style', WW_LOAN_CALCULATOR_URL . 'includes/css/frontend-style.css', array(), WW_LOAN_CALCULATOR_VERSION);
-			wp_register_style('loan-calculator-frontend-style', WW_LOAN_CALCULATOR_URL . 'includes/css/frontend-style.css', array(), WW_LOAN_CALCULATOR_VERSION);
 			wp_register_script('loan-calculator-frontend-script', WW_LOAN_CALCULATOR_URL . 'includes/js/frontend-script.js', array('jquery'), WW_LOAN_CALCULATOR_VERSION, true);
 			wp_register_script('loan-calculator-frequency-payment', WW_LOAN_CALCULATOR_URL . 'includes/js/frequency_payment.js', array('jquery'), WW_LOAN_CALCULATOR_VERSION, true);
+			
 
 			add_action('wp_footer', function () {
 				global $setting_data;

@@ -148,8 +148,7 @@ $disable_tabs_icon = isset($loan_all_setting_data['disable_tabs_icon']) ? $loan_
 
 ?>
 
-<div class="wp-loan-calculator-main">
-   
+<div class="wp-loan-calculator-main" id="wp-loan-calculator-main">
     <section class="heading-section">
         <div class="menu-sec-cls">
             <ul class="heading-sec-link">
@@ -387,7 +386,7 @@ $disable_tabs_icon = isset($loan_all_setting_data['disable_tabs_icon']) ? $loan_
                                     <?php
                                     if (!empty($youtube_video_link)) {
                                     ?>
-                                        <iframe height="415" src="<?php echo esc_url($youtube_video_link); ?>" style="width:100%;" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+                                        <iframe id="printframe" height="415" src="<?php echo esc_url($youtube_video_link); ?>" style="width:100%;" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
                                     <?php } else { ?>
                                         <div class="no-video-exist-main">
                                             <div class="video-child-sec">

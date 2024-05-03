@@ -2724,10 +2724,17 @@ select.single-val-option {
 }
 
 @media print {
+  @page {
+    size: 297mm 420mm;
+    margin: 0.3in 1in 0.3in 1in !important;
+   }
+   
   #main-sec {
     -webkit-print-color-adjust: exact !important;
+    -moz-print-color-adjust: exact !important;
+    -ms-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
-    /* background: var(--calc-background-color); */
+    color-adjust: exact !important;
   }
   .loan-option-text-info
     .loan-option-text-info-section

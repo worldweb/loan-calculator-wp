@@ -149,7 +149,7 @@ $disable_tabs_icon = isset($loan_all_setting_data['disable_tabs_icon']) ? $loan_
 /* END : NEW SETTING ADDED */
 
 ?>
-<div class="wp-loan-calculator-main-new wp-loan-mobile-view" style="<?php esc_attr_e($font_family_new_theme, 'loan-calculator-wp') ?>">
+<div class="wp-loan-calculator-main-new wp-loan-mobile-view" style="<?php esc_attr_e($font_family_new_theme, 'loan-calculator-wp'); ?>">
     <style type="text/css">
         :root {
             --calc-font-family-new-theme: <?php echo esc_html($font_family_new_theme); ?>;
@@ -170,7 +170,7 @@ $disable_tabs_icon = isset($loan_all_setting_data['disable_tabs_icon']) ? $loan_
                 <?php
                 if ($print_option_enable) { ?>
                     <li>
-                        <a href="javascript:;" class="print-table"><i class="fa fa-print" aria-hidden="true"></i><?php echo esc_html($print_option_heading); ?></a>
+                        <a href="javascript:void(0);" class="print-table"><i class="fa fa-print" aria-hidden="true"></i><?php echo esc_html($print_option_heading); ?></a>
                     </li>
                 <?php  } ?>
                 <?php if ($about_this_calculator_disable == "") { ?>
