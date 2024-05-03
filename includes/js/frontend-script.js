@@ -1240,7 +1240,7 @@ jQuery(document).ready(function ($) {
 		// Set the paper size to A3 using jQuery
 		jQuery("#main-sec").css({
 		  "@media print": {
-			"@page": {size: "297mm 420mm",margin: "0.3in 1in 0.3in 1in !important"},
+			"@page": {size: "297mm 420mm"},
 			"-webkit-print-color-adjust": "exact !important",
 			"-moz-print-color-adjust": "exact !important",
 			"-ms-print-color-adjust": "exact !important",
@@ -2650,7 +2650,7 @@ jQuery(document).ready(function ($) {
 		// Set the paper size to A3 using jQuery
 		jQuery("#main-sec").css({
 		  "@media print": {
-			"@page": {size: "297mm 420mm",margin: "0.3in 1in 0.3in 1in !important"},
+			"@page": {size: "297mm 420mm"},
 			"-webkit-print-color-adjust": "exact !important",
 			"-moz-print-color-adjust": "exact !important",
 			"-ms-print-color-adjust": "exact !important",

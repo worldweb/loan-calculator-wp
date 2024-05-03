@@ -3265,7 +3265,7 @@ font-weight: normal !important;
 @media print {
 @page {
 size: 297mm 420mm;
-margin: 0.3in 1in 0.3in 1in !important;
+/* margin: 0.3in 1in 0.3in 1in !important; */
 }
 #main-sec {
 -webkit-print-color-adjust: exact !important;
