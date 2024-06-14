@@ -281,6 +281,10 @@ $chart_types = isset($loan_all_setting_data['chart_types']) ? $loan_all_setting_
                         <input type="checkbox" name="ww_loan_option[repayment_frequency][]" id="repayment_frequency_option" value="Quarterly" class="regular-text" <?php echo ((!empty($get_repayment_frequency) && in_array('Quarterly', $get_repayment_frequency)) ? "checked" : ""); ?>><?php esc_html_e('Quarterly', 'loan-calculator-wp'); ?>
                         &nbsp;|&nbsp;
                         <input type="checkbox" name="ww_loan_option[repayment_frequency][]" id="repayment_frequency_option" value="Yearly" class="regular-text" <?php echo ((!empty($get_repayment_frequency) && in_array('Yearly', $get_repayment_frequency)) ? "checked" : ""); ?>><?php esc_html_e('Yearly', 'loan-calculator-wp'); ?>
+                        &nbsp;|&nbsp;
+                        <input type="checkbox" name="ww_loan_option[repayment_frequency][]" id="repayment_frequency_option" value="Weekly" class="regular-text" <?php echo ((!empty($get_repayment_frequency) && in_array('Weekly', $get_repayment_frequency)) ? "checked" : ""); ?>><?php esc_html_e('Weekly', 'loan-calculator-wp'); ?>
+                         &nbsp;|&nbsp;
+                        <input type="checkbox" name="ww_loan_option[repayment_frequency][]" id="repayment_frequency_option" value="Fortnight" class="regular-text" <?php echo ((!empty($get_repayment_frequency) && in_array('Fortnight', $get_repayment_frequency)) ? "checked" : ""); ?>><?php esc_html_e('Fortnight', 'loan-calculator-wp'); ?>
                         </br>
                         </br>
                         <i><b style="color:red"><?php esc_html_e('Note', 'loan-calculator-wp') ?></b><?php esc_attr_e(": If no Repayment Frequency Options are selected, the monthly option will be automatically displayed on the frontend by default.", 'loan-calculator-wp') ?></i>
