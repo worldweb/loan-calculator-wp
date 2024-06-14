@@ -9,10 +9,10 @@ Author URI:        https://worldwebtechnology.com
 Requires at least: 5.8
 Requires PHP:      7.2
 Tested up to:      6.5.2
-Stable tag:        1.3.4
+Stable tag:        1.3.5
 License:           GPLv2 or later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
-Version:           1.3.4
+Version:           1.3.5
 
 Loan / EMI Calculator for Home Loan and Personal Loan
 
@@ -26,28 +26,30 @@ Loan Calculator creates a detailed amortization schedule with dates based on Pay
 The plugin provides an option for a contact form so that users can use the contact form if there is any query. Display the loan disclaimer at the bottom of the loan section. Admin can customize the color to change the look of the loan calculator. All labels and values are managed from the backend
 
 **Main Features**
-* Simple to use, easy to install, powerful back-end features
-* Clean and modern design
-* Change design based on your needs
-* Display loan table
-* Display loan chart
-* Change default chart
-* Print option
-* Google font support (New Theme)
-* Display various currencies in each form (New Theme)
-* About this calculator popup
-* Manage all labels
-* Contact us section (support contact form shortcode)
-* Display disclaimer
-* Shortcode ready
-* Responsive ready
+
+- Simple to use, easy to install, powerful back-end features
+- Clean and modern design
+- Change design based on your needs
+- Display loan table
+- Display loan chart
+- Change default chart
+- Print option
+- Google font support (New Theme)
+- Display various currencies in each form (New Theme)
+- About this calculator popup
+- Manage all labels
+- Contact us section (support contact form shortcode)
+- Display disclaimer
+- Shortcode ready
+- Responsive ready
 
 **Best Used For**
-* Bank loan websites
-* Real estate websites
-* Auto and car loan website
-* Finance-related website
-* Any website that offers loans
+
+- Bank loan websites
+- Real estate websites
+- Auto and car loan website
+- Finance-related website
+- Any website that offers loans
 
 **Shortcode**
 
@@ -100,6 +102,10 @@ The plugin provides an option for a contact form so that users can use the conta
   You can enable/disable loan fee calculation from the WP admin. Go to the loan calculator > click on the "Default value settings" tab and search for "Enable Fee Calculation" and enable/disable according to your needs.
 
 == Changelog ==
+
+1.3.5 (May 03, 2024)
+* Fixed printing problem. 
+* Expanded graph options within the plugin
 
 1.3.4 (Apr 24, 2024)
 * Resolved language translation issues. 

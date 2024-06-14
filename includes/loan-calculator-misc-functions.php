@@ -43,6 +43,8 @@ function ww_loan_repayment_frequency_label()
 			'Monthly' => __('Monthly', 'loan-calculator-wp'),
 			'Quarterly' => __('Quarterly', 'loan-calculator-wp'),
 			'Yearly' => __('Yearly', 'loan-calculator-wp'),
+			'Weekly' => __('Weekly', 'loan-calculator-wp'),
+			'Fortnight' => __('Fortnightly', 'loan-calculator-wp'),
 		)
 	);
 }
@@ -63,6 +65,8 @@ function ww_loan_repayment_frequency_calc_label()
 			'Monthly' => __('per Month for ', 'loan-calculator-wp'),
 			'Quarterly' => __('per Quarter for ', 'loan-calculator-wp'),
 			'Yearly' => __('per Year for ', 'loan-calculator-wp'),
+			'Weekly' => __('per Weekly for', 'loan-calculator-wp'),
+			'Fortnight' => __('per Fortnightly for', 'loan-calculator-wp'),
 		)
 	);
 }

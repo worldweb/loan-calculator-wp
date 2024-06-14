@@ -88,6 +88,8 @@ if (!class_exists('WW_Loan_Calculator_Public')) {
 				'repay_freq_per_month_label' => $repay_freq_per_field_label['Monthly'],
 				'repay_freq_per_quarter_label' => $repay_freq_per_field_label['Quarterly'],
 				'repay_freq_per_year_label' => $repay_freq_per_field_label['Yearly'],
+				'repay_freq_per_week_label' => $repay_freq_per_field_label['Weekly'],
+				'repay_freq_per_fortnight_label' => $repay_freq_per_field_label['Fortnight'],
 				'chart_types' => isset($loan_all_setting_data['chart_types']) ? $loan_all_setting_data['chart_types'] : "line"
 			);
 
