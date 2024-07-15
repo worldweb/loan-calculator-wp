@@ -421,7 +421,7 @@
   }
   
   .ctm_main_wrap .loan-text-dis.no-payment .payment-opt-drop {
-    width: 85px !important;
+    width: 118px !important;
   
     background-color: var(--calc-bg-light-color) !important;
   
@@ -2320,6 +2320,17 @@
   }
   
   /*sidebar css end here*/
+
+
+
+#label-for-freuency{
+    font-size: 10px;
+    padding: 0px;
+    margin: 0px;
+    position: absolute;
+    bottom: 42px;
+}
+
   
   @media (min-width: 769px) {
     .mobile-tabs {
@@ -2949,3 +2960,11 @@
       height: max-content;
     }
   }
+
+  .loan-number-payment-with-label {
+    position: relative;
+}
+
+.loan-number-payment-with-label label#label-for-freuency {
+    bottom: -15px;
+}
