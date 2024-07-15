@@ -149,6 +149,12 @@ $disable_tabs_icon = isset($loan_all_setting_data['disable_tabs_icon']) ? $loan_
 
 /* END : NEW SETTING ADDED */
 
+/*   loan term label option */
+
+$ww_loan_term_label = isset($loan_all_setting_data['ww_loan_term_label']) ? $loan_all_setting_data['ww_loan_term_label'] : "";
+/*   loan term label option */
+
+
 ?>
 
 <div class="wp-loan-calculator-main-new wp-loan-mobile-view" style="<?php esc_attr_e($font_family_new_theme, 'loan-calculator-wp'); ?>">
@@ -242,7 +248,7 @@ $disable_tabs_icon = isset($loan_all_setting_data['disable_tabs_icon']) ? $loan_
                                     <div class="col-columns-20">
                                         <div class="input-container-loan-terms">
 
-                                            <input type="text" class="loan-right-input" name="loan_terms" id="loan_terms" value="" tabindex="5" onkeydown="return onlyNos(event,'loan_terms')" maxlength="3" autocomplete="off" />
+                                            <input type="text" class="loan-right-input" name="loan_terms" id="loan_terms" value="" tabindex="5" onkeydown="return onlyNos(event,'loan_terms')" maxlength="5" autocomplete="off" />
                                         </div>
                                     </div>
 
@@ -254,9 +260,14 @@ $disable_tabs_icon = isset($loan_all_setting_data['disable_tabs_icon']) ? $loan_
                                     <div class="loan-new-theme-inner-block loan-btn-display-value">
                                         <div class="loan-new-theme-inner-block">
                                             <label for="loan_terms" class="loan-text"><?php esc_html_e('Repayment Frequency', 'loan-calculator-wp'); ?></label>
+
+                                            <?php if($ww_loan_term_label== "1") { ?>
+
+                                            <label id="label-for-freuency"></label> 
+
+                                            <?php } ?>
+
                                         </div>
-
-
                                         <div class="col-columns-20">
 
                                             <div class="input-container">

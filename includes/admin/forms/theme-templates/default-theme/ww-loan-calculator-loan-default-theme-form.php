@@ -146,6 +146,12 @@ $disable_tabs_icon = isset($loan_all_setting_data['disable_tabs_icon']) ? $loan_
 
 /* END : NEW SETTING ADDED */
 
+/*   loan term label option */
+
+$ww_loan_term_label = isset($loan_all_setting_data['ww_loan_term_label']) ? $loan_all_setting_data['ww_loan_term_label'] : "";
+/*   loan term label option */
+
+
 ?>
 
 <div class="wp-loan-calculator-main" id="wp-loan-calculator-main">
@@ -215,6 +221,7 @@ $disable_tabs_icon = isset($loan_all_setting_data['disable_tabs_icon']) ? $loan_
                         </div>
                         <div class="first-row-sub-child">
                             <label for="loan_terms" class="loan-text"><?php echo __('No. of Payments', 'loan-calculator-wp'); ?><i class="fa fa-info-circle" aria-hidden="true" tabindex="4"></i><span class="text-tooltip-disp"><?php echo __($loan_terms_tooltip, 'loan-calculator-wp'); ?></span></label>
+                            <div class="loan-number-payment-with-label">
                             <div class="loan-text-dis no-payment">
                                 <!-- <span class="extra-info"><?php echo __('Months', 'loan-calculator-wp'); ?></span> -->
                                 <?php if (!empty($get_repayment_frequency)) {
@@ -229,13 +236,21 @@ $disable_tabs_icon = isset($loan_all_setting_data['disable_tabs_icon']) ? $loan_
                                         <?php
                                         }
                                         ?>
-                                    </select>
+                                    </select>                                  
                                 <?php } else { ?>
                                     <select name="repayment_freq" id="repayment_freq" class="payment-opt-drop single-val-option">
                                         <option value="Monthly" selected><?php echo $repayment_frequency_label['Monthly'];?></option>
                                     </select>
                                 <?php } ?>
-                                <input type="text" name="loan_terms" min="<?php esc_attr_e($loan_term_min_value, 'loan-calculator-wp'); ?>" max="<?php esc_attr_e($loan_term_max_value, 'loan-calculator-wp'); ?>" maxlength="3" id="loan_terms" value="" tabindex="5" onkeydown="return onlyNos(event,'loan_terms')" />
+                                <input type="text" name="loan_terms" min="<?php esc_attr_e($loan_term_min_value, 'loan-calculator-wp'); ?>" max="<?php esc_attr_e($loan_term_max_value, 'loan-calculator-wp'); ?>" maxlength="5" id="loan_terms" value="" tabindex="5" onkeydown="return onlyNos(event,'loan_terms')" />
+
+                            </div>
+
+                            <?php if($ww_loan_term_label== "1") { ?>
+
+                            <label id="label-for-freuency"></label> 
+
+                            <?php } ?>
                             </div>
 
                             <input type="range" min="<?php esc_attr_e($loan_term_min_value, 'loan-calculator-wp'); ?>" max="<?php esc_attr_e($loan_term_max_value, 'loan-calculator-wp'); ?>" value="<?php esc_attr_e($loan_term, 'loan-calculator-wp'); ?>" class="slider" id="loan_terms_range" tabindex="6" step="1">
