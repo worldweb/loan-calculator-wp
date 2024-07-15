@@ -13,6 +13,10 @@ function cal_emi_amount_frequency_payment_options(frp_option,lamount, interest_r
 
       var monthly_fee = parseFloat(setting_data.monthly_rate);
 
+      if(Number.isNaN(monthly_fee)){
+          monthly_fee = 0;
+      }
+
       emi_amount = emi_amount + monthly_fee;     
 
     }      
@@ -39,6 +43,10 @@ function cal_emi_amount_frequency_payment_options(frp_option,lamount, interest_r
 
       var monthly_fee = parseFloat(setting_data.monthly_rate);
 
+      if(Number.isNaN(monthly_fee)){
+          monthly_fee = 0;
+      }
+
       emi_amount = emi_amount + monthly_fee;
 
     }       
@@ -56,6 +64,10 @@ function cal_emi_amount_frequency_payment_options(frp_option,lamount, interest_r
      if (setting_data.calculation_fee_setting_enable == 1) {
 
       var monthly_fee = parseFloat(setting_data.monthly_rate);
+
+      if(Number.isNaN(monthly_fee)){
+          monthly_fee = 0;
+      }
 
       emi_amount = emi_amount + monthly_fee;
      
@@ -76,6 +88,11 @@ function cal_emi_amount_frequency_payment_options(frp_option,lamount, interest_r
      if (setting_data.calculation_fee_setting_enable == 1) {
 
       var monthly_fee = parseFloat(setting_data.monthly_rate);
+
+      if(Number.isNaN(monthly_fee)){
+          monthly_fee = 0;
+      }
+
 
       emi_amount = emi_amount + monthly_fee;
    
@@ -98,6 +115,10 @@ function cal_emi_amount_frequency_payment_options(frp_option,lamount, interest_r
 
       var monthly_fee = parseFloat(setting_data.monthly_rate);
 
+      if(Number.isNaN(monthly_fee)){
+          monthly_fee = 0;
+      }
+
       emi_amount = emi_amount + monthly_fee;      
       
     }  
@@ -110,24 +131,37 @@ function cal_emi_amount_frequency_payment_options(frp_option,lamount, interest_r
   return newArr;
 }
 
-function cal_loan_terms_by_frequency_payment_option(frp_option, loan_terms_months) {
-
+function cal_loan_terms_by_frequency_payment_option(frp_option, loan_terms_months) {  
   
 
-  if (frp_option === 'Quarterly') {
-    jQuery("#regular_repayment_heading").html();
+  var label_star;
+
+  var backend_repayment_label = setting_data.regular_repayment_heading;  
+
+
+  if(backend_repayment_label == 'NULL' || backend_repayment_label == '' || backend_repayment_label == null){
+
+    backend_repayment_label = "";
+
+  }
+
+
+  var selected_freq_text = jQuery('#repayment_freq option:selected').text();
+
+  label_star = backend_repayment_label.replace("{frequency}", selected_freq_text);   
+
+
+  jQuery("#regular_repayment_heading").html(label_star);
+
+  if (frp_option === 'Quarterly') {    
      return parseInt(loan_terms_months * 3);
-  } else if (frp_option === 'Monthly') {
-    jQuery("#regular_repayment_heading").html();			
+  } else if (frp_option === 'Monthly') {    
     return parseInt(loan_terms_months);
-  } else if (frp_option === 'Yearly') {
-			jQuery("#regular_repayment_heading").html();
+  } else if (frp_option === 'Yearly') {     
       return parseInt(loan_terms_months * 12);
-  } else if (frp_option === 'Weekly') {
-      jQuery("#regular_repayment_heading").html();
+  } else if (frp_option === 'Weekly') {      
       return parseInt(loan_terms_months * 12 / 52 );
-  } else if (frp_option === 'Fortnight') {
-      jQuery("#regular_repayment_heading").html();
+  } else if (frp_option === 'Fortnight') {      
       return parseInt(loan_terms_months * 12 / 26);
   }
 
@@ -151,6 +185,11 @@ function cal_interest_amount_by_fre_payment_option(frp_option, loan_terms_months
 
       var monthly_fee = parseFloat(setting_data.monthly_rate);
 
+      if(Number.isNaN(monthly_fee)){
+          monthly_fee = 0;
+      }
+
+
       quarterlyInterestAmount = quarterlyInterestAmount + monthly_fee;      
 
      } 
@@ -167,6 +206,11 @@ function cal_interest_amount_by_fre_payment_option(frp_option, loan_terms_months
     if (setting_data.calculation_fee_setting_enable == 1) {
 
       var monthly_fee = parseFloat(setting_data.monthly_rate);
+
+       if(Number.isNaN(monthly_fee)){
+          monthly_fee = 0;
+      }
+
 
       monthlyInterestAmount = monthlyInterestAmount + monthly_fee;      
 
@@ -185,6 +229,10 @@ function cal_interest_amount_by_fre_payment_option(frp_option, loan_terms_months
 
       var monthly_fee = parseFloat(setting_data.monthly_rate);
 
+       if(Number.isNaN(monthly_fee)){
+          monthly_fee = 0;
+      }
+
       yearlyInterestAmount = yearlyInterestAmount + monthly_fee;      
 
     }  
@@ -202,6 +250,10 @@ function cal_interest_amount_by_fre_payment_option(frp_option, loan_terms_months
 
       var monthly_fee = parseFloat(setting_data.monthly_rate);
 
+       if(Number.isNaN(monthly_fee)){
+          monthly_fee = 0;
+      }
+
       weeklyInterestAmount = weeklyInterestAmount + monthly_fee;      
 
     }  
@@ -217,6 +269,10 @@ function cal_interest_amount_by_fre_payment_option(frp_option, loan_terms_months
     if (setting_data.calculation_fee_setting_enable == 1) {
 
       var monthly_fee = parseFloat(setting_data.monthly_rate);
+
+       if(Number.isNaN(monthly_fee)){
+          monthly_fee = 0;
+      }
 
       fortnightInterestAmount = fortnightInterestAmount + monthly_fee;      
 

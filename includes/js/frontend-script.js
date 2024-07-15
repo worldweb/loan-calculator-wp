@@ -22,7 +22,8 @@ jQuery(document).ready(function ($) {
 		var currency_symbol = setting_data.currency_symbols;
 		var loan_amount = jQuery("#loan_amount").val();
 		var monthly_payment = 0;
-		var repayment_frequency_val = jQuery("#repayment_freq").val();
+		var repayment_frequency_val = jQuery("#repayment_freq").val();	
+
   
 		jQuery("input[name='current_repayment_freq']").val(
 		  repayment_frequency_val
@@ -77,6 +78,21 @@ jQuery(document).ready(function ($) {
 		  );
 		  loan_terms_month = loan_terms;
 		}
+
+
+
+		/* display loan terms as year and months start */
+
+		if (loan_terms > 0) {			
+
+			convert_total_terms_to_year_month(loan_terms,repayment_frequency_val);
+
+		}
+
+
+		/* display loan terms as year and months end */
+
+
   
 		document.getElementById("ballon_amount_range").max = 80;
   
@@ -502,14 +518,18 @@ jQuery(document).ready(function ($) {
 		  }
 		}
 		/* END : Total Fee Calculation*/
+
+		/* check for the inifinity and NAN value */
+
+		if(monthly_payment==Infinity || monthly_payment == 'NaN' || Number.isNaN(monthly_payment) == Number.isNaN(NaN)){
+
+			monthly_payment = 0;
+		}
+
   
 		if (setting_data.remove_decimal_point == 1) {
-		  if (setting_data.calculation_fee_setting_enable == 1) {
-			/* jQuery("#per_month_amount").html(
-			  addCommas(
-				Math.round(parseInt(monthly_payment + Number(monthly_fee)))
-			  )
-			); */
+
+		  if (setting_data.calculation_fee_setting_enable == 1) {			
 
 			jQuery("#per_month_amount").html(
 			  addCommas(
@@ -524,13 +544,8 @@ jQuery(document).ready(function ($) {
 			);
 		  }
 		} else {
+
 		  if (setting_data.calculation_fee_setting_enable == 1) {
-			
-			/* jQuery("#per_month_amount").html(
-			  addCommas(
-				parseFloat(monthly_payment + Number(monthly_fee)).toFixed(2)
-			  )
-			); */
 
 			jQuery("#per_month_amount").html(
 			  addCommas(
@@ -547,34 +562,10 @@ jQuery(document).ready(function ($) {
 		}
   
 		/* STRAT : Interests Field Fill*/
-  
-		var display_year = total_months_terms / 12;
-		var display_year_str = "";
-		var display_month = "";
-		if (display_year >= 1) {
-		  display_month = total_months_terms % 12;
-		  if (display_month > 0) {
-			display_year_str =
-			  parseInt(display_year) +
-			  " <label>" +
-			  setting_data.year_label +
-			  "</label> " +
-			  display_month +
-			  " <label>" +
-			  setting_data.month_label +
-			  "</label> ";
-		  } else {
-			display_year_str =
-			  Math.round(display_year) +
-			  " <label>" +
-			  setting_data.year_label +
-			  "</label> ";
-		  }
-		} else {
-		  display_year_str = loan_terms_month + " " + setting_data.month_label;
-		}
-  
-		jQuery("#loan_amount_year").html(display_year_str);
+  	  		
+
+		convert_total_terms_to_year_month(loan_terms_month,repayment_frequency_val);
+
   
 		//var loan_amount_term_label = 'per ' + repayment_frequency_val.slice(0, -2) + ' for ';
 		var loan_amount_term_label = "";
@@ -594,13 +585,23 @@ jQuery(document).ready(function ($) {
   
 		if (setting_data.remove_decimal_point == 1) {
 		  jQuery("#loan_amount_rate").html(interest_rates);
-		  jQuery("#total_interests_amt").html(
-			addCommas(
+
+		  	var total_int_amt = addCommas(
 			  Math.round(
 				parseInt(total_interests) - parseInt(loan_advance_interest)
 			  )
 			)
-		  );
+
+		  	/* check for NAN value */
+
+			 if(total_int_amt=='NaN'){
+			 	total_int_amt = 0;
+			 }
+
+
+		  jQuery("#total_interests_amt").html(total_int_amt);
+
+
 		} else {
 		  jQuery("#loan_amount_rate").html(interest_rates.toFixed(2));
 		  if (interest_rates === 0) {
@@ -608,20 +609,30 @@ jQuery(document).ready(function ($) {
 			  addCommas(Math.round(parseFloat(0) - parseFloat(0)))
 			);
 		  } else {
+
 			var total_sum_interests =
 			  total_interests < loan_advance_interest
-				? total_interests
+				? addCommas(
+					  parseFloat(total_interests).toFixed(2)
+					)
 				: addCommas(
 					(
 					  parseFloat(total_interests) -
 					  parseFloat(loan_advance_interest)
 					).toFixed(2)
 				  );
+
+
+			 /* check for NAN value */	
+			 if(total_sum_interests=='NaN'){
+			 	total_sum_interests = '0.00';
+			 }
+
 			jQuery("#total_interests_amt").html(total_sum_interests);
 		  }
 		}
   
-		jQuery("#total_interests_years").html(display_year_str);
+		//jQuery("#total_interests_years").html(display_year_str);
   
 		var currency_symbols = setting_data.currency_symbols;
   
@@ -1489,6 +1500,9 @@ jQuery(document).ready(function ($) {
 		jQuery("input[name='current_repayment_freq']").val(
 		  repayment_frequency_val
 		);
+
+
+
   
 		var loan_amount = jQuery("#loan_amount").val();
 		if (setting_data.remove_decimal_point == 1) {
@@ -1508,7 +1522,8 @@ jQuery(document).ready(function ($) {
 		var total_months_terms = 0;
 		jQuery("#loan_terms").val(Math.round(jQuery("#loan_terms").val()));
   
-		var loan_terms = parseFloat(jQuery("#loan_terms").val());		
+		var loan_terms = parseFloat(jQuery("#loan_terms").val());	
+
   
 		if (loan_terms > 0) {
 		  total_months_terms = cal_loan_terms_by_frequency_payment_option(
@@ -1517,6 +1532,18 @@ jQuery(document).ready(function ($) {
 		  );
 		  loan_terms_month = loan_terms;
 		}
+
+
+		/* display loan terms as year and months start */
+
+		if (loan_terms > 0) {	
+
+			convert_total_terms_to_year_month(loan_terms,repayment_frequency_val);
+
+		}
+
+
+		/* display loan terms as year and months end */
 		
   
 		document.getElementById("ballon_amount_range").max = 80;
@@ -1887,7 +1914,15 @@ jQuery(document).ready(function ($) {
 
 		}
   
-		/* START: Total Fee Calculation */
+		/* START: Total Fee Calculation */	
+
+		/* check for the inifinity and NAN value */
+
+		if(monthly_payment==Infinity || monthly_payment =='NaN' || Number.isNaN(monthly_payment) == Number.isNaN(NaN)){
+			monthly_payment = 0;
+		}
+
+
 		
 		jQuery("#loan_terms_range").val(jQuery("#loan_terms").val());
 		var monthly_fee = setting_data.monthly_rate;
@@ -1949,7 +1984,7 @@ jQuery(document).ready(function ($) {
 			}
 			else{
 
-				loan_terms_for_fee = parseFloat(loan_terms).toFixed(2);;
+				loan_terms_for_fee = parseFloat(loan_terms).toFixed(2);
 
 
 			}
@@ -1970,6 +2005,7 @@ jQuery(document).ready(function ($) {
 		/* END : Total Fee Calculation*/
   
 		/* STRAT : Interests Field Fill*/
+
 		if (setting_data.remove_decimal_point == 1) {
 		  if (setting_data.calculation_fee_setting_enable == 1) {
 			
@@ -2008,41 +2044,18 @@ jQuery(document).ready(function ($) {
 
 
 
-		  } else {
+		  } else {	  	
+
+
 			jQuery("#per_month_amount").html(
 			  addCommas(parseFloat(monthly_payment).toFixed(2))
 			);
 		  }
-		}
-  
-		var display_year = total_months_terms / 12;
-		var display_year_str = "";
-		var display_month = "";
-		if (display_year >= 1) {
-		  display_month = total_months_terms % 12;
-  
-		  if (display_month > 0) {
-			display_year_str =
-			  parseInt(display_year) +
-			  " <label>" +
-			  setting_data.year_label +
-			  "</label> " +
-			  display_month +
-			  " <label>" +
-			  setting_data.month_label +
-			  "</label> ";
-		  } else {
-			display_year_str =
-			  Math.round(display_year) +
-			  " <label>" +
-			  setting_data.year_label +
-			  "</label> ";
-		  }
-		} else {
-		  display_year_str = total_months_terms + " " + setting_data.month_label;
-		}
-  
-		jQuery("#loan_amount_year").html(display_year_str);
+		}  
+	
+
+		convert_total_terms_to_year_month(loan_terms_month,repayment_frequency_val);
+
   
 		//var loan_amount_term_label = 'per ' + repayment_frequency_val.slice(0, -2) + ' for ';
 		var loan_amount_term_label = "";
@@ -2063,33 +2076,53 @@ jQuery(document).ready(function ($) {
 		if (setting_data.remove_decimal_point == 1) {
 		  jQuery("#loan_amount_rate").html(interest_rates);		  
 
-		  jQuery("#total_interests_amt").html(
-			addCommas(
+		 	var total_int_amt = addCommas(
 			  Math.round(
 				parseInt(total_interests) - parseInt(loan_advance_interest)
 			  )
-			)
-		  );
+			);	
+
+		 	/* check for NAN value */
+
+			 if(total_int_amt=='NaN'){
+			 	total_int_amt = 0;
+			 }
+
+
+		  jQuery("#total_interests_amt").html(total_int_amt);
 		} else {
 		  jQuery("#loan_amount_rate").html(interest_rates.toFixed(2));
-		  if (interest_rates === 0) {
+		  if (interest_rates === 0) {		  	
+
 			jQuery("#total_interests_amt").html(
 			  addCommas(Math.round(parseFloat(0) - parseFloat(0)))
 			);
 		  } else {
+
+
 			var total_sum_interests =
 			  total_interests < loan_advance_interest
-				? total_interests
+				? addCommas(
+					  parseFloat(total_interests).toFixed(2)
+					)
 				: addCommas(
 					(
 					  parseFloat(total_interests) -
 					  parseFloat(loan_advance_interest)
 					).toFixed(2)
-				  );
+				  );			
+			
+
+			/* check for NAN value */	
+			if(total_sum_interests=='NaN'){
+			 	total_sum_interests = '0.00';
+			 }
+
 			jQuery("#total_interests_amt").html(total_sum_interests);
 		  }
 		}
-		jQuery("#total_interests_years").html(display_year_str);
+		
+		//jQuery("#total_interests_years").html(display_year_str);
   
 		var currency_symbols = setting_data.currency_symbols;
   
@@ -3207,3 +3240,82 @@ jQuery(document).ready(function ($) {
 	  document.getElementById("loan_amount").textContent = value;
 	}
   }
+
+
+  function convert_total_terms_to_year_month(loan_terms,repayment_frequency_val){	
+
+
+	var years = 0;
+	var months = 0;	
+	var remains = 0; 
+
+	
+	if(repayment_frequency_val == "Weekly"){	
+		
+		
+		years = parseInt(loan_terms / 52);
+
+		remains = loan_terms - (years * 52);
+
+		months = parseInt(remains / 4);
+
+
+	}
+	else if(repayment_frequency_val == "Fortnight"){
+	
+		years = parseInt(loan_terms / 26);
+
+		remains = loan_terms - (years * 26);
+
+		months = parseInt(remains / 2);		
+
+	}
+	else if(repayment_frequency_val == "Monthly"){		
+
+		years = parseInt(loan_terms / 12);
+
+		remains = loan_terms - (years * 12);		
+
+		months = parseInt(remains);	
+	}
+	else if(repayment_frequency_val == "Quarterly"){
+
+		years = parseInt(loan_terms / 4);
+
+		remains = loan_terms - (years * 4);		
+
+		months = parseInt(remains * 3);	
+
+	}
+	else if(repayment_frequency_val == "Yearly"){
+
+		years = parseInt(loan_terms);		
+		months = 0;
+
+	}	
+
+
+	var display = years + " years and " + months + " months";	
+
+	jQuery('#label-for-freuency').text(display);
+
+	if(months <= 0){
+
+		var display_year_months_loan_det_sec = years + " <label>"+setting_data.year_label+" </label>";	
+ 
+   }
+   else{
+
+   		var display_year_months_loan_det_sec = years + " <label>"+setting_data.year_label+" </label>" + months + " <label>"+setting_data.month_label+" </label>";	
+   }
+
+
+	jQuery('#loan_amount_year').html(display_year_months_loan_det_sec);
+
+	jQuery("#total_interests_years").html(display_year_months_loan_det_sec);
+
+
+
+  }
+
+

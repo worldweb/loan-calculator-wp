@@ -3,7 +3,7 @@
  * Plugin Name: Loan Calculator WP
  * Plugin URI: https://www.worldwebtechnology.com/
  * Description:  Advanced Loan Calculator for Home Loans, Personal Loans, and various other types of loans. Includes features like a repayment chart, amortization table, video tab, balloon payment option, and supports all currencies. Use the contact form shortcode for easy access.
- * Version: 1.3.5
+ * Version: 1.3.9
  * Author: World Web Technology
  * Author URI: https://www.worldwebtechnology.com/
  * Text Domain: loan-calculator-wp
@@ -93,9 +93,9 @@ function ww_loan_calculator_load_plugin_textdomain()
 register_activation_hook(__FILE__, 'ww_loan_calculator_register_activation');
 function ww_loan_calculator_register_activation()
 {
-    $loan_calculator_db_version = get_option('loan_calculator_db_version');
-    if (empty($loan_calculator_db_version)) {
-
+        
+        $plugin_data = get_plugin_data( __FILE__ );  
+        $loan_calculator_db_version =  $plugin_data['Version']; 
         // Set default data
         $loan_calculator_default_options = array();
         $loan_calculator_default_options['first_heading_lbl'] = esc_html__('I want a', 'loan-calculator-wp');
@@ -125,10 +125,10 @@ function ww_loan_calculator_register_activation()
         $loan_calculator_default_options['interest_rate_max_value'] = '15.00';
         $loan_calculator_default_options['application_fee'] = '500';
         $loan_calculator_default_options['monthly_rate'] = '10';
-        $loan_calculator_default_options['regular_repayment_heading'] = esc_html__('Monthly Payment (incl fees)', 'loan-calculator-wp');
+        $loan_calculator_default_options['regular_repayment_heading'] = esc_html__('{frequency} Payment', 'loan-calculator-wp');
         $loan_calculator_default_options['per_month_heading'] = esc_html__('Per month for', 'loan-calculator-wp');
         $loan_calculator_default_options['years_heading'] = esc_html__('years', 'loan-calculator-wp');
-        $loan_calculator_default_options['repayment_frequency'] = array('Monthly', 'Quarterly','Yearly');
+        $loan_calculator_default_options['repayment_frequency'] = array('Monthly', 'Quarterly','Yearly','Weekly','Fortnight');
         $loan_calculator_default_options['choose_default_payment_mode'] = 'In Arrears';
         $loan_calculator_default_options['disable_ballon_amt'] = '1';
         $loan_calculator_default_options['total_interests_payable_heading'] = esc_html__('Total interest payable', 'loan-calculator-wp');
@@ -181,26 +181,11 @@ The results from this calculator should be used as an indication only. Results d
         $loan_calculator_default_options['disable_font_awesome'] = '';
         $loan_calculator_default_options['ww_loan_currency'] = 'USD';
 
-        //update loan calculator default option 
-        update_option('ww_loan_option', $loan_calculator_default_options);
-        // update db version 
-        update_option('loan_calculator_db_version', '1.0.1');
-    }
-
-    $loan_calculator_db_version = get_option('loan_calculator_db_version');
-    if ($loan_calculator_db_version == '1.0.1') {
-
-        // Get option & update currency option
-        $loan_calculator_default_options = get_option('ww_loan_option');
-        $loan_calculator_default_options['ww_loan_currency'] = 'USD';
-        update_option('ww_loan_option', $loan_calculator_default_options);
-        update_option('loan_calculator_db_version', '1.0.2');
-    }
-
-    $loan_calculator_db_version = get_option('loan_calculator_db_version');
-    if ($loan_calculator_db_version == '1.0.2') {
-        // Next update should be here.
-    }
+    //update loan calculator default option 
+    update_option('ww_loan_option', $loan_calculator_default_options);
+    // update db version 
+    update_option('loan_calculator_db_version', $loan_calculator_db_version);      
+    
     $plugin_activate_time =  strtotime("now");
     update_option('plugin_activation_time', $plugin_activate_time);
     update_option('lc_avoid_notice', 0);

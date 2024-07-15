@@ -8,11 +8,11 @@ Tags:              loan calculator, home loan calculator, car loan calculator, p
 Author URI:        https://worldwebtechnology.com
 Requires at least: 5.8
 Requires PHP:      7.2
-Tested up to:      6.5.2
-Stable tag:        1.3.5
+Tested up to:      6.5.5
+Stable tag:        1.3.9
 License:           GPLv2 or later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
-Version:           1.3.5
+Version:           1.3.9
 
 Loan / EMI Calculator for Home Loan and Personal Loan
 
@@ -20,7 +20,7 @@ Loan / EMI Calculator for Home Loan and Personal Loan
 
 [youtube https://www.youtube.com/watch?v=VhvlcwYUyIg]
 
-[Video](https://www.youtube.com/watch?v=VhvlcwYUyIg)  |  [Docs](https://docs.worldwebtechnology.com/loan-calculator/)  |  [Support](mailto:help.worldweb@gmail.com)  | [Demo](https://demo.worldwebtechnology.com/loan-calculator/) | [Website](https://www.worldwebtechnology.com/)
+[Video](https://www.youtube.com/watch?v=VhvlcwYUyIg)  |  [Docs](https://loancalc.worldwebtechnology.com/document/)  |  [Support](mailto:help.worldweb@gmail.com)  | [Demo](https://loancalc.worldwebtechnology.com/) | [Website](https://www.worldwebtechnology.com/)
 
 Loan Calculator creates a detailed amortization schedule with dates based on Payments. Users can see the chart and video as well. Visitors can also print it. 
 The plugin provides an option for a contact form so that users can use the contact form if there is any query. Display the loan disclaimer at the bottom of the loan section. Admin can customize the color to change the look of the loan calculator. All labels and values are managed from the backend
@@ -56,8 +56,8 @@ The plugin provides an option for a contact form so that users can use the conta
 `[loan_calculator]`
 
 == Screenshots ==
-1. Frontend view with Table tab enabled
-2. Frontend view with Chart tab enabled
+1. Frontend view with Chart tab enabled
+2. Frontend view with Table tab enabled
 3. Frontend view with Video tab enabled
 4. General Settings
 5. Display Settings
@@ -70,9 +70,9 @@ The plugin provides an option for a contact form so that users can use the conta
 
 = 1. Installation Instructions =
 
-1. Unzip the downloaded zip file
-2. Upload the included folder to the '/wp-content/plugins' directory of your WordPress installation
-3. Activate the plugin via the WordPress Plugins page
+1. Unzip the downloaded zip file.
+2. Upload the included folder to the '/wp-content/plugins' directory of your WordPress installation.
+3. Activate the plugin via the WordPress Plugins page.
 
 = 2. How to Display Loan Calculator? =
   Copy the shortcode <code>[loan_calculator]</code> and paste it into the page or post where you want it to appear.
@@ -103,24 +103,39 @@ The plugin provides an option for a contact form so that users can use the conta
 
 == Changelog ==
 
-1.3.5 (May 03, 2024)
-* Fixed printing problem. 
-* Expanded graph options within the plugin
+= 1.3.9 (Jul 15, 2024) =
+* Add backend setting for Display Loan Term Label
+* Fixed issue with Display Loan Term Label ( with Year and month format )
+* Fixed NaN issue with repaymant options
 
-1.3.4 (Apr 24, 2024)
+= 1.3.8 (Jul 09, 2024) =
+* Resolved Dynamic frequency issue.
+* Checked with the Latest WordPress version 6.5.5
+
+= 1.3.7 (Jun 27, 2024) =
+* Fixed issue with dynamic text.
+
+= 1.3.6 (Jun 26, 2024) =
+* Added "Weekly" and "Fortnight" frequency options to the loan calculator.
+
+= 1.3.5 (May 03, 2024) =
+* Fixed printing problem. 
+* Expanded graph options within the plugin.
+
+= 1.3.4 (Apr 24, 2024) =
 * Resolved language translation issues. 
 
-1.3.3 (Apr 16, 2024)
+= 1.3.3 (Apr 16, 2024) =
 * Resolved issue with regular repayment label on frontend.
 
-1.3.2 (Apr 15, 2024)
+= 1.3.2 (Apr 15, 2024) =
 * Tested the plugin in Playground and launched blueprint.json.
 * Resolved an issue with the default theme Twenty Twenty Four. (V1.3.1)
 
-1.3.0 (Apr 02, 2024)
-* Added Change theme option
-* Added change font-family option with search functionality
-* Added search functionality in existing currency option
+= 1.3.0 (Apr 02, 2024) =
+* Added Change theme option.
+* Added change font-family option with search functionality.
+* Added search functionality in existing currency option.
 * New theme added for the frontend calculator output.
 
 = 1.2.2 (Nov 27, 2023) =
@@ -144,16 +159,16 @@ The plugin provides an option for a contact form so that users can use the conta
 * Addressed conflicts arising from general class issues within the plugin.
 
 = 1.0.7 =
-* Added Repayment Frequency option (Monthly, Quarterly & Yearly)
+* Added Repayment Frequency option (Monthly, Quarterly & Yearly).
 
 = 1.0.5 =
 * Added setting to change graph colors.
 
 = 1.0.4 =
 * Allow the user to Disable the Balloon setting in the backend.
-* Allow the user to Disable the Tabs Icon setting in the checkbox, It will show a label instead of an icon
+* Allow the user to Disable the Tabs Icon setting in the checkbox, It will show a label instead of an icon.
 * Allow the user to Disable the Repayment Frequency setting in the backend.
-* Allow user to Disable the ContactUs section
+* Allow user to Disable the ContactUs section.
 * Allow the user to add a link on the ContactUs button in place of the popup.
 * Allow the user to Disable the Disclaimer section from the backend setting.
 
@@ -166,7 +181,7 @@ The plugin provides an option for a contact form so that users can use the conta
 * Check WordPress Version 6.1 compatibility.
 
 = 1.0.1 =
-* Added multi-currency support
+* Added multi-currency support.
 
 = 1.0.0 =
 * Initial release.

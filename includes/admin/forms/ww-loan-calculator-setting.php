@@ -115,6 +115,12 @@ $disable_tabs_icon = isset($loan_all_setting_data['disable_tabs_icon']) ? $loan_
 $get_chart_types = ww_loan_chart_types();
 $chart_types = isset($loan_all_setting_data['chart_types']) ? $loan_all_setting_data['chart_types'] : "line";
 /* END : NEW SETTING ADDED */
+
+/*   loan term label option */
+
+$ww_loan_term_label = isset($loan_all_setting_data['ww_loan_term_label']) ? $loan_all_setting_data['ww_loan_term_label'] : "";
+/*   loan term label option */
+
 ?>
 <!-- . begining of wrap -->
 <div class="wrap">
@@ -276,15 +282,15 @@ $chart_types = isset($loan_all_setting_data['chart_types']) ? $loan_all_setting_
                         <label for="repayment_frequency"><strong><?php esc_html_e('Enable Repayment Frequency', 'loan-calculator-wp'); ?></strong></label>
                     </th>
                     <td>
-                        <input type="checkbox" name="ww_loan_option[repayment_frequency][]" id="repayment_frequency_option" value="Monthly" class="regular-text" <?php echo ((!empty($get_repayment_frequency) && in_array('Monthly', $get_repayment_frequency)) ? "checked" : ""); ?>><?php esc_html_e('Monthly', 'loan-calculator-wp'); ?>
+                        <input type="checkbox" name="ww_loan_option[repayment_frequency][]" id="repayment_frequency_option_monthly" value="Monthly" class="regular-text" <?php echo ((!empty($get_repayment_frequency) && in_array('Monthly', $get_repayment_frequency)) ? "checked" : ""); ?>><label for="repayment_frequency_option_monthly"><?php esc_html_e('Monthly', 'loan-calculator-wp'); ?></label>
                         &nbsp;|&nbsp;
-                        <input type="checkbox" name="ww_loan_option[repayment_frequency][]" id="repayment_frequency_option" value="Quarterly" class="regular-text" <?php echo ((!empty($get_repayment_frequency) && in_array('Quarterly', $get_repayment_frequency)) ? "checked" : ""); ?>><?php esc_html_e('Quarterly', 'loan-calculator-wp'); ?>
+                        <input type="checkbox" name="ww_loan_option[repayment_frequency][]" id="repayment_frequency_option_quarterly" value="Quarterly" class="regular-text" <?php echo ((!empty($get_repayment_frequency) && in_array('Quarterly', $get_repayment_frequency)) ? "checked" : ""); ?>><label for="repayment_frequency_option_quarterly"><?php esc_html_e('Quarterly', 'loan-calculator-wp'); ?></label>
                         &nbsp;|&nbsp;
-                        <input type="checkbox" name="ww_loan_option[repayment_frequency][]" id="repayment_frequency_option" value="Yearly" class="regular-text" <?php echo ((!empty($get_repayment_frequency) && in_array('Yearly', $get_repayment_frequency)) ? "checked" : ""); ?>><?php esc_html_e('Yearly', 'loan-calculator-wp'); ?>
+                        <input type="checkbox" name="ww_loan_option[repayment_frequency][]" id="repayment_frequency_option_yearly" value="Yearly" class="regular-text" <?php echo ((!empty($get_repayment_frequency) && in_array('Yearly', $get_repayment_frequency)) ? "checked" : ""); ?>><label for="repayment_frequency_option_yearly"><?php esc_html_e('Yearly', 'loan-calculator-wp'); ?></label>
                         &nbsp;|&nbsp;
-                        <input type="checkbox" name="ww_loan_option[repayment_frequency][]" id="repayment_frequency_option" value="Weekly" class="regular-text" <?php echo ((!empty($get_repayment_frequency) && in_array('Weekly', $get_repayment_frequency)) ? "checked" : ""); ?>><?php esc_html_e('Weekly', 'loan-calculator-wp'); ?>
+                        <input type="checkbox" name="ww_loan_option[repayment_frequency][]" id="repayment_frequency_option_weekly" value="Weekly" class="regular-text" <?php echo ((!empty($get_repayment_frequency) && in_array('Weekly', $get_repayment_frequency)) ? "checked" : ""); ?>><label for="repayment_frequency_option_weekly"><?php esc_html_e('Weekly', 'loan-calculator-wp'); ?></label>
                          &nbsp;|&nbsp;
-                        <input type="checkbox" name="ww_loan_option[repayment_frequency][]" id="repayment_frequency_option" value="Fortnight" class="regular-text" <?php echo ((!empty($get_repayment_frequency) && in_array('Fortnight', $get_repayment_frequency)) ? "checked" : ""); ?>><?php esc_html_e('Fortnight', 'loan-calculator-wp'); ?>
+                        <input type="checkbox" name="ww_loan_option[repayment_frequency][]" id="repayment_frequency_option_fortnight" value="Fortnight" class="regular-text" <?php echo ((!empty($get_repayment_frequency) && in_array('Fortnight', $get_repayment_frequency)) ? "checked" : ""); ?>><label for="repayment_frequency_option_fortnight"><?php esc_html_e('Fortnightly', 'loan-calculator-wp'); ?></label>
                         </br>
                         </br>
                         <i><b style="color:red"><?php esc_html_e('Note', 'loan-calculator-wp') ?></b><?php esc_attr_e(": If no Repayment Frequency Options are selected, the monthly option will be automatically displayed on the frontend by default.", 'loan-calculator-wp') ?></i>
@@ -623,6 +629,15 @@ $chart_types = isset($loan_all_setting_data['chart_types']) ? $loan_all_setting_
                         <i><b style="color:red"><?php esc_html_e('Note', 'loan-calculator-wp') ?></b><?php esc_html_e(': If you enable the setting, it will use "In Advance" or "In Arrears" payment mode based on "Default Payment method" setting. ', 'loan-calculator-wp'); ?></i>
                     </td>
                 </tr>
+                <tr id="loan-terms-label-sec">
+                    <th scope="row">
+                        <label for="ww_loan_term_label"><strong><?php esc_html_e('Display Loan Term Label', 'loan-calculator-wp'); ?></strong></label>                       
+                    </th>
+                    <td>
+                        <input type='checkbox' name='ww_loan_option[ww_loan_term_label]' id='ww_loan_term_label' value='1' <?php checked($ww_loan_term_label, 1) ?> class="regular-text">
+                         <i><b style="color:red"><?php esc_html_e('Note', 'loan-calculator-wp') ?></b><?php esc_html_e(': If you enable this setting, you can see the label ( with Year and Month Duration ) below No. of payment field.', 'loan-calculator-wp'); ?> </i>
+                    </td>
+                </tr>
                 <tr>
                     <td colspan="2">
                         <h2><?php esc_html_e('Default Text for Calculation Result', 'loan-calculator-wp'); ?></h2>
@@ -637,6 +652,7 @@ $chart_types = isset($loan_all_setting_data['chart_types']) ? $loan_all_setting_
                     </th>
                     <td>
                         <input type='text' name='ww_loan_option[regular_repayment_heading]' id='regular_repayment_heading' maxlength="200" value='<?php esc_attr_e($regular_repayment_heading, 'loan-calculator-wp'); ?>' class="regular-text">
+                        <br/><i><b style="color:red"><?php esc_html_e('Note', 'loan-calculator-wp') ?></b><?php esc_html_e(' {frequency} : Frequency will replace with the dynamic option selected in dropdown like "Monthly", "Yearly", "Quarterly" etc.', 'loan-calculator-wp'); ?> </i>
                     </td>
                 </tr>
                 <tr>
