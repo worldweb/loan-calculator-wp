@@ -24,7 +24,7 @@ if (!defined('ABSPATH')) exit;
  * @since 1.0.0
  */
 if (!defined('WW_LOAN_CALCULATOR_VERSION')) {
-    define('WW_LOAN_CALCULATOR_VERSION', '1.3.5'); //version of plugin
+    define('WW_LOAN_CALCULATOR_VERSION', '1.3.9'); //version of plugin
 }
 if (!defined('WW_LOAN_CALCULATOR_TEXT_DOMAIN')) { //check if variable is not defined previous then define it
     define('WW_LOAN_CALCULATOR_TEXT_DOMAIN', 'loan-calculator-wp'); //this is for multi language support in plugin
