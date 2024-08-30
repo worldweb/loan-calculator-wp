@@ -343,6 +343,22 @@ jQuery(document).ready(function (jQuery) {
 
 	});
 
+
+	jQuery('#down_payment_option').on('change', function () {
+
+		if (this.checked) {
+
+			jQuery('.down-payment-fields-row').show(); //checked
+
+		} else {
+
+			jQuery('.down-payment-fields-row').hide(); //checked
+
+		}
+
+	});
+
+
 });
 
 

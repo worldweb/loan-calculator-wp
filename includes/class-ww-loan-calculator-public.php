@@ -59,6 +59,13 @@ if (!class_exists('WW_Loan_Calculator_Public')) {
 			$select_theme = isset($loan_all_setting_data['select_theme']) ? $loan_all_setting_data['select_theme'] : "";
 
 
+			$down_payment_option = isset($loan_all_setting_data['down_payment_option']) ? $loan_all_setting_data['down_payment_option'] : "";
+
+			$down_payment_mode = isset($loan_all_setting_data['down_payment_mode']) ? $loan_all_setting_data['down_payment_mode'] : "fixed";
+
+
+
+
 			$repay_freq_per_field_label = ww_loan_repayment_frequency_calc_label();
 
 			// Setting data is passed in js file using Localize
@@ -90,7 +97,11 @@ if (!class_exists('WW_Loan_Calculator_Public')) {
 				'repay_freq_per_year_label' => $repay_freq_per_field_label['Yearly'],
 				'repay_freq_per_week_label' => $repay_freq_per_field_label['Weekly'],
 				'repay_freq_per_fortnight_label' => $repay_freq_per_field_label['Fortnight'],
-				'chart_types' => isset($loan_all_setting_data['chart_types']) ? $loan_all_setting_data['chart_types'] : "line"
+				'chart_types' => isset($loan_all_setting_data['chart_types']) ? $loan_all_setting_data['chart_types'] : "line",
+				'down_payment_option' => $down_payment_option,
+				'down_payment_mode' => $down_payment_mode,
+				'down_payment_label_str' => __('Down Payment', 'loan-calculator-wp'),
+				'font_awesome_css_url' => WW_LOAN_CALCULATOR_URL . 'includes/css/all.min.css'
 			);
 
 			wp_localize_script('loan-calculator-frontend-script', 'setting_data', $setting_data);
@@ -98,6 +109,8 @@ if (!class_exists('WW_Loan_Calculator_Public')) {
 			wp_enqueue_script('loan-calculator-frontend-script');
 			wp_enqueue_script('loan-calculator-frequency-payment');
 			wp_enqueue_script('loan-calculator-print-script');
+
+			wp_enqueue_style('loan-calculator-print-style');
 
 			// Output content based on the theme
 			$html = '';

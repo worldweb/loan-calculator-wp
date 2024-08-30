@@ -157,7 +157,7 @@ function cal_loan_terms_by_frequency_payment_option(frp_option, loan_terms_month
      return parseInt(loan_terms_months * 3);
   } else if (frp_option === 'Monthly') {    
     return parseInt(loan_terms_months);
-  } else if (frp_option === 'Yearly') {     
+  } else if (frp_option === 'Yearly') {			
       return parseInt(loan_terms_months * 12);
   } else if (frp_option === 'Weekly') {      
       return parseInt(loan_terms_months * 12 / 52 );

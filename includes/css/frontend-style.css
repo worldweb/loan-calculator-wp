@@ -722,11 +722,9 @@
   .loan-option-text-info
     .loan-detail-section
     .loan-detail-section-child:last-child {
-    width: 40%;
-  
-    padding-top: 15px;
-  
-    padding-left: 17px;
+    width: 100%;
+     padding-top: 15px;
+/*    padding-left: 17px;*/
   }
   
   .loan-option-text-info
@@ -2088,7 +2086,7 @@
     border: none;
     background-color: var(--calc-bg-light-color);
     width: auto;
-    min-height: 36px;
+    min-height: 36px !important;
     font-size: 15px;
     border-radius: 4px;
     letter-spacing: 0.03em;
@@ -2967,4 +2965,163 @@
 
 .loan-number-payment-with-label label#label-for-freuency {
     bottom: -15px;
+}
+
+
+/* downpayment css start */
+
+.loan-option-text-info .loan-option-text-info-section .loan-option-text-info-block .downpayment-row{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -15px 15px;
+}
+
+.loan-option-text-info .loan-option-text-info-section .loan-option-text-info-block .downpayment-row .downpayment-row-sub-child{
+    width: 50%; 
+    padding: 0 15px;
+}
+
+.loan-option-text-info .loan-option-text-info-section .loan-option-text-info-block .downpayment-row .downpayment-row-sub-child label{
+    color: rgb(77, 79, 83);
+    font-size: 16px;
+    font-weight: 500;
+    display: block;
+    width: 100%;
+    margin-bottom: 5px;
+}
+.loan-option-text-info .loan-option-text-info-section .loan-option-text-info-block .downpayment-row .downpayment-row-sub-child label i{
+    cursor: pointer;
+    margin-left: 5px;
+    position: relative;
+    top: 1px;
+}
+.loan-option-text-info .loan-option-text-info-section .loan-option-text-info-block .downpayment-row .downpayment-row-sub-child .loan-text-dis{
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    justify-content: center;
+}
+.loan-option-text-info .loan-option-text-info-section .loan-option-text-info-block .downpayment-row .downpayment-row-sub-child .loan-text-dis .extra-info{
+    width: 70px;
+    background-color: var(--calc-bg-light-color);
+    height: 34px;
+    line-height: 30px !important;
+    text-align: center;
+    border: 1px solid var(--calc-border-color);
+    border-right: 0;
+    border-bottom-left-radius: 4px;
+    border-top-left-radius: 4px;
+    font-weight: bold;
+}
+.loan-option-text-info .loan-option-text-info-section .loan-option-text-info-block .downpayment-row .downpayment-row-sub-child  .loan-text-dis input[type="text"]{
+    border-radius: 0;
+    border-right: 0 !important;
+    width: 47%;
+}
+.ctm_main_wrap .downpayment_items {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.loan-option-text-info .loan-option-text-info-section .loan-option-text-info-block .downpayment-row .downpayment-row-sub-child  .loan-text-dis input#down_payment_per{
+    border-right: 1px solid var(--calc-border-color) !important;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+.loan-option-text-info .loan-option-text-info-section .loan-option-text-info-block .downpayment-row .downpayment-row-sub-child .loan-text-dis span#down_payment_per_dis{
+    position: absolute;
+    right: auto;
+    left: 11px;
+    font-weight: bold;
+    color: #555555;
+    z-index: 0;
+    bottom: 4.5px;
+}
+.loan-option-text-info .loan-option-text-info-section .loan-option-text-info-block .downpayment-row .downpayment-row-sub-child input[type="text"] {
+    width: 100%;
+    border: 1px solid var(--calc-border-color) !important;
+    background: transparent !important;
+    height: 34px;
+    padding: 0 10px;
+    color: #555;
+    font-weight: bold;
+    -webkit-box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
+    box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
+    border-radius: 4px;
+    outline: 0 !important;
+    margin: 0px !important;
+}
+
+ .loan-option-text-info .loan-option-text-info-section .loan-option-text-info-block .downpayment-row .downpayment-row-sub-child.dp-fixed-mode .loan-text-dis{
+    justify-content: left;
+ }
+ .loan-option-text-info .loan-option-text-info-section .loan-option-text-info-block .downpayment-row .downpayment-row-sub-child.dp-fixed-mode .loan-text-dis input[type="text"]{
+    border-right: 1px solid var(--calc-border-color) !important;    
+    border-radius: 0 !important;
+    border-bottom-right-radius: 4px !important;
+    border-top-right-radius: 4px !important;
+ }
+ body .ctm_main_wrap .downpayment_items input{
+      width: 100% !important;
+ }
+
+
+
+.loan-option-text-info
+.loan-option-text-info-section
+.loan-option-text-info-block
+.downpayment-row
+.downpayment-row-sub-child
+.loan-text-dis
+input#down_payment_per {
+-webkit-text-fill-color: #ffffff;
+}
+
+.loan-option-text-info
+.loan-option-text-info-section
+.loan-option-text-info-block
+.downpayment-row
+.downpayment-row-sub-child
+.loan-text-dis
+input#down_payment_per:focus {
+-webkit-text-fill-color: #555555;
+}
+
+
+.loan-option-text-info
+    .loan-option-text-info-section
+    .loan-option-text-info-block
+    .downpayment-row
+    .downpayment-row-sub-child
+    .loan-text-dis
+    input#down_payment_per:focus
+    ~ span {
+    display: none;
+}
+
+.loan-option-text-info .loan-option-text-info-section .loan-option-text-info-block .downpayment-row .downpayment-row-sub-child.dp-fixed-mode .loan-text-dis .extra-info{
+  width:59px;
+
+}
+
+/* downpayment css end */
+
+.contact-us-section .contact-btn-link{
+    transition: box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    padding: 10px 16px !important;
+    font-size: 16px !important;
+    line-height: 1.33333 !important;
+    border-radius: 6px !important;
+    color: var(--calc-background-color) !important;
+    background-color: var(--calc-bg-light-color) !important;
+    border-color: var(--calc-bg-light-color) !important;
+    border: 2px solid transparent !important;
+    outline: 0 !important;
+    text-decoration: none;
+}
+.contact-us-section .contact-btn-link:hover{
+    color: var(--calc-bg-light-color) !important;
+    background-color: var(--calc-background-color) !important;
+    border: 2px solid var(--calc-bg-light-color) !important;
 }

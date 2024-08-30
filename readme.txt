@@ -9,10 +9,10 @@ Author URI:        https://worldwebtechnology.com
 Requires at least: 5.8
 Requires PHP:      7.2
 Tested up to:      6.5.5
-Stable tag:        1.3.9
+Stable tag:        1.4.1
 License:           GPLv2 or later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
-Version:           1.3.9
+Version:           1.4.1
 
 Loan / EMI Calculator for Home Loan and Personal Loan
 
@@ -102,6 +102,15 @@ The plugin provides an option for a contact form so that users can use the conta
   You can enable/disable loan fee calculation from the WP admin. Go to the loan calculator > click on the "Default value settings" tab and search for "Enable Fee Calculation" and enable/disable according to your needs.
 
 == Changelog ==
+
+= 1.4.1 (Aug 30, 2024) =
+* Fixed issue of Chart not appear in the Print.
+* Fixed issue of numlock keypad not working in down payment field
+* Removed Contact Button when popup content or link is not added.
+* Removed Video Tab when video link is not added.
+
+= 1.4.0 (Aug 15, 2024) =
+* Resolved default setting issue, with save fields.
 
 = 1.3.9 (Jul 15, 2024) =
 * Add backend setting for Display Loan Term Label

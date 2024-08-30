@@ -21,6 +21,8 @@ jQuery(document).ready(function ($) {
 	  function loan_calculation_process() {
 		var currency_symbol = setting_data.currency_symbols;
 		var loan_amount = jQuery("#loan_amount").val();
+
+
 		var monthly_payment = 0;
 		var repayment_frequency_val = jQuery("#repayment_freq").val();	
 
@@ -41,8 +43,8 @@ jQuery(document).ready(function ($) {
 		}
   
 		var interest_rates_sign = jQuery("#interest_rates").val();
-		if (!interest_rates_sign.endsWith("% p.a.")) {
-		  jQuery("#interest_rates").val(interest_rates_sign + "% p.a.");
+		if (!interest_rates_sign.endsWith("%")) {
+		  jQuery("#interest_rates").val(interest_rates_sign + "%");
 		}
   
 		var loan_amount = jQuery("#loan_amount")
@@ -54,12 +56,123 @@ jQuery(document).ready(function ($) {
 		} else {
 		  loan_amount = parseFloat(loan_amount.replaceAll(",", ""));
 		}
+
+
+		/* down payment code start */
+
+		if (setting_data.down_payment_option == '1') {	
+
+			if (setting_data.down_payment_mode == 'percentage') {
+
+				document.getElementById("down_payment_range").max = 80;	
+
+				var down_payment_range = document.getElementById("down_payment_range");
+				
+				if (setting_data.remove_decimal_point == 1) {
+				  var value = parseInt(
+					((down_payment_range.value - down_payment_range.min) /
+					  (down_payment_range.max - down_payment_range.min)) *
+					  100
+				  );
+				  down_payment_range.style.background =
+					"linear-gradient(to right, #555555 0%, #555555 " +
+					value +
+					"%, #fff " +
+					value +
+					"%, " +
+					setting_data.back_ground_color +
+					" 100%)";		 
+				} else {
+				  var value =
+					((down_payment_range.value - down_payment_range.min) /
+					  (down_payment_range.max - down_payment_range.min)) *
+					100;
+				  down_payment_range.style.background =
+					"linear-gradient(to right, #555555 0%, #555555 " +
+					value +
+					"%, #fff " +
+					value +
+					"%, " +
+					setting_data.back_ground_color +
+					" 100%)";		 
+				}
+
+
+				var down_payment_per = jQuery("#down_payment_per").val();
+
+				if (setting_data.remove_decimal_point == 1) {
+					down_payment_per = parseInt(down_payment_per);
+					jQuery("#down_payment_per_dis").html(down_payment_per + "%");		 
+				} else {
+					down_payment_per = parseFloat(down_payment_per);
+					jQuery("#down_payment_per_dis").html(
+					down_payment_per.toFixed(2) + "%"
+					);		  
+				}
+
+
+				
+				var down_payment =
+				parseInt(
+				(parseInt(loan_amount) *
+				parseInt(down_payment_per)
+				)) / 100;
+
+				loan_amount = loan_amount - parseInt(down_payment);
+
+				jQuery("#bottom_down_payment_per").html(parseInt(down_payment_per));
+				jQuery("#bottom_down_payment").html(addCommas(parseInt(down_payment)));		
+				jQuery("#down_payment").val(addCommas(parseInt(down_payment)));	
+				var down_payment_per_sign = jQuery("#down_payment_per").val();
+				if (!down_payment_per_sign.endsWith("%")) {
+					jQuery("#down_payment_per").val(down_payment_per_sign + "%");
+				}
+
+
+
+			}
+			else{
+
+				var down_payment = parseInt(jQuery("#down_payment").val());			
+
+				if(isNaN(down_payment)){
+
+					jQuery("#down_payment").val('');
+				}
+				else if(down_payment >= loan_amount){
+					jQuery("#down_payment").val('');
+				}	
+				else if (down_payment >  0 && down_payment < loan_amount) {	
+
+					loan_amount = loan_amount - parseInt(down_payment);
+				
+				}
+
+			}					
+
+			
+
+			if (down_payment == "") {
+				down_payment = 0;
+			}
+			if (down_payment > 0) {
+				jQuery("#down_payment_section").show();
+			} else {
+				jQuery("#down_payment_section").hide();
+			}
+
+		}		
+
+
+		/* down payment code end */
+
+
   
 		if (setting_data.remove_decimal_point == 1) {
 		  var interest_rates = parseInt(jQuery("#interest_rates").val());
 		} else {
 		  var interest_rates = parseFloat(
-			jQuery("#interest_rates").val().replaceAll("% p.a.", "")
+			jQuery("#interest_rates").val().replaceAll("%", "")
 		  );
 		}
   
@@ -189,13 +302,13 @@ jQuery(document).ready(function ($) {
 		if (setting_data.remove_decimal_point == 1) {
 		  ballon_amounts_per = parseInt(ballon_amounts_per);
 		  jQuery("#interest_rate_range_dis").html(
-			jQuery("#interest_rates").val() + "% p.a."
+			jQuery("#interest_rates").val() + "%"
 		  );
 		  jQuery("#ballon_amounts_per_dis").html(ballon_amounts_per + "%");
 		} else {
 		  ballon_amounts_per = parseFloat(ballon_amounts_per);
 		  jQuery("#interest_rate_range_dis").html(
-			jQuery("#interest_rates").val() + "% p.a."
+			jQuery("#interest_rates").val() + "%"
 		  );
 		  jQuery("#ballon_amounts_per_dis").html(
 			ballon_amounts_per.toFixed(2) + "%"
@@ -641,6 +754,43 @@ jQuery(document).ready(function ($) {
 		var rmv_decimal = 0;
 		var is_advanced = "";
 		var count = loan_terms_month;
+
+
+		/* down payment entry in table start */
+
+		if (setting_data.down_payment_option == '1') {
+
+			if(parseInt(down_payment) > 0 ){	
+
+				if (setting_data.remove_decimal_point == 1) {
+
+					var table_down_payment = currency_symbols+parseInt(down_payment);
+					var table_loan_amout = currency_symbols+parseInt(loan_amount);
+					var table_int_rate = currency_symbols+'0';
+
+				}
+				else{
+
+					var table_down_payment = currency_symbols+parseInt(down_payment)+'.00';
+					var table_loan_amout = currency_symbols+parseInt(loan_amount)+'.00';
+					var table_int_rate = currency_symbols+'0.00';
+
+				}
+
+
+				table_data += '<tr>';
+				  table_data += '<td>*</td>';
+				  table_data += '<td>-' +table_down_payment+ '<br/><span style="font-weight: bold;font-size:12px;">('+setting_data.down_payment_label_str+')</span></td>';
+				  table_data += '<td>'+table_int_rate+'</td>';
+				  table_data += '<td>' +table_loan_amout+ '</td>';
+			    table_data += '</tr>';
+
+			}
+
+		}
+
+		/* down payment entry in table end  */
+
   
 		for (var i = 1; i <= loan_terms_month; i++) {
 		  if (setting_data.remove_decimal_point == 1) {
@@ -1009,6 +1159,10 @@ jQuery(document).ready(function ($) {
 		loan_amount = loan_amount
 		  .replaceAll(",", "")
 		  .replaceAll(currency_symbol, "");
+
+		if (setting_data.down_payment_option == '1') {
+			jQuery("#loan_amount").val(addCommas(parseInt(loan_amount)));		
+		} 
   
 		jQuery("#loan_amount_range").val(parseFloat(loan_amount));
 		loan_calculation_process();
@@ -1082,7 +1236,7 @@ jQuery(document).ready(function ($) {
 	  jQuery("#interest_rates").blur(function () {
 		var interest_rates = jQuery("#interest_rates")
 		  .val()
-		  .replaceAll("% p.a.", "");
+		  .replaceAll("%", "");
 		if (setting_data.remove_decimal_point == 1) {
 		  if (interest_rates == "" || interest_rates == ".") {
 			jQuery("#interest_rates").val(parseInt(setting_data.interested_rate));
@@ -1129,7 +1283,7 @@ jQuery(document).ready(function ($) {
   
 		jQuery("#interest_rate_range").val(jQuery("#interest_rates").val());
 		jQuery("#interest_rate_range_dis").html(
-		  jQuery("#interest_rates").val() + "% p.a."
+		  jQuery("#interest_rates").val() + "%"
 		);
 		loan_calculation_process();
 	  });
@@ -1166,7 +1320,7 @@ jQuery(document).ready(function ($) {
 		jQuery("#ballon_amounts").val(ballon_amounts);
 		jQuery("#bill_ballon_amt").html(ballon_amounts);
 		jQuery("#interest_rate_range_dis").html(
-		  jQuery("#interest_rates").val() + "% p.a."
+		  jQuery("#interest_rates").val() + "%"
 		);
 		jQuery("#ballon_amounts_per_dis").html(ballon_amounts_per + "%");
 		loan_calculation_process();
@@ -1299,7 +1453,7 @@ jQuery(document).ready(function ($) {
 		jQuery("#interest_rates").val(interest_rate_range_val.toFixed(2));
 	  }
 	  jQuery("#interest_rate_range_dis").html(
-		interest_rate_range.value + "% p.a."
+		interest_rate_range.value + "%"
 	  );
 	  if (setting_data.remove_decimal_point == 1) {
 		var value = parseInt(
@@ -1326,7 +1480,7 @@ jQuery(document).ready(function ($) {
 	  interest_rate_range.oninput = function () {
 		var interest_rate_range_val = this.value;
 		jQuery("#interest_rates").val(interest_rate_range_val);
-		jQuery("#interest_rate_range_dis").html(this.value + "% p.a.");
+		jQuery("#interest_rate_range_dis").html(this.value + "%");
 		if (setting_data.remove_decimal_point == 1) {
 		  var value = parseInt(
 			((this.value - this.min) / (this.max - this.min)) * 100
@@ -1397,25 +1551,33 @@ jQuery(document).ready(function ($) {
 	  };
   
 	  /*************** || Print Code [PDF] || *****************/
-  
+  	
+  	 /* fixed issue of chart in print start */
 	  
 	  jQuery(".print-table").click(function () {
-		// Set the paper size to A3 using jQuery
-		jQuery("#main-sec").css({
-		  "@media print": {
-			"@page": {size: "297mm 420mm"},
-			"-webkit-print-color-adjust": "exact !important",
-			"-moz-print-color-adjust": "exact !important",
-			"-ms-print-color-adjust": "exact !important",
-			"print-color-adjust": "exact !important",
-			"color-adjust": "exact !important"
-		  }
-		});
-		jQuery("#main-sec").print(/*options*/);
-	  });
-	  
+
+	  	 var graphW = jQuery('#loan-process-graph').attr('width');  	 
+
+	  	 if(graphW == '0'){	  	 	
+	  	 	jQuery('#loan-process-graph').prop('width',464);
+	  	 	jQuery('#loan-process-graph').prop('height',697);	  	 	
+	  	 }
+
+		 printJS({
+            printable: 'main-sec',
+            type: 'html',
+            targetStyles: ['*'], 
+            
+        });
+	  });  
+
+	  jQuery('input:radio[name="tabs"]').on('change',function() {        	
+        	loan_calculation_process();
+       });
 	
-   
+	 /* fixed issue of chart in print end */	
+
+   	
 	  // Attach change event handler to the payment_type dropdown
 	  $("#payment_type").change(function () {
 		// Call loan_calculation_process when the dropdown changes
@@ -1485,6 +1647,227 @@ jQuery(document).ready(function ($) {
 		/*========End 6-7-2023=========*/
 		loan_calculation_process();
 	  });
+
+
+	   /* down payment event code start */
+
+	  if (setting_data.down_payment_option == '1') {	  		
+
+		   /* check if down payment value entered */
+		   jQuery("#down_payment").on("blur", function () {		   		
+
+		   		if(setting_data.down_payment_mode=='percentage'){		   			
+
+					var down_payment_range = document.getElementById("down_payment_range");
+					if (parseFloat(down_payment_range.value) == 0 || parseInt(down_payment_range.value) == 0 ) {
+						document.getElementById("down_payment").value = 0 ;
+						document.getElementById("down_payment_per").value = 0 + "%";
+						document.getElementById("down_payment_per_dis").text = 0 + "%";
+					}
+					var down_payment = $(this).val();
+					var down_payment_per = jQuery("#down_payment_per").val();
+					down_payment_range.value = down_payment_per;
+					var loan_amount = jQuery("#loan_amount").val();
+					loan_amount = loan_amount.replaceAll(",", "");
+
+					if (down_payment == "" || down_payment == ".") {
+					jQuery("#down_payment").val(0);
+					}
+
+					down_payment = down_payment.replaceAll(",", "");
+
+					if (down_payment == "" || down_payment == ".") {
+						down_payment = 0;
+						down_payment_per = 0;
+					} else {
+					if (setting_data.remove_decimal_point == 1) {
+						var down_payment_per = parseInt(
+						(parseInt(down_payment) * 100) / parseInt(loan_amount)
+						);
+					} else {
+						var down_payment_per = parseFloat(
+						(parseFloat(down_payment) * 100) / parseFloat(loan_amount)
+						);
+					}
+					}
+					jQuery("#down_payment_per").val(Math.round(down_payment_per));
+					document.getElementById("down_payment_range").value = down_payment_per;
+					jQuery("#down_payment_per").val(down_payment_per);
+
+					jQuery("#bottom_down_payment").html(down_payment);
+					jQuery("#bottom_down_payment_per").html(down_payment_per);
+
+		   		
+		   		}
+		   		else{	
+
+		   			var down_payment = $(this).val();
+		   			var loan_amount = jQuery("#loan_amount").val();
+		   			var currency_symbol = setting_data.currency_symbols;
+
+		   			down_payment = down_payment.replaceAll(",", "");
+		   			loan_amount = loan_amount.replaceAll(",", "");
+		   			loan_amount = loan_amount.replaceAll(currency_symbol, "");
+
+
+		   			if (setting_data.remove_decimal_point == 1) {		   				
+
+		   				var eighty_percent_loan_amt = 	(parseInt(loan_amount) * 80)/100;  
+		   				down_payment = parseInt(down_payment);
+		   				
+		   				if(down_payment>eighty_percent_loan_amt){
+		   					
+		   					jQuery(this).val(0);
+		   				
+		   				}
+		   				else{		   					
+
+		   					jQuery(this).val(parseInt(down_payment));
+
+		   					jQuery("#bottom_down_payment").html(parseInt(down_payment));
+
+		   				}		   				
+		   			
+		   			}
+		   			else{
+
+		   				var eighty_percent_loan_amt = 	(parseFloat(loan_amount) * 80)/100;  
+		   				down_payment = parseFloat(down_payment);
+		   				if(down_payment>eighty_percent_loan_amt){
+		   					jQuery(this).val(0.00);
+		   					
+		   				}
+		   				else{
+
+		   					jQuery("#bottom_down_payment").html(down_payment);
+
+		   				}
+		   			}
+   			
+		   			
+		   			loan_calculation_process();
+		   
+		   		}
+
+
+		   });		   
+	   
+			
+
+
+			if(setting_data.down_payment_mode=='percentage'){	
+
+				/* check if down payment per changed */
+
+				jQuery("#down_payment_per").on("blur", function () {	
+
+
+					jQuery(this).val(parseInt(jQuery(this).val()));
+
+					console.log('cur_val:'+jQuery(this).val());
+
+					if(parseInt(jQuery(this).val()) > 80){
+
+						if (setting_data.remove_decimal_point == 1) {
+							jQuery(this).val(0);
+						}
+						else{
+							jQuery(this).val(0.00);
+						}
+					}
+
+
+					var currency_symbol = setting_data.currency_symbols;
+					jQuery("#down_payment_range").val(
+					jQuery("#down_payment_per").val().replaceAll("%", "")
+					);
+					var loan_amount = jQuery("#loan_amount")
+					.val()
+					.replaceAll(currency_symbol, "");
+					loan_amount = loan_amount.replaceAll(",", "");
+					var down_payment_per = jQuery("#down_payment_per")
+					.val()
+					.replaceAll("%", "");
+
+					if (setting_data.remove_decimal_point == 1) {
+
+					var down_payment =
+					parseInt(parseInt(loan_amount) * parseInt(down_payment_per)) / 100;
+					} else {
+					var down_payment =
+					parseFloat(parseFloat(loan_amount) * parseFloat(down_payment_per)) /
+					100;
+					}
+
+					if (down_payment_per == "" || down_payment_per == ".") {
+					jQuery("#down_payment_per").val("0%");
+					jQuery("#down_payment_range").val(0);
+					down_payment_per = 0;
+					}
+
+
+					jQuery("#down_payment").val(down_payment);
+					jQuery("#bottom_down_payment").html(down_payment);
+
+
+					jQuery("#down_payment_per_dis").html(down_payment_per + "%");
+					loan_calculation_process();
+
+				});	   
+
+			
+
+				var down_payment_range = document.getElementById("down_payment_range");
+				jQuery("#down_payment_per").val(down_payment_range.value);
+				jQuery("#down_payment_per_dis").html(down_payment_range.value + "%");
+				if (setting_data.remove_decimal_point == 1) {
+					var value = parseInt(
+					((down_payment_range.value - down_payment_range.min) /
+					(down_payment_range.max - down_payment_range.min)) *
+					100
+					);
+				} else {
+					var value = parseFloat(
+					((down_payment_range.value - down_payment_range.min) /
+					(down_payment_range.max - down_payment_range.min)) *
+					100
+					);
+				}
+				down_payment_range.style.background =
+				"linear-gradient(to right, #555555 0%, #555555 " +
+				value +
+				"%, #fff " +
+				value +
+				"%, white 100%)";
+
+				// Update the current slider value (each time you drag the slider handle)
+				down_payment_range.oninput = function (e) {					
+					jQuery("#down_payment_per").val(this.value);
+					jQuery("#down_payment_per_dis").html(this.value + "%");
+					if (setting_data.remove_decimal_point == 1) {
+					value = parseInt(
+					((this.value - this.min) / (this.max - this.min)) * 100
+					);
+					} else {
+					value = parseFloat(
+					((this.value - this.min) / (this.max - this.min)) * 100
+					);
+					}
+					this.style.background =
+					"linear-gradient(to right, #555555 0%, #555555 " +
+					value +
+					"%, #fff " +
+					value +
+					"%, white 100%)";
+					loan_calculation_process();
+				};  
+
+			}
+
+
+	   }
+
+	   /* down payment event code start */
   
 	  loan_calculation_process(); // call function
 	} else {
@@ -1499,9 +1882,7 @@ jQuery(document).ready(function ($) {
   
 		jQuery("input[name='current_repayment_freq']").val(
 		  repayment_frequency_val
-		);
-
-
+		);	
 
   
 		var loan_amount = jQuery("#loan_amount").val();
@@ -1510,6 +1891,104 @@ jQuery(document).ready(function ($) {
 		} else {
 		  loan_amount = parseFloat(loan_amount.replaceAll(",", ""));
 		}
+
+
+		/* down payment code start */
+
+		if (setting_data.down_payment_option == '1') {	
+
+
+
+			if (setting_data.down_payment_mode == 'percentage') {
+
+				document.getElementById("down_payment_range").max = 80;	
+
+				var down_payment_range = document.getElementById("down_payment_range");
+				
+				if (setting_data.remove_decimal_point == 1) {
+				  var value = parseInt(
+					((down_payment_range.value - down_payment_range.min) /
+					  (down_payment_range.max - down_payment_range.min)) *
+					  100
+				  );
+				  down_payment_range.style.background =
+					"linear-gradient(to right, #555555 0%, #555555 " +
+					value +
+					"%, #fff " +
+					value +
+					"%, " +
+					setting_data.back_ground_color +
+					" 100%)";		 
+				} else {
+				  var value =
+					((down_payment_range.value - down_payment_range.min) /
+					  (down_payment_range.max - down_payment_range.min)) *
+					100;
+				  down_payment_range.style.background =
+					"linear-gradient(to right, #555555 0%, #555555 " +
+					value +
+					"%, #fff " +
+					value +
+					"%, " +
+					setting_data.back_ground_color +
+					" 100%)";		 
+				}
+
+
+				var down_payment_per = jQuery("#down_payment_per").val();
+
+				
+				down_payment_per = parseInt(down_payment_per);
+				jQuery("#down_payment_per_dis").html(down_payment_per + "%");	
+				
+				var down_payment =
+				parseInt(
+				(parseInt(loan_amount) *
+				parseInt(down_payment_per)
+				)) / 100;
+
+				loan_amount = loan_amount - parseInt(down_payment);
+
+				jQuery("#bottom_down_payment_per").html(parseInt(down_payment_per));
+				jQuery("#bottom_down_payment").html(addCommas(parseInt(down_payment)));
+				jQuery("#down_payment").val(addCommas(parseInt(down_payment)));				
+
+
+			}
+			else{
+
+				var down_payment = parseInt(jQuery("#down_payment").val().replaceAll(",", ""));			
+
+				if(isNaN(down_payment)){
+
+					jQuery("#down_payment").val('');
+				}
+				else if(down_payment >= loan_amount){
+					jQuery("#down_payment").val('');
+				}	
+				else if (down_payment >  0 && down_payment < loan_amount) {	
+
+					loan_amount = loan_amount - parseInt(down_payment);
+				
+				}
+
+			}		
+			
+
+
+			if (down_payment == "") {
+				down_payment = 0;
+			}
+			if (down_payment > 0) {
+				jQuery("#down_payment_section").show();
+			} else {
+				jQuery("#down_payment_section").hide();
+			}
+
+		}		
+
+
+		/* down payment code end */
   
 		if (setting_data.remove_decimal_point == 1) {
 		  var interest_rates = parseInt(jQuery("#interest_rates").val());
@@ -1642,7 +2121,7 @@ jQuery(document).ready(function ($) {
 		  ballon_amounts_per = parseInt(ballon_amounts_per);
 		  jQuery("#ballon_amounts_per_dis").html(ballon_amounts_per + "%");
 		  jQuery("#interest_rate_range_dis").html(
-			jQuery("#interest_rates").val() + "% p.a."
+			jQuery("#interest_rates").val() + "%"
 		  );
 		} else {
 		  ballon_amounts_per = parseFloat(ballon_amounts_per);
@@ -1650,7 +2129,7 @@ jQuery(document).ready(function ($) {
 			ballon_amounts_per.toFixed(2) + "%"
 		  );
 		  jQuery("#interest_rate_range_dis").html(
-			jQuery("#interest_rates").val() + "% p.a."
+			jQuery("#interest_rates").val() + "%"
 		  );
 		}
   
@@ -1753,7 +2232,9 @@ jQuery(document).ready(function ($) {
 		  loan_terms = parseFloat(loan_terms / 12).toFixed(2);
 		  loan_terms = parseFloat(loan_terms);
 		}
-  
+
+		
+  	
 		if (setting_data.remove_decimal_point == 1) {
 		  var emi_cal = cal_emi_amount_frequency_payment_options(
 			repayment_frequency_val,
@@ -1770,10 +2251,7 @@ jQuery(document).ready(function ($) {
 		  var per_month_ballon_amt = 0;
 		  var ballon_amt_interest = 0;		  
 
-		  if (ballon_amounts > 0) {
-
-		  	//console.log('interest_rates'+interest_rates);
-		  	//console.log('total_months_terms'+total_months_terms);
+		  if (ballon_amounts > 0) {	  	
 
 
 			ballon_amt_interest = (ballon_amounts * interest_rates) / 100;				
@@ -2134,6 +2612,44 @@ jQuery(document).ready(function ($) {
 		var rmv_decimal = 0;
 		var is_advanced = "";
 		var count = loan_terms_month;
+
+		//var down_payment = 123;
+
+
+		/* down payment entry in table start */
+
+		if (setting_data.down_payment_option == '1') {
+
+			if(parseInt(down_payment) > 0 ){	
+
+				if (setting_data.remove_decimal_point == 1) {
+
+					var table_down_payment = currency_symbols+down_payment;
+					var table_loan_amout = currency_symbols+loan_amount;
+					var table_int_rate = currency_symbols+'0';
+
+				}
+				else{
+
+					var table_down_payment = currency_symbols+down_payment+'.00';
+					var table_loan_amout = currency_symbols+loan_amount+'.00';
+					var table_int_rate = currency_symbols+'0.00';
+
+				}
+
+
+				table_data += '<tr>';
+				  table_data += '<td>*</td>';
+				  table_data += '<td>-' +table_down_payment+ '<br/><span style="font-weight: bold;font-size:12px;">('+setting_data.down_payment_label_str+')</span></td>';
+				  table_data += '<td>'+table_int_rate+'</td>';
+				  table_data += '<td>' +table_loan_amout+ '</td>';
+			    table_data += '</tr>';
+
+			}
+
+		}
+
+		/* down payment entry in table end  */
   
 		for (var i = 1; i <= loan_terms_month; i++) {
 		  if (setting_data.remove_decimal_point == 1) {
@@ -2511,6 +3027,12 @@ jQuery(document).ready(function ($) {
 		}
 		var loan_amount = jQuery("#loan_amount").val();
 		loan_amount = loan_amount.replaceAll(",", "");
+
+		if (setting_data.down_payment_option == '1') {
+
+			jQuery("#loan_amount").val(addCommas(parseInt(loan_amount)));
+		
+		}
   
 		jQuery("#loan_amount_range").val(parseFloat(loan_amount));
 		loan_calculation_process();
@@ -2640,7 +3162,7 @@ jQuery(document).ready(function ($) {
   
 		jQuery("#interest_rate_range").val(jQuery("#interest_rates").val());
 		jQuery("#interest_rate_range_dis").html(
-		  jQuery("#interest_rates").val() + "% p.a."
+		  jQuery("#interest_rates").val() + "%"
 		);
   
 		loan_calculation_process();
@@ -2679,10 +3201,11 @@ jQuery(document).ready(function ($) {
 		jQuery("#ballon_amounts").val(ballon_amounts);
 		jQuery("#bill_ballon_amt").html(ballon_amounts);
 		jQuery("#interest_rate_range_dis").html(
-		  jQuery("#interest_rates").val() + "% p.a."
+		  jQuery("#interest_rates").val() + "%"
 		);
 		jQuery("#ballon_amounts_per_dis").html(ballon_amounts_per + "%");
 		loan_calculation_process();
+
 	  });
   
 	  jQuery("#ballon_amounts").blur(function () {
@@ -2729,6 +3252,7 @@ jQuery(document).ready(function ($) {
 		jQuery("#ballon_amounts_per_dis").text(ballon_amounts_per + "%");
 		loan_calculation_process();
 	  });
+
 	  /* END : Textbox Blur Event*/
   
 	  var loan_amount_range = document.getElementById("loan_amount_range");
@@ -2881,7 +3405,7 @@ jQuery(document).ready(function ($) {
 		jQuery("#interest_rates").val(interest_rate_range_val.toFixed(2));
 	  }
 	  jQuery("#interest_rate_range_dis").html(
-		interest_rate_range.value + "% p.a."
+		interest_rate_range.value + "%"
 	  );
 	  if (setting_data.remove_decimal_point == 1) {
 		var value = parseInt(
@@ -2906,7 +3430,7 @@ jQuery(document).ready(function ($) {
 	  interest_rate_range.oninput = function () {
 		var interest_rate_range_val = this.value;
 		jQuery("#interest_rates").val(interest_rate_range_val);
-		jQuery("#interest_rate_range_dis").html(this.value + "% p.a.");
+		jQuery("#interest_rate_range_dis").html(this.value + "%");
 		if (setting_data.remove_decimal_point == 1) {
 		  var value = parseInt(
 			((this.value - this.min) / (this.max - this.min)) * 100
@@ -2963,7 +3487,8 @@ jQuery(document).ready(function ($) {
 		"%, white 100%)";
   
 	  // Update the current slider value (each time you drag the slider handle)
-	  ballon_amount_range.oninput = function (e) {
+	  ballon_amount_range.oninput = function (e) {	  	
+
 		jQuery("#ballon_amounts_per").val(this.value);
 		jQuery("#ballon_amounts_per_dis").html(this.value + "%");
 		if (setting_data.remove_decimal_point == 1) {
@@ -2982,7 +3507,8 @@ jQuery(document).ready(function ($) {
 		  value +
 		  "%, white 100%)";
 		loan_calculation_process();
-	  };
+	  };  
+
   
 	  var loan_terms = document.getElementById("loan_terms");
   
@@ -3019,26 +3545,40 @@ jQuery(document).ready(function ($) {
   
 	  /******************|| Print Code || **********************/
   
-	  jQuery(".print-table").click(function () {
-		// Set the paper size to A3 using jQuery
-		jQuery("#main-sec").css({
-		  "@media print": {
-			"@page": {size: "297mm 420mm"},
-			"-webkit-print-color-adjust": "exact !important",
-			"-moz-print-color-adjust": "exact !important",
-			"-ms-print-color-adjust": "exact !important",
-			"print-color-adjust": "exact !important",
-			"color-adjust": "exact !important"
-		  }
-		});
-		jQuery("#main-sec").print(/*options*/);
+  	  /* fixed issue of chart in print start */
+	  
+	  jQuery(".print-table").click(function () {		
+
+	  	 var graphW = jQuery('#loan-process-graph').attr('width');  	 
+
+	  	 if(graphW == '0'){
+	  	 	graphW = 540;
+	  	 	jQuery('#loan-process-graph').prop('width',graphW);
+	  	 	jQuery('#loan-process-graph').prop('height',graphW);	  	 	
+	  	 }
+
+		 printJS({
+            printable: 'main-sec',
+            type: 'html',
+            targetStyles: ['*'], 
+            css: setting_data.font_awesome_css_url /* require to load font awesome icons */
+         });
+		
 	  });
+
+	   jQuery('input:radio[name="tabs"]').on('change',function() {        	
+        	loan_calculation_process();
+       });
+
+       /* fixed issue of chart in print end */
   
 	  // Attach change event handler to the payment_type dropdown
 	  $("#payment_type").change(function () {
 		// Call loan_calculation_process when the dropdown changes
 		loan_calculation_process();
 	  });
+
+	  
   
 	  $(document).on("input", "#repayment_freq", function () {
 		/*========start 6-7-2023=========*/
@@ -3054,9 +3594,6 @@ jQuery(document).ready(function ($) {
 		var min_nop_value = jQuery("input[name='min_value']").val();
   
 		var max_nop_value = jQuery("input[name='max_value']").val();
-  
-		
-
 
 
 		var numbers_of_payments = cal_numbers_of_payment_by_frequency_val(
@@ -3112,7 +3649,233 @@ jQuery(document).ready(function ($) {
 		/*========End 6-7-2023=========*/
 		loan_calculation_process();
 	  });
+
+
+	  /* down payment event code start */
+
+	  if (setting_data.down_payment_option == '1') {
+
+	  		
+
+		   /* check if down payment value entered */
+		   jQuery("#down_payment").on("blur", function () {		   		
+
+		   		if(setting_data.down_payment_mode=='percentage'){		   			
+
+					var down_payment_range = document.getElementById("down_payment_range");
+					if (parseFloat(down_payment_range.value) == 0 || parseInt(down_payment_range.value) == 0 ) {
+						document.getElementById("down_payment").value = 0 ;
+						document.getElementById("down_payment_per").value = 0 + "%";
+						document.getElementById("down_payment_per_dis").text = 0 + "%";
+					}
+					var down_payment = $(this).val();
+					var down_payment_per = jQuery("#down_payment_per").val();
+					down_payment_range.value = down_payment_per;
+					var loan_amount = jQuery("#loan_amount").val();
+					loan_amount = loan_amount.replaceAll(",", "");
+
+					if (down_payment == "" || down_payment == ".") {
+					jQuery("#down_payment").val(0);
+					}
+
+					down_payment = down_payment.replaceAll(",", "");
+
+					if (down_payment == "" || down_payment == ".") {
+						down_payment = 0;
+						down_payment_per = 0;
+					} else {
+					if (setting_data.remove_decimal_point == 1) {
+						var down_payment_per = parseInt(
+						(parseInt(down_payment) * 100) / parseInt(loan_amount)
+						);
+					} else {
+						var down_payment_per = parseFloat(
+						(parseFloat(down_payment) * 100) / parseFloat(loan_amount)
+						);
+					}
+					}
+					jQuery("#down_payment_per").val(Math.round(down_payment_per));
+					document.getElementById("down_payment_range").value = down_payment_per;
+					jQuery("#down_payment_per").val(down_payment_per);
+
+					jQuery("#bottom_down_payment").html(down_payment);
+					jQuery("#bottom_down_payment_per").html(down_payment_per);
+
+		   		
+		   		}
+		   		else{	
+
+		   			var down_payment = $(this).val();
+		   			var loan_amount = jQuery("#loan_amount").val();
+
+		   			down_payment = down_payment.replaceAll(",", "");
+		   			loan_amount = loan_amount.replaceAll(",", "");
+
+		   			if (setting_data.remove_decimal_point == 1) {
+
+		   				var eighty_percent_loan_amt = 	(parseInt(loan_amount) * 80)/100;  
+		   				down_payment = parseInt(down_payment);
+		   				if(down_payment>eighty_percent_loan_amt){
+
+		   					jQuery(this).val(0);
+		   				
+		   				}
+		   				else{
+
+		   					jQuery(this).val(parseInt(down_payment));
+
+		   					jQuery("#bottom_down_payment").html(parseInt(down_payment));
+
+		   				}		   				
+		   			
+		   			}
+		   			else{
+
+		   				var eighty_percent_loan_amt = 	(parseFloat(loan_amount) * 80)/100;  
+		   				down_payment = parseFloat(down_payment);
+		   				if(down_payment>eighty_percent_loan_amt){
+		   					jQuery(this).val(0.00);
+		   					
+		   				}
+		   				else{
+
+		   					jQuery(this).val(addCommas(parseInt(down_payment)));
+
+		   					jQuery("#bottom_down_payment").html(addCommas(parseInt(down_payment)));
+
+		   				}
+		   			}
+   			
+		   			
+		   			loan_calculation_process();
+		   
+		   		}
+
+
+		   });		   
+	   
+			
+
+
+			if(setting_data.down_payment_mode=='percentage'){	
+
+				/* check if down payment per changed */
+
+				jQuery("#down_payment_per").on("blur", function () {	
+
+
+					jQuery(this).val(parseInt(jQuery(this).val()));
+					
+					console.log('cur_val:'+jQuery(this).val());
+
+					if(parseInt(jQuery(this).val()) > 80){
+
+						if (setting_data.remove_decimal_point == 1) {
+							jQuery(this).val(0);
+						}
+						else{
+							jQuery(this).val(0.00);
+						}
+					}
+
+
+					var currency_symbol = setting_data.currency_symbols;
+					jQuery("#down_payment_range").val(
+					jQuery("#down_payment_per").val().replaceAll("%", "")
+					);
+					var loan_amount = jQuery("#loan_amount")
+					.val()
+					.replaceAll(currency_symbol, "");
+					loan_amount = loan_amount.replaceAll(",", "");
+					var down_payment_per = jQuery("#down_payment_per")
+					.val()
+					.replaceAll("%", "");
+
+					if (setting_data.remove_decimal_point == 1) {
+
+					var down_payment =
+					parseInt(parseInt(loan_amount) * parseInt(down_payment_per)) / 100;
+					} else {
+					var down_payment =
+					parseFloat(parseFloat(loan_amount) * parseFloat(down_payment_per)) /
+					100;
+					}
+
+					if (down_payment_per == "" || down_payment_per == ".") {
+					jQuery("#down_payment_per").val("0%");
+					jQuery("#down_payment_range").val(0);
+					down_payment_per = 0;
+					}
+
+
+					jQuery("#down_payment").val(down_payment);
+					jQuery("#bottom_down_payment").html(down_payment);
+
+
+					jQuery("#down_payment_per_dis").html(down_payment_per + "%");
+					loan_calculation_process();
+
+				});	   
+
+			
+
+				var down_payment_range = document.getElementById("down_payment_range");
+				jQuery("#down_payment_per").val(down_payment_range.value);
+				jQuery("#down_payment_per_dis").html(down_payment_range.value + "%");
+				if (setting_data.remove_decimal_point == 1) {
+					var value = parseInt(
+					((down_payment_range.value - down_payment_range.min) /
+					(down_payment_range.max - down_payment_range.min)) *
+					100
+					);
+				} else {
+					var value = parseFloat(
+					((down_payment_range.value - down_payment_range.min) /
+					(down_payment_range.max - down_payment_range.min)) *
+					100
+					);
+				}
+				down_payment_range.style.background =
+				"linear-gradient(to right, #555555 0%, #555555 " +
+				value +
+				"%, #fff " +
+				value +
+				"%, white 100%)";
+
+				// Update the current slider value (each time you drag the slider handle)
+				down_payment_range.oninput = function (e) {
+					
+					jQuery("#down_payment_per").val(this.value);
+					jQuery("#down_payment_per_dis").html(this.value + "%");
+					if (setting_data.remove_decimal_point == 1) {
+					value = parseInt(
+					((this.value - this.min) / (this.max - this.min)) * 100
+					);
+					} else {
+					value = parseFloat(
+					((this.value - this.min) / (this.max - this.min)) * 100
+					);
+					}
+					this.style.background =
+					"linear-gradient(to right, #555555 0%, #555555 " +
+					value +
+					"%, #fff " +
+					value +
+					"%, white 100%)";
+					loan_calculation_process();
+				};  
+
+			}
+
+
+	   }
+
+	   /* down payment event code start */	  
+
+
 	  loan_calculation_process();
+
+
 	} /********** END: This condition for Default theme and New theme change *************/
   }); //End jQuery(document).ready(function ($)
   
@@ -3202,6 +3965,25 @@ jQuery(document).ready(function ($) {
 	  document.getElementById("ballon_amounts_per_dis").textContent = value;
 	}
   }
+
+ function validateInputDownPayment(input) {
+	var value = parseFloat(input.value);
+	// Check if the value is a number and within the specified range
+	if (isNaN(value) || value < 0) {
+	  // Display an error message or take appropriate action
+	  console.log(
+		"Invalid input. Please enter a number greater than or equal to 0."
+	  );
+	} else if (value > 80) {
+	  // Truncate the value to 100 if it exceeds the maximum allowed
+	  input.value = 80;
+	  document.getElementById("down_payment_per_dis").textContent = input.value;
+	} else {
+	  // Update the hidden span element with the valid value
+	  document.getElementById("down_payment_per_dis").textContent = value;
+	}
+  }
+
   
   function validateInputInterestRate(input) {
 	var value = parseFloat(input.value);
@@ -3317,5 +4099,6 @@ jQuery(document).ready(function ($) {
 
 
   }
+
 
 

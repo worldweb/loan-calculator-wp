@@ -60,6 +60,7 @@ $years_heading = isset($loan_all_setting_data['years_heading']) ? $loan_all_sett
 $total_interests_payable_heading = isset($loan_all_setting_data['total_interests_payable_heading']) ? $loan_all_setting_data['total_interests_payable_heading'] : "";
 $over_heading = isset($loan_all_setting_data['over_heading']) ? $loan_all_setting_data['over_heading'] : "";
 $ballon_amt_heading = isset($loan_all_setting_data['ballon_amt_heading']) ? $loan_all_setting_data['ballon_amt_heading'] : "";
+
 /* END : Calculation Result */
 
 /* START : Tab Field Setting */
@@ -86,6 +87,7 @@ $contact_url = isset($loan_all_setting_data['contact_url']) ? $loan_all_setting_
 
 /* START : Tooltip Setting */
 $loan_amount_tooltip = isset($loan_all_setting_data['loan_amount_tooltip']) ? $loan_all_setting_data['loan_amount_tooltip'] : "";
+$loan_amount_label = isset($loan_all_setting_data['loan_amount_label']) ? $loan_all_setting_data['loan_amount_label'] : "";
 $loan_terms_tooltip = isset($loan_all_setting_data['loan_terms_tooltip']) ? $loan_all_setting_data['loan_terms_tooltip'] : "";
 $interest_rates_tooltip = isset($loan_all_setting_data['interest_rates_tooltip']) ? $loan_all_setting_data['interest_rates_tooltip'] : "";
 $payment_mode_tooltip = isset($loan_all_setting_data['payment_mode_tooltip']) ? $loan_all_setting_data['payment_mode_tooltip'] : "";
@@ -146,14 +148,36 @@ $disable_tabs_icon = isset($loan_all_setting_data['disable_tabs_icon']) ? $loan_
 
 /* END : NEW SETTING ADDED */
 
-/*   loan term label option */
+/* loan term label option */
 
 $ww_loan_term_label = isset($loan_all_setting_data['ww_loan_term_label']) ? $loan_all_setting_data['ww_loan_term_label'] : "";
-/*   loan term label option */
+/* loan term label option */
+
+
+/* loan term total interest payable */
+
+$ww_loan_total_interest_payable = isset($loan_all_setting_data['ww_loan_total_interest_payable']) ? $loan_all_setting_data['ww_loan_total_interest_payable'] : "";
+
+/* loan term total interest payable */
+
+
+/* down payment options */
+
+$down_payment_option = isset($loan_all_setting_data['down_payment_option']) ? $loan_all_setting_data['down_payment_option'] : "";
+
+$down_payment_mode = isset($loan_all_setting_data['down_payment_mode']) ? $loan_all_setting_data['down_payment_mode'] : "fixed";
+
+
+$down_payment_tooltip = isset($loan_all_setting_data['down_payment_tooltip']) ? $loan_all_setting_data['down_payment_tooltip'] : "";
+
+
+$down_payment_heading = isset($loan_all_setting_data['down_payment_heading']) ? $loan_all_setting_data['down_payment_heading'] : "";
+
+
+/* down payment options */
 
 
 ?>
-
 <div class="wp-loan-calculator-main" id="wp-loan-calculator-main">
     <style type="text/css">
         :root {
@@ -211,7 +235,7 @@ $ww_loan_term_label = isset($loan_all_setting_data['ww_loan_term_label']) ? $loa
                     <div class="first-row">
                         <div class="first-row-sub-child">
 
-                            <label for="loan_amt" class="loan-text"><?php echo __('Loan Amount', 'loan-calculator-wp'); ?> <i class="fa fa-info-circle" aria-hidden="true" tabindex="1"></i><span class="text-tooltip-disp"><?php echo __($loan_amount_tooltip, 'loan-calculator-wp'); ?></span></label>
+                            <label for="loan_amt" class="loan-text"><?php esc_html_e($loan_amount_label, 'loan-calculator-wp'); ?> <i class="fa fa-info-circle" aria-hidden="true" tabindex="1"></i><span class="text-tooltip-disp"><?php echo __($loan_amount_tooltip, 'loan-calculator-wp'); ?></span></label>
 
                             <div class="loan-text-dis loan-amount">
                                 <span class="extra-info"><?php echo $currency_symbols; ?></span>
@@ -330,6 +354,40 @@ $ww_loan_term_label = isset($loan_all_setting_data['ww_loan_term_label']) ? $loa
                             ?>
                         <?php  } ?>
                     </div>
+                    
+                    <?php if($down_payment_option == '1') {  ?>
+
+                        <div class="downpayment-row">
+
+                            <?php if($down_payment_mode == 'percentage'){   ?> 
+                   
+                                <div class="downpayment-row-sub-child dp-perc-mode">
+                                    <label for="down_payment" class="loan-text"><?php echo __('Down Payment', 'loan-calculator-wp'); ?><i class="fa fa-info-circle" aria-hidden="true" tabindex="8"></i><span class="text-tooltip-disp"><?php esc_attr_e($down_payment_tooltip, 'loan-calculator-wp'); ?></span></label>
+                                    <div class="loan-text-dis">
+                                        <span class="extra-info"><?php echo $currency_symbols; ?></span>
+                                        <input type="text" name="down_payment" id="down_payment" value="" tabindex="14" onkeydown="return onlyNos(event,'down_payment')" readonly />
+                                        <span class="relative downpayment_items">
+                                            <input type="text" name="down_payment_per" id="down_payment_per" value="" tabindex="15" maxlength="5" onkeydown="return onlyNos(event,'down_payment_per')">
+                                            <span id="down_payment_per_dis" min="0" max="" class="down_payment_rate_disp"></span>
+                                        </span>
+                                    </div>
+                                    <input type="range" min="0" value="0" class="slider" id="down_payment_range" tabindex="16" step="1">
+                                
+                                </div>
+
+                                <?php }else{ ?>
+
+                                    <div class="downpayment-row-sub-child dp-fixed-mode">
+                                        <label for="down_payment" class="loan-text"><?php echo __('Down Payment', 'loan-calculator-wp'); ?><i class="fa fa-info-circle" aria-hidden="true" tabindex="8"></i><span class="text-tooltip-disp"><?php esc_attr_e($down_payment_tooltip, 'loan-calculator-wp'); ?></span></label>
+                                        <div class="loan-text-dis">
+                                            <span class="extra-info"><?php echo $currency_symbols; ?></span>
+                                            <input type="text" name="down_payment" id="down_payment" value="0" tabindex="14" onkeydown="return onlyNos(event,'down_payment')" />
+                                        </div>                                        
+                                    </div>
+                                
+                                <?php }  ?>
+                        </div>
+                    <?php } ?>
                 </div>
             </div>
             <?php
@@ -382,7 +440,7 @@ $ww_loan_term_label = isset($loan_all_setting_data['ww_loan_term_label']) ? $loa
                                     </label>
                                 <?php  } ?>
                                 <?php
-                                if ($enable_video_tab == 1) {
+                                if ($enable_video_tab == 1 && !empty($youtube_video_link)){
                                 ?>
                                     <input type="radio" name="tabs" id="tab2" <?php esc_attr_e($tab2_checked); ?>>
                                     <label for="tab2">
@@ -402,16 +460,8 @@ $ww_loan_term_label = isset($loan_all_setting_data['ww_loan_term_label']) ? $loa
                                     if (!empty($youtube_video_link)) {
                                     ?>
                                         <iframe height="415" src="<?php echo esc_url($youtube_video_link); ?>" style="width:100%;" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
-                                    <?php } else { ?>
-                                        <div class="no-video-exist-main">
-                                            <div class="video-child-sec">
-                                                <h1><?php echo __('Sorry', 'loan-calculator-wp'); ?></h1>
-                                                <p><?php echo __('This video does not exist.', 'loan-calculator-wp'); ?></p>
-                                            </div>
-                                        </div>
                                     <?php } ?>
                                 </div>
-
                                 <div id="tab-content3" class="tab-content">
                                     <table id="loan-process-tbl">
                                         <thead>
@@ -442,6 +492,7 @@ $ww_loan_term_label = isset($loan_all_setting_data['ww_loan_term_label']) ? $loa
                                 <label><span><small><?php echo __($currency_symbols); ?></small><span id="per_month_amount"></span></span> <strong id="loan_amount_term_label"></strong><span id="loan_amount_year"></span> </span></label>
                             </div>
                         </div>
+                        <?php if($ww_loan_total_interest_payable != '1'){ ?>
                         <div class="loan-cal-desc">
                             <div class="loan-cal-desc-heading">
                                 <label><strong><?php echo __($total_interests_payable_heading, 'loan-calculator-wp'); ?></strong></label>
@@ -451,6 +502,7 @@ $ww_loan_term_label = isset($loan_all_setting_data['ww_loan_term_label']) ? $loa
                             </div>
 
                         </div>
+                        <?php } ?>
                         <div class="loan-cal-desc" id="ballon_amt_section">
                             <div class="loan-cal-desc-heading">
                                 <label><strong><?php echo __($ballon_amt_heading, 'loan-calculator-wp'); ?> (<span id="bill_ballon_per"><?php esc_attr_e(number_format($ballon_per, 2), 'loan-calculator-wp'); ?></span>%)</strong></label>
@@ -460,6 +512,18 @@ $ww_loan_term_label = isset($loan_all_setting_data['ww_loan_term_label']) ? $loa
                             </div>
 
                         </div>
+
+                        <?php if($down_payment_option=='1'){ ?>
+                        <div class="loan-cal-desc" id="down_payment_section">
+                            <div class="loan-cal-desc-heading">
+                                <label><strong><?php echo __($down_payment_heading, 'loan-calculator-wp'); ?><?php if($down_payment_mode=='percentage'){ ?>(<span id="bottom_down_payment_per"></span>%)<?php } ?></strong></label>
+                            </div>
+                            <div class="loan-cal-desc-val">
+                                <label><small><?php echo __($currency_symbols); ?></small><strong><span id="bottom_down_payment"></span></strong></label>
+                            </div>
+
+                        </div>
+                      <?php } ?>
                     </div>
                     <?php
                     $total_regular_fees_amt = round(floatval(ceil($loan_term) * 120), 2);
@@ -488,17 +552,35 @@ $ww_loan_term_label = isset($loan_all_setting_data['ww_loan_term_label']) ? $loa
                 </div>
             </div>
         </section>
-        <?php if ($disable_contactus_section == "") { ?>
-            <div class="contact-us-section">
-                <!-- <h3><?php echo __($contact_info_heading, 'loan-calculator-wp'); ?></h3> -->
-                <?php if ($contact_type == "popup") { ?>
-                    <button class="contact-book-btn"><?php echo __($contact_popup_button_heading, 'loan-calculator-wp'); ?></button>
-                <?php } else {  ?>
-                    <a href="<?php echo $contact_url; ?>" target="_blank"><?php echo __($contact_popup_button_heading, 'loan-calculator-wp'); ?></a>
-                <?php } ?>
-            </div>
-        <?php } ?>
+        <?php 
+            if ($disable_contactus_section == "") { 
 
+                   $show_contact_sec = false;
+                   if ($contact_type == "popup" && !empty($contact_popup_content)) { 
+                      $show_contact_sec = true;  
+                   }
+                   else if($contact_type == "link" && !empty($contact_url)){
+                      $show_contact_sec = true;    
+                   }
+                    
+
+                if($show_contact_sec){    
+
+                ?>   
+                <div class="contact-us-section">
+                    <!-- <h3><?php echo __($contact_info_heading, 'loan-calculator-wp'); ?></h3> -->
+                    <?php if ($contact_type == "popup") { ?>                    
+                        <button class="contact-book-btn"><?php echo __($contact_popup_button_heading, 'loan-calculator-wp'); ?></button>
+                    <?php } else {  ?>                      
+                             <a href="<?php echo esc_url($contact_url); ?>" target="_blank" class="contact-btn-link"><?php echo __($contact_popup_button_heading, 'loan-calculator-wp'); ?></a>                      
+                    <?php } ?>
+                </div>
+
+        <?php 
+                }
+             }    
+
+        ?>
         <div class="contact-us-popup" style="display:none;">
             <div class="contact-us-popup-body">
                 <a href="javascript:void(0);" class="close-button" onclick="jQuery('.contact-us-popup').hide();jQuery('body').removeClass('body-overflow-hidden');">X</a>
