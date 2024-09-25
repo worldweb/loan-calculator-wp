@@ -3,7 +3,7 @@
  * Plugin Name: Loan Calculator WP
  * Plugin URI: https://www.worldwebtechnology.com/
  * Description:  Advanced Loan Calculator for Home Loans, Personal Loans, and various other types of loans. Includes features like a repayment chart, amortization table, video tab, balloon payment option, and supports all currencies. Use the contact form shortcode for easy access.
- * Version: 1.4.1
+ * Version: 1.5.0
  * Author: World Web Technology
  * Author URI: https://www.worldwebtechnology.com/
  * Text Domain: loan-calculator-wp
@@ -24,7 +24,7 @@ if (!defined('ABSPATH')) exit;
  * @since 1.0.0
  */
 if (!defined('WW_LOAN_CALCULATOR_VERSION')) {
-    define('WW_LOAN_CALCULATOR_VERSION', '1.4.1'); //version of plugin
+    define('WW_LOAN_CALCULATOR_VERSION', '1.5.0'); //version of plugin
 }
 if (!defined('WW_LOAN_CALCULATOR_TEXT_DOMAIN')) { //check if variable is not defined previous then define it
     define('WW_LOAN_CALCULATOR_TEXT_DOMAIN', 'loan-calculator-wp'); //this is for multi language support in plugin
@@ -227,6 +227,40 @@ The results from this calculator should be used as an indication only. Results d
         update_option('ww_loan_option', $loan_calculator_default_options);
 
         update_option( 'loan_calculator_db_version', '1.0.3' );
+    }
+
+
+    $loan_calculator_db_version = get_option( 'loan_calculator_db_version' );   
+     
+       
+    if( $loan_calculator_db_version == '1.0.3') {
+
+         $loan_calculator_default_options = get_option( 'ww_loan_option' );
+
+
+         $loan_calculator_default_options['extra_payment_option'] = '';
+          
+         $loan_calculator_default_options['extra_payment_tooltip'] = esc_html__('If applicable, enter the extra payment, which will be deducted from loan amount', 'loan-calculator-wp');   
+
+         $loan_calculator_default_options['extra_payment_heading'] = esc_html__('Extra Payment Amount', 'loan-calculator-wp');      
+
+         update_option('ww_loan_option', $loan_calculator_default_options);
+
+         update_option( 'loan_calculator_db_version', '1.0.4' );
+
+    }
+
+
+    if( $loan_calculator_db_version == '1.0.4') {
+
+         $loan_calculator_default_options = get_option( 'ww_loan_option' );         
+
+         $loan_calculator_default_options['extra_payment_save_time_label'] = esc_html__('Time Saved From Extra Payments', 'loan-calculator-wp');      
+
+         update_option('ww_loan_option', $loan_calculator_default_options);
+
+         update_option( 'loan_calculator_db_version', '1.0.5' );
+
     }
 
     
