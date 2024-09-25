@@ -7,12 +7,12 @@ Plugin URI:        https://wordpress.org/plugins/loan-calculator-wp
 Tags:              loan calculator, home loan calculator, car loan calculator, personal loan calculator, mortgage loan calculator
 Author URI:        https://worldwebtechnology.com
 Requires at least: 5.8
-Requires PHP:      7.2
+Requires PHP:      7.4
 Tested up to:      6.5.5
-Stable tag:        1.4.1
+Stable tag:        1.5.0
 License:           GPLv2 or later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
-Version:           1.4.1
+Version:           1.5.0
 
 Loan / EMI Calculator for Home Loan and Personal Loan
 
@@ -20,7 +20,7 @@ Loan / EMI Calculator for Home Loan and Personal Loan
 
 [youtube https://www.youtube.com/watch?v=VhvlcwYUyIg]
 
-[Video](https://www.youtube.com/watch?v=VhvlcwYUyIg)  |  [Docs](https://loancalc.worldwebtechnology.com/document/)  |  [Support](mailto:help.worldweb@gmail.com)  | [Demo](https://loancalc.worldwebtechnology.com/) | [Website](https://www.worldwebtechnology.com/)
+[Video](https://www.youtube.com/watch?v=VhvlcwYUyIg)  |  [Docs](https://loancalc.worldwebtechnology.com/document/)  |  [Support](mailto:help.worldweb@gmail.com)  | [Demo](https://loancalc.worldwebtechnology.com/) | [Website](https://www.worldwebtechnology.com/) | [Pro](https://loancalc.worldwebtechnology.com/loan-calculator-pro/)
 
 Loan Calculator creates a detailed amortization schedule with dates based on Payments. Users can see the chart and video as well. Visitors can also print it. 
 The plugin provides an option for a contact form so that users can use the contact form if there is any query. Display the loan disclaimer at the bottom of the loan section. Admin can customize the color to change the look of the loan calculator. All labels and values are managed from the backend
@@ -54,6 +54,17 @@ The plugin provides an option for a contact form so that users can use the conta
 **Shortcode**
 
 `[loan_calculator]`
+
+
+= PRO =
+
+The Loan Calculator WP Pro plugin allows you to create a wide range of advanced loan calculators with dynamic and fully customizable options tailored to your specific needs.
+
+* Create Multiple Calculators: Generate various types of loan calculators with unique Post IDs for different scenarios.
+* Page-Specific Customization: Add and customize different calculators and designs on each page, ensuring each page meets its specific purpose.
+* Supports Various Loan Types: Easily create calculators for Home Loans, Personal Loans, Car Loans, Education Loans, Mortgage Loans, and more.
+
+[Loan Calculator Pro](https://loancalc.worldwebtechnology.com/loan-calculator-pro/)
 
 == Screenshots ==
 1. Frontend view with Chart tab enabled
@@ -102,6 +113,18 @@ The plugin provides an option for a contact form so that users can use the conta
   You can enable/disable loan fee calculation from the WP admin. Go to the loan calculator > click on the "Default value settings" tab and search for "Enable Fee Calculation" and enable/disable according to your needs.
 
 == Changelog ==
+
+= 1.5.0 (Sep 24, 2024) =
+* Added Extra Payment Feature with Time Savings Display
+* Tab fields not working while creating PDF, the table was overlapping in PDF.
+* Resolved currency issue in new theme front end view.
+* Add notes in admin backend settings form
+* Resolved section issues while print PDF in both theme
+* Resolved section fields/structure issues in front end view in both theme
+* Resolved Repayment Frequency dropdown issue while print PDF in both theme
+
+= 1.4.2 (Aug 30, 2024) =
+* Fixed few warnings from the plugin.
 
 = 1.4.1 (Aug 30, 2024) =
 * Fixed issue of Chart not appear in the Print.

@@ -64,6 +64,9 @@ if (!class_exists('WW_Loan_Calculator_Public')) {
 			$down_payment_mode = isset($loan_all_setting_data['down_payment_mode']) ? $loan_all_setting_data['down_payment_mode'] : "fixed";
 
 
+			$extra_payment_option = isset($loan_all_setting_data['extra_payment_option']) ? $loan_all_setting_data['extra_payment_option'] : "";
+
+			$extra_payment_max_per = isset($loan_all_setting_data['extra_payment_max_per']) ? $loan_all_setting_data['extra_payment_max_per'] : "100";			
 
 
 			$repay_freq_per_field_label = ww_loan_repayment_frequency_calc_label();
@@ -83,8 +86,8 @@ if (!class_exists('WW_Loan_Calculator_Public')) {
 				'calculation_fee_setting_enable' => isset($loan_all_setting_data['calculation_fee_setting_enable']) ? $loan_all_setting_data['calculation_fee_setting_enable'] : "",
 				'currency_symbols' => ww_loan_get_currency_symbol($ww_loan_currency),
 				'remove_decimal_point' => isset($loan_all_setting_data['remove_decimal_point']) ? $loan_all_setting_data['remove_decimal_point'] : "",
-				'month_label' => __('Months', 'loan-calculator-wp'),
-				'year_label' => __('Years', 'loan-calculator-wp'),
+				'month_label' => __('Month(s)', 'loan-calculator-wp'),
+				'year_label' => __('Year(s)', 'loan-calculator-wp'),
 				'interest_label' => __('Interest', 'loan-calculator-wp'),
 				'principal_label' => __('Principal', 'loan-calculator-wp'),
 				'default_balloon_amount' => isset($loan_all_setting_data['ballon_per']) ? $loan_all_setting_data['ballon_per'] : "",
@@ -101,6 +104,8 @@ if (!class_exists('WW_Loan_Calculator_Public')) {
 				'down_payment_option' => $down_payment_option,
 				'down_payment_mode' => $down_payment_mode,
 				'down_payment_label_str' => __('Down Payment', 'loan-calculator-wp'),
+				'extra_payment_option' => $extra_payment_option,
+				'extra_payment_max_per' => $extra_payment_max_per,				
 				'font_awesome_css_url' => WW_LOAN_CALCULATOR_URL . 'includes/css/all.min.css'
 			);
 

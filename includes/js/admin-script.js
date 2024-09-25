@@ -359,6 +359,23 @@ jQuery(document).ready(function (jQuery) {
 	});
 
 
+
+	jQuery('#extra_payment_option').on('change', function () {
+
+		if (this.checked) {
+
+			jQuery('.extra-payment-fields-row').show(); //checked
+
+		} else {
+
+			jQuery('.extra-payment-fields-row').hide(); //checked
+
+		}
+
+	});
+
+
+
 });
 
 
