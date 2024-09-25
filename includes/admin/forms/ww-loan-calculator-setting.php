@@ -150,6 +150,30 @@ $down_payment_tooltip = isset($loan_all_setting_data['down_payment_tooltip']) ? 
 
 /* down payment option */
 
+/* extra payment option */
+
+$extra_payment_option = isset($loan_all_setting_data['extra_payment_option']) ? $loan_all_setting_data['extra_payment_option'] : "";
+
+$extra_payment_max_per = isset($loan_all_setting_data['extra_payment_max_per']) ? $loan_all_setting_data['extra_payment_max_per'] : "100";
+
+$extra_payment_fields_display_style = "";
+
+if($extra_payment_option != '1'){
+
+    $extra_payment_fields_display_style = 'style=display:none;';
+}
+
+$extra_payment_tooltip = isset($loan_all_setting_data['extra_payment_tooltip']) ? $loan_all_setting_data['extra_payment_tooltip'] : "";
+
+
+$extra_payment_heading = isset($loan_all_setting_data['extra_payment_heading']) ? $loan_all_setting_data['extra_payment_heading'] : "";
+
+
+$extra_payment_save_time_label = isset($loan_all_setting_data['extra_payment_save_time_label']) ? $loan_all_setting_data['extra_payment_save_time_label'] : "";
+
+
+/* extra payment option */
+
 ?>
 <!-- . begining of wrap -->
 <div class="wrap">
@@ -593,7 +617,7 @@ $down_payment_tooltip = isset($loan_all_setting_data['down_payment_tooltip']) ? 
                 </tr>
                 <tr>
                     <th scope="row">
-                        <label for="down_payment_option"><strong><?php esc_html_e(' Down Payment Option', 'loan-calculator-wp'); ?></strong></label>
+                        <label for="down_payment_option"><strong><?php esc_html_e('Down Payment Option', 'loan-calculator-wp'); ?></strong></label>
                     </th>
                     <td>
                         <input type="checkbox" name="ww_loan_option[down_payment_option]" id="down_payment_option" value="1" class="regular-text" <?php echo ($down_payment_option == "1") ? "checked" : ""; ?>> <label for="down_payment_option"><?php esc_attr_e("Enable Down Payment Option", "loan-calculator-wp") ?></label>
@@ -619,7 +643,36 @@ $down_payment_tooltip = isset($loan_all_setting_data['down_payment_tooltip']) ? 
                     <td>
                         <textarea name="ww_loan_option[down_payment_tooltip]" id="down_payment_tooltip" rows="4" cols="50"><?php esc_attr_e($down_payment_tooltip, 'loan-calculator-wp'); ?></textarea>
                     </td>
-                </tr>                
+                </tr>   
+
+                <tr>
+                    <th scope="row">
+                        <label for="extra_payment_option"><strong><?php esc_html_e('Extra Payment Option', 'loan-calculator-wp'); ?></strong></label>
+                    </th>
+                    <td>
+                        <input type="checkbox" name="ww_loan_option[extra_payment_option]" id="extra_payment_option" value="1" class="regular-text" <?php echo ($extra_payment_option == "1") ? "checked" : ""; ?>> <label for="extra_payment_option"><?php esc_attr_e("Enable Extra Payment Option", "loan-calculator-wp") ?></label>
+                        <br><br>                        
+                        <i><b style="color:red"><?php esc_html_e('Note', 'loan-calculator-wp') ?></b><?php esc_html_e(': Check this box to enable Extra Payment option. It will be visible on the calculator', 'loan-calculator-wp'); ?></i>
+                    </td>
+                </tr>                 
+                <tr class="extra-payment-fields-row" <?php echo $extra_payment_fields_display_style; ?>>
+                    <th scope="row">
+                        <label for="extra_payment_max_per"><strong><?php esc_html_e('Extra Payment Maximum', 'loan-calculator-wp'); ?></strong></label>
+                    </th>
+                    <td>
+                        <input type="number" min="0" max="100" name="ww_loan_option[extra_payment_max_per]" id="extra_payment_max_per" value="<?php esc_attr_e($extra_payment_max_per, 'loan-calculator-wp'); ?>" > <label for="extra_payment_max_per"><?php esc_attr_e("%", "loan-calculator-wp") ?></label>
+                        <br><br>                        
+                        <i><b style="color:red"><?php esc_html_e('Note', 'loan-calculator-wp') ?></b><?php esc_html_e(': Enter maximum percentage of loan amount for extra payment that will be allowed for User', 'loan-calculator-wp'); ?></i>
+                    </td>
+                </tr> 
+                <tr class="extra-payment-fields-row" <?php echo $extra_payment_fields_display_style; ?>>
+                    <th scope="row">
+                        <label for="extra_payment_tooltip"><strong><?php esc_html_e('Extra Payment Tooltip', 'loan-calculator-wp'); ?></strong></label>
+                    </th>
+                    <td>
+                        <textarea name="ww_loan_option[extra_payment_tooltip]" id="extra_payment_tooltip" rows="4" cols="50"><?php esc_attr_e($extra_payment_tooltip, 'loan-calculator-wp'); ?></textarea>
+                    </td>
+                </tr> 
                 <tr>
                     <th scope="row">
                         <label for="interested_rate"><strong><?php esc_html_e('Interest Rate', 'loan-calculator-wp'); ?></strong></label>
@@ -755,6 +808,22 @@ $down_payment_tooltip = isset($loan_all_setting_data['down_payment_tooltip']) ? 
                     </td>
                 </tr>
                 <tr>
+                    <th scope="row">
+                        <label for="extra_payment_heading"><strong><?php esc_html_e('Extra Payment Label', 'loan-calculator-wp'); ?></strong></label>
+                    </th>
+                    <td>
+                        <input type='text' name='ww_loan_option[extra_payment_heading]' id='extra_payment_heading' maxlength="200" value='<?php esc_attr_e($extra_payment_heading, 'loan-calculator-wp'); ?>' class="regular-text">
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label for="extra_payment_save_time_label"><strong><?php esc_html_e('Extra Payment Save Time Label', 'loan-calculator-wp'); ?></strong></label>
+                    </th>
+                    <td>
+                        <input type='text' name='ww_loan_option[extra_payment_save_time_label]' id='extra_payment_save_time_label' maxlength="200" value='<?php esc_attr_e($extra_payment_save_time_label, 'loan-calculator-wp'); ?>' class="regular-text">
+                    </td>
+                </tr>
+                <tr>
                     <td colspan="2">
                         <h2><?php esc_html_e('Fee Calculation Settings ', 'loan-calculator-wp'); ?> </h2>
                         <span class="heading-tooltip-section">
@@ -881,7 +950,7 @@ $down_payment_tooltip = isset($loan_all_setting_data['down_payment_tooltip']) ? 
                         <label for="youtube_video_link"><strong><?php esc_html_e('Youtube Video Link', 'loan-calculator-wp'); ?></strong></label>
                     </th>
                     <td>
-                        <input type='text' name='ww_loan_option[youtube_video_link]' id='youtube_video_link' maxlength="200" value='<?php esc_attr_e($youtube_video_link, 'loan-calculator-wp'); ?>' class="regular-text">
+                        <input type='text' name='ww_loan_option[youtube_video_link]' id='youtube_video_link' maxlength="200" value='<?php esc_attr_e($youtube_video_link, 'loan-calculator-wp'); ?>' class="regular-text"><br><i><b style="color:red">Note</b>: Enter youtube embed url e.g. https://www.youtube.com/embed/VhvlcwYUyIg?si=6ZQebyFT9_HwIrFo.</i>
                     </td>
                 </tr>
             </tbody>
