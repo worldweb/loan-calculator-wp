@@ -62,6 +62,15 @@ select.payment-opt-drop {
 select#repayment_freq:hover {
     cursor: pointer;
 }
+
+.disabled-rate-adj{
+    display: none !important;
+}
+
+.remove-cal-range-sliders{
+    display: none !important;
+}
+
 @media (min-width: 769px) {
     .mobile-tabs {
         display: block !important;
@@ -3240,7 +3249,7 @@ span#loan_amount_year,
 span#total_interests_years,
 #total_payments,
 #total_interests_amt,
-#bill_ballon_amt,#bottom_down_payment,#bottom_extra_payment,#extra_payment_loan_amount_year,#time_save_for_extra_payment {
+#bill_ballon_amt,#bottom_down_payment,#bottom_extra_payment,#extra_payment_loan_amount_year,#time_save_for_extra_payment,#bottom_total_extra_payment,#interest_save_for_extra_payment {
     font-size: 34px;
     color: var(--calc-background-color);
 }
@@ -3255,8 +3264,8 @@ small {
     font-weight: 600;
     line-height: 16px;
 }
-span#bill_ballon_amt,span#bottom_down_payment,span#bottom_extra_payment {
-    font-weight: 600;
+span#bill_ballon_amt,span#bottom_down_payment,span#bottom_extra_payment, span#bottom_total_extra_payment,span#interest_save_for_extra_payment{
+    font-weight: 700;
 }
 .second-section-new-theme .loan-detail-cal-desc {
     width: 950px !important;
