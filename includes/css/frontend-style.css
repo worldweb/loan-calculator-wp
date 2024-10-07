@@ -2320,13 +2320,20 @@ label.loan-text {
 
 
 #label-for-freuency{
-    font-size: 10px;
+    font-size: 12px;
     padding: 0px;
     margin: 0px;
     position: absolute;
     bottom: 42px;
 }
 
+.disabled-rate-adj{
+    display: none !important;
+}
+
+.remove-cal-range-sliders{
+    display: none !important;
+}
 
 @media (min-width: 769px) {
     .mobile-tabs {
@@ -3002,7 +3009,7 @@ body:not([data-theme="twenty-twenty-four"]) .loan-option-text-info .loan-option-
 }
 
 .loan-number-payment-with-label label#label-for-freuency {
-    bottom: -15px;
+    bottom: -17px;
 }
 
 

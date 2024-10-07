@@ -66,7 +66,17 @@ if (!class_exists('WW_Loan_Calculator_Public')) {
 
 			$extra_payment_option = isset($loan_all_setting_data['extra_payment_option']) ? $loan_all_setting_data['extra_payment_option'] : "";
 
-			$extra_payment_max_per = isset($loan_all_setting_data['extra_payment_max_per']) ? $loan_all_setting_data['extra_payment_max_per'] : "100";			
+			$extra_payment_max_per = isset($loan_all_setting_data['extra_payment_max_per']) ? $loan_all_setting_data['extra_payment_max_per'] : "100";	
+
+
+			$hide_total_extra_payments = isset($loan_all_setting_data['hide_total_extra_payments']) ? $loan_all_setting_data['hide_total_extra_payments'] : "";
+
+    		$hide_save_time_extra_payments = isset($loan_all_setting_data['hide_save_time_extra_payments']) ? $loan_all_setting_data['hide_save_time_extra_payments'] : "";
+
+    		$hide_save_interest_extra_payments = isset($loan_all_setting_data['hide_save_interest_extra_payments']) ? $loan_all_setting_data['hide_save_interest_extra_payments'] : "";
+
+
+    		$interest_rates_adj_disable = isset($loan_all_setting_data['interest_rates_adj_disable']) ? $loan_all_setting_data['interest_rates_adj_disable'] : "";
 
 
 			$repay_freq_per_field_label = ww_loan_repayment_frequency_calc_label();
@@ -105,7 +115,12 @@ if (!class_exists('WW_Loan_Calculator_Public')) {
 				'down_payment_mode' => $down_payment_mode,
 				'down_payment_label_str' => __('Down Payment', 'loan-calculator-wp'),
 				'extra_payment_option' => $extra_payment_option,
-				'extra_payment_max_per' => $extra_payment_max_per,				
+				'extra_payment_max_per' => $extra_payment_max_per,
+				'hide_total_extra_payments' => $hide_total_extra_payments,
+				'hide_save_time_extra_payments' => $hide_save_time_extra_payments,
+				'hide_save_interest_extra_payments' => $hide_save_interest_extra_payments,
+				'interest_rates_adj_disable' => $interest_rates_adj_disable,
+				'remove_range_sliders' => isset($loan_all_setting_data['remove_range_sliders']) ? $loan_all_setting_data['remove_range_sliders'] : "",				
 				'font_awesome_css_url' => WW_LOAN_CALCULATOR_URL . 'includes/css/all.min.css'
 			);
 

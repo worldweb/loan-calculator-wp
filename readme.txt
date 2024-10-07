@@ -9,10 +9,10 @@ Author URI:        https://worldwebtechnology.com
 Requires at least: 5.8
 Requires PHP:      7.4
 Tested up to:      6.5.5
-Stable tag:        1.5.0
+Stable tag:        1.5.1
 License:           GPLv2 or later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
-Version:           1.5.0
+Version:           1.5.1
 
 Loan / EMI Calculator for Home Loan and Personal Loan
 
@@ -113,6 +113,14 @@ The Loan Calculator WP Pro plugin allows you to create a wide range of advanced 
   You can enable/disable loan fee calculation from the WP admin. Go to the loan calculator > click on the "Default value settings" tab and search for "Enable Fee Calculation" and enable/disable according to your needs.
 
 == Changelog ==
+
+= 1.5.1 (Oct 03, 2024) =
+* "Total Extra Payment amount" with Show/Hide backend and label options.
+* "Saved time for extra payment" with Show/Hide backend and label options.
+*  Currency number format in "extra payment" and "total interest payable".
+* "Save total interest amount" with Show/Hide backend and label options.
+* Fixed field for Interest Rate means that is disabled for user to adjust it.
+* Option to disable Sliders.
 
 = 1.5.0 (Sep 24, 2024) =
 * Added Extra Payment Feature with Time Savings Display

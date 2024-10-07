@@ -171,8 +171,29 @@ $extra_payment_heading = isset($loan_all_setting_data['extra_payment_heading']) 
 
 $extra_payment_save_time_label = isset($loan_all_setting_data['extra_payment_save_time_label']) ? $loan_all_setting_data['extra_payment_save_time_label'] : "";
 
+$extra_payment_total_label = isset($loan_all_setting_data['extra_payment_total_label']) ? $loan_all_setting_data['extra_payment_total_label'] : "";
+
+
+$hide_total_extra_payments = isset($loan_all_setting_data['hide_total_extra_payments']) ? $loan_all_setting_data['hide_total_extra_payments'] : "";
+
+$hide_save_time_extra_payments = isset($loan_all_setting_data['hide_save_time_extra_payments']) ? $loan_all_setting_data['hide_save_time_extra_payments'] : "";
+
+
+$extra_payment_save_interest_label = isset($loan_all_setting_data['extra_payment_save_interest_label']) ? $loan_all_setting_data['extra_payment_save_interest_label'] : "";
+
+$hide_save_interest_extra_payments = isset($loan_all_setting_data['hide_save_interest_extra_payments']) ? $loan_all_setting_data['hide_save_interest_extra_payments'] : "";
+
 
 /* extra payment option */
+
+/* disable interest rate adjustment */
+
+$interest_rates_adj_disable = isset($loan_all_setting_data['interest_rates_adj_disable']) ? $loan_all_setting_data['interest_rates_adj_disable'] : "";
+
+/* remove all range slider fields */
+
+$remove_range_sliders = isset($loan_all_setting_data['remove_range_sliders']) ? $loan_all_setting_data['remove_range_sliders'] : "";
+
 
 ?>
 <!-- . begining of wrap -->
@@ -705,6 +726,16 @@ $extra_payment_save_time_label = isset($loan_all_setting_data['extra_payment_sav
                         <textarea name="ww_loan_option[interest_rates_tooltip]" id="interest_rates_tooltip" rows="4" cols="50"><?php esc_attr_e($interest_rates_tooltip, 'loan-calculator-wp'); ?></textarea>
                     </td>
                 </tr>
+                <tr>
+                    <th scope="row">
+                        <label for="interest_rates_adj_disable"><strong><?php esc_html_e('Disable Interest Rates Adjustment', 'loan-calculator-wp'); ?></strong></label>
+                    </th>
+                    <td>
+                        <input type="checkbox" name="ww_loan_option[interest_rates_adj_disable]" id="interest_rates_adj_disable" value="1" class="regular-text" <?php echo ($interest_rates_adj_disable == "1") ? "checked" : ""; ?> > <label for="interest_rates_adj_disable"><?php esc_attr_e("Disable Interest Rates Adjustment", "loan-calculator-wp") ?></label>
+                        <br><br>                        
+                        <i><b style="color:red"><?php esc_html_e('Note', 'loan-calculator-wp') ?></b><?php esc_html_e(': Check this box to disable interest rate adjustment by User', 'loan-calculator-wp'); ?></i>
+                    </td>
+                </tr>
                 <tr id="application-fee">
                     <th scope="row">
                         <label for="application_fee"><strong><?php esc_html_e('Application Fee', 'loan-calculator-wp'); ?></strong></label>
@@ -766,6 +797,33 @@ $extra_payment_save_time_label = isset($loan_all_setting_data['extra_payment_sav
                          <i><b style="color:red"><?php esc_html_e('Note', 'loan-calculator-wp') ?></b><?php esc_html_e(': if you enable this option it will hide Total Interest Payable Amount', 'loan-calculator-wp'); ?> </i>
                     </td>
                 </tr>
+                <tr id="loan-total-extra-payment">
+                    <th scope="row">
+                        <label for="hide_total_extra_payments"><strong><?php esc_html_e('Hide Total Extra Payments', 'loan-calculator-wp'); ?></strong></label>                       
+                    </th>
+                    <td>
+                        <input type='checkbox' name='ww_loan_option[hide_total_extra_payments]' id='hide_total_extra_payments' value='1' <?php checked($hide_total_extra_payments, 1) ?> class="regular-text">
+                         <i><b style="color:red"><?php esc_html_e('Note', 'loan-calculator-wp') ?></b><?php esc_html_e(': if you enable this option it will hide Total Extra Payments', 'loan-calculator-wp'); ?> </i>
+                    </td>
+                </tr>
+                <tr id="save-time-extra-payment">
+                    <th scope="row">
+                        <label for="hide_save_time_extra_payments"><strong><?php esc_html_e('Hide Save Time For Extra Payments', 'loan-calculator-wp'); ?></strong></label>                       
+                    </th>
+                    <td>
+                        <input type='checkbox' name='ww_loan_option[hide_save_time_extra_payments]' id='hide_save_time_extra_payments' value='1' <?php checked($hide_save_time_extra_payments, 1) ?> class="regular-text">
+                         <i><b style="color:red"><?php esc_html_e('Note', 'loan-calculator-wp') ?></b><?php esc_html_e(': if you enable this option it will hide Save Time Extra Payments', 'loan-calculator-wp'); ?> </i>
+                    </td>
+                </tr>
+                <tr id="save-interest-extra-payment">
+                    <th scope="row">
+                        <label for="hide_save_interest_extra_payments"><strong><?php esc_html_e('Hide Save Interest For Extra Payments', 'loan-calculator-wp'); ?></strong></label>                       
+                    </th>
+                    <td>
+                        <input type='checkbox' name='ww_loan_option[hide_save_interest_extra_payments]' id='hide_save_interest_extra_payments' value='1' <?php checked($hide_save_interest_extra_payments, 1) ?> class="regular-text">
+                         <i><b style="color:red"><?php esc_html_e('Note', 'loan-calculator-wp') ?></b><?php esc_html_e(': if you enable this option it will hide Save Interest Extra Payments', 'loan-calculator-wp'); ?> </i>
+                    </td>
+                </tr>
                 <tr>
                     <td colspan="2">
                         <h2><?php esc_html_e('Default Text for Calculation Result', 'loan-calculator-wp'); ?></h2>
@@ -821,6 +879,22 @@ $extra_payment_save_time_label = isset($loan_all_setting_data['extra_payment_sav
                     </th>
                     <td>
                         <input type='text' name='ww_loan_option[extra_payment_save_time_label]' id='extra_payment_save_time_label' maxlength="200" value='<?php esc_attr_e($extra_payment_save_time_label, 'loan-calculator-wp'); ?>' class="regular-text">
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label for="extra_payment_total_label"><strong><?php esc_html_e('Extra Payment Total Label', 'loan-calculator-wp'); ?></strong></label>
+                    </th>
+                    <td>
+                        <input type='text' name='ww_loan_option[extra_payment_total_label]' id='extra_payment_total_label' maxlength="200" value='<?php esc_attr_e($extra_payment_total_label, 'loan-calculator-wp'); ?>' class="regular-text">
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label for="extra_payment_save_interest_label"><strong><?php esc_html_e('Extra Payment Save Interest Label', 'loan-calculator-wp'); ?></strong></label>
+                    </th>
+                    <td>
+                        <input type='text' name='ww_loan_option[extra_payment_save_interest_label]' id='extra_payment_save_interest_label' maxlength="200" value='<?php esc_attr_e($extra_payment_save_interest_label, 'loan-calculator-wp'); ?>' class="regular-text">
                     </td>
                 </tr>
                 <tr>
@@ -1099,6 +1173,15 @@ $extra_payment_save_time_label = isset($loan_all_setting_data['extra_payment_sav
                         <input type='checkbox' name='ww_loan_option[remove_decimal_point]' id='remove_decimal_point' value='1' <?php echo ($remove_decimal_point == 1) ? esc_html('checked') : ""; ?> class="regular-text"> <label for="remove_decimal_point"><?php esc_html_e('Check this box if you want to remove decimal point in loan calculator form', 'loan-calculator-wp'); ?></label>
                     </td>
                 </tr>
+                <tr>
+                    <th scope="row">
+                        <label for="remove_range_sliders"><strong><?php esc_html_e('Remove All Range Sliders', 'loan-calculator-wp'); ?></strong></label>
+                    </th>
+                    <td>
+                        <input type='checkbox' name='ww_loan_option[remove_range_sliders]' id='remove_range_sliders' value='1' <?php echo ($remove_range_sliders == 1) ? esc_html('checked') : ""; ?> class="regular-text"> <label for="remove_range_sliders"><?php esc_html_e('Check this box if you want to remove all range slider fields in the calculator form', 'loan-calculator-wp'); ?></label>
+                    </td>
+                </tr>
+
             </tbody>
         </table>
         <table class="form-table sa-manage-level-product-box" id="save_setting">
