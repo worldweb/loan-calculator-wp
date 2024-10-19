@@ -210,7 +210,7 @@ $hide_total_extra_payments = isset($loan_all_setting_data['hide_total_extra_paym
 
 $hide_save_time_extra_payments = isset($loan_all_setting_data['hide_save_time_extra_payments']) ? $loan_all_setting_data['hide_save_time_extra_payments'] : "";
 
- $extra_payment_save_interest_label = isset($loan_all_setting_data['extra_payment_save_interest_label']) ? $loan_all_setting_data['extra_payment_save_interest_label'] : "";
+$extra_payment_save_interest_label = isset($loan_all_setting_data['extra_payment_save_interest_label']) ? $loan_all_setting_data['extra_payment_save_interest_label'] : "";
 
 $hide_save_interest_extra_payments = isset($loan_all_setting_data['hide_save_interest_extra_payments']) ? $loan_all_setting_data['hide_save_interest_extra_payments'] : "";   
 
@@ -228,7 +228,7 @@ $remove_range_sliders = isset($loan_all_setting_data['remove_range_sliders']) ? 
 
 
 ?>
-<div class="wp-loan-calculator-main-new wp-loan-mobile-view" style="<?php esc_attr_e($font_family_new_theme, 'loan-calculator-wp'); ?>">
+<div class="wp-loan-calculator-main-new wp-loan-mobile-view" style="<?php echo esc_attr($font_family_new_theme, 'loan-calculator-wp'); ?>">
     <style type="text/css">
         :root {
             --calc-font-family-new-theme: <?php echo esc_html($font_family_new_theme); ?>;
@@ -271,12 +271,12 @@ $remove_range_sliders = isset($loan_all_setting_data['remove_range_sliders']) ? 
             $allowed_html = wp_kses_allowed_html('post');
             $calculator_popup_content = wp_kses(stripslashes_deep($calculator_popup_content), $allowed_html);
             ?>
-            <div class="calculator-content"><?php echo $calculator_popup_content; ?></div>
+            <div class="calculator-content"><?php echo esc_attr($calculator_popup_content); ?></div>
         </div>
     </div>
 </section>
 
-<section id="main-sec" class="new-theme-template-section" style="<?php esc_attr_e($font_family_new_theme, 'loan-calculator-wp') ?>">
+<section id="main-sec" class="new-theme-template-section" style="<?php echo esc_attr($font_family_new_theme, 'loan-calculator-wp') ?>">
     <section class="calculator-heading-section calculator-heading-block">
         <div class="calculator-child-heading">
             <h2>
@@ -294,9 +294,9 @@ $remove_range_sliders = isset($loan_all_setting_data['remove_range_sliders']) ? 
                         <div class="first-row-sub-child">
                             <div class="loan-text-dis-new-theme-block">
                                 <div class="loan-new-theme-inner-block">
-                                    <label for="loan_amt" class="loan-text"><?php esc_html_e($loan_amount_label, 'loan-calculator-wp'); ?> <i class="fa fa-info-circle" aria-hidden="true" tabindex="1"></i><span class="text-tooltip-disp"><?php esc_html_e($loan_amount_tooltip, 'loan-calculator-wp'); ?></span></label>
+                                    <label for="loan_amt" class="loan-text"><?php echo esc_html($loan_amount_label, 'loan-calculator-wp'); ?> <i class="fa fa-info-circle" aria-hidden="true" tabindex="1"></i><span class="text-tooltip-disp"><?php echo esc_html($loan_amount_tooltip, 'loan-calculator-wp'); ?></span></label>
                                     <div class="loan-new-theme-range-slider">
-                                        <input type="range" min="<?php esc_attr_e($loan_amount_min_value, 'loan-calculator-wp'); ?>" max="<?php esc_attr_e($loan_amount_max_value, 'loan-calculator-wp'); ?>" value="<?php esc_attr_e($loan_amount, 'loan-calculator-wp'); ?>" class="slider <?php if($remove_range_sliders =='1') { echo 'remove-cal-range-sliders'; } ?>" id="loan_amount_range" tabindex="3" step="1000">
+                                        <input type="range" min="<?php echo esc_attr($loan_amount_min_value, 'loan-calculator-wp'); ?>" max="<?php echo esc_attr($loan_amount_max_value, 'loan-calculator-wp'); ?>" value="<?php echo esc_attr($loan_amount, 'loan-calculator-wp'); ?>" class="slider <?php if($remove_range_sliders =='1') { echo 'remove-cal-range-sliders'; } ?>" id="loan_amount_range" tabindex="3" step="1000">
                                     </div>
                                 </div>
                                 <div class="col-columns-20">
@@ -310,12 +310,12 @@ $remove_range_sliders = isset($loan_all_setting_data['remove_range_sliders']) ? 
                         <div class="forth-row-sub-child">
                             <div class="loan-text-dis-new-theme-block">
                                 <div class="loan-new-theme-inner-block">
-                                    <label for="loan_terms" class="loan-text"><?php esc_html_e('Loan Terms', 'loan-calculator-wp'); ?> <i class="fa fa-info-circle" aria-hidden="true" tabindex="4"></i><span class="text-tooltip-disp"><?php esc_html_e($loan_terms_tooltip, 'loan-calculator-wp'); ?></span></label>
+                                    <label for="loan_terms" class="loan-text"><?php esc_html_e('Loan Terms', 'loan-calculator-wp'); ?> <i class="fa fa-info-circle" aria-hidden="true" tabindex="4"></i><span class="text-tooltip-disp"><?php echo esc_html($loan_terms_tooltip, 'loan-calculator-wp'); ?></span></label>
                                     <div class="loan-new-theme-range-slider">
-                                        <input type="range" min="<?php esc_attr_e($loan_term_min_value, 'loan-calculator-wp'); ?>" max="<?php esc_attr_e($loan_term_max_value, 'loan-calculator-wp'); ?>" value="<?php esc_attr_e($loan_term, 'loan-calculator-wp'); ?>" class="slider <?php if($remove_range_sliders =='1') { echo 'remove-cal-range-sliders'; } ?>" id="loan_terms_range" tabindex="6" step="1">
-                                        <input type="hidden" name="default_value" value="<?php esc_attr_e($loan_term, 'loan-calculator-wp'); ?>">
-                                        <input type="hidden" name="min_value" value="<?php esc_attr_e($loan_term_min_value, 'loan-calculator-wp'); ?>">
-                                        <input type="hidden" name="max_value" value="<?php esc_attr_e($loan_term_max_value, 'loan-calculator-wp'); ?>">
+                                        <input type="range" min="<?php echo esc_attr($loan_term_min_value, 'loan-calculator-wp'); ?>" max="<?php echo esc_attr($loan_term_max_value, 'loan-calculator-wp'); ?>" value="<?php echo esc_attr($loan_term, 'loan-calculator-wp'); ?>" class="slider <?php if($remove_range_sliders =='1') { echo 'remove-cal-range-sliders'; } ?>" id="loan_terms_range" tabindex="6" step="1">
+                                        <input type="hidden" name="default_value" value="<?php echo esc_attr($loan_term, 'loan-calculator-wp'); ?>">
+                                        <input type="hidden" name="min_value" value="<?php echo esc_attr($loan_term_min_value, 'loan-calculator-wp'); ?>">
+                                        <input type="hidden" name="max_value" value="<?php echo esc_attr($loan_term_max_value, 'loan-calculator-wp'); ?>">
                                         <input type="hidden" name="current_repayment_freq" value="">
                                     </div>
                                 </div>
@@ -346,17 +346,17 @@ $remove_range_sliders = isset($loan_all_setting_data['remove_range_sliders']) ? 
 
                                         <div class="input-container">
                                             <?php $backgroud_arrow_logo = WW_LOAN_CALCULATOR_URL.'includes/images/down-arrow.svg'; ?>
-                                            <style type="text/css"> .site-wrap-repayment-freq-section:after {background-image: url(<?php echo $backgroud_arrow_logo; ?>); } </style>
+                                            <style type="text/css"> .site-wrap-repayment-freq-section:after {background-image: url(<?php echo esc_attr($backgroud_arrow_logo); ?>); } </style>
                                             <?php if (!empty($get_repayment_frequency)) {
                                                 $rpfclass = (count($get_repayment_frequency) == 1 ? 'single-val-option' : '');
                                                 ?>
                                                 <div class="site-wrap-repayment-freq-section">
-                                                    <select name="repayment_freq" id="repayment_freq" class="payment-opt-drop <?php echo $rpfclass; ?>">
+                                                    <select name="repayment_freq" id="repayment_freq" class="payment-opt-drop <?php echo esc_attr($rpfclass); ?>">
                                                         <?php
                                                         foreach ($get_repayment_frequency as $key => $value) {
                                                             $selected = ($key == 0 ? 'selected' : '');
                                                             ?>
-                                                            <option value="<?php echo $value; ?>" <?php echo $selected; ?>><?php echo $repayment_frequency_label[$value]; ?></option>
+                                                            <option value="<?php echo esc_attr($value); ?>" <?php echo esc_attr($selected); ?>><?php echo esc_attr($repayment_frequency_label[$value]); ?></option>
                                                             <?php
                                                         }
                                                         ?>
@@ -365,14 +365,14 @@ $remove_range_sliders = isset($loan_all_setting_data['remove_range_sliders']) ? 
                                             <?php } else { ?>
                                                 <div class="site-wrap-repayment-freq-section">
                                                     <select name="repayment_freq" id="repayment_freq" class="payment-opt-drop single-val-option">
-                                                        <option value="Monthly" selected><?php echo $repayment_frequency_label['Monthly'];?></option>
+                                                        <option value="Monthly" selected><?php echo esc_attr($repayment_frequency_label['Monthly']);?></option>
                                                     </select>
                                                 </div>
                                             <?php } ?>
                                             <!-- <span class="select-arrow-main"><span class="select-arrow-wrap">❮</span></span> -->
-                                            <input type="hidden" name="default_value" value="<?php esc_attr_e($loan_term, 'loan-calculator-wp'); ?>">
-                                            <input type="hidden" name="min_value" value="<?php esc_attr_e($loan_term_min_value, 'loan-calculator-wp'); ?>">
-                                            <input type="hidden" name="max_value" value="<?php esc_attr_e($loan_term_max_value, 'loan-calculator-wp'); ?>">
+                                            <input type="hidden" name="default_value" value="<?php echo esc_attr($loan_term, 'loan-calculator-wp'); ?>">
+                                            <input type="hidden" name="min_value" value="<?php echo esc_attr($loan_term_min_value, 'loan-calculator-wp'); ?>">
+                                            <input type="hidden" name="max_value" value="<?php echo esc_attr($loan_term_max_value, 'loan-calculator-wp'); ?>">
                                             <input type="hidden" name="current_repayment_freq" value="">
                                         </div>
                                     </div>
@@ -387,9 +387,9 @@ $remove_range_sliders = isset($loan_all_setting_data['remove_range_sliders']) ? 
                             <div class="second-row-sub-child">
                                 <div class="loan-text-dis-new-theme-block">
                                     <div class="loan-new-theme-inner-block">
-                                        <label for="loan_amt" class="loan-text"><?php esc_html_e('Interest Rate', 'loan-calculator-wp'); ?> <i class="fa fa-info-circle" aria-hidden="true" tabindex="8"></i><span class="text-tooltip-disp"><?php esc_attr_e($interest_rates_tooltip, 'loan-calculator-wp'); ?></span></label>
+                                        <label for="loan_amt" class="loan-text"><?php esc_html_e('Interest Rate', 'loan-calculator-wp'); ?> <i class="fa fa-info-circle" aria-hidden="true" tabindex="8"></i><span class="text-tooltip-disp"><?php echo esc_attr($interest_rates_tooltip, 'loan-calculator-wp'); ?></span></label>
                                         <div class="loan-new-theme-range-slider">
-                                            <input type="range" min="<?php esc_attr_e(intval($interest_rate_min_value), 'loan-calculator-wp'); ?>" max="<?php esc_attr_e(intval($interest_rate_max_value), 'loan-calculator-wp'); ?>" value="<?php esc_attr_e(intval($interested_rate), 'loan-calculator-wp'); ?>" class="slider <?php if($interest_rates_adj_disable =='1') { echo 'disabled-rate-adj'; } ?> <?php if($remove_range_sliders =='1') { echo 'remove-cal-range-sliders'; } ?>" id="interest_rate_range" tabindex="10" step="1">
+                                            <input type="range" min="<?php echo esc_attr(intval($interest_rate_min_value), 'loan-calculator-wp'); ?>" max="<?php echo esc_attr(intval($interest_rate_max_value), 'loan-calculator-wp'); ?>" value="<?php echo esc_attr(intval($interested_rate), 'loan-calculator-wp'); ?>" class="slider <?php if($interest_rates_adj_disable =='1') { echo 'disabled-rate-adj'; } ?> <?php if($remove_range_sliders =='1') { echo 'remove-cal-range-sliders'; } ?>" id="interest_rate_range" tabindex="10" step="1">
                                         </div>
                                     </div>
                                     <div class="col-columns-20">
@@ -404,9 +404,9 @@ $remove_range_sliders = isset($loan_all_setting_data['remove_range_sliders']) ? 
                             <div class="second-row-sub-child">
                                 <div class="loan-text-dis-new-theme-block">
                                     <div class="loan-new-theme-inner-block">
-                                        <label for="loan_amt" class="loan-text"><?php esc_html_e('Interest Rate', 'loan-calculator-wp'); ?> <i class="fa fa-info-circle" aria-hidden="true" tabindex="8"></i><span class="text-tooltip-disp"><?php esc_attr_e($interest_rates_tooltip, 'loan-calculator-wp'); ?></span></label>
+                                        <label for="loan_amt" class="loan-text"><?php esc_html_e('Interest Rate', 'loan-calculator-wp'); ?> <i class="fa fa-info-circle" aria-hidden="true" tabindex="8"></i><span class="text-tooltip-disp"><?php echo esc_attr($interest_rates_tooltip, 'loan-calculator-wp'); ?></span></label>
                                         <div class="loan-new-theme-range-slider">
-                                            <input type="range" min="<?php esc_attr_e($interest_rate_min_value, 'loan-calculator-wp'); ?>" max="<?php esc_attr_e($interest_rate_max_value, 'loan-calculator-wp'); ?>" value="<?php esc_attr_e($interested_rate, 'loan-calculator-wp'); ?>" class="slider <?php if($interest_rates_adj_disable =='1') { echo 'disabled-rate-adj'; } ?> <?php if($remove_range_sliders =='1') { echo 'remove-cal-range-sliders'; } ?>" id="interest_rate_range" tabindex="10" step="0.01">
+                                            <input type="range" min="<?php echo esc_attr($interest_rate_min_value, 'loan-calculator-wp'); ?>" max="<?php echo esc_attr($interest_rate_max_value, 'loan-calculator-wp'); ?>" value="<?php echo esc_attr($interested_rate, 'loan-calculator-wp'); ?>" class="slider <?php if($interest_rates_adj_disable =='1') { echo 'disabled-rate-adj'; } ?> <?php if($remove_range_sliders =='1') { echo 'remove-cal-range-sliders'; } ?>" id="interest_rate_range" tabindex="10" step="0.01">
                                         </div>
                                     </div>
                                     <div class="col-columns-20">
@@ -423,9 +423,9 @@ $remove_range_sliders = isset($loan_all_setting_data['remove_range_sliders']) ? 
                                 <div class="loan-text-dis">
                                     <input type="hidden" name="ballon_amounts" id="ballon_amounts" value="" tabindex="11" onkeydown="return onlyNos(event,'ballon_amounts')" />
 
-                                    <input type="hidden" name="ballon_amounts_per" id="ballon_amounts_per" value="<?php esc_attr_e($ballon_per); ?>" tabindex="12" min="0" max="<?php esc_attr_e($ballon_per); ?>" />
+                                    <input type="hidden" name="ballon_amounts_per" id="ballon_amounts_per" value="<?php echo esc_attr($ballon_per); ?>" tabindex="12" min="0" max="<?php echo esc_attr($ballon_per); ?>" />
                                 </div>
-                                <input type="hidden" id="ballon_amount_range" min="0" max="<?php esc_attr($ballon_per); ?>" tabindex="13" step="1" value="<?php esc_attr_e($ballon_per); ?>">
+                                <input type="hidden" id="ballon_amount_range" min="0" max="<?php echo esc_attr($ballon_per); ?>" tabindex="13" step="1" value="<?php echo esc_attr($ballon_per); ?>">
                             </div>
                         <?php } else {
 
@@ -433,9 +433,9 @@ $remove_range_sliders = isset($loan_all_setting_data['remove_range_sliders']) ? 
                                 <div class="fifth-row-sub-child">
                                     <div class="loan-text-dis-new-theme-block">
                                         <div class="loan-new-theme-inner-block">
-                                            <label for="loan_amt" class="loan-text"><?php esc_html_e('Balloon Amount', 'loan-calculator-wp'); ?> <i class="fa fa-info-circle" aria-hidden="true" tabindex="8"></i><span class="text-tooltip-disp"><?php esc_attr_e($balloon_amount_tooltip, 'loan-calculator-wp'); ?></span></label>
+                                            <label for="loan_amt" class="loan-text"><?php esc_html_e('Balloon Amount', 'loan-calculator-wp'); ?> <i class="fa fa-info-circle" aria-hidden="true" tabindex="8"></i><span class="text-tooltip-disp"><?php echo esc_attr($balloon_amount_tooltip, 'loan-calculator-wp'); ?></span></label>
                                             <div class="loan-new-theme-range-slider">
-                                                <input type="range" min="0" value="<?php esc_attr_e($ballon_per); ?>" class="slider <?php if($remove_range_sliders =='1') { echo 'remove-cal-range-sliders'; } ?>" id="ballon_amount_range" max="<?php esc_attr($ballon_per); ?>" tabindex="13" step="1">
+                                                <input type="range" min="0" value="<?php echo esc_attr($ballon_per); ?>" class="slider <?php if($remove_range_sliders =='1') { echo 'remove-cal-range-sliders'; } ?>" id="ballon_amount_range" max="<?php echo esc_attr($ballon_per); ?>" tabindex="13" step="1">
                                             </div>
 
 
@@ -445,7 +445,7 @@ $remove_range_sliders = isset($loan_all_setting_data['remove_range_sliders']) ? 
                                         <div class="col-columns-20">
                                             <div class="input-container">
                                                 <input type="text" class="loan-right-input" name="ballon_amounts_per" id="ballon_amounts_per" value="" tabindex="12"  onkeydown="return onlyNos(event,'ballon_amounts_per')" autocomplete="off">
-                                                <span style="display: none;" id="ballon_amounts_per_dis" min="0" max="<?php esc_attr_e($ballon_per); ?>" class="rate_disp"></span>
+                                                <span style="display: none;" id="ballon_amounts_per_dis" min="0" max="<?php echo esc_attr($ballon_per); ?>" class="rate_disp"></span>
                                             </div>
                                         </div>
                                     </div>
@@ -461,7 +461,7 @@ $remove_range_sliders = isset($loan_all_setting_data['remove_range_sliders']) ? 
                             <?php if($down_payment_mode == 'percentage'){ ?>     
                                 <div class="loan-text-dis-new-theme-block dp-perc-mode">
                                     <div class="loan-new-theme-inner-block">
-                                        <label for="down_payment" class="loan-text"><?php esc_html_e('Down Payment', 'loan-calculator-wp'); ?> <i class="fa fa-info-circle" aria-hidden="true" tabindex="8"></i><span class="text-tooltip-disp"><?php esc_attr_e($down_payment_tooltip, 'loan-calculator-wp'); ?></span></label>
+                                        <label for="down_payment" class="loan-text"><?php esc_html_e('Down Payment', 'loan-calculator-wp'); ?> <i class="fa fa-info-circle" aria-hidden="true" tabindex="8"></i><span class="text-tooltip-disp"><?php echo esc_attr($down_payment_tooltip, 'loan-calculator-wp'); ?></span></label>
 
                                         <div class="loan-new-theme-range-slider">
                                             <input type="range" min="0" value="0" class="slider <?php if($remove_range_sliders =='1') { echo 'remove-cal-range-sliders'; } ?>" id="down_payment_range" max="" tabindex="13" step="1">
@@ -482,7 +482,7 @@ $remove_range_sliders = isset($loan_all_setting_data['remove_range_sliders']) ? 
 
                                 <div class="loan-text-dis-new-theme-block dp-fixed-mode">
                                     <div class="loan-new-theme-inner-block">
-                                        <label for="down_payment" class="loan-text"><?php esc_html_e('Down Payment', 'loan-calculator-wp'); ?> <i class="fa fa-info-circle" aria-hidden="true" tabindex="8"></i><span class="text-tooltip-disp"><?php esc_attr_e($down_payment_tooltip, 'loan-calculator-wp'); ?></span></label>
+                                        <label for="down_payment" class="loan-text"><?php esc_html_e('Down Payment', 'loan-calculator-wp'); ?> <i class="fa fa-info-circle" aria-hidden="true" tabindex="8"></i><span class="text-tooltip-disp"><?php echo esc_attr($down_payment_tooltip, 'loan-calculator-wp'); ?></span></label>
                                     </div>
                                     <div class="col-columns-20">
                                         <div class="input-container">  
@@ -499,9 +499,9 @@ $remove_range_sliders = isset($loan_all_setting_data['remove_range_sliders']) ? 
 
                             <div class="loan-text-dis-new-theme-block dp-fixed-mode">
                                 <div class="loan-new-theme-inner-block">
-                                    <label for="extra_payment" class="loan-text"><?php echo __('Extra Payment', 'loan-calculator-wp'); ?> <i class="fa fa-info-circle" aria-hidden="true" tabindex="8"></i><span class="text-tooltip-disp"><?php esc_attr_e($extra_payment_tooltip, 'loan-calculator-wp'); ?></span></label>
+                                    <label for="extra_payment" class="loan-text"><?php echo esc_attr('Extra Payment', 'loan-calculator-wp'); ?> <i class="fa fa-info-circle" aria-hidden="true" tabindex="8"></i><span class="text-tooltip-disp"><?php echo esc_attr($extra_payment_tooltip, 'loan-calculator-wp'); ?></span></label>
                                     <div class="loan-new-theme-range-slider">
-                                        <input type="range" min="0" max="<?php esc_attr_e($extra_payment_max_val, 'loan-calculator-wp'); ?>" value="0" class="slider <?php if($remove_range_sliders =='1') { echo 'remove-cal-range-sliders'; } ?>" id="extra_payment_range" tabindex="16" step="1">
+                                        <input type="range" min="0" max="<?php echo esc_attr($extra_payment_max_val, 'loan-calculator-wp'); ?>" value="0" class="slider <?php if($remove_range_sliders =='1') { echo 'remove-cal-range-sliders'; } ?>" id="extra_payment_range" tabindex="16" step="1">
                                     </div>
                                 </div>
                                 <div class="col-columns-20">
@@ -518,19 +518,19 @@ $remove_range_sliders = isset($loan_all_setting_data['remove_range_sliders']) ? 
                         <div class="first-row-main-child">
                             <div class="loan-new-theme-inner-block loan-btn-display-value">
                                 <div class="loan-new-theme-inner-block">
-                                    <label for="loan_amt" class="loan-text"><?php esc_html_e('Payment Mode', 'loan-calculator-wp'); ?> <i class="fa fa-info-circle" aria-hidden="true" tabindex="8"></i><span class="text-tooltip-disp"><?php esc_attr_e($payment_mode_tooltip, 'loan-calculator-wp'); ?></span></label>
+                                    <label for="loan_amt" class="loan-text"><?php esc_html_e('Payment Mode', 'loan-calculator-wp'); ?> <i class="fa fa-info-circle" aria-hidden="true" tabindex="8"></i><span class="text-tooltip-disp"><?php echo esc_attr($payment_mode_tooltip, 'loan-calculator-wp'); ?></span></label>
                                 </div>
 
                                 <div class="col-columns-20">
 
                                     <div class="input-container">
                                         <?php $backgroud_arrow_logo_code = WW_LOAN_CALCULATOR_URL.'includes/images/down-arrow.svg'; ?>
-                                        <style type="text/css"> .site-wrap-payment-mode-section:after {background-image: url(<?php echo $backgroud_arrow_logo_code; ?>); } </style>
+                                        <style type="text/css"> .site-wrap-payment-mode-section:after {background-image: url(<?php echo esc_attr($backgroud_arrow_logo_code); ?>); } </style>
                                         <?php if ($payment_mode_enable == '1' && $choose_default_payment_mode == 'In Arrears') { ?>
                                             <div class="first-row-main-child site-wrap-payment-mode-section">
 
                                                 <select name="payment_type" id="payment_type" class="payment-opt-drop">
-                                                    <option value="<?php esc_attr_e($choose_default_payment_mode, 'loan-calculator-wp'); ?>" selected> <?php esc_html_e('In Arrears', 'loan-calculator-wp'); ?></option>
+                                                    <option value="<?php echo esc_attr($choose_default_payment_mode, 'loan-calculator-wp'); ?>" selected> <?php esc_html_e('In Arrears', 'loan-calculator-wp'); ?></option>
                                                 </select>
                                             </div>
                                         <?php  } else if ($payment_mode_enable == '1' && $choose_default_payment_mode == 'In Advanced') {
@@ -570,7 +570,7 @@ $remove_range_sliders = isset($loan_all_setting_data['remove_range_sliders']) ? 
     }
     ?>
     <div class="loan-detail-section-right-content">
-        <div class="loan-detail-section <?php esc_attr_e($full_width_cls); ?>">
+        <div class="loan-detail-section <?php echo esc_attr($full_width_cls); ?>">
             <div class="loan-detail-section-child">
                 <div class="sub-main-tab">
                     <div class="container">
@@ -607,13 +607,13 @@ $remove_range_sliders = isset($loan_all_setting_data['remove_range_sliders']) ? 
                                         border-radius: 16px 0px 0px 16px !important;
                                     }
                                 </style>
-                                <input type="radio" name="tabs" id="tab1" <?php esc_attr_e($tab1_checked); ?>>
+                                <input type="radio" name="tabs" id="tab1" <?php echo esc_attr($tab1_checked); ?>>
                                 <label for="tab1" class="tab1_icon">
                                     <?php if ($disable_tabs_icon == "") { ?>
-                                        <img src="<?php echo WW_LOAN_CALCULATOR_URL ?>/includes/images/group-4.png">
-                                        <span class="tooltip-disp"><?php esc_html_e($repayment_chart_heading, 'loan-calculator-wp'); ?></span>
+                                        <img src="<?php echo esc_attr(WW_LOAN_CALCULATOR_URL) ?>/includes/images/group-4.png">
+                                        <span class="tooltip-disp"><?php echo esc_html($repayment_chart_heading, 'loan-calculator-wp'); ?></span>
                                     <?php } else { ?>
-                                        <span><?php esc_html_e($repayment_chart_heading, 'loan-calculator-wp'); ?></span>
+                                        <span><?php echo esc_html($repayment_chart_heading, 'loan-calculator-wp'); ?></span>
                                     <?php } ?>
                                 </label>
                                 <?php
@@ -630,14 +630,14 @@ $remove_range_sliders = isset($loan_all_setting_data['remove_range_sliders']) ? 
                                         border-radius: 16px 0px 0px 16px !important;
                                     }
                                 </style>
-                                <input type="radio" name="tabs" id="tab3" <?php esc_attr_e($tab3_checked); ?>>
+                                <input type="radio" name="tabs" id="tab3" <?php echo esc_attr($tab3_checked); ?>>
                                 <label for="tab3" class="tab3_icon">
                                     <?php if ($disable_tabs_icon == "") { ?>
                                         <!-- <i class="fa fa-tasks"></i> -->
-                                        <img src="<?php echo WW_LOAN_CALCULATOR_URL ?>/includes/images/group-5.png">
-                                        <span class="tooltip-disp"><?php esc_html_e($loan_table_heading, 'loan-calculator-wp'); ?></span>
+                                        <img src="<?php echo esc_attr(WW_LOAN_CALCULATOR_URL) ?>/includes/images/group-5.png">
+                                        <span class="tooltip-disp"><?php echo esc_html($loan_table_heading, 'loan-calculator-wp'); ?></span>
                                     <?php } else { ?>
-                                        <span class=""><?php esc_html_e($loan_table_heading, 'loan-calculator-wp'); ?></span>
+                                        <span class=""><?php echo esc_html($loan_table_heading, 'loan-calculator-wp'); ?></span>
                                     <?php } ?>
                                 </label>
                                 <?php
@@ -654,13 +654,13 @@ $remove_range_sliders = isset($loan_all_setting_data['remove_range_sliders']) ? 
                                         border-radius: 0px 16px 16px 0px !important;
                                     }
                                 </style>
-                                <input type="radio" name="tabs" id="tab2" <?php esc_attr_e($tab2_checked); ?>>
+                                <input type="radio" name="tabs" id="tab2" <?php echo esc_attr($tab2_checked); ?>>
                                 <label for="tab2" class="tab2_icon">
                                     <?php if ($disable_tabs_icon == "") { ?>
-                                        <img src="<?php echo WW_LOAN_CALCULATOR_URL ?>/includes/images/play-video.png">
-                                        <span class="tooltip-disp"><?php esc_html_e($video_heading, 'loan-calculator-wp'); ?></span>
+                                        <img src="<?php echo esc_attr(WW_LOAN_CALCULATOR_URL) ?>/includes/images/play-video.png">
+                                        <span class="tooltip-disp"><?php echo esc_html($video_heading, 'loan-calculator-wp'); ?></span>
                                     <?php } else { ?>
-                                        <span><?php esc_html_e($video_heading, 'loan-calculator-wp'); ?></span>
+                                        <span><?php echo esc_html($video_heading, 'loan-calculator-wp'); ?></span>
                                     <?php } ?>
                                 </label>
                                 <?php
@@ -684,7 +684,7 @@ $remove_range_sliders = isset($loan_all_setting_data['remove_range_sliders']) ? 
                                             <th><?php esc_html_e('Period', 'loan-calculator-wp'); ?></th>
                                             <th><?php esc_html_e('Payment', 'loan-calculator-wp'); ?></th>
                                             <?php if($extra_payment_option=='1'){ ?>
-                                                <th class="extra-payment-column"><?php echo __('Extra Payment', 'loan-calculator-wp'); ?></th>
+                                                <th class="extra-payment-column"><?php echo esc_attr('Extra Payment', 'loan-calculator-wp'); ?></th>
                                             <?php } ?>
                                             <th><?php esc_html_e('Interest', 'loan-calculator-wp'); ?></th>
                                             <th><?php esc_html_e('Balance', 'loan-calculator-wp'); ?></th>
@@ -724,11 +724,11 @@ $remove_range_sliders = isset($loan_all_setting_data['remove_range_sliders']) ? 
                             ?>
                             <div class="contact-us-section-new-theme">
                                 <?php if ($contact_type == "popup") { ?>      
-                                    <button style="<?php esc_attr_e($font_family_new_theme, 'loan-calculator-wp') ?>" class="contact-book-btn"><?php esc_html_e($contact_popup_button_heading, 'loan-calculator-wp'); ?></button>
+                                    <button style="<?php echo esc_attr($font_family_new_theme, 'loan-calculator-wp') ?>" class="contact-book-btn"><?php echo esc_html($contact_popup_button_heading, 'loan-calculator-wp'); ?></button>
 
                                 <?php } else {  ?>     
 
-                                    <a style="<?php esc_attr_e($font_family_new_theme, 'loan-calculator-wp') ?>" href="<?php echo esc_url($contact_url); ?>" target="_blank" class="contact-btn-link"><?php esc_html_e($contact_popup_button_heading, 'loan-calculator-wp'); ?></a>
+                                    <a style="<?php echo esc_attr($font_family_new_theme, 'loan-calculator-wp') ?>" href="<?php echo esc_url($contact_url); ?>" target="_blank" class="contact-btn-link"><?php echo esc_html($contact_popup_button_heading, 'loan-calculator-wp'); ?></a>
 
                                 <?php } ?>
                             </div>
@@ -747,14 +747,14 @@ $remove_range_sliders = isset($loan_all_setting_data['remove_range_sliders']) ? 
     }
     ?>
     <div class="loan-detail-section-right-content">
-        <div class="loan-detail-section <?php esc_attr_e($full_width_cls); ?>">
+        <div class="loan-detail-section <?php echo esc_attr($full_width_cls); ?>">
 
             <div class="container loan-detail-section-child-container ">
                 <div class="loan-detail-section-child">
                     <div class="loan-detail-cal-desc">
                         <div class="loan-cal-desc">
                             <div class="loan-cal-desc-heading main-heading">
-                                <label id="regular_repayment_heading"><strong><?php esc_html_e($regular_repayment_heading, 'loan-calculator-wp'); ?></strong></label>
+                                <label id="regular_repayment_heading"><strong><?php echo esc_html($regular_repayment_heading, 'loan-calculator-wp'); ?></strong></label>
                             </div>
                             <div class="loan-cal-desc-val">
                                 <label><span><small><?php echo esc_html($currency_symbols); ?></small><span id="per_month_amount"></span></span> <strong id="loan_amount_term_label"></strong><span id="loan_amount_year"></span> </span></label>
@@ -764,7 +764,7 @@ $remove_range_sliders = isset($loan_all_setting_data['remove_range_sliders']) ? 
                         <?php if($ww_loan_total_interest_payable != '1'){ ?>
                             <div class="loan-cal-desc">
                                 <div class="loan-cal-desc-heading">
-                                    <label><span><?php esc_html_e($total_interests_payable_heading, 'loan-calculator-wp'); ?></span></label>
+                                    <label><span><?php echo esc_html($total_interests_payable_heading, 'loan-calculator-wp'); ?></span></label>
                                 </div>
                                 <div class="loan-cal-desc-val">
                                     <label><small><?php echo esc_html($currency_symbols); ?></small><span id="total_interests_amt"></span> <?php esc_html_e('over', 'loan-calculator-wp'); ?> <span id="total_interests_years"></span> </label>
@@ -773,19 +773,19 @@ $remove_range_sliders = isset($loan_all_setting_data['remove_range_sliders']) ? 
                         <?php } ?>
                         <div class="loan-cal-desc" id="ballon_amt_section">
                             <div class="loan-cal-desc-heading">
-                                <label><span><?php esc_html_e($ballon_amt_heading, 'loan-calculator-wp'); ?> (<span id="bill_ballon_per"><?php esc_attr_e(number_format($ballon_per, 2), 'loan-calculator-wp'); ?></span>%)</span></label>
+                                <label><span><?php echo esc_html($ballon_amt_heading, 'loan-calculator-wp'); ?> (<span id="bill_ballon_per"><?php echo esc_attr(number_format($ballon_per, 2), 'loan-calculator-wp'); ?></span>%)</span></label>
                             </div>
                             <div class="loan-cal-desc-val">
-                                <label><small><?php echo esc_html($currency_symbols); ?></small><strong><span id="bill_ballon_amt"><?php esc_attr_e(number_format(($loan_amount * $ballon_per / 100), 2), 'loan-calculator-wp'); ?></span></strong></label>
+                                <label><small><?php echo esc_html($currency_symbols); ?></small><strong><span id="bill_ballon_amt"><?php echo esc_attr(number_format(($loan_amount * $ballon_per / 100), 2), 'loan-calculator-wp'); ?></span></strong></label>
                             </div>
                         </div> 
                         <?php if($down_payment_option=='1'){ ?>
                             <div class="loan-cal-desc" id="down_payment_section">
                                 <div class="loan-cal-desc-heading">
-                                    <label><span><?php echo __($down_payment_heading, 'loan-calculator-wp'); ?><?php if($down_payment_mode=='percentage'){ ?> (<span id="bottom_down_payment_per"></span>%)<?php } ?></span></label>
+                                    <label><span><?php echo esc_attr($down_payment_heading, 'loan-calculator-wp'); ?><?php if($down_payment_mode=='percentage'){ ?> (<span id="bottom_down_payment_per"></span>%)<?php } ?></span></label>
                                 </div>
                                 <div class="loan-cal-desc-val">
-                                    <label><small><?php echo __($currency_symbols); ?></small><strong><span id="bottom_down_payment"></span></strong></label>
+                                    <label><small><?php echo esc_attr($currency_symbols); ?></small><strong><span id="bottom_down_payment"></span></strong></label>
                                 </div>
                             </div>
                         <?php } ?>  
@@ -793,45 +793,46 @@ $remove_range_sliders = isset($loan_all_setting_data['remove_range_sliders']) ? 
                         <?php if($extra_payment_option=='1'){ ?>
                             <div class="loan-cal-desc" id="extra_payment_section">
                                 <div class="loan-cal-desc-heading">
-                                    <label><span><?php echo __($extra_payment_heading, 'loan-calculator-wp'); ?></span></label>
+                                    <label><span><?php echo esc_attr($extra_payment_heading, 'loan-calculator-wp'); ?></span></label>
                                 </div>
                                 <div class="loan-cal-desc-val">
-                                    <label><small><?php echo __($currency_symbols); ?></small><strong><span id="bottom_extra_payment"></span></strong> <strong id="extra_payment_loan_amount_term_label"></strong></label>
+                                    <label><small><?php echo esc_attr($currency_symbols); ?></small><strong><span id="bottom_extra_payment"></span></strong> <strong id="extra_payment_loan_amount_term_label"></strong></label>
                                 </div>
                             </div>
                             <?php if($hide_total_extra_payments != '1'){ ?>
-                            <div class="loan-cal-desc" id="extra_payment_total_section">
-                            <div class="loan-cal-desc-heading">
-                                <label><span><?php esc_html_e($extra_payment_total_label); ?></span></label>
-                            </div>
-                            <div class="loan-cal-desc-val">
-                                <label><small><?php echo __($currency_symbols); ?></small><strong><span id="bottom_total_extra_payment"></span></strong></label>
-                            </div>
-                           </div>
+                                <div class="loan-cal-desc" id="extra_payment_total_section">
+                                    <div class="loan-cal-desc-heading">
+                                        <label><span><?php echo esc_html($extra_payment_total_label); ?></span></label>
+                                    </div>
+                                    <div class="loan-cal-desc-val">
+                                        <label><small><?php echo esc_attr($currency_symbols); ?></small><strong><span id="bottom_total_extra_payment"></span></strong></label>
+                                    </div>
+                                </div>
                             <?php } ?>
                             <?php if($hide_save_time_extra_payments != '1'){ ?>
-                            <div class="loan-cal-desc" id="extra_payment_saved_time_section">
-                            <div class="loan-cal-desc-heading">
-                                <label><span><?php esc_html_e($extra_payment_save_time_label); ?></span></label>
-                            </div>
-                            <div class="loan-cal-desc-val">
-                                <label><span id="time_save_for_extra_payment"></span></label>
-                            </div>
-                            </div>
+                                <div class="loan-cal-desc" id="extra_payment_saved_time_section">
+                                    <div class="loan-cal-desc-heading">
+                                        <label><span><?php echo esc_html($extra_payment_save_time_label); ?></span></label>
+                                    </div>
+                                    <div class="loan-cal-desc-val">
+                                        <label><span id="time_save_for_extra_payment"></span></label>
+                                    </div>
+                                </div>
                             <?php } ?>                            
-                             <?php if($hide_save_interest_extra_payments != '1'){ ?>
-                            <div class="loan-cal-desc" id="extra_payment_saved_interest_section">
-                                <div class="loan-cal-desc-heading">
-                                    <label><span><?php esc_html_e($extra_payment_save_interest_label); ?></span></label>
-                                </div>
-                                <div class="loan-cal-desc-val">
-                                    <label><small><?php echo __($currency_symbols); ?></small>
-                                    <strong><span id="interest_save_for_extra_payment"></span>
-                                    </strong></label>
-                                </div>
-                            </div>
+                            <?php if($hide_save_interest_extra_payments != '1'){ ?>
+                                <div class="loan-cal-desc" id="extra_payment_saved_interest_section">
+                                    <div class="loan-cal-desc-heading">
+                                        <label><span><?php echo esc_html($extra_payment_save_interest_label); ?></span></label>
+                                    </div>
+                                    <div class="loan-cal-desc-val">
+                                        <label><small><?php echo esc_attr($currency_symbols); ?></small>
+                                            <strong><span id="interest_save_for_extra_payment"></span>
+                                            </strong></label>
+                                        </div>
+                                    </div>
+                                <?php } ?>
                             <?php } ?>
-                        <?php } ?>
+                        </div>
                     </div>
                 </div>
                 <?php
@@ -839,51 +840,52 @@ $remove_range_sliders = isset($loan_all_setting_data['remove_range_sliders']) ? 
                 $total_fees_amt = floatval($total_regular_fees_amt) + floatval($application_fee);
                 ?>
                 <?php if ($calculation_fee_setting_enable == 1) { ?>
-                    <div class="loan-detail-fee-desc">
-                        <div class="loan-detail-fee-block">
-                            <div class="loan-detail-fee-heading">
-                                <h5><?php esc_html_e($application_fee_heading, 'loan-calculator-wp'); ?></h5>
+                    <div class="container loan-detail-section-child-container ">
+                        <div class="loan-detail-fee-desc">
+                            <div class="loan-detail-fee-block">
+                                <div class="loan-detail-fee-heading">
+                                    <h5><?php echo esc_html($application_fee_heading, 'loan-calculator-wp'); ?></h5>
+                                </div>
+                                <div class="loan-detail-fee-val">
+                                    <p><?php echo esc_html($currency_symbols); ?></small><?php echo esc_html($application_fee, 'loan-calculator-wp'); ?></p>
+                                </div>
                             </div>
-                            <div class="loan-detail-fee-val">
-                                <p><?php echo esc_html($currency_symbols); ?></small><?php esc_html_e($application_fee, 'loan-calculator-wp'); ?></p>
+                            <div class="loan-detail-fee-block">
+                                <div class="loan-detail-fee-heading">
+                                    <h5><?php echo esc_html($monthly_fee_heading, 'loan-calculator-wp'); ?></h5>
+                                </div>
+                                <div class="loan-detail-fee-val">
+                                    <p><?php echo esc_html($currency_symbols); ?></small><?php echo esc_html($monthly_rate, 'loan-calculator-wp'); ?></p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="loan-detail-fee-block">
-                            <div class="loan-detail-fee-heading">
-                                <h5><?php esc_html_e($monthly_fee_heading, 'loan-calculator-wp'); ?></h5>
+                            <div class="loan-detail-fee-block">
+                                <div class="loan-detail-fee-heading">
+                                    <h5><?php echo esc_html($total_regular_fees, 'loan-calculator-wp'); ?></h5>
+                                </div>
+                                <div class="loan-detail-fee-val">
+                                    <p><?php echo esc_html($currency_symbols); ?></small><span id="total_regular_fee_amt"><?php echo esc_html(round($total_regular_fees_amt, 2), 'loan-calculator-wp'); ?></span></p>
+                                </div>
                             </div>
-                            <div class="loan-detail-fee-val">
-                                <p><?php echo esc_html($currency_symbols); ?></small><?php esc_html_e($monthly_rate, 'loan-calculator-wp'); ?></p>
-                            </div>
-                        </div>
-                        <div class="loan-detail-fee-block">
-                            <div class="loan-detail-fee-heading">
-                                <h5><?php esc_html_e($total_regular_fees, 'loan-calculator-wp'); ?></h5>
-                            </div>
-                            <div class="loan-detail-fee-val">
-                                <p><?php echo esc_html($currency_symbols); ?></small><span id="total_regular_fee_amt"><?php esc_html_e(round($total_regular_fees_amt, 2), 'loan-calculator-wp'); ?></span></p>
-                            </div>
-                        </div>
-                        <div class="loan-detail-fee-block">
-                            <div class="loan-detail-fee-heading">
-                                <h5><?php esc_html_e($total_fees, 'loan-calculator-wp'); ?></h5>
-                            </div>
-                            <div class="loan-detail-fee-val">
-                                <p><?php echo esc_html($currency_symbols); ?></small><span id="total_fee_amt"><?php esc_html_e($total_fees_amt, 'loan-calculator-wp'); ?></span></p>
+                            <div class="loan-detail-fee-block">
+                                <div class="loan-detail-fee-heading">
+                                    <h5><?php echo esc_html($total_fees, 'loan-calculator-wp'); ?></h5>
+                                </div>
+                                <div class="loan-detail-fee-val">
+                                    <p><?php echo esc_html($currency_symbols); ?></small><span id="total_fee_amt"><?php echo esc_html($total_fees_amt, 'loan-calculator-wp'); ?></span></p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             <?php } ?>
         </div>
-    </div>
-</section>
+    </section>
 
-<div class="contact-us-popup" style="display:none;">
-    <div class="contact-us-popup-body">
-        <a href="javascript:void(0);" class="close-button" onclick="jQuery('.contact-us-popup').hide();jQuery('body').removeClass('body-overflow-hidden');">X</a>
-        <?php echo do_shortcode($contact_popup_content); ?>
+    <div class="contact-us-popup" style="display:none;">
+        <div class="contact-us-popup-body">
+            <a href="javascript:void(0);" class="close-button" onclick="jQuery('.contact-us-popup').hide();jQuery('body').removeClass('body-overflow-hidden');">X</a>
+            <?php echo do_shortcode($contact_popup_content); ?>
+        </div>
     </div>
-</div>
 </section>
 </div>
