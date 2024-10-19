@@ -29,9 +29,9 @@ if (!class_exists('WW_Loan_Calculator_Admin_Pages')) {
 		public function ww_loan_calculator_admin_menu()
 		{
 			// Loan Calculator Menu
-			add_menu_page(esc_html__('Loan Calculator', 'ww_loan_calculator_page'), esc_html__('Loan Calculator', 'ww_loan_calculator_page'), WW_LOAN_CALCULATOR_LEVEL, 'ww_loan_calculator_page', '', 'dashicons-calculator');
+			add_menu_page(esc_html__('Loan Calculator', 'loan-calculator-wp'), esc_html__('Loan Calculator', 'loan-calculator-wp'), WW_LOAN_CALCULATOR_LEVEL, 'ww_loan_calculator_page', '', 'dashicons-calculator');
 
-			add_submenu_page('ww_loan_calculator_page', esc_html__('Loan Calculator', 'ww_loan_calculator_page'), esc_html__('Loan Calculator', 'loan-calculator-wp'), WW_LOAN_CALCULATOR_LEVEL, 'ww_loan_calculator_page', array($this, 'ww_loan_calculator_page'));
+			add_submenu_page('ww_loan_calculator_page', esc_html__('Loan Calculator', 'loan-calculator-wp'), esc_html__('Loan Calculator', 'loan-calculator-wp'), WW_LOAN_CALCULATOR_LEVEL, 'ww_loan_calculator_page', array($this, 'ww_loan_calculator_page'));
 		}
 
 		/**
@@ -63,7 +63,7 @@ if (!class_exists('WW_Loan_Calculator_Admin_Pages')) {
 			if (is_plugin_active('loan-calculator-wp/loan-calculator-wp.php')) {
 				if (is_admin()) {
 					global $pagenow;
-					if ($pagenow === 'index.php' || (isset($_GET['page']) && $_GET['page'] === 'ww_loan_calculator_page')) {
+					if ($pagenow === 'index.php' || (isset($_GET['page']) && $_GET['page'] === 'ww_loan_calculator_page')) { // phpcs:ignore
 						$avoid_notice = get_option('lc_avoid_notice');
 						$display_notice_yes = get_option('lc_rating_notice');
 						$last_notice_timestamp = get_option('last_notice_timestamp');
@@ -75,11 +75,11 @@ if (!class_exists('WW_Loan_Calculator_Admin_Pages')) {
 
 								<div class="admin_notice_hide notice notice-info is-dismissible">
 									<p>
-										<?php esc_html_e("You have been using Loan Calculator Plugin for a while Would you like to leave a review?", "loan_calculator"); ?>
+										<?php esc_html_e("You have been using Loan Calculator Plugin for a while Would you like to leave a review?", "loan-calculator-wp"); ?>
 									</p>
 									<p>
-										<button type="button" id='ww_loan_calculator_response_yes' class='rating_yes button button-primary'><?php esc_attr_e("Yes, I'd love to!", "loan_calculator") ?></button>
-										<button type="button" class='button button-secondary notice_avoid_yes dismissable-button' id='ww_loan_calculator_avoid_now'><?php esc_attr_e("No, thanks") ?></button>
+										<button type="button" id='ww_loan_calculator_response_yes' class='rating_yes button button-primary'><?php esc_attr_e("Yes, I'd love to!", "loan-calculator-wp") ?></button>
+										<button type="button" class='button button-secondary notice_avoid_yes dismissable-button' id='ww_loan_calculator_avoid_now'><?php esc_attr_e("No, thanks", "loan-calculator-wp") ?></button>
 									</p>
 								</div>
 
@@ -89,11 +89,11 @@ if (!class_exists('WW_Loan_Calculator_Admin_Pages')) {
 
 								<div class="admin_notice_hide notice notice-info is-dismissible">
 									<p>
-										<?php esc_html_e("You have been using Loan Calculator Plugin for a while Would you like to leave a review?", "loan_calculator"); ?>
+										<?php esc_html_e("You have been using Loan Calculator Plugin for a while Would you like to leave a review?", "loan-calculator-wp"); ?>
 									</p>
 									<p>
-										<button type="button" id='ww_loan_calculator_response_yes' class='rating_yes button button-primary'><?php esc_attr_e("Yes, I'd love to!", "loan_calculator") ?><a href="https://wordpress.org/plugins/loan-calculator-wp/#reviews" target="_blank" rel="noopener noreferrer"></a></button>
-										<button type="button" class='button button-secondary notice_avoid_yes dismissable-button' id='ww_loan_calculator_avoid_now'><?php esc_attr_e("No, thanks") ?></button>
+										<button type="button" id='ww_loan_calculator_response_yes' class='rating_yes button button-primary'><?php esc_attr_e("Yes, I'd love to!", "loan-calculator-wp") ?><a href="https://wordpress.org/plugins/loan-calculator-wp/#reviews" target="_blank" rel="noopener noreferrer"></a></button>
+										<button type="button" class='button button-secondary notice_avoid_yes dismissable-button' id='ww_loan_calculator_avoid_now'><?php esc_attr_e("No, thanks", "loan-calculator-wp") ?></button>
 									</p>
 								</div>
 

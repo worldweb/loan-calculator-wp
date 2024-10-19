@@ -93,9 +93,10 @@ if (!class_exists('WW_Loan_Calculator_Script')) {
 
 			add_action('wp_footer', function () {
 				global $setting_data;
-
-				$formatted_data = json_encode($setting_data);
-				printf('<script id="loan-calculator-frontend-script-js-extra">var setting_data = %s</script>', $formatted_data);
+				if (isset($setting_data) && is_array($setting_data)) {
+					$formatted_data = wp_json_encode($setting_data);
+					printf('<script id="loan-calculator-frontend-script-js-extra">var setting_data = %s;</script>', $formatted_data); // phpcs:ignore
+				}
 			});
 		}
 
