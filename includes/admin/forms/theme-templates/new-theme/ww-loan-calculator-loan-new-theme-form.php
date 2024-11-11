@@ -296,7 +296,7 @@ $remove_range_sliders = isset($loan_all_setting_data['remove_range_sliders']) ? 
                                 <div class="loan-new-theme-inner-block">
                                     <label for="loan_amt" class="loan-text"><?php echo esc_html($loan_amount_label, 'loan-calculator-wp'); ?> <i class="fa fa-info-circle" aria-hidden="true" tabindex="1"></i><span class="text-tooltip-disp"><?php echo esc_html($loan_amount_tooltip, 'loan-calculator-wp'); ?></span></label>
                                     <div class="loan-new-theme-range-slider">
-                                        <input type="range" min="<?php echo esc_attr($loan_amount_min_value, 'loan-calculator-wp'); ?>" max="<?php echo esc_attr($loan_amount_max_value, 'loan-calculator-wp'); ?>" value="<?php echo esc_attr($loan_amount, 'loan-calculator-wp'); ?>" class="slider <?php if($remove_range_sliders =='1') { echo 'remove-cal-range-sliders'; } ?>" id="loan_amount_range" tabindex="3" step="1000">
+                                        <input type="range" min="<?php echo esc_attr($loan_amount_min_value, 'loan-calculator-wp'); ?>" max="<?php echo esc_attr($loan_amount_max_value, 'loan-calculator-wp'); ?>" value="<?php echo esc_attr($loan_amount, 'loan-calculator-wp'); ?>" class="slider <?php if($remove_range_sliders =='1') { echo 'remove-cal-range-sliders'; } ?>" id="loan_amount_range" tabindex="3" >
                                     </div>
                                 </div>
                                 <div class="col-columns-20">

@@ -295,7 +295,7 @@ if (!defined('ABSPATH')) exit;
                                 <span class="extra-info"><?php echo esc_attr($currency_symbols); ?></span>
                                 <input type="text" name="loan_amount" id="loan_amount" value="" tabindex="2" oninput="validateInputLoanRate(this)" onkeydown="return onlyNos(event,'loan_amount')" />
                             </div>
-                            <input type="range" min="<?php echo esc_attr($loan_amount_min_value, 'loan-calculator-wp'); ?>" max="<?php echo esc_attr($loan_amount_max_value, 'loan-calculator-wp'); ?>" value="<?php echo esc_attr($loan_amount, 'loan-calculator-wp'); ?>" class="slider <?php if($remove_range_sliders =='1') { echo 'remove-cal-range-sliders'; } ?>" id="loan_amount_range" tabindex="3" step="1000">
+                            <input type="range" min="<?php echo esc_attr($loan_amount_min_value, 'loan-calculator-wp'); ?>" max="<?php echo esc_attr($loan_amount_max_value, 'loan-calculator-wp'); ?>" value="<?php echo esc_attr($loan_amount, 'loan-calculator-wp'); ?>" class="slider <?php if($remove_range_sliders =='1') { echo 'remove-cal-range-sliders'; } ?>" id="loan_amount_range" tabindex="3" >
                         </div>
                         <div class="first-row-sub-child">
                             <label for="loan_terms" class="loan-text"><?php echo esc_attr('No. of Payments', 'loan-calculator-wp'); ?><i class="fa fa-info-circle" aria-hidden="true" tabindex="4"></i><span class="text-tooltip-disp"><?php echo esc_attr($loan_terms_tooltip, 'loan-calculator-wp');?></span></label>
