@@ -3,7 +3,7 @@
  * Plugin Name: Loan Calculator WP
  * Plugin URI: https://www.worldwebtechnology.com/
  * Description: Advanced Loan Calculator for Home Loans, Personal Loans, and various other types of loans. Includes features like a repayment chart, amortization table, video tab, balloon payment option, and supports all currencies. Use the contact form shortcode for easy access.
- * Version: 1.5.3
+ * Version: 1.5.5
  * Author: World Web Technology
  * Author URI: https://www.worldwebtechnology.com/
  * Text Domain: loan-calculator-wp
@@ -26,7 +26,7 @@ if (!defined('ABSPATH')) exit;
  * @since 1.0.0
  */
 if (!defined('WW_LOAN_CALCULATOR_VERSION')) {
-    define('WW_LOAN_CALCULATOR_VERSION', '1.5.3'); //version of plugin
+    define('WW_LOAN_CALCULATOR_VERSION', '1.5.5'); //version of plugin
 }
 if (!defined('WW_LOAN_CALCULATOR_TEXT_DOMAIN')) { //check if variable is not defined previous then define it
     define('WW_LOAN_CALCULATOR_TEXT_DOMAIN', 'loan-calculator-wp'); //this is for multi language support in plugin
@@ -95,10 +95,7 @@ function ww_loan_calculator_load_plugin_textdomain()
 register_activation_hook(__FILE__, 'ww_loan_calculator_register_activation');
 function ww_loan_calculator_register_activation()
 {
-        
-        //$plugin_data = get_plugin_data( __FILE__ );  
-        //$loan_calculator_db_version =  $plugin_data['Version']; 
-
+    
     $loan_calculator_db_version = get_option( 'loan_calculator_db_version' );    
 
     
@@ -145,7 +142,7 @@ function ww_loan_calculator_register_activation()
         $loan_calculator_default_options['loan_feature_product_heading'] = esc_html__('Loan Product Features', 'loan-calculator-wp');
         $loan_calculator_default_options['video_heading'] = esc_html__('Video', 'loan-calculator-wp');
         $loan_calculator_default_options['repayment_chart_heading'] = esc_html__('Repayment Chart', 'loan-calculator-wp');
-        $loan_calculator_default_options['loan_table_heading'] = esc_html__('Loan Amortisation Table', 'loan-calculator-wp');
+        $loan_calculator_default_options['loan_table_heading'] = esc_html__('Loan Amortization Table', 'loan-calculator-wp');
         $loan_calculator_default_options['youtube_video_link'] = '';
         $loan_calculator_default_options['contact_popup_button_heading'] = esc_html__('Contact us now for a quote', 'loan-calculator-wp');
         $loan_calculator_default_options['calculator_disclaimer_heading'] = esc_html__('Calculator Disclaimer', 'loan-calculator-wp');
@@ -162,24 +159,24 @@ function ww_loan_calculator_register_activation()
         $loan_calculator_default_options['about_this_calculator'] = esc_html__('About this calculator', 'loan-calculator-wp');
         $loan_calculator_default_options['calculator_heading'] = esc_html__('Feel free to use our Equipment Finance Calculator', 'loan-calculator-wp');
         $loan_calculator_default_options['calculator_popup_content'] = '<h1>Calculator Information</h1>
-The Equipment Finance Calculator calculates the type of repayment required, at the frequency requested, in respect of the loan parameters entered, namely amount, term and interest rate. The Product selected determines the default interest rate for personal loan product.
+        The Equipment Finance Calculator calculates the type of repayment required, at the frequency requested, in respect of the loan parameters entered, namely amount, term and interest rate. The Product selected determines the default interest rate for personal loan product.
 
-The Equipment Finance Calculator also calculates the time saved to pay off the loan and the amount of interest saved based on an additional input from the customer. This is if repayments are increased by the entered amount of extra contribution per repayment period. This feature is only enabled for the products that support an extra repayment.
+        The Equipment Finance Calculator also calculates the time saved to pay off the loan and the amount of interest saved based on an additional input from the customer. This is if repayments are increased by the entered amount of extra contribution per repayment period. This feature is only enabled for the products that support an extra repayment.
 
-The calculations are done at the repayment frequency entered, in respect of the original loan parameters entered, namely amount, annual interest rate and term in years.
-<h1>Calculator Assumptions</h1>
-<h3>Length of Month</h3>
-All months are assumed to be of equal length. In reality, many loans accrue on a daily basis leading to a varying number of days interest dependent on the number of days in the particular month.
-<h3>Number of Weeks or Fortnights in a Year</h3>
-One year is assumed to contain exactly 52 weeks or 26 fortnights. This implicitly assumes that a year has 364 days rather than the actual 365 or 366.
-<h3>Rounding of Amount of Each Repayment</h3>
-In practice, repayments are rounded to at least the nearer cent. However the calculator uses the unrounded repayment to derive the amount of interest payable at points along the graph and in total over the full term of the loan. This assumption allows for a smooth graph and equal repayment amounts. Note that the final repayment after the increase in repayment amount.
-<h3>Rounding of Time Saved</h3>
-The time saved is presented as a number of years and months, fortnights or weeks, based on the repayment frequency selected. It assumes the potential partial last repayment when calculating the savings.
-<h3>Amount of Interest Saved</h3>
-This amount can only be approximated from the amount of time saved and based on the original loan details.
-<h3>Calculator Disclaimer</h3>
-The results from this calculator should be used as an indication only. Results do not represent either quotes or pre-qualifications for the product. Individual institutions apply different formulas. Information such as interest rates quoted and default figures used in the assumptions are subject to change.';
+        The calculations are done at the repayment frequency entered, in respect of the original loan parameters entered, namely amount, annual interest rate and term in years.
+        <h1>Calculator Assumptions</h1>
+        <h3>Length of Month</h3>
+        All months are assumed to be of equal length. In reality, many loans accrue on a daily basis leading to a varying number of days interest dependent on the number of days in the particular month.
+        <h3>Number of Weeks or Fortnights in a Year</h3>
+        One year is assumed to contain exactly 52 weeks or 26 fortnights. This implicitly assumes that a year has 364 days rather than the actual 365 or 366.
+        <h3>Rounding of Amount of Each Repayment</h3>
+        In practice, repayments are rounded to at least the nearer cent. However the calculator uses the unrounded repayment to derive the amount of interest payable at points along the graph and in total over the full term of the loan. This assumption allows for a smooth graph and equal repayment amounts. Note that the final repayment after the increase in repayment amount.
+        <h3>Rounding of Time Saved</h3>
+        The time saved is presented as a number of years and months, fortnights or weeks, based on the repayment frequency selected. It assumes the potential partial last repayment when calculating the savings.
+        <h3>Amount of Interest Saved</h3>
+        This amount can only be approximated from the amount of time saved and based on the original loan details.
+        <h3>Calculator Disclaimer</h3>
+        The results from this calculator should be used as an indication only. Results do not represent either quotes or pre-qualifications for the product. Individual institutions apply different formulas. Information such as interest rates quoted and default figures used in the assumptions are subject to change.';
         $loan_calculator_default_options['calculation_fee_setting_enable'] = '0';
         $loan_calculator_default_options['delete_data_enable'] = '0';
         $loan_calculator_default_options['enable_repayment_chart'] = '1';
@@ -199,7 +196,7 @@ The results from this calculator should be used as an indication only. Results d
     $loan_calculator_db_version = get_option( 'loan_calculator_db_version' );
 
     if( $loan_calculator_db_version == '1.0.1' ) {
-          
+      
         $loan_calculator_default_options = get_option( 'ww_loan_option' );
 
         $loan_calculator_default_options['ww_loan_currency'] = 'USD';        
@@ -211,8 +208,8 @@ The results from this calculator should be used as an indication only. Results d
     }
 
     $loan_calculator_db_version = get_option( 'loan_calculator_db_version' );   
-     
-       
+    
+    
     if( $loan_calculator_db_version == '1.0.2' || $loan_calculator_db_version == '1.3.9') { 
 
         /* 1.3.9 is for plugin version that we have set before */
@@ -233,68 +230,95 @@ The results from this calculator should be used as an indication only. Results d
 
 
     $loan_calculator_db_version = get_option( 'loan_calculator_db_version' );   
-     
-       
+    
+    
     if( $loan_calculator_db_version == '1.0.3') {
 
-         $loan_calculator_default_options = get_option( 'ww_loan_option' );
+       $loan_calculator_default_options = get_option( 'ww_loan_option' );
 
 
-         $loan_calculator_default_options['extra_payment_option'] = '';
-          
-         $loan_calculator_default_options['extra_payment_tooltip'] = esc_html__('If applicable, enter the extra payment, which will be deducted from loan amount', 'loan-calculator-wp');   
+       $loan_calculator_default_options['extra_payment_option'] = '';
+       
+       $loan_calculator_default_options['extra_payment_tooltip'] = esc_html__('If applicable, enter the extra payment, which will be deducted from loan amount', 'loan-calculator-wp');   
 
-         $loan_calculator_default_options['extra_payment_heading'] = esc_html__('Extra Payment Amount', 'loan-calculator-wp');      
+       $loan_calculator_default_options['extra_payment_heading'] = esc_html__('Extra Payment Amount', 'loan-calculator-wp');      
 
-         update_option('ww_loan_option', $loan_calculator_default_options);
+       update_option('ww_loan_option', $loan_calculator_default_options);
 
-         update_option( 'loan_calculator_db_version', '1.0.4' );
+       update_option( 'loan_calculator_db_version', '1.0.4' );
 
-    }
-
-
-    if( $loan_calculator_db_version == '1.0.4') {
-
-         $loan_calculator_default_options = get_option( 'ww_loan_option' );         
-
-         $loan_calculator_default_options['extra_payment_save_time_label'] = esc_html__('Time Saved From Extra Payments', 'loan-calculator-wp');  
-            
-
-         update_option('ww_loan_option', $loan_calculator_default_options);
-
-         update_option( 'loan_calculator_db_version', '1.0.5' );
-
-    }
+   }
 
 
-    if( $loan_calculator_db_version == '1.0.5') {
+   if( $loan_calculator_db_version == '1.0.4') {
 
-         $loan_calculator_default_options = get_option( 'ww_loan_option' );         
+       $loan_calculator_default_options = get_option( 'ww_loan_option' );         
 
-         $loan_calculator_default_options['extra_payment_total_label'] = esc_html__('Total Extra Payments', 'loan-calculator-wp');  
+       $loan_calculator_default_options['extra_payment_save_time_label'] = esc_html__('Time Saved From Extra Payments', 'loan-calculator-wp');  
+       
 
-         $loan_calculator_default_options['hide_total_extra_payments'] = '';
-         $loan_calculator_default_options['hide_save_time_extra_payments'] = '';
+       update_option('ww_loan_option', $loan_calculator_default_options);
 
-         $loan_calculator_default_options['extra_payment_save_interest_label'] = esc_html__('Interest Saved From Extra Payments', 'loan-calculator-wp'); 
+       update_option( 'loan_calculator_db_version', '1.0.5' );
 
-         $loan_calculator_default_options['hide_save_interest_extra_payments'] = '';
+   }
 
 
-         $loan_calculator_default_options['interest_rates_adj_disable'] = '';         
+   if( $loan_calculator_db_version == '1.0.5') {
 
-         update_option('ww_loan_option', $loan_calculator_default_options);
+       $loan_calculator_default_options = get_option( 'ww_loan_option' );         
 
-         update_option( 'loan_calculator_db_version', '1.0.6' );
+       $loan_calculator_default_options['extra_payment_total_label'] = esc_html__('Total Extra Payments', 'loan-calculator-wp');  
 
-    }
+       $loan_calculator_default_options['hide_total_extra_payments'] = '';
+       $loan_calculator_default_options['hide_save_time_extra_payments'] = '';
 
+       $loan_calculator_default_options['extra_payment_save_interest_label'] = esc_html__('Interest Saved From Extra Payments', 'loan-calculator-wp'); 
+
+       $loan_calculator_default_options['hide_save_interest_extra_payments'] = '';
+
+
+       $loan_calculator_default_options['interest_rates_adj_disable'] = '';         
+
+       update_option('ww_loan_option', $loan_calculator_default_options);
+
+       update_option( 'loan_calculator_db_version', '1.0.6' );
+
+   }
+
+   if($loan_calculator_db_version == '1.0.6'){
+
+    $loan_calculator_default_options = get_option( 'ww_loan_option' );         
+    $loan_calculator_default_options['balance_border_color_graph'] = '#b8204c';
+    $loan_calculator_default_options['balance_point_background_color_graph'] = '#b8204c';
+    $loan_calculator_default_options['extra_payment_graph_color'] = '#00636b';
     
-    $plugin_activate_time =  strtotime("now");
-    update_option('plugin_activation_time', $plugin_activate_time);
-    update_option('lc_avoid_notice', 0);
-    update_option('lc_rating_notice', 0);
-    update_option('last_notice_timestamp', 0);
+    
+    $loan_calculator_default_options['summary_chart_option'] = '';
+
+    $loan_calculator_default_options['summary_chart_label'] = esc_html__('Break-up of Total Payment', 'loan-calculator-wp');
+
+    $loan_calculator_default_options['summary_chart_principal_fill_color'] = '#ed8c2b';
+    $loan_calculator_default_options['summary_chart_interest_fill_color'] = '#88a825';
+    $loan_calculator_default_options['summary_chart_ballon_payment_fill_color'] = '#25649f';
+    $loan_calculator_default_options['summary_chart_down_payment_fill_color'] = '#b8204c';
+    $loan_calculator_default_options['summary_chart_extra_payment_fill_color'] = '#cf4a30';
+
+
+    $loan_calculator_default_options['down_payment_label'] = esc_html__('Down Payment', 'loan-calculator-wp');
+    $loan_calculator_default_options['down_payment_max_per'] = 100;
+
+    update_option('ww_loan_option', $loan_calculator_default_options);
+    update_option( 'loan_calculator_db_version', '1.0.7' );
+
+}
+
+
+$plugin_activate_time =  strtotime("now");
+update_option('plugin_activation_time', $plugin_activate_time);
+update_option('lc_avoid_notice', 0);
+update_option('lc_rating_notice', 0);
+update_option('last_notice_timestamp', 0);
 }
 
 /**
@@ -345,6 +369,6 @@ require_once(WW_LOAN_CALCULATOR_DIR . '/includes/loan-calculator-misc-functions.
 function ww_loan_upgrade_completed() {       
     
     ww_loan_calculator_register_activation(); 
- 
+    
 }
 add_action( 'plugins_loaded', 'ww_loan_upgrade_completed');

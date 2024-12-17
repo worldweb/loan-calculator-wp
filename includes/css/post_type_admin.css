@@ -47,3 +47,12 @@
 #ww_loan_calc .postbox-header{
     display: none !important;
 }
+
+.loan-calculator-form-settings .sa-manage-level-product-box .require-field-star{
+    color: red;
+  /*  display: flex;*/
+}
+.loan-calculator-form-settings .sa-manage-level-product-box .error{
+    color: red;
+    display: flex;
+}

@@ -63,6 +63,8 @@ if (!class_exists('WW_Loan_Calculator_Public')) {
 
 			$down_payment_mode = isset($loan_all_setting_data['down_payment_mode']) ? $loan_all_setting_data['down_payment_mode'] : "fixed";
 
+			 $down_payment_max_per = isset($loan_all_setting_data['down_payment_max_per']) ? $loan_all_setting_data['down_payment_max_per'] : "100";			
+
 
 			$extra_payment_option = isset($loan_all_setting_data['extra_payment_option']) ? $loan_all_setting_data['extra_payment_option'] : "";
 
@@ -73,10 +75,31 @@ if (!class_exists('WW_Loan_Calculator_Public')) {
 
     		$hide_save_time_extra_payments = isset($loan_all_setting_data['hide_save_time_extra_payments']) ? $loan_all_setting_data['hide_save_time_extra_payments'] : "";
 
-    		$hide_save_interest_extra_payments = isset($loan_all_setting_data['hide_save_interest_extra_payments']) ? $loan_all_setting_data['hide_save_interest_extra_payments'] : "";
-
+    		$hide_save_interest_extra_payments = isset($loan_all_setting_data['hide_save_interest_extra_payments']) ? $loan_all_setting_data['hide_save_interest_extra_payments'] : ""; 
 
     		$interest_rates_adj_disable = isset($loan_all_setting_data['interest_rates_adj_disable']) ? $loan_all_setting_data['interest_rates_adj_disable'] : "";
+
+    		/* stacked bar graph options */
+
+		    $balance_border_color_graph = isset($loan_all_setting_data['balance_border_color_graph']) ? $loan_all_setting_data['balance_border_color_graph'] : "";
+			$balance_point_background_color_graph = isset($loan_all_setting_data['balance_point_background_color_graph']) ? $loan_all_setting_data['balance_point_background_color_graph'] : "";
+			$extra_payment_graph_color = isset($loan_all_setting_data['extra_payment_graph_color']) ? $loan_all_setting_data['extra_payment_graph_color'] : "";
+
+    		/* summary pie chart options */
+
+			$summary_chart_option = isset($loan_all_setting_data['summary_chart_option']) ? $loan_all_setting_data['summary_chart_option'] : "";			
+
+			$summary_chart_label = isset($loan_all_setting_data['summary_chart_label']) ? $loan_all_setting_data['summary_chart_label'] : "";
+
+			$summary_chart_principal_fill_color = isset($loan_all_setting_data['summary_chart_principal_fill_color']) ? $loan_all_setting_data['summary_chart_principal_fill_color'] : ""; 
+
+			$summary_chart_interest_fill_color = isset($loan_all_setting_data['summary_chart_interest_fill_color']) ? $loan_all_setting_data['summary_chart_interest_fill_color'] : "";
+
+			$summary_chart_ballon_payment_fill_color = isset($loan_all_setting_data['summary_chart_ballon_payment_fill_color']) ? $loan_all_setting_data['summary_chart_ballon_payment_fill_color'] : "";
+
+			$summary_chart_down_payment_fill_color = isset($loan_all_setting_data['summary_chart_down_payment_fill_color']) ? $loan_all_setting_data['summary_chart_down_payment_fill_color'] : "";
+
+			$summary_chart_extra_payment_fill_color = isset($loan_all_setting_data['summary_chart_extra_payment_fill_color']) ? $loan_all_setting_data['summary_chart_extra_payment_fill_color'] : "";
 
 
 			$repay_freq_per_field_label = ww_loan_repayment_frequency_calc_label();
@@ -121,12 +144,28 @@ if (!class_exists('WW_Loan_Calculator_Public')) {
 				'hide_save_interest_extra_payments' => $hide_save_interest_extra_payments,
 				'interest_rates_adj_disable' => $interest_rates_adj_disable,
 				'remove_range_sliders' => isset($loan_all_setting_data['remove_range_sliders']) ? $loan_all_setting_data['remove_range_sliders'] : "",				
-				'font_awesome_css_url' => WW_LOAN_CALCULATOR_URL . 'includes/css/all.min.css'
+				'font_awesome_css_url' => WW_LOAN_CALCULATOR_URL . 'includes/css/all.min.css',
+				'summary_chart_option' => $summary_chart_option,
+				'extra_payment_label' => __('Extra Payment', 'loan-calculator-wp'),
+				'total_interest_label' => __('Total Interest', 'loan-calculator-wp'),
+				'ballon_amount_label' => __('Ballon Amount', 'loan-calculator-wp'),
+				'balance_border_color_graph' => $balance_border_color_graph,
+				'balance_point_background_color_graph' => $balance_point_background_color_graph,
+				'extra_payment_graph_color' => $extra_payment_graph_color,
+				'summary_chart_principal_fill_color' => $summary_chart_principal_fill_color,
+				'summary_chart_interest_fill_color' => $summary_chart_interest_fill_color,
+				'summary_chart_ballon_payment_fill_color' => $summary_chart_ballon_payment_fill_color,
+				'summary_chart_down_payment_fill_color' => $summary_chart_down_payment_fill_color,
+				'summary_chart_extra_payment_fill_color' => $summary_chart_extra_payment_fill_color,
+				'down_payment_max_per' => $down_payment_max_per,
+
 			);
 
 			wp_localize_script('loan-calculator-frontend-script', 'setting_data', $setting_data);
 
 			wp_enqueue_script('loan-calculator-frontend-script');
+			wp_enqueue_script('loan-calculator-datalabels');
+			wp_enqueue_script('loan-calculator-break-up-of-total-payment'); 
 			wp_enqueue_script('loan-calculator-frequency-payment');
 			wp_enqueue_script('loan-calculator-print-script');
 

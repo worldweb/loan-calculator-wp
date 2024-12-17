@@ -722,7 +722,7 @@ label
 .loan-detail-section
 .loan-detail-section-child:last-child {
     width: 100%;
-    padding-top: 15px;
+    padding-top: 15px;    
 /*    padding-left: 17px;*/
 }
 
@@ -2345,7 +2345,7 @@ label.loan-text {
 }
 
 .loan-number-payment-with-label label#label-for-freuency {
-    bottom: -20px;
+    bottom: -17px;
 }
 
 
@@ -2653,6 +2653,138 @@ label.loan-text {
 #loan-process-tbl {
     white-space: nowrap;
 }
+
+/* new bar chart css */
+
+span.balance-legend-icon {
+    position: relative;    
+}
+
+span.balance-legend-icon:before {content: "";position: absolute;left: -5px;top: 5%;height: 4px;width: 5px;border-bottom: 3px solid var(--calc-graph-balance-border-color) !important;}
+
+span.balance-legend-icon:after {content: "";position: absolute;right: -5px;top: 5%;height: 4px;width: 5px;border-bottom: 3px solid var(--calc-graph-balance-border-color) !important;}
+
+body.theme-astra span.balance-legend-icon:before {content: "";position: absolute;left: -5px;top: 18%;height: 4px;width: 5px;border-bottom: 3px solid var(--calc-graph-balance-border-color) !important;}
+
+body.theme-astra span.balance-legend-icon:after {content: "";position: absolute;right: -5px;top: 18%;height: 4px;width: 5px;border-bottom: 3px solid var(--calc-graph-balance-border-color) !important;}
+
+/* new bar chart css */
+
+
+/* summary chart css */
+
+.summary-chart-canvas{
+    width: 250px;
+    height: 250px;
+}
+
+.loan-detail-section-child.with-summary-chart{
+    display: flex;
+}
+
+/* summary chart css */
+
+
+/*summary chart changes*/
+.default-theme.with-summary-chart {
+  flex-direction: column;
+}
+
+.loan-detail-section-child .summary-calculation-and-chart-wrappar {
+  display: flex;
+}
+
+.loan-detail-section-child.with-summary-chart .loan-detail-cal-desc {
+  width: calc(60% - 15px);
+}
+
+.loan-detail-section-child.with-summary-chart .break-up-total-payment-chart-wrap.loan-detail-cal-desc {
+  width: calc(40% - 15px);
+}
+
+.summary-calculation-and-chart-wrappar .loan-detail-cal-desc {
+  width: calc(100% - 15px);
+}
+
+.loan-detail-section-child .loan-cal-desc .loan-cal-desc-heading label,
+.loan-detail-section-child .loan-cal-desc .loan-cal-desc-heading span {
+  font-size: 16px;
+  line-height: 29px !important;
+}
+
+.loan-detail-section-child .loan-cal-desc-val {
+    text-align: end;
+}
+
+.loan-detail-section-child .loan-cal-desc-val label span {
+  font-size: 20px !important;
+  line-height: 32px;
+  margin-left: 2px;
+}
+
+.loan-detail-section-child .loan-cal-desc-heading {
+  width: 50%;
+}
+
+.loan-detail-section-child .break-up-total-payment-chart-wrap {
+  width: calc(40% - 15px);
+  text-align: center;
+}
+
+.loan-detail-section-child .loan-cal-desc {
+  align-items: flex-start !important;
+}
+
+.loan-detail-section-child .loan-cal-desc-val label {
+  font-size: 16px !important;
+  word-spacing: 1px;
+}
+
+.loan-detail-section-child .calculator-disclaimer-section h4 {
+  font-size: 18px;
+  margin: 15px 0px;
+  font-weight: 600;
+}
+
+.loan-detail-section-child .break-up-total-payment-chart-wrap label.summary-chart-heading {
+  font-size: 18px;
+  font-weight: 600;
+  color: #3f4864;
+}
+
+.loan-detail-section-child .calculator-disclaimer-section p {
+  margin-bottom: 10px;
+  font-size: 14px;
+  line-height: 22px;
+}
+
+.loan-detail-fee-block {
+  padding: 10px 0px !important;
+}
+
+.calculator-disclaimer-section h4 {
+  font-size: 18px;
+  margin: 15px 0px;
+  color: #3f4864;
+  font-weight: 800;
+}
+
+.calculator-disclaimer-section p {
+  font-size: 14px;
+  line-height: 24px;
+}
+
+.chart-note{
+    display: none;
+}
+.chart-note p {
+    font-size: 11px;
+}
+#total_interests_amt_hidden{
+    display: none;
+}
+
+
 /****************************************************/
 /**************** START Media Screen ****************/
 /****************************************************/
@@ -2663,255 +2795,42 @@ label.loan-text {
         /* margin: 0.3in 1in 0.3in 1in !important; */
     }
 
-    #main-sec {
-        -webkit-print-color-adjust: exact !important;
-        -moz-print-color-adjust: exact !important;
-        -ms-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
-        color-adjust: exact !important;
-    }
-    .loan-option-text-info
-    .loan-option-text-info-section
-    .loan-option-text-info-block
-    .first-row {
-        display: flex;
-        flex-wrap: wrap;
-        margin: 0 -15px 15px;
+    body * {
+        visibility: hidden;
     }
 
-    .loan-option-text-info
-    .loan-option-text-info-section
-    .loan-option-text-info-block
-    .second-row {
-        display: flex;
-    }
-    .loan-option-text-info
-    .loan-option-text-info-section
-    .loan-option-text-info-block
-    .second-row
-    .second-row-sub-child:first-child {
-        width: 50%;
-    }
-    .loan-option-text-info
-    .loan-option-text-info-section
-    .loan-option-text-info-block
-    .second-row
-    .second-row-sub-child {
-        width: 50%;
-        padding: 0 15px;
+    .ctm_main_wrap, .ctm_main_wrap * {
+        visibility: visible;
     }
 
-    .loan-option-text-info
-    .loan-detail-section
-    .loan-detail-section-child
-    .sub-main-tab
-    .tab-content {
-        width: 100%;
-    }
-    .loan-option-text-info
-    .loan-detail-section
-    .loan-detail-section-child:first-child {
-        width: 100% !important;
-        padding-top: 20px;
-        background: rgb(255, 255, 255);
-    }
-    .loan-option-text-info
-    .loan-detail-section
-    .loan-detail-section-child:last-child {
-        max-width: 100%;
-        padding-top: 20px !important;
-        padding-left: 17px;
-    }
-    .loan-option-text-info .loan-detail-section {
-        background: #ffffff;
-        padding: 0;
-        margin-top: 20px;
-        display: flex;
-        flex-wrap: wrap;
-        margin: 0 -15px;
-    }
-    #loan-process-graph {
-        width: 460px !important;
-    }
-    .loan-option-text-info
-    .loan-detail-section
-    .loan-detail-section-child:last-child
-    .loan-detail-cal-desc {
-        padding: 15px;
-        background: var(--calc-bg-light-color);
-    }
-    .loan-option-text-info
-    .loan-detail-section
-    .loan-detail-section-child:last-child
-    .loan-detail-fee-desc {
-        padding: 15px;
-        background: #ffffff;
-        margin-top: 20px;
-        border: 1px solid black;
-    }
-    .loan-option-text-info {
-        background: #f8f8f8;
-        padding: 15px 15px 0;
-        margin-bottom: 15px;
-    }
-
-    .loan-option-text-info
-    .loan-detail-section
-    .loan-detail-section-child
-    .sub-main-tab
-    .tabs {
-        max-width: 100%;
-        float: none;
-        list-style: none;
-        padding: 0;
-        margin: 0 auto;
-        position: relative;
-        display: flex;
-        flex-wrap: wrap;
-    }
-    .loan-option-text-info
-    .loan-detail-section
-    .loan-detail-section-child
-    .sub-main-tab
-    .tabs
-    input[type="radio"] {
-        display: none;
-    }
-    .loan-option-text-info
-    .loan-detail-section
-    .loan-detail-section-child
-    .sub-main-tab
-    .tabs
-    input[type="radio"]:checked
-    + label {
-        background: var(--calc-background-color);
-        border: 1px solid var(--calc-background-color);
-        color: #ffffff;
-    }
-    .loan-option-text-info
-    .loan-detail-section
-    .loan-detail-section-child
-    .sub-main-tab
-    .tabs
-    label
-    i {
-        padding: 5px;
-        margin-right: 0;
-    }
-    .loan-option-text-info
-    .loan-detail-section
-    .loan-detail-section-child
-    .sub-main-tab
-    .tabs
-    input[type="radio"] {
-        display: none;
-    }
-    .loan-option-text-info
-    .loan-detail-section
-    .loan-detail-section-child
-    .sub-main-tab
-    .tabs
-    label {
-        padding: 10px 12px;
-        border: 1px solid var(--calc-background-color);
-        background-color: var(--calc-bg-light-color);
-        color: var(--calc-background-color);
-        font-size: 14px;
-        margin: 0;
-    }
-    .loan-option-text-info
-    .loan-detail-section
-    .loan-detail-section-child
-    .sub-main-tab
-    .tabs
-    input[type="radio"] {
-        display: none;
-    }
-
-    .loan-option-text-info
-    .loan-detail-section
-    .loan-detail-section-child
-    .sub-main-tab
-    .tabs:after {
-        content: "";
-        display: table;
-        clear: both;
-    }
-
-    .contact-us-section {
-        background-color: var(--calc-background-color);
-        text-align: center;
-        padding: 16px;
-        margin-bottom: 16px;
-    }
-
-    .contact-us-popup {
-        position: fixed;
-        display: block;
-        background: rgba(0, 0, 0, 0.5);
+    .ctm_main_wrap {
+        position: absolute;
         left: 0;
         top: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 9;
-        padding: 50px 0;
-        overflow: auto;
-        display: none;
-    }
-
-    #main-sec {
-        margin: 0 !important;
-        max-width: 100%;
-        display: block;
-        font-weight: normal;
-        overflow: hidden;
-        height: max-content;
-    }
-
-    #tab-content1.tab-content {
-        overflow: hidden;
-        height: max-content;
-    }
-    table {
-        page-break-inside: auto !important;
-        width: 100%;
-        border-collapse: collapse;
-
-    }
-    th, td {
-        padding: 5px;
-        border: 1px solid #000;
-        text-align: left;
-    }
-
-    tr {
-        page-break-inside: avoid !important;
-        page-break-after: auto !important;
     }
 
     .page-break {
-        page-break-before: always !important;
+        page-break-inside: avoid;
     }
-    section#main-sec .calculator-disclaimer-section {
-        padding: 15px;
-        background-color: #ecf5fe;
+
+    .loan-option-text-info .loan-detail-section .loan-detail-section-child:last-child {
+        width: 100%;
+        padding-top: 15px;
+        /* padding-left: 17px; */
     }
-    .loan-option-text-info .loan-detail-section .loan-detail-section-child:last-child{
-        padding: 20px 15px 15px 15px !important;
-        background-color: #ecf5fe;
+    .loan-detail-section-child .summary-calculation-and-chart-wrappar {
+        display: flex;
     }
-    .loan-option-text-info .loan-option-text-info-section .loan-option-text-info-block .downpayment-row .downpayment-row-sub-child  .loan-text-dis input[type="text"]{
-        width: 100% !important;;
-    }
-    .loan-option-text-info .loan-option-text-info-section .loan-option-text-info-block .extrapayment-row .extrapayment-row-sub-child  .loan-text-dis input[type="text"]{
-        width: 100% !important;;
-    }
-    .loan-option-text-info .loan-option-text-info-section .loan-option-text-info-block .extrapayment-row .extrapayment-row-sub-child .slider{
+
+    #loan-process-graph{
         width: 100% !important;
+        height: 100% !important;
     }
-    #tab-content1 #loan-process-graph{
-        width:100% !important;
+    #break-up-total-payment-chart{
+        width: 100% !important;
+        height: 90% !important;
     }
+
 }
 
 @media (max-width: 1199px) and (min-width: 1024px) {
@@ -2928,9 +2847,9 @@ label.loan-text {
     .loan-option-text-info-block
     .first-row
     .first-row-sub-child:last-child {
-        width: 100%;
+        /*width: 100%;*/
 
-        margin: 15px 0;
+        /*margin: 15px 0;*/
     }
 }
 
@@ -3038,7 +2957,7 @@ label.loan-text {
     .loan-option-text-info-block
     .first-row
     .first-row-sub-child {
-        width: 50%;
+        width: 100%;
     }
 
     .loan-option-text-info
@@ -3048,7 +2967,7 @@ label.loan-text {
     .first-row-sub-child:last-child {
         width: 100%;
 
-        margin: 15px 0;
+        /*margin: 15px 0;*/
     }
 
     .contact-us-popup .contact-us-popup-body {
@@ -3309,6 +3228,14 @@ label.loan-text {
     #tab-content3 {
         overflow-x: scroll;
     }
+
+    .loan-detail-section-child.with-summary-chart .loan-detail-cal-desc {
+        width: calc(100% - 15px);
+    }
+
+    .loan-detail-section-child.with-summary-chart .break-up-total-payment-chart-wrap.loan-detail-cal-desc {
+        width: calc(100% - 15px);
+    }
 }
 
 @media only screen and (max-width: 767px) {
@@ -3322,6 +3249,11 @@ label.loan-text {
     .loan-option-text-info .loan-option-text-info-section .loan-option-text-info-block .first-row {
         flex-wrap: wrap;
     }
+
+    .loan-detail-section-child .summary-calculation-and-chart-wrappar {
+        flex-direction: column;
+    }
+
 }
 
 @media only screen and (max-width: 575px) {
@@ -3362,5 +3294,26 @@ label.loan-text {
 
     .loan-cal-desc-val {
         text-wrap: balance;
+    }
+
+    .loan-detail-section-child .loan-cal-desc {
+        flex-direction: column;
+        border-bottom: 1px solid #242c4c29;
+
+    }
+
+    .loan-detail-section-child .loan-cal-desc-val {
+        text-align: start;
+        text-wrap: unset;
+    }
+
+    .loan-detail-section-child .loan-cal-desc-heading {
+        width: 100% !important;
+        margin: 0 !important;
+    }
+
+    .loan-detail-section-child .loan-cal-desc-val {
+        width: 100%;
+        margin-bottom: 5px;
     }
 }

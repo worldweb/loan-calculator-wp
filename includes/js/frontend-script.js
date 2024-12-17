@@ -16,7 +16,7 @@ jQuery(document).ready(function ($) {
   /******************** START : Condition For New theme ************************************/
   /*****************************************************************************************/
   
- if (element.classList.contains("new-theme-template-section")) {
+ if (element != null && element.classList.contains("new-theme-template-section")) {
     //Condition For New theme
     function loan_calculation_process() {
      var currency_symbol = setting_data.currency_symbols; 
@@ -58,7 +58,7 @@ jQuery(document).ready(function ($) {
 
       if (setting_data.down_payment_mode == 'percentage') {
 
-        document.getElementById("down_payment_range").max = 80; 
+        document.getElementById("down_payment_range").max = setting_data.down_payment_max_per; 
 
         var down_payment_range = document.getElementById("down_payment_range");
 
@@ -216,6 +216,7 @@ jQuery(document).ready(function ($) {
         jQuery("#extra_payment_saved_time_section").hide();
         jQuery("#extra_payment_total_section").hide();
         jQuery("#extra_payment_saved_interest_section").hide();
+        jQuery("#bottom_total_extra_payment").text('');
       }
 
     }   
@@ -778,6 +779,8 @@ if (setting_data.remove_decimal_point == 1) {
 
 
   jQuery("#total_interests_amt").html(addCommas(total_int_amt));
+  jQuery("#total_interests_amt_hidden").html(addCommas(total_int_amt));
+
 
 
 } else {
@@ -786,6 +789,12 @@ if (setting_data.remove_decimal_point == 1) {
     jQuery("#total_interests_amt").html(
       addCommas(Math.round(parseFloat(0) - parseFloat(0)))
       );
+
+    jQuery("#total_interests_amt_hidden").html(
+      addCommas(Math.round(parseFloat(0) - parseFloat(0)))
+      );
+
+
   } else {
 
     var total_sum_interests =
@@ -807,6 +816,9 @@ if (setting_data.remove_decimal_point == 1) {
     }
 
     jQuery("#total_interests_amt").html(total_sum_interests);
+    jQuery("#total_interests_amt_hidden").html(total_sum_interests);
+
+
   }
 }
 
@@ -1260,18 +1272,20 @@ if (setting_data.extra_payment_option == '1') {
 
 
 
-/* extra payment display total interest in summery result */
+/* extra payment display total interest in summary result */
 
 if (setting_data.extra_payment_option == '1' && extra_payment > 0) {
 
   if (setting_data.remove_decimal_point == 1) {
 
     jQuery("#total_interests_amt").html(addCommas(total_interest_for_extra_pay));
+    jQuery("#total_interests_amt_hidden").html(addCommas(total_interest_for_extra_pay));
 
   }
   else{
 
     jQuery("#total_interests_amt").html(addCommas(total_interest_for_extra_pay.toFixed(2)));
+    jQuery("#total_interests_amt_hidden").html(addCommas(total_interest_for_extra_pay.toFixed(2)));
 
   }
 
@@ -1327,7 +1341,7 @@ if (setting_data.extra_payment_option == '1' && extra_payment > 0) {
 
 }
 
-/* extra payment display total interest in summery result */
+/* extra payment display total interest in summary result */
 
 
 
@@ -1339,7 +1353,12 @@ if (setting_data.extra_payment_option == '1' && extra_payment > 0) {
 /* START : Loan Chart Section */
 var balance_arr = [];
 var remainig_interests = [];
+var total_monthly_payment = [];
+var total_principal_amonut = [];
 var balance = loan_amount;
+var interestSum = 0;
+var principalSum = 0;
+var monthly_paymentSum = 0;
 
 var graph_type = "Years";
 if (loan_terms_month <= 12) {
@@ -1402,23 +1421,49 @@ for (var p = 1; p <= loan_terms_month; p++) {
     total_interests = 0;
 }
 
+ interestSum += interest;  // Accumulate interest
+ principalSum += principal; 
+ monthly_paymentSum += monthly_payment;
+
 if (loan_terms_month > 120) {
-  if (p % 12 == 0) {
+  if (p % 12 == 0 || p == loan_terms_month) {
     if (setting_data.remove_decimal_point == 1) {
-      remainig_interests.push(parseInt(total_interests));
+      /* remainig_interests.push(parseInt(total_interests));
+      balance_arr.push(parseInt(balance)); */
+
+      remainig_interests.push(parseInt(interestSum)); 
       balance_arr.push(parseInt(balance));
+      total_monthly_payment.push(parseInt(monthly_paymentSum));
+      total_principal_amonut.push(parseInt(monthly_paymentSum) - parseInt(interestSum));
     } else {
-      remainig_interests.push(parseFloat(total_interests.toFixed(2)));
+      remainig_interests.push(parseFloat(interestSum.toFixed(2)));
       balance_arr.push(parseFloat(balance.toFixed(2)));
+      total_monthly_payment.push(parseFloat(monthly_paymentSum.toFixed(2)));
+      total_principal_amonut.push(parseFloat(monthly_paymentSum.toFixed(2)) - parseFloat(interestSum.toFixed(2)));
     }
+    interestSum = 0;
+    //principalSum = 0;
+    monthly_paymentSum = 0;
   }
 } else {
   if (setting_data.remove_decimal_point == 1) {
-    remainig_interests.push(parseInt(total_interests));
-    balance_arr.push(parseInt(balance));
+    remainig_interests.push(parseInt(interest));
+    if(setting_data.chart_types == 'stacked_bar'){
+      balance_arr.push(parseInt(balance));
+      total_monthly_payment.push(parseInt(monthly_paymentSum));
+      total_principal_amonut.push(parseInt(monthly_paymentSum) - parseInt(interestSum));
+    }else{
+      balance_arr.push(parseInt(principal));
+    }
   } else {
-    remainig_interests.push(parseFloat(total_interests.toFixed(2)));
-    balance_arr.push(parseFloat(balance.toFixed(2)));
+    remainig_interests.push(parseFloat(interest.toFixed(2)));
+    if(setting_data.chart_types == 'stacked_bar'){
+      balance_arr.push(parseFloat(balance.toFixed(2)));
+      total_monthly_payment.push(parseFloat(monthly_payment.toFixed(2)));
+      total_principal_amonut.push(parseFloat(monthly_payment.toFixed(2)) - parseFloat(interest.toFixed(2)));
+    }else{
+      balance_arr.push(parseFloat(principal.toFixed(2)));
+    }
   }
 }
       // total_interests
@@ -1437,17 +1482,40 @@ if (setting_data.extra_payment_option == '1' && parseInt(balance) <= 0 && extra_
 /* START : PREPARE CHART JS DATA */
 var loan_data = [];
 const interests = [];
-const principal_arr = [];
+const total_balance_arr = [];
 const xData = [];
 
-for (var p = 0; p < remainig_interests.length; p++) {
-  principal_arr.push(balance_arr[p]);
+/* new stacked bar chart */
+//if(setting_data.chart_types == 'stacked_bar'){  
+  const principal_calc_new_arr = [];
+  const extra_payment_arr = [];
+//}
+
+for (var p = 1; p < remainig_interests.length; p++) {
+  total_balance_arr.push(balance_arr[p]);
   if (setting_data.remove_decimal_point == 1) {
     interests.push(parseInt(remainig_interests[p]));
+    /* new stacked bar chart */
+    if(setting_data.chart_types == 'stacked_bar'){
+      principal_calc_new_arr.push(parseInt(monthly_payment) - parseInt(remainig_interests[p]));
+    }
+
   } else {
     interests.push(parseFloat(remainig_interests[p]));
+
+    /* new stacked bar chart */
+    if(setting_data.chart_types == 'stacked_bar'){
+      principal_calc_new_arr.push(parseFloat(monthly_payment) - parseFloat(remainig_interests[p]));
+    }
+
   }
   xData.push(p);
+
+  /* new stacked bar chart */
+  if(setting_data.chart_types == 'stacked_bar'){
+    extra_payment_arr.push(extra_payment);
+  }
+
 }
 
 var graphColor = $("#loan-process-graph").css("--calc-graph-color");
@@ -1460,6 +1528,22 @@ var graph_border_color = $("#loan-process-graph").css(
 var graph_border_color_sub = $("#loan-process-graph").css(
   "--calc-graph-border-color-sub"
   );
+
+
+/* new stacked bar chart */
+if(setting_data.chart_types == 'stacked_bar'){
+
+var balance_border_color_graph = $("#loan-process-graph").css(
+  "--calc-graph-balance-border-color"
+  );
+var balance_point_background_color_graph = $("#loan-process-graph").css(
+  "--calc-graph-balance-point-background-color"
+  );
+var extra_payment_graph_color = $("#loan-process-graph").css(
+  "--calc-graph-extra-payment-graph-color"
+  );
+
+}
 
 const colors = {
   green: {
@@ -1482,34 +1566,125 @@ const colors = {
   },
 };
 
-const data = {
-  labels: xData,
-  datasets: [
-  {
+var data = {};
+
+/* new stacked bar chart */
+
+if(setting_data.chart_types == 'stacked_bar'){
+
+
+  if (typeof balance_point_background_color_graph === 'undefined'){
+      balance_point_background_color_graph = setting_data.balance_point_background_color_graph;
+  }
+
+  if (typeof balance_border_color_graph === 'undefined'){
+      balance_border_color_graph = setting_data.balance_border_color_graph;
+  }
+
+  if (typeof extra_payment_graph_color === 'undefined'){
+      extra_payment_graph_color = setting_data.extra_payment_graph_color;
+  }
+
+
+  var data_sets_graph = [
+
+       {
+          // label: "Balance",
+          label: 'Balance',
+          type:'line',
+          fill: false,
+          data: total_balance_arr,
+          backgroundColor: balance_point_background_color_graph,
+          pointBackgroundColor: balance_point_background_color_graph,
+          borderColor: balance_border_color_graph,
+          pointHighlightStroke: balance_point_background_color_graph,
+          borderCapStyle: "butt",  
+          pointRadius: 5
+          
+      },    
+      {
+            // label: "Principal",
+        label: setting_data.principal_label,
+        fill: true,
+        backgroundColor: colors.darkBlue.fill,
+        pointBackgroundColor: colors.darkBlue.stroke,
+        borderColor: colors.darkBlue.stroke,
+        pointHighlightStroke: colors.darkBlue.stroke,
+        borderCapStyle: "butt",
+        data: total_principal_amonut,
+        yAxisID: 'y1'
+        
+      },  
+      {
         //  label: "Interest",
-    label: setting_data.interest_label,
-    fill: true,
-    backgroundColor: colors.purple.fill,
-    pointBackgroundColor: colors.purple.stroke,
-    borderColor: colors.purple.stroke,
-    pointHighlightStroke: colors.purple.stroke,
-    borderCapStyle: "butt",
-    data: interests,
-  },
-  
-  {
-        // label: "Principal",
-    label: setting_data.principal_label,
-    fill: true,
-    backgroundColor: colors.darkBlue.fill,
-    pointBackgroundColor: colors.darkBlue.stroke,
-    borderColor: colors.darkBlue.stroke,
-    pointHighlightStroke: colors.darkBlue.stroke,
-    borderCapStyle: "butt",
-    data: principal_arr,
-  },
-  ],
-};
+        label: setting_data.interest_label,
+        fill: true,
+        backgroundColor: colors.purple.fill,
+        pointBackgroundColor: colors.purple.stroke,
+        borderColor: colors.purple.stroke,
+        pointHighlightStroke: colors.purple.stroke,
+        borderCapStyle: "butt",
+        data: interests,
+        yAxisID: 'y1'    
+      } 
+       
+    ];
+
+
+    if(extra_payment > 0){
+
+          data_sets_graph.push({
+            //  label: "Extra payment",
+            label: setting_data.extra_payment_label,
+            fill: true,
+            backgroundColor: extra_payment_graph_color,
+            pointBackgroundColor: colors.purple.stroke,
+            borderColor: colors.purple.stroke,
+            pointHighlightStroke: colors.purple.stroke,
+            borderCapStyle: "butt",
+            data: extra_payment_arr,
+            yAxisID: 'y1'    
+        });
+    }
+
+  data = {
+  labels: xData,
+  datasets: data_sets_graph  
+  };
+
+}else{
+
+    data = {
+    labels: xData,
+    datasets: [
+    {
+          //  label: "Interest",
+      label: setting_data.interest_label,
+      fill: true,
+      backgroundColor: colors.purple.fill,
+      pointBackgroundColor: colors.purple.stroke,
+      borderColor: colors.purple.stroke,
+      pointHighlightStroke: colors.purple.stroke,
+      borderCapStyle: "butt",
+      data: interests,
+    },
+    
+    {
+          // label: "Principal",
+      label: setting_data.principal_label,
+      fill: true,
+      backgroundColor: colors.darkBlue.fill,
+      pointBackgroundColor: colors.darkBlue.stroke,
+      borderColor: colors.darkBlue.stroke,
+      pointHighlightStroke: colors.darkBlue.stroke,
+      borderCapStyle: "butt",
+      data: total_balance_arr,
+    },
+    ],
+  };
+
+
+}
 
 Chart.Tooltip.positioners.custom = function (elements, position) {
       //debugger;
@@ -1527,63 +1702,260 @@ if (graph_new_theme) {
   graph_new_theme.destroy();
 }
 
-graph_new_theme = new Chart(ctx, {
-  type: setting_data.chart_types,
-  data: data,
-  responsive: true,
-  options: {
-    title: {
-      display: true,
-      text: "Loan Calculator",
-    },
-    layout: {
-      padding: 32,
-    },
-    tooltips: {
-      mode: "index",
-      intersect: true,
-      position: "custom",
-      yAlign: "bottom",
-    },
-    scales: {
-      xAxes: [
-      {
-        stacked: true,
-        gridLines: {
-          display: false,
-        },
-          // display:false,
-        scaleLabel: {
-          display: true,
-          labelString: "Term (Months)",
-        },
-      },
-      ],
-      yAxes: [
-      {
-        stacked: true,
-        gridLines: {
-          display: false,
-        },
-          // display:false,
 
-        scaleLabel: {
+/* new stacked bar chart */
+
+if(setting_data.chart_types == 'stacked_bar'){  
+
+  graph_new_theme = new Chart(ctx, {
+      type: 'bar', 
+      data: data,
+      responsive: true,
+      options: {  
+        title: {
           display: true,
-          labelString: "Amount Owing ($)",
+          text: "Loan Calculator",
         },
+        layout: {
+          padding: 32,
+        },
+        tooltips: {
+          mode: "index",
+          intersect: true,
+          position: "custom",
+          yAlign: "bottom",
+        },      
+        scales: {
+          xAxes: {
+            stacked: true, 
+            gridLines: {
+              display: false,
+            },              
+            scaleLabel: {
+              display: true,
+              labelString: "Term (Months)",
+            },
+            min: 1,
+            title: {
+                    display: true,
+                    text: 'No. of Payments'
+            },
+          },          
+          yAxes: {
+            stacked: true, 
+            beginAtZero: false, 
+            gridLines: {
+              display: true,
+            },             
+            scaleLabel: { 
+              display: true,
+              labelString: "Amount Owing ($)",
+            }, 
+            title: {
+                display: true,
+                text: 'Balance'
+            }           
+          },
+          y1: { 
+                type: 'linear',
+                position: 'right',
+                min: 0,                 
+                title: {
+                    display: true,
+                    text: 'EMI Payment / '+repayment_frequency_val
+                },
+                stacked: true, 
+          },
+        },
+        plugins: {
+          legend: {
+            display: false,
+          },
+          datalabels : {
+                display:false,
+          },
+          htmlLegend: {            
+            containerID: 'lc-chart-legend-container',
+          },          
+          tooltip: {
+              enabled: false, // Disable default tooltips
+              external: function(context) {
+                    // Tooltip Element
+                    let tooltipEl = document.getElementById('chartjs-tooltip');                    
+                    if (!tooltipEl) {
+                        tooltipEl = document.createElement('div');
+                        tooltipEl.id = 'chartjs-tooltip';
+                        tooltipEl.innerHTML = '<table></table>';
+                        document.body.appendChild(tooltipEl);
+                    }                    
+                    const tooltipModel = context.tooltip;
+                    if (tooltipModel.opacity === 0) {
+                        tooltipEl.style.opacity = 0;
+                        return;
+                    }                    
+                    tooltipEl.classList.remove('above', 'below', 'no-transform');
+                    if (tooltipModel.yAlign) {
+                        tooltipEl.classList.add(tooltipModel.yAlign);
+                    } else {
+                        tooltipEl.classList.add('no-transform');
+                    }
+                    function getBody(bodyItem) {
+                        return bodyItem.lines;
+                    }                    
+                    if (tooltipModel.body) {
+                        const titleLines = tooltipModel.title || [];
+                        const bodyLines = tooltipModel.body.map(getBody);
+
+                        let innerHtml = '<div style="background-color:#fff;padding:10px;border:1px solid #ccc;">';
+
+                        titleLines.forEach(function(title) {
+                            innerHtml += '<p style="margin:0px;">No. Payment: ' + title + '</p>';
+                        });
+                        bodyLines.forEach(function(body, i) {     
+                            innerHtml += '<p style="margin:0px;">' + body + '</p>';
+                            if(body[0].split(':')[0]!='Balance'){
+
+                              if(parseInt(extra_payment) > 0){                               
+
+                                var total_payment_graph = monthly_payment+parseInt(extra_payment)
+
+                                if(setting_data.remove_decimal_point=='1'){
+                                  total_payment_graph = parseInt(total_payment_graph);
+                                }
+                                else{
+                                  total_payment_graph = parseFloat(total_payment_graph).toFixed(2);  
+                                }
+
+                                innerHtml += '<p style="margin:0px;">Total Payment: '+total_payment_graph+'</p>';
+                              }
+                              else{                               
+                                var totalpayment= (total_monthly_payment[i] != ''?total_monthly_payment[i]:monthly_payment);
+                                innerHtml += '<p style="margin:0px;">Total Payment: '+totalpayment+'</p>';
+                              }
+
+                            }
+
+                        });
+                        innerHtml += '</div>';
+
+                        let tableRoot = tooltipEl.querySelector('table');
+                        tableRoot.innerHTML = innerHtml;
+                    }
+
+                    const position = context.chart.canvas.getBoundingClientRect();
+                    const bodyFont = Chart.helpers.toFont(tooltipModel.options.bodyFont);
+                    tooltipEl.style.opacity = 1;
+                    tooltipEl.style.position = 'absolute';
+                    tooltipEl.style.left = position.left + window.pageXOffset + tooltipModel.caretX + 'px';
+                    tooltipEl.style.top = position.top + window.pageYOffset + tooltipModel.caretY + 'px';
+                    tooltipEl.style.font = bodyFont.string;
+                    tooltipEl.style.padding = tooltipModel.padding + 'px ' + tooltipModel.padding + 'px';
+                    tooltipEl.style.pointerEvents = 'none';
+                }
+          },
+        },
+         onHover: function(event, chartElement) {
+            const datasetIndex = chartElement[0]?.datasetIndex;            
+            // Reset all dataset colors
+            this.data.datasets.forEach((dataset, index) => {
+                dataset.backgroundColor = index === datasetIndex
+                    ? dataset.backgroundColor.replace(/0\.2/, '0.9') // Highlight
+                    : dataset.backgroundColor.replace(/0\.9/, '0.2'); // Reset
+            });
+
+            // Re-render the chart
+            this.update();
+        }
       },
-      ],
+      plugins: [htmlLegendPlugin],
+    });
+
+}
+else{ 
+
+  var intersectValue = setting_data.chart_types == "bar" ? { intersect: false, mode: 'index' } : { intersect: true, mode: 'nearest' }; // default values
+    graph_new_theme = new Chart(ctx, {
+    type: setting_data.chart_types,
+    data: data,
+    responsive: true,
+    options: {
+      title: {
+        display: true,
+        text: "Loan Calculator",
+      },
+      interaction: intersectValue,
+      layout: {
+        padding: 32,
+      },
+      tooltips: {
+        mode: "index",
+        intersect: true,
+        position: "custom",
+        yAlign: "bottom",
+      },
+      scales: {
+        xAxes: [
+        {
+          stacked: true,
+          gridLines: {
+            display: false,
+          },
+            // display:false,
+          scaleLabel: {
+            display: true,
+            labelString: "Term (Months)",
+          },
+        },
+        ],
+        yAxes: [
+        {
+          stacked: true,
+          gridLines: {
+            display: false,
+          },
+            // display:false,
+
+          scaleLabel: {
+            display: true,
+            labelString: "Amount Owing ($)",
+          },
+        },
+        ],
+      },
+      plugins:{
+           datalabels : {
+                display:false,
+              },
+      }
     },
-  },
-});
+  });
+
+}
 
 /* END : PREPARE CHART JS DATA */
 
-  /* extrapayment code to deduct time frequency in summery result */
+  /* extrapayment code to deduct time frequency in summary result */
   if (setting_data.extra_payment_option == '1' && extra_payment > 0) {
       convert_total_terms_to_year_month(loan_terms_month,repayment_frequency_val);
-  }
+  } 
 
+
+   /* Summary Chart Break-up of Total Payment */   
+
+
+    if(setting_data.summary_chart_option == '1'){
+      
+      var break_up_chart_data = {};
+      break_up_chart_data['total_principal'] = parseFloat(principalSum).toFixed(2);
+      break_up_chart_data['total_interest'] = jQuery("#total_interests_amt_hidden").text();
+      break_up_chart_data['down_payment'] = jQuery("#down_payment").val();
+      break_up_chart_data['total_extra_payment'] = jQuery("#bottom_total_extra_payment").text();
+      break_up_chart_data['ballon_amount'] = jQuery("#ballon_amounts").val(); 
+      break_up_of_total_payment_chart(break_up_chart_data);
+
+    }
+      
+    /* Summary Chart Break-up of Total Payment */
 
 
 } /* END : Loan Calculation Process */
@@ -1636,8 +2008,13 @@ jQuery("#loan_terms").on("blur", function () {
     "input[name='current_repayment_freq']"
     ).val();
   var default_nop_value = jQuery("input[name='loan_terms']").val();
-  
-    /* nop = number of payments */
+  /* visible note below chart */
+  if(default_nop_value > 120){
+    jQuery('body').find('.chart-note').show();
+  }else{
+    jQuery('body').find('.chart-note').hide();
+  }
+  /* nop = number of payments */
   var min_nop_value = jQuery("input[name='min_value']").val();
   var max_nop_value = jQuery("input[name='max_value']").val();
   
@@ -2053,7 +2430,7 @@ var loan_terms_range = document.getElementById("loan_terms_range");
       }
     }
 
-    jQuery(".print-table").on('click', function () {
+    /*jQuery(".print-table").on('click', function () {
   // Show the loader and gray-out background
       jQuery('#overlay').show();
 
@@ -2074,10 +2451,14 @@ var loan_terms_range = document.getElementById("loan_terms_range");
 
       setTimeout(function() {
         jQuery('#overlay').hide();
-    jQuery("#main-sec").print(/*options*/);
+    jQuery("#main-sec").print();
 
     // Hide the loader and gray-out background after printing
       }, 50);
+    });*/
+
+    jQuery('.print-table').on('click', function () {
+      window.print();
     });
 
 // Optional: Show loader when input focus out
@@ -2226,7 +2607,7 @@ var loan_terms_range = document.getElementById("loan_terms_range");
 
         if (setting_data.remove_decimal_point == 1) {             
 
-          var eighty_percent_loan_amt =   (parseInt(loan_amount) * 80)/100;  
+          var eighty_percent_loan_amt =   (parseInt(loan_amount) * parseInt(setting_data.down_payment_max_per))/100;  
           down_payment = parseInt(down_payment);
 
           if(down_payment>eighty_percent_loan_amt){
@@ -2245,7 +2626,7 @@ var loan_terms_range = document.getElementById("loan_terms_range");
         }
         else{
 
-          var eighty_percent_loan_amt =   (parseFloat(loan_amount) * 80)/100;  
+          var eighty_percent_loan_amt =   (parseFloat(loan_amount) * parseInt(setting_data.down_payment_max_per))/100;  
           down_payment = parseFloat(down_payment);
           if(down_payment>eighty_percent_loan_amt){
             jQuery(this).val(0.00);
@@ -2278,7 +2659,7 @@ var loan_terms_range = document.getElementById("loan_terms_range");
 
         jQuery(this).val(parseInt(jQuery(this).val()));         
 
-        if(parseInt(jQuery(this).val()) > 80){
+        if(parseInt(jQuery(this).val()) > setting_data.down_payment_max_per){
 
           if (setting_data.remove_decimal_point == 1) {
             jQuery(this).val(0);
@@ -2451,7 +2832,7 @@ var loan_terms_range = document.getElementById("loan_terms_range");
 
 }   
 
-     /* extra payment event code end */
+/* extra payment event code end */
 
 loan_calculation_process(); // call function
 
@@ -2484,7 +2865,7 @@ loan_calculation_process(); // call function
 
       if (setting_data.down_payment_mode == 'percentage') {
 
-        document.getElementById("down_payment_range").max = 80; 
+        document.getElementById("down_payment_range").max = setting_data.down_payment_max_per; 
 
         var down_payment_range = document.getElementById("down_payment_range");
         
@@ -2629,6 +3010,7 @@ loan_calculation_process(); // call function
         jQuery("#extra_payment_saved_time_section").hide();
         jQuery("#extra_payment_total_section").hide();
         jQuery("#extra_payment_saved_interest_section").hide();
+        jQuery("#bottom_total_extra_payment").text('');
       }
 
     }   
@@ -3225,6 +3607,9 @@ if (setting_data.remove_decimal_point == 1) {
 
 
   jQuery("#total_interests_amt").html(addCommas(total_int_amt));
+  jQuery("#total_interests_amt_hidden").html(addCommas(total_int_amt));
+
+
 } else {
   jQuery("#loan_amount_rate").html(interest_rates.toFixed(2));
   if (interest_rates === 0) {       
@@ -3254,6 +3639,8 @@ if (setting_data.remove_decimal_point == 1) {
     }
 
     jQuery("#total_interests_amt").html(addCommas(total_sum_interests));
+    jQuery("#total_interests_amt_hidden").html(addCommas(total_sum_interests));
+
   }
 }
 
@@ -3711,18 +4098,20 @@ if (setting_data.extra_payment_option == '1') {
 
 /* hide extra payment table column when its 0 */
 
-/* extra payment display total interest in summery result */
+/* extra payment display total interest in summary result */
 
 if (setting_data.extra_payment_option == '1' && extra_payment > 0) {
 
   if (setting_data.remove_decimal_point == 1) {
 
     jQuery("#total_interests_amt").html(addCommas(total_interest_for_extra_pay));
+    jQuery("#total_interests_amt_hidden").html(addCommas(total_interest_for_extra_pay));
 
   }
   else{
 
     jQuery("#total_interests_amt").html(addCommas(total_interest_for_extra_pay.toFixed(2)));
+    jQuery("#total_interests_amt_hidden").html(addCommas(total_interest_for_extra_pay.toFixed(2)));
 
   }
 
@@ -3779,7 +4168,7 @@ if (setting_data.extra_payment_option == '1' && extra_payment > 0) {
 
 }
 
-/* extra payment display total interest in summery result */
+/* extra payment display total interest in summary result */
 
 
 /* END : Loan Table Section */
@@ -3787,7 +4176,12 @@ if (setting_data.extra_payment_option == '1' && extra_payment > 0) {
 /* START : Loan Chart Section */
 var balance_arr = [];
 var remainig_interests = [];
+var total_monthly_payment = [];
+var total_principal_amonut = [];
 var balance = loan_amount;
+var interestSum = 0;
+var principalSum = 0;
+var monthly_paymentSum = 0;
 
 var graph_type = "Years";
 if (loan_terms_month <= 12) {
@@ -3852,23 +4246,49 @@ for (var p = 1; p <= loan_terms_month; p++) {
     total_interests = 0;
 }
 
+ interestSum += interest;  // Accumulate interest
+ principalSum += principal; 
+ monthly_paymentSum += monthly_payment;
+
 if (loan_terms_month > 120) {
-  if (p % 12 == 0) {
+  if (p % 12 == 0 || p == loan_terms_month) {
     if (setting_data.remove_decimal_point == 1) {
-      remainig_interests.push(parseInt(total_interests));
+      /*remainig_interests.push(parseInt(interest));
+      balance_arr.push(parseInt(balance));*/
+      remainig_interests.push(parseInt(interestSum)); 
       balance_arr.push(parseInt(balance));
+      total_monthly_payment.push(parseInt(monthly_paymentSum));
+      total_principal_amonut.push(parseInt(monthly_paymentSum) - parseInt(interestSum));
     } else {
-      remainig_interests.push(parseFloat(total_interests.toFixed(2)));
+      remainig_interests.push(parseFloat(interestSum.toFixed(2)));
       balance_arr.push(parseFloat(balance.toFixed(2)));
+      total_monthly_payment.push(parseFloat(monthly_paymentSum.toFixed(2)));
+      total_principal_amonut.push(parseFloat(monthly_paymentSum.toFixed(2)) - parseFloat(interestSum.toFixed(2)));
     }
+    interestSum = 0;
+    //principalSum = 0;
+    monthly_paymentSum = 0;
   }
 } else {
   if (setting_data.remove_decimal_point == 1) {
-    remainig_interests.push(parseInt(total_interests));
-    balance_arr.push(parseInt(balance));
+    remainig_interests.push(parseInt(interest));
+    if(setting_data.chart_types == 'stacked_bar'){
+      balance_arr.push(parseInt(balance));
+      total_monthly_payment.push(parseInt(monthly_paymentSum));
+      total_principal_amonut.push(parseInt(monthly_paymentSum) - parseInt(interestSum));
+    }else{
+      balance_arr.push(parseInt(principal));
+    }
   } else {
-    remainig_interests.push(parseFloat(total_interests.toFixed(2)));
-    balance_arr.push(parseFloat(balance.toFixed(2)));
+    remainig_interests.push(parseFloat(interest.toFixed(2)));
+    if(setting_data.chart_types == 'stacked_bar'){
+      balance_arr.push(parseFloat(balance.toFixed(2)));
+      total_monthly_payment.push(parseFloat(monthly_payment.toFixed(2)));
+      total_principal_amonut.push(parseFloat(monthly_payment.toFixed(2)) - parseFloat(interest.toFixed(2)));
+    }else{
+      balance_arr.push(parseFloat(principal.toFixed(2)));
+    }
+
   }
 }
       // total_interests
@@ -3879,8 +4299,7 @@ if (loan_terms_month > 120) {
 if (setting_data.extra_payment_option == '1' && parseInt(balance) <= 0 && extra_payment > 0) {         
  break; 
 }
-      /* extra payment chart no of payments */
-
+      /* extra payment chart no of payments */   
 
 }
 
@@ -3888,17 +4307,38 @@ if (setting_data.extra_payment_option == '1' && parseInt(balance) <= 0 && extra_
 /* START : PREPARE CHART JS DATA */
 var loan_data = [];
 const interests = [];
-const principal_arr = [];
+const total_balance_arr = [];
 const xData = [];
 
-for (var p = 0; p < remainig_interests.length; p++) {
-  principal_arr.push(balance_arr[p]);
+/* new stacked bar chart */
+const principal_calc_new_arr = [];
+const extra_payment_arr = [];
+
+
+for (var p = 1; p < remainig_interests.length; p++) {
+  total_balance_arr.push(balance_arr[p]);
   if (setting_data.remove_decimal_point == 1) {
     interests.push(parseInt(remainig_interests[p]));
+    /* new stacked bar chart */
+    if(setting_data.chart_types == 'stacked_bar'){
+      principal_calc_new_arr.push(parseInt(monthly_payment) - parseInt(remainig_interests[p]));
+    }
+
   } else {
+
     interests.push(parseFloat(remainig_interests[p]));
+    /* new stacked bar chart */
+    if(setting_data.chart_types == 'stacked_bar'){
+      principal_calc_new_arr.push(parseFloat(monthly_payment) - parseFloat(remainig_interests[p]));
+    }
+
   }
   xData.push(p);
+
+  /* new stacked bar chart */
+  if(setting_data.chart_types == 'stacked_bar'){
+    extra_payment_arr.push(extra_payment);
+  }
 }
 
 var graphColor = $("#loan-process-graph").css("--calc-graph-color");
@@ -3911,6 +4351,19 @@ var graph_border_color = $("#loan-process-graph").css(
 var graph_border_color_sub = $("#loan-process-graph").css(
   "--calc-graph-border-color-sub"
   );
+
+/* new stacked bar chart */
+if(setting_data.chart_types == 'stacked_bar'){
+  var balance_border_color_graph = $("#loan-process-graph").css(
+    "--calc-graph-balance-border-color"
+    );
+  var balance_point_background_color_graph = $("#loan-process-graph").css(
+    "--calc-graph-balance-point-background-color"
+    );
+  var extra_payment_graph_color = $("#loan-process-graph").css(
+    "--calc-graph-extra-payment-graph-color"
+    );
+}
 
 const colors = {
   green: {
@@ -3933,34 +4386,126 @@ const colors = {
   },
 };
 
-const data = {
-  labels: xData,
-  datasets: [
-  {
+
+var data = {};
+
+/* new stacked bar chart */
+if(setting_data.chart_types == 'stacked_bar'){  
+
+  if (typeof balance_point_background_color_graph === 'undefined'){
+      balance_point_background_color_graph = setting_data.balance_point_background_color_graph;
+  }
+
+  if (typeof balance_border_color_graph === 'undefined'){
+      balance_border_color_graph = setting_data.balance_border_color_graph;
+  }
+
+  if (typeof extra_payment_graph_color === 'undefined'){
+      extra_payment_graph_color = setting_data.extra_payment_graph_color;
+  }
+
+
+  var data_sets_graph = [
+
+       {
+          // label: "Balance",
+          label: 'Balance',
+          type:'line',
+          fill: false,
+          data: total_balance_arr,
+          backgroundColor: balance_point_background_color_graph,
+          pointBackgroundColor: balance_point_background_color_graph,
+          borderColor: balance_border_color_graph,
+          pointHighlightStroke: balance_point_background_color_graph,
+          borderCapStyle: "butt",  
+          pointRadius: 5
+          
+      },    
+      {
+            // label: "Principal",
+        label: setting_data.principal_label,
+        fill: true,
+        backgroundColor: colors.darkBlue.fill,
+        pointBackgroundColor: colors.darkBlue.stroke,
+        borderColor: colors.darkBlue.stroke,
+        pointHighlightStroke: colors.darkBlue.stroke,
+        borderCapStyle: "butt",
+        data: total_principal_amonut,
+        yAxisID: 'y1'
+        
+      },  
+      {
         //  label: "Interest",
-    label: setting_data.interest_label,
-    fill: true,
-    backgroundColor: colors.purple.fill,
-    pointBackgroundColor: colors.purple.stroke,
-    borderColor: colors.purple.stroke,
-    pointHighlightStroke: colors.purple.stroke,
-    borderCapStyle: "butt",
-    data: interests,
-  },
-  
-  {
-        // label: "Principal",
-    label: setting_data.principal_label,
-    fill: true,
-    backgroundColor: colors.darkBlue.fill,
-    pointBackgroundColor: colors.darkBlue.stroke,
-    borderColor: colors.darkBlue.stroke,
-    pointHighlightStroke: colors.darkBlue.stroke,
-    borderCapStyle: "butt",
-    data: principal_arr,
-  },
-  ],
-};
+        label: setting_data.interest_label,
+        fill: true,
+        backgroundColor: colors.purple.fill,
+        pointBackgroundColor: colors.purple.stroke,
+        borderColor: colors.purple.stroke,
+        pointHighlightStroke: colors.purple.stroke,
+        borderCapStyle: "butt",
+        data: interests,
+        yAxisID: 'y1'    
+      } 
+       
+    ];
+
+
+    if(extra_payment > 0){
+
+          data_sets_graph.push({
+            //  label: "Extra payment",
+            label: "Extra Payment",
+            fill: true,
+            backgroundColor: extra_payment_graph_color,
+            pointBackgroundColor: colors.purple.stroke,
+            borderColor: colors.purple.stroke,
+            pointHighlightStroke: colors.purple.stroke,
+            borderCapStyle: "butt",
+            data: extra_payment_arr,
+            yAxisID: 'y1'    
+        });
+    }
+
+
+
+  data = {
+  labels: xData,
+  datasets: data_sets_graph  
+  };
+
+}else{
+
+    data = {
+    labels: xData,
+    datasets: [
+    {
+          //  label: "Interest",
+      label: setting_data.interest_label,
+      fill: true,
+      backgroundColor: colors.purple.fill,
+      pointBackgroundColor: colors.purple.stroke,
+      borderColor: colors.purple.stroke,
+      pointHighlightStroke: colors.purple.stroke,
+      borderCapStyle: "butt",
+      data: interests,
+    },
+    
+    {
+          // label: "Principal",
+      label: setting_data.principal_label,
+      fill: true,
+      backgroundColor: colors.darkBlue.fill,
+      pointBackgroundColor: colors.darkBlue.stroke,
+      borderColor: colors.darkBlue.stroke,
+      pointHighlightStroke: colors.darkBlue.stroke,
+      borderCapStyle: "butt",
+      data: total_balance_arr,
+    },
+    ],
+  };
+
+
+}
 
 Chart.Tooltip.positioners.custom = function (elements, position) {
       //debugger;
@@ -3980,62 +4525,256 @@ if (default_theme_chart) {
   default_theme_chart.destroy();
 }
 
-default_theme_chart = new Chart(ctx, {
-  type: setting_data.chart_types,
-  data: data,
-  responsive: true,
-  options: {
-    title: {
-      display: true,
-      text: "Loan Calculator",
-    },
-    layout: {
-      padding: 32,
-    },
-    tooltips: {
-      mode: "index",
-      intersect: true,
-      position: "custom",
-      yAlign: "bottom",
-    },
-    scales: {
-      xAxes: [
-      {
-        stacked: true,
-        gridLines: {
-          display: false,
-        },
-          // display:false,
-        scaleLabel: {
+/* new stacked bar chart */
+if(setting_data.chart_types == 'stacked_bar'){ 
+
+  default_theme_chart = new Chart(ctx, {
+      type: 'bar', 
+      data: data,
+      responsive: true,
+      options: {  
+        title: {
           display: true,
-          labelString: "Term (Months)",
+          text: "Loan Calculator",
         },
-      },
-      ],
-      yAxes: [
-      {
-        stacked: true,
-        gridLines: {
-          display: false,
+        layout: {
+          padding: 32,
         },
-          // display:false,
+        tooltips: {
+          mode: "index",
+          intersect: true,
+          position: "custom",
+          yAlign: "bottom",
+        },      
+        scales: {
+          xAxes: {
+            stacked: true, 
+            gridLines: {
+              display: false,
+            },              
+            scaleLabel: {
+              display: true,
+              labelString: "Term (Months)",
+            },
+            min: 1,
+            title: {
+                    display: true,
+                    text: 'No. of Payments'
+            },
+          },          
+          yAxes: {
+            stacked: true, 
+            beginAtZero: false, 
+            gridLines: {
+              display: true,
+            },             
+            scaleLabel: { 
+              display: true,
+              labelString: "Amount Owing ($)",
+            }, 
+            title: {
+                display: true,
+                text: 'Balance'
+            }           
+          },
+          y1: { 
+                type: 'linear',
+                position: 'right',
+                min: 0,                 
+                title: {
+                    display: true,
+                    text: 'EMI Payment / '+repayment_frequency_val
+                },
+                stacked: true, 
+          },
+        },
+        plugins: {
+          legend: {
+            display: false,
+          },
+          datalabels : {
+                display:false,
+          },
+          htmlLegend: {            
+            containerID: 'lc-chart-legend-container',
+          },          
+          tooltip: {
+              enabled: false, // Disable default tooltips
+              external: function(context) {
+                    // Tooltip Element
+                    let tooltipEl = document.getElementById('chartjs-tooltip');                    
+                    if (!tooltipEl) {
+                        tooltipEl = document.createElement('div');
+                        tooltipEl.id = 'chartjs-tooltip';
+                        tooltipEl.innerHTML = '<table></table>';
+                        document.body.appendChild(tooltipEl);
+                    }                    
+                    const tooltipModel = context.tooltip;
+                    if (tooltipModel.opacity === 0) {
+                        tooltipEl.style.opacity = 0;
+                        return;
+                    }                    
+                    tooltipEl.classList.remove('above', 'below', 'no-transform');
+                    if (tooltipModel.yAlign) {
+                        tooltipEl.classList.add(tooltipModel.yAlign);
+                    } else {
+                        tooltipEl.classList.add('no-transform');
+                    }
+                    function getBody(bodyItem) {
+                        return bodyItem.lines;
+                    }                    
+                    if (tooltipModel.body) {
+                        const titleLines = tooltipModel.title || [];
+                        const bodyLines = tooltipModel.body.map(getBody);
 
-        scaleLabel: {
+                        let innerHtml = '<div style="background-color:#fff;padding:10px;border:1px solid #ccc;">';
+
+                        titleLines.forEach(function(title) {
+                            innerHtml += '<p style="margin:0px;">No. Payment: ' + title + '</p>';
+                        });
+                        bodyLines.forEach(function(body, i) {     
+                            innerHtml += '<p style="margin:0px;">' + body + '</p>';
+                            if(body[0].split(':')[0]!='Balance'){
+
+                              if(parseInt(extra_payment) > 0){                               
+
+                                var total_payment_graph = monthly_payment+parseInt(extra_payment)
+
+                                if(setting_data.remove_decimal_point=='1'){
+                                  total_payment_graph = parseInt(total_payment_graph);
+                                }
+                                else{
+                                  total_payment_graph = parseFloat(total_payment_graph).toFixed(2);  
+                                }
+
+                                innerHtml += '<p style="margin:0px;">Total Payment: '+total_payment_graph+'</p>';
+                              }
+                              else{                               
+                                var totalpayment= (total_monthly_payment[i] != ''?total_monthly_payment[i]:monthly_payment);
+                                innerHtml += '<p style="margin:0px;">Total Payment: '+totalpayment+'</p>';
+                              }
+
+                            }
+
+                        });
+                        innerHtml += '</div>';
+
+                        let tableRoot = tooltipEl.querySelector('table');
+                        tableRoot.innerHTML = innerHtml;
+                    }
+
+                    const position = context.chart.canvas.getBoundingClientRect();
+                    const bodyFont = Chart.helpers.toFont(tooltipModel.options.bodyFont);
+                    tooltipEl.style.opacity = 1;
+                    tooltipEl.style.position = 'absolute';
+                    tooltipEl.style.left = position.left + window.pageXOffset + tooltipModel.caretX + 'px';
+                    tooltipEl.style.top = position.top + window.pageYOffset + tooltipModel.caretY + 'px';
+                    tooltipEl.style.font = bodyFont.string;
+                    tooltipEl.style.padding = tooltipModel.padding + 'px ' + tooltipModel.padding + 'px';
+                    tooltipEl.style.pointerEvents = 'none';
+                }
+          },
+        },
+        onHover: function(event, chartElement) {
+            const datasetIndex = chartElement[0]?.datasetIndex;            
+            // Reset all dataset colors
+            this.data.datasets.forEach((dataset, index) => {
+                dataset.backgroundColor = index === datasetIndex
+                    ? dataset.backgroundColor.replace(/0\.2/, '0.9') // Highlight
+                    : dataset.backgroundColor.replace(/0\.9/, '0.2'); // Reset
+            });
+
+            // Re-render the chart
+            this.update();
+        }
+      },
+      plugins: [htmlLegendPlugin],
+    });
+
+}
+else{ 
+var intersectValue = setting_data.chart_types == "bar" ? { intersect: false, mode: 'index' } : { intersect: true, mode: 'nearest' }; // default values
+
+    default_theme_chart = new Chart(ctx, {
+      type: setting_data.chart_types,
+      data: data,
+      responsive: true,
+      options: {
+        title: {
           display: true,
-          labelString: "Amount Owing ($)",
+          text: "Loan Calculator",
         },
+        interaction: intersectValue,
+        layout: {
+          padding: 32,
+        },
+        tooltips: {
+          mode: "index",
+          intersect: true,
+          position: "custom",
+          yAlign: "bottom",
+        },
+        scales: {
+          xAxes: [
+          {
+            stacked: true,
+            gridLines: {
+              display: false,
+            },
+              // display:false,
+            scaleLabel: {
+              display: true,
+              labelString: "Term (Months)",
+            },
+          },
+          ],
+          yAxes: [
+          {
+            stacked: true,
+            gridLines: {
+              display: false,
+            },
+              // display:false,
+
+            scaleLabel: {
+              display: true,
+              labelString: "Amount Owing ($)",
+            },
+          },
+          ],
+        },
+        plugins:{
+           datalabels : {
+                display:false,
+              },
+        }
       },
-      ],
-    },
-  },
-});
+     });
+
+ }
 
 
-  
-  /* extrapayment code to deduct time frequency in summery result */
+  /* extrapayment code to deduct time frequency in summary result */
   if (setting_data.extra_payment_option == '1' && extra_payment > 0) {
       convert_total_terms_to_year_month(loan_terms_month,repayment_frequency_val);
   }
+
+
+   /* Summary Chart Break-up of Total Payment */
+
+   if(setting_data.summary_chart_option == '1'){
+    
+      var break_up_chart_data = {};      
+      break_up_chart_data['total_principal'] = parseFloat(principalSum).toFixed(2);
+      break_up_chart_data['total_interest'] = jQuery("#total_interests_amt_hidden").text();
+      break_up_chart_data['down_payment'] = jQuery("#down_payment").val();
+      break_up_chart_data['total_extra_payment'] = jQuery("#bottom_total_extra_payment").text();
+      break_up_chart_data['ballon_amount'] = jQuery("#ballon_amounts").val(); 
+      break_up_of_total_payment_chart(break_up_chart_data);
+
+    }
+    
+    /* Summary Chart Break-up of Total Payment */
 
     // }, 50);
 /* END : PREPARE CHART JS DATA */
@@ -4088,7 +4827,7 @@ jQuery("#loan_amount_range").val(parseFloat(loan_amount));
 loan_calculation_process();
 });
 
-jQuery("#loan_terms").on("blur", function () {
+jQuery("#loan_terms").on("blur", function () {  
     /*on filled input check min max values 6-7-2023*/
   var repayment_freq = jQuery("#repayment_freq option:selected").val();
   var old_repayment_freq = jQuery(
@@ -4096,6 +4835,12 @@ jQuery("#loan_terms").on("blur", function () {
     ).val();
   var default_nop_value = jQuery("input[name='loan_terms']").val();
   
+  /* visible note below chart */
+  if(default_nop_value > 120){
+    jQuery('body').find('.chart-note').show();
+  }else{
+    jQuery('body').find('.chart-note').hide();
+  }
     /* nop = number of payments */
   var min_nop_value = jQuery("input[name='min_value']").val();
   var max_nop_value = jQuery("input[name='max_value']").val();
@@ -4639,14 +5384,12 @@ function switchTab(tabId) {
   }
 }
 
-jQuery(".print-table").on('click', function () {
-  // Show the loader and gray-out background
+/*jQuery(".print-table").on('click', function () {
   jQuery('#overlay').show();
   
   var selectedTabIds = jQuery('input[name="tabs"]:checked').attr('id');
   switchTab(selectedTabIds);
 
-  // Apply print styles
   jQuery("#main-sec").css({
     "@media print": {
       "@page": { size: "297mm 420mm" },
@@ -4660,10 +5403,12 @@ jQuery(".print-table").on('click', function () {
 
   setTimeout(function() {
     jQuery('#overlay').hide();
-    jQuery("#main-sec").print(/*options*/);
-    
-    // Hide the loader and gray-out background after printing
+    jQuery("#main-sec").print();
   }, 50);
+});*/
+
+jQuery('.print-table').on('click', function () {
+  window.print();
 });
 
 // Optional: Show loader when input focus out
@@ -4817,7 +5562,7 @@ if (setting_data.down_payment_option == '1') {
 
     if (setting_data.remove_decimal_point == 1) {
 
-      var eighty_percent_loan_amt =   (parseInt(loan_amount) * 80)/100;  
+      var eighty_percent_loan_amt =   (parseInt(loan_amount) * parseInt(setting_data.down_payment_max_per))/100;  
       down_payment = parseInt(down_payment);
       if(down_payment>eighty_percent_loan_amt){
 
@@ -4835,7 +5580,7 @@ if (setting_data.down_payment_option == '1') {
     }
     else{
 
-      var eighty_percent_loan_amt =   (parseFloat(loan_amount) * 80)/100;  
+      var eighty_percent_loan_amt =   (parseFloat(loan_amount) * parseInt(setting_data.down_payment_max_per))/100;  
       down_payment = parseFloat(down_payment);
       if(down_payment>eighty_percent_loan_amt){
         jQuery(this).val(0.00);
@@ -4870,7 +5615,7 @@ if (setting_data.down_payment_option == '1') {
 
     jQuery(this).val(parseInt(jQuery(this).val()));
 
-    if(parseInt(jQuery(this).val()) > 80){
+    if(parseInt(jQuery(this).val()) > setting_data.down_payment_max_per){
 
       if (setting_data.remove_decimal_point == 1) {
         jQuery(this).val(0);
@@ -5240,7 +5985,7 @@ function convert_total_terms_to_year_month(loan_terms,repayment_frequency_val){
   jQuery("#total_interests_years").html(display_year_months_loan_det_sec);
 
 
-  /* extra payment display saved time in result summery start */
+  /* extra payment display saved time in result summary start */
 
   if (setting_data.extra_payment_option == '1' && parseInt(jQuery('#extra_payment').val().replaceAll(",", "")) > 0) {
 
@@ -5331,7 +6076,7 @@ function convert_total_terms_to_year_month(loan_terms,repayment_frequency_val){
     }  
 
 
-    /* extra payment display saved time in result summery end */
+    /* extra payment display saved time in result summary end */
 
 
 }
@@ -5986,4 +6731,112 @@ jQuery('select').on('change',function(e){
  jQuery(this).find('[selected]').removeAttr('selected')
  jQuery(this).find(':selected').attr('selected','selected')
 });
+
+
+/* new stacked bar chart */
+
+  const getOrCreateLegendList = (chart, id) => {
+    const legendContainer = document.getElementById(id);
+    let listContainer = legendContainer.querySelector('ul');
+
+    if (!listContainer) {
+      listContainer = document.createElement('ul');
+      listContainer.style.display = 'flex';
+      listContainer.style.flexDirection = 'row';
+      listContainer.style.margin = 0;
+      listContainer.style.padding = 0;
+
+      legendContainer.appendChild(listContainer);
+    }
+
+    return listContainer;
+  };
+
+  const htmlLegendPlugin = {
+    id: 'htmlLegend',
+    afterUpdate(chart, args, options) {
+      const ul = getOrCreateLegendList(chart, options.containerID);
+
+      // Remove old legend items
+      while (ul.firstChild) {
+        ul.firstChild.remove();
+      }
+      
+      const items = chart.options.plugins.legend.labels.generateLabels(chart);   
+
+      var bal_val;
+
+      Object.entries(items).forEach(([key, value]) => {
+
+        if(value.text=='Balance'){
+          bal_val = value; 
+          delete items[key];
+        }
+
+      });
+
+      items.push(bal_val);
+
+      items.forEach(item => {
+        const li = document.createElement('li');
+        li.style.alignItems = 'center';
+        li.style.cursor = 'pointer';
+        li.style.display = 'flex';
+        li.style.flexDirection = 'row';
+        li.style.marginLeft = '10px';
+
+        li.onclick = () => {
+          const {type} = chart.config;
+          if (type === 'pie' || type === 'doughnut') {
+            // Pie and doughnut charts only have a single dataset and visibility is per item
+            chart.toggleDataVisibility(item.index);
+          } else {
+            chart.setDatasetVisibility(item.datasetIndex, !chart.isDatasetVisible(item.datasetIndex));
+          }
+          chart.update();
+        };      
+
+        // Color box
+        const boxSpan = document.createElement('span');
+        boxSpan.style.background = item.fillStyle;
+        boxSpan.style.borderColor = item.strokeStyle;
+        boxSpan.style.borderWidth = '0px';
+        boxSpan.style.display = 'inline-block';
+        boxSpan.style.flexShrink = 0;
+        boxSpan.style.height = '14px';
+        boxSpan.style.marginRight = '10px';
+        boxSpan.style.width = '14px';      
+        boxSpan.style.borderRadius = '50%';
+
+        if(item.text == 'Balance'){
+          boxSpan.classList.add('balance-legend-icon');
+          boxSpan.style.height = '10px';
+          boxSpan.style.width = '10px';  
+          li.style.marginLeft = '15px';
+        }
+
+        // Text
+        const textContainer = document.createElement('p');
+        textContainer.style.color = item.fontColor;
+        textContainer.style.margin = 0;
+        textContainer.style.padding = 0;
+        textContainer.style.textDecoration = item.hidden ? 'line-through' : '';
+
+        if(jQuery(window).width() <= 767){
+          textContainer.style.fontSize = '8px';
+        }
+
+        const text = document.createTextNode(item.text);
+        textContainer.appendChild(text);
+
+        li.appendChild(boxSpan);
+        li.appendChild(textContainer);
+        ul.appendChild(li);
+
+        ul.style.justifyContent = 'center';
+
+      });
+    }
+  };
+
 

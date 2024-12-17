@@ -174,6 +174,14 @@ $down_payment_tooltip = isset($loan_all_setting_data['down_payment_tooltip']) ? 
 
 $down_payment_heading = isset($loan_all_setting_data['down_payment_heading']) ? $loan_all_setting_data['down_payment_heading'] : "";
 
+
+/* down paymnet label and max cap */
+
+$down_payment_label = isset($loan_all_setting_data['down_payment_label']) ? $loan_all_setting_data['down_payment_label'] : "";
+
+$down_payment_max_per = isset($loan_all_setting_data['down_payment_max_per']) ? $loan_all_setting_data['down_payment_max_per'] : "100";
+
+
 /* down payment options */
 
 
@@ -227,6 +235,30 @@ $interest_rates_adj_disable = isset($loan_all_setting_data['interest_rates_adj_d
 $remove_range_sliders = isset($loan_all_setting_data['remove_range_sliders']) ? $loan_all_setting_data['remove_range_sliders'] : "";
 
 
+/* stacked bar chart options */
+
+$balance_border_color_graph = isset($loan_all_setting_data['balance_border_color_graph']) ? $loan_all_setting_data['balance_border_color_graph'] : "";
+$balance_point_background_color_graph = isset($loan_all_setting_data['balance_point_background_color_graph']) ? $loan_all_setting_data['balance_point_background_color_graph'] : "";
+$extra_payment_graph_color = isset($loan_all_setting_data['extra_payment_graph_color']) ? $loan_all_setting_data['extra_payment_graph_color'] : "";
+$chart_types = isset($loan_all_setting_data['chart_types']) ? $loan_all_setting_data['chart_types'] : "";
+
+  /* summary pie chart options */
+
+    $summary_chart_option = isset($loan_all_setting_data['summary_chart_option']) ? $loan_all_setting_data['summary_chart_option'] : "";
+
+    $summary_chart_label = isset($loan_all_setting_data['summary_chart_label']) ? $loan_all_setting_data['summary_chart_label'] : "";
+
+    $summary_chart_principal_fill_color = isset($loan_all_setting_data['summary_chart_principal_fill_color']) ? $loan_all_setting_data['summary_chart_principal_fill_color'] : "";
+
+    $summary_chart_interest_fill_color = isset($loan_all_setting_data['summary_chart_interest_fill_color']) ? $loan_all_setting_data['summary_chart_interest_fill_color'] : "";
+
+    $summary_chart_ballon_payment_fill_color = isset($loan_all_setting_data['summary_chart_ballon_payment_fill_color']) ? $loan_all_setting_data['summary_chart_ballon_payment_fill_color'] : "";
+
+    $summary_chart_down_payment_fill_color = isset($loan_all_setting_data['summary_chart_down_payment_fill_color']) ? $loan_all_setting_data['summary_chart_down_payment_fill_color'] : "";
+
+    $summary_chart_extra_payment_fill_color = isset($loan_all_setting_data['summary_chart_extra_payment_fill_color']) ? $loan_all_setting_data['summary_chart_extra_payment_fill_color'] : "";
+
+
 ?>
 <div class="wp-loan-calculator-main-new wp-loan-mobile-view" style="<?php echo esc_attr($font_family_new_theme, 'loan-calculator-wp'); ?>">
     <style type="text/css">
@@ -240,6 +272,14 @@ $remove_range_sliders = isset($loan_all_setting_data['remove_range_sliders']) ? 
             --calc-graph-color-sub: <?php echo esc_html($graph_color_sub); ?>;
             --calc-graph-border-color: <?php echo esc_html($graph_border_color); ?>;
             --calc-graph-border-color-sub: <?php echo esc_html($graph_border_color_sub); ?>;
+            --calc-graph-balance-border-color: <?php echo esc_attr($balance_border_color_graph); ?>;
+            --calc-graph-balance-point-background-color: <?php echo esc_attr($balance_point_background_color_graph); ?>;
+            --calc-graph-extra-payment-graph-color: <?php echo esc_attr($extra_payment_graph_color); ?>;
+             --calc-summary-chart-principal-fill-color: <?php echo esc_attr($summary_chart_principal_fill_color); ?>;
+            --calc-summary-chart-interest-fill-color: <?php echo esc_attr($summary_chart_interest_fill_color); ?>;
+            --calc-summary-chart-balloon-payment-fill-color: <?php echo esc_attr($summary_chart_ballon_payment_fill_color); ?>;
+            --calc-summary-chart-down-payment-fill-color: <?php echo esc_attr($summary_chart_down_payment_fill_color); ?>;
+            --calc-summary-chart-extra-payment-fill-color: <?php echo esc_attr($summary_chart_extra_payment_fill_color); ?>;     
         }
     </style>
     <div id="overlay" style="display: none;"></div>
@@ -268,10 +308,10 @@ $remove_range_sliders = isset($loan_all_setting_data['remove_range_sliders']) ? 
             <a href="javascript:void(0);" class="close-button" onclick="jQuery('.about-this-calculator-popup').hide();jQuery('body').removeClass('body-overflow-hidden');">X</a>
             <?php
                 // very permissive: allows pretty much all HTML to pass - same as what's normally applied to the_content by default
-            $allowed_html = wp_kses_allowed_html('post');
-            $calculator_popup_content = wp_kses(stripslashes_deep($calculator_popup_content), $allowed_html);
+            /* $allowed_html = wp_kses_allowed_html('post');
+            $calculator_popup_content = wp_kses(stripslashes_deep($calculator_popup_content), $allowed_html); */
             ?>
-            <div class="calculator-content"><?php echo esc_attr($calculator_popup_content); ?></div>
+            <div class="calculator-content"><?php echo wp_kses_post($calculator_popup_content); ?></div>
         </div>
     </div>
 </section>
@@ -286,7 +326,7 @@ $remove_range_sliders = isset($loan_all_setting_data['remove_range_sliders']) ? 
         </div>
     </section>
 
-    <section class="loan-option-text-info main-container-new-theme">
+    <section class="loan-option-text-info main-container-new-theme <?php if($chart_types=='stacked_bar'){ ?>with-stacked-bar-chart<?php } ?>">
         <div class="custom-container loan-option-text-info-section-left-content">
             <div class="custom-container loan-option-text-info-section">
                 <div class="loan-option-text-info-block">
@@ -461,7 +501,7 @@ $remove_range_sliders = isset($loan_all_setting_data['remove_range_sliders']) ? 
                             <?php if($down_payment_mode == 'percentage'){ ?>     
                                 <div class="loan-text-dis-new-theme-block dp-perc-mode">
                                     <div class="loan-new-theme-inner-block">
-                                        <label for="down_payment" class="loan-text"><?php esc_html_e('Down Payment', 'loan-calculator-wp'); ?> <i class="fa fa-info-circle" aria-hidden="true" tabindex="8"></i><span class="text-tooltip-disp"><?php echo esc_attr($down_payment_tooltip, 'loan-calculator-wp'); ?></span></label>
+                                        <label for="down_payment" class="loan-text"><?php echo esc_html($down_payment_label, 'loan-calculator-wp'); ?> <i class="fa fa-info-circle" aria-hidden="true" tabindex="8"></i><span class="text-tooltip-disp"><?php echo esc_attr($down_payment_tooltip, 'loan-calculator-wp'); ?></span></label>
 
                                         <div class="loan-new-theme-range-slider">
                                             <input type="range" min="0" value="0" class="slider <?php if($remove_range_sliders =='1') { echo 'remove-cal-range-sliders'; } ?>" id="down_payment_range" max="" tabindex="13" step="1">
@@ -482,7 +522,7 @@ $remove_range_sliders = isset($loan_all_setting_data['remove_range_sliders']) ? 
 
                                 <div class="loan-text-dis-new-theme-block dp-fixed-mode">
                                     <div class="loan-new-theme-inner-block">
-                                        <label for="down_payment" class="loan-text"><?php esc_html_e('Down Payment', 'loan-calculator-wp'); ?> <i class="fa fa-info-circle" aria-hidden="true" tabindex="8"></i><span class="text-tooltip-disp"><?php echo esc_attr($down_payment_tooltip, 'loan-calculator-wp'); ?></span></label>
+                                        <label for="down_payment" class="loan-text"><?php echo esc_html($down_payment_label, 'loan-calculator-wp'); ?> <i class="fa fa-info-circle" aria-hidden="true" tabindex="8"></i><span class="text-tooltip-disp"><?php echo esc_attr($down_payment_tooltip, 'loan-calculator-wp'); ?></span></label>
                                     </div>
                                     <div class="col-columns-20">
                                         <div class="input-container">  
@@ -668,7 +708,11 @@ $remove_range_sliders = isset($loan_all_setting_data['remove_range_sliders']) ? 
                             ?>
                             
                             <div id="tab-content1" class="tab-content">
-                                <canvas id="loan-process-graph" width="800" height="1200"></canvas>
+                                <canvas id="loan-process-graph" width="350" height="250"></canvas>
+                                <?php if($chart_types=='stacked_bar'){ ?>
+                                    <div id="lc-chart-legend-container"></div>
+                                <?php } ?>
+                                <div id="chart-note" class="chart-note"><p>**Note: For exceeding 120 no. of payments, a group of 12 payments will be combined into a single payment number for better chart visibility.</p></div>
                             </div>
                             <div id="tab-content2" class="tab-content">
                                 <?php
@@ -694,7 +738,7 @@ $remove_range_sliders = isset($loan_all_setting_data['remove_range_sliders']) ? 
                                     </tbody>
                                 </table>
                             </div>
-                        </div>
+                        </div>                         
                     </div>
                 </div>
             </div>
@@ -750,7 +794,7 @@ $remove_range_sliders = isset($loan_all_setting_data['remove_range_sliders']) ? 
         <div class="loan-detail-section <?php echo esc_attr($full_width_cls); ?>">
 
             <div class="container loan-detail-section-child-container ">
-                <div class="loan-detail-section-child">
+                <div class="loan-detail-section-child <?php if($summary_chart_option=='1'){ ?>with-summary-chart<?php } ?> page-break">
                     <div class="loan-detail-cal-desc">
                         <div class="loan-cal-desc">
                             <div class="loan-cal-desc-heading main-heading">
@@ -771,6 +815,7 @@ $remove_range_sliders = isset($loan_all_setting_data['remove_range_sliders']) ? 
                                 </div>
                             </div>
                         <?php } ?>
+                        <span id="total_interests_amt_hidden"></span>
                         <div class="loan-cal-desc" id="ballon_amt_section">
                             <div class="loan-cal-desc-heading">
                                 <label><span><?php echo esc_html($ballon_amt_heading, 'loan-calculator-wp'); ?> (<span id="bill_ballon_per"><?php echo esc_attr(number_format($ballon_per, 2), 'loan-calculator-wp'); ?></span>%)</span></label>
@@ -833,14 +878,24 @@ $remove_range_sliders = isset($loan_all_setting_data['remove_range_sliders']) ? 
                                 <?php } ?>
                             <?php } ?>
                         </div>
-                    </div>
+
+                        <?php if($summary_chart_option=='1'){ ?>
+            
+                        <div class="break-up-total-payment-chart-wrap">
+                            <label class="summary-chart-heading"><?php echo esc_html($summary_chart_label); ?></label>
+                            <canvas id="break-up-total-payment-chart" class="summary-chart-canvas" >
+                        </div>
+
+                    <?php } ?>  
+
+                    </div>                     
                 </div>
                 <?php
                 $total_regular_fees_amt = round(floatval(ceil($loan_term) * 120), 2);
                 $total_fees_amt = floatval($total_regular_fees_amt) + floatval($application_fee);
                 ?>
                 <?php if ($calculation_fee_setting_enable == 1) { ?>
-                    <div class="container loan-detail-section-child-container ">
+                    <div class="container loan-detail-section-child-container page-break">
                         <div class="loan-detail-fee-desc">
                             <div class="loan-detail-fee-block">
                                 <div class="loan-detail-fee-heading">

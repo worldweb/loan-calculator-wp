@@ -1,0 +1,7 @@
+#loan_calculator_form_settings .sa-manage-level-product-box .error{
+	color: red;
+    display: flex;
+}
+#loan_calculator_form_settings .require-field-star{
+    color: red;
+}
