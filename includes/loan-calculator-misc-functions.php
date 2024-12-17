@@ -84,6 +84,7 @@ function ww_loan_chart_types()
 		'ww_loan_chart_types',
 		array(
 			'bar' => __('Bar', 'loan-calculator-wp'),
+			'stacked_bar' => __('Stacked Bar', 'loan-calculator-wp'),
 			'pie' => __('Pie', 'loan-calculator-wp'),
 			'bubble' => __('Bubble ', 'loan-calculator-wp'),
 			'doughnut' => __('Doughnut ', 'loan-calculator-wp'),

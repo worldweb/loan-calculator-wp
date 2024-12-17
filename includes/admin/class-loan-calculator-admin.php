@@ -10,11 +10,9 @@
  */
 if (!class_exists('WW_Loan_Calculator_Admin_Pages')) {
 
-	class WW_Loan_Calculator_Admin_Pages
-	{
+	class WW_Loan_Calculator_Admin_Pages {
 
-		public function __construct()
-		{
+		public function __construct() {
 			// Construct properties
 		}
 
@@ -26,8 +24,7 @@ if (!class_exists('WW_Loan_Calculator_Admin_Pages')) {
 		 * @package Loan Calculator
 		 * @since 1.0.0
 		 */
-		public function ww_loan_calculator_admin_menu()
-		{
+		public function ww_loan_calculator_admin_menu() {
 			// Loan Calculator Menu
 			add_menu_page(esc_html__('Loan Calculator', 'loan-calculator-wp'), esc_html__('Loan Calculator', 'loan-calculator-wp'), WW_LOAN_CALCULATOR_LEVEL, 'ww_loan_calculator_page', '', 'dashicons-calculator');
 
@@ -42,14 +39,12 @@ if (!class_exists('WW_Loan_Calculator_Admin_Pages')) {
 		 * @package Loan Calculator
 		 * @since 1.0.0
 		 */
-		public function ww_loan_calculator_page()
-		{
+		public function ww_loan_calculator_page() {
 			// Include Loan Calculator Setting page
 			include_once(WW_LOAN_CALCULATOR_ADMIN . '/forms/ww-loan-calculator-setting.php');
 		}
 
-		function loan_calculator_settings()
-		{
+		public function loan_calculator_settings() {
 
 			// Register Loan Calculator Setting
 			register_setting('ww_loan_calculaor_option', 'ww_loan_option');
@@ -58,8 +53,7 @@ if (!class_exists('WW_Loan_Calculator_Admin_Pages')) {
 			add_settings_section('section_setting_id', 'Section Setting', '', 'section-setting-admin');
 		}
 
-		function loan_calculator_wp_admin_notice()
-		{
+		public function loan_calculator_wp_admin_notice() {
 			if (is_plugin_active('loan-calculator-wp/loan-calculator-wp.php')) {
 				if (is_admin()) {
 					global $pagenow;
@@ -71,7 +65,7 @@ if (!class_exists('WW_Loan_Calculator_Admin_Pages')) {
 
 						if (get_option('plugin_activation_time')) {
 							if ($display_notice_yes == 0 && $avoid_notice == 0) {
-?>
+								?>
 
 								<div class="admin_notice_hide notice notice-info is-dismissible">
 									<p>
@@ -83,9 +77,9 @@ if (!class_exists('WW_Loan_Calculator_Admin_Pages')) {
 									</p>
 								</div>
 
-							<?php
+								<?php
 							} else if ($last_notice_timestamp >= $future_popup_date && $avoid_notice == 1) {
-							?>
+								?>
 
 								<div class="admin_notice_hide notice notice-info is-dismissible">
 									<p>
@@ -97,7 +91,7 @@ if (!class_exists('WW_Loan_Calculator_Admin_Pages')) {
 									</p>
 								</div>
 
-<?php
+								<?php
 							}
 						}
 					}
@@ -105,8 +99,7 @@ if (!class_exists('WW_Loan_Calculator_Admin_Pages')) {
 			}
 		}
 
-		function update_user_choice_weekly()
-		{
+		public function update_user_choice_weekly() {
 			/* it's an Ajax call */
 			if (defined('DOING_AJAX') && DOING_AJAX) {
 				$i = 0;
@@ -125,8 +118,7 @@ if (!class_exists('WW_Loan_Calculator_Admin_Pages')) {
 			}
 		}
 
-		function update_display_notice_option()
-		{
+		public function update_display_notice_option() {
 			/* it's an Ajax call */
 			if (defined('DOING_AJAX') && DOING_AJAX) {
 				$rating_positive = update_option('lc_rating_notice', 1);
@@ -146,8 +138,7 @@ if (!class_exists('WW_Loan_Calculator_Admin_Pages')) {
 		 * @package Loan Calculator
 		 * @since 1.0.0
 		 */
-		function add_hooks()
-		{
+		public function add_hooks() {
 			add_action('admin_menu', array($this, 'ww_loan_calculator_admin_menu'));
 			add_action('admin_init', array($this, 'loan_calculator_settings'));
 			add_action('admin_notices', array($this, 'loan_calculator_wp_admin_notice'));

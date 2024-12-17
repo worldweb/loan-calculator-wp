@@ -1,6 +1,6 @@
 <?php
     // Exit if accessed directly
-if (!defined('ABSPATH')) exit;
+if (!defined('ABSPATH')) exit; 
 
     /**
     * Settings Page
@@ -174,6 +174,13 @@ if (!defined('ABSPATH')) exit;
     $down_payment_heading = isset($loan_all_setting_data['down_payment_heading']) ? $loan_all_setting_data['down_payment_heading'] : "";
 
 
+    /* down paymnet label and max cap */
+
+    $down_payment_label = isset($loan_all_setting_data['down_payment_label']) ? $loan_all_setting_data['down_payment_label'] : "";
+
+    $down_payment_max_per = isset($loan_all_setting_data['down_payment_max_per']) ? $loan_all_setting_data['down_payment_max_per'] : "100";
+
+
     /* down payment options */
 
     /* Extra payment options */
@@ -229,6 +236,34 @@ if (!defined('ABSPATH')) exit;
     $remove_range_sliders = isset($loan_all_setting_data['remove_range_sliders']) ? $loan_all_setting_data['remove_range_sliders'] : "";
 
 
+
+    /* stacked bar chart options */
+
+    
+    $balance_border_color_graph = isset($loan_all_setting_data['balance_border_color_graph']) ? $loan_all_setting_data['balance_border_color_graph'] : "";
+    $balance_point_background_color_graph = isset($loan_all_setting_data['balance_point_background_color_graph']) ? $loan_all_setting_data['balance_point_background_color_graph'] : "";
+    $extra_payment_graph_color = isset($loan_all_setting_data['extra_payment_graph_color']) ? $loan_all_setting_data['extra_payment_graph_color'] : "";  
+
+    $chart_types = isset($loan_all_setting_data['chart_types']) ? $loan_all_setting_data['chart_types'] : "";  
+
+
+    /* summary pie chart options */
+
+    $summary_chart_option = isset($loan_all_setting_data['summary_chart_option']) ? $loan_all_setting_data['summary_chart_option'] : "";
+
+    $summary_chart_label = isset($loan_all_setting_data['summary_chart_label']) ? $loan_all_setting_data['summary_chart_label'] : "";
+
+    $summary_chart_principal_fill_color = isset($loan_all_setting_data['summary_chart_principal_fill_color']) ? $loan_all_setting_data['summary_chart_principal_fill_color'] : "";
+
+    $summary_chart_interest_fill_color = isset($loan_all_setting_data['summary_chart_interest_fill_color']) ? $loan_all_setting_data['summary_chart_interest_fill_color'] : "";
+
+    $summary_chart_ballon_payment_fill_color = isset($loan_all_setting_data['summary_chart_ballon_payment_fill_color']) ? $loan_all_setting_data['summary_chart_ballon_payment_fill_color'] : "";
+
+    $summary_chart_down_payment_fill_color = isset($loan_all_setting_data['summary_chart_down_payment_fill_color']) ? $loan_all_setting_data['summary_chart_down_payment_fill_color'] : "";
+
+    $summary_chart_extra_payment_fill_color = isset($loan_all_setting_data['summary_chart_extra_payment_fill_color']) ? $loan_all_setting_data['summary_chart_extra_payment_fill_color'] : "";
+
+
     ?>
     <div class="wp-loan-calculator-main" id="wp-loan-calculator-main">
         <style type="text/css">
@@ -241,6 +276,15 @@ if (!defined('ABSPATH')) exit;
                 --calc-graph-color-sub: <?php echo esc_attr($graph_color_sub); ?>;
                 --calc-graph-border-color: <?php echo esc_attr($graph_border_color); ?>;
                 --calc-graph-border-color-sub: <?php echo esc_attr($graph_border_color_sub); ?>;
+                --calc-graph-balance-border-color: <?php echo esc_attr($balance_border_color_graph); ?>;
+                --calc-graph-balance-point-background-color: <?php echo esc_attr($balance_point_background_color_graph); ?>;
+                --calc-graph-extra-payment-graph-color: <?php echo esc_attr($extra_payment_graph_color); ?>;
+                --calc-summary-chart-principal-fill-color: <?php echo esc_attr($summary_chart_principal_fill_color); ?>;
+                --calc-summary-chart-interest-fill-color: <?php echo esc_attr($summary_chart_interest_fill_color); ?>;
+                --calc-summary-chart-balloon-payment-fill-color: <?php echo esc_attr($summary_chart_ballon_payment_fill_color); ?>;
+                --calc-summary-chart-down-payment-fill-color: <?php echo esc_attr($summary_chart_down_payment_fill_color); ?>;
+                --calc-summary-chart-extra-payment-fill-color: <?php echo esc_attr($summary_chart_extra_payment_fill_color); ?>;                
+
             }
         </style>
         <div id="overlay" style="display: none;"></div>
@@ -268,8 +312,8 @@ if (!defined('ABSPATH')) exit;
                 <a href="javascript:void(0);" class="close-button" onclick="jQuery('.about-this-calculator-popup').hide();jQuery('body').removeClass('body-overflow-hidden');">X</a>
                 <?php
                     // very permissive: allows pretty much all HTML to pass - same as what's normally applied to the_content by default
-                $allowed_html = wp_kses_allowed_html('post');
-                $calculator_popup_content = wp_kses(stripslashes_deep($calculator_popup_content), $allowed_html);
+                /*$allowed_html = wp_kses_allowed_html('post');
+                $calculator_popup_content = wp_kses(stripslashes_deep($calculator_popup_content), $allowed_html);*/
                 ?>
                 <div class="calculator-content"><?php echo wp_kses_post($calculator_popup_content); ?></div>
             </div>
@@ -290,7 +334,7 @@ if (!defined('ABSPATH')) exit;
                     <div class="first-row">
                         <div class="first-row-sub-child">
 
-                            <label for="loan_amt" class="loan-text"><?php echo esc_attr('Loan Amount', 'loan-calculator-wp'); ?><i class="fa fa-info-circle" aria-hidden="true" tabindex="1"></i><span class="text-tooltip-disp"><?php echo esc_attr($loan_amount_tooltip, 'loan-calculator-wp'); ?></span></label>
+                            <label for="loan_amt" class="loan-text"><?php echo esc_html($loan_amount_label, 'loan-calculator-wp'); ?><i class="fa fa-info-circle" aria-hidden="true" tabindex="1"></i><span class="text-tooltip-disp"><?php echo esc_attr($loan_amount_tooltip, 'loan-calculator-wp'); ?></span></label>
                             <div class="loan-text-dis loan-amount">
                                 <span class="extra-info"><?php echo esc_attr($currency_symbols); ?></span>
                                 <input type="text" name="loan_amount" id="loan_amount" value="" tabindex="2" oninput="validateInputLoanRate(this)" onkeydown="return onlyNos(event,'loan_amount')" />
@@ -416,7 +460,7 @@ if (!defined('ABSPATH')) exit;
                                 <?php if($down_payment_mode == 'percentage'){   ?> 
 
                                     <div class="downpayment-row-sub-child dp-perc-mode">
-                                        <label for="down_payment" class="loan-text"><?php echo esc_attr('Down Payment', 'loan-calculator-wp'); ?><i class="fa fa-info-circle" aria-hidden="true" tabindex="8"></i><span class="text-tooltip-disp"><?php echo esc_attr($down_payment_tooltip, 'loan-calculator-wp'); ?></span></label>
+                                        <label for="down_payment" class="loan-text"><?php echo esc_html($down_payment_label, 'loan-calculator-wp'); ?> <i class="fa fa-info-circle" aria-hidden="true" tabindex="8"></i><span class="text-tooltip-disp"><?php echo esc_attr($down_payment_tooltip, 'loan-calculator-wp'); ?></span></label>
                                         <div class="loan-text-dis">
                                             <span class="extra-info"><?php echo esc_attr($currency_symbols); ?></span>
                                             <input type="text" name="down_payment" id="down_payment" value="" tabindex="14" onkeydown="return onlyNos(event,'down_payment')" readonly />
@@ -432,7 +476,7 @@ if (!defined('ABSPATH')) exit;
                                 <?php }else{ ?>
 
                                     <div class="downpayment-row-sub-child dp-fixed-mode">
-                                        <label for="down_payment" class="loan-text"><?php echo esc_attr('Down Payment', 'loan-calculator-wp'); ?><i class="fa fa-info-circle" aria-hidden="true" tabindex="8"></i><span class="text-tooltip-disp"><?php echo esc_attr($down_payment_tooltip, 'loan-calculator-wp'); ?></span></label>
+                                        <label for="down_payment" class="loan-text"><?php echo esc_html($down_payment_label, 'loan-calculator-wp'); ?> <i class="fa fa-info-circle" aria-hidden="true" tabindex="8"></i><span class="text-tooltip-disp"><?php echo esc_attr($down_payment_tooltip, 'loan-calculator-wp'); ?></span></label>
                                         <div class="loan-text-dis">
                                             <span class="extra-info"><?php echo esc_attr($currency_symbols); ?></span>
                                             <input type="text" name="down_payment" id="down_payment" value="0" tabindex="14" onkeydown="return onlyNos(event,'down_payment')" />
@@ -514,7 +558,11 @@ if (!defined('ABSPATH')) exit;
                                 </label>
                                 <?php  //} ?>
                                 <div id="tab-content1" class="tab-content">
-                                    <canvas id="loan-process-graph" width="460" height="350"></canvas>
+                                    <canvas id="loan-process-graph" width="650" height="320"></canvas>
+                                    <?php if($chart_types=='stacked_bar'){ ?>
+                                        <div id="lc-chart-legend-container"></div>
+                                    <?php } ?>
+                                        <div id="chart-note" class="chart-note"><p>**Note: For exceeding 120 no. of payments, a group of 12 payments will be combined into a single payment number for better chart visibility.</p></div>
                                 </div>
                                 <div id="tab-content2" class="tab-content">
                                     <?php
@@ -546,7 +594,8 @@ if (!defined('ABSPATH')) exit;
                         </div>
                     </div>
                 </div>
-                <div class="loan-detail-section-child">
+                <div class="loan-detail-section-child <?php if($summary_chart_option=='1'){ ?> default-theme with-summary-chart page-break<?php } ?>" >
+                    <div class="summary-calculation-and-chart-wrappar">
                     <div class="loan-detail-cal-desc">
                         <div class="loan-cal-desc">
                             <div class="loan-cal-desc-heading main-heading">
@@ -569,6 +618,7 @@ if (!defined('ABSPATH')) exit;
 
                         </div>
                     <?php } ?>
+                    <span id="total_interests_amt_hidden"></span>
                     <div class="loan-cal-desc" id="ballon_amt_section">
                         <div class="loan-cal-desc-heading">
                             <label><strong><?php echo esc_attr($ballon_amt_heading, 'loan-calculator-wp'); ?> (<span id="bill_ballon_per"><?php echo esc_attr(number_format($ballon_per, 2), 'loan-calculator-wp'); ?></span>%)</strong></label>
@@ -633,6 +683,16 @@ if (!defined('ABSPATH')) exit;
                 <?php } ?>
 
             </div>
+            
+            <?php if($summary_chart_option=='1'){ ?>
+            
+                <div class="break-up-total-payment-chart-wrap loan-detail-cal-desc">
+                    <label class="summary-chart-heading"><?php echo esc_html($summary_chart_label); ?></label>
+                    <canvas id="break-up-total-payment-chart" class="summary-chart-canvas" >
+                </div>
+
+            <?php } ?>
+        </div>
             <?php
             $total_regular_fees_amt = round(floatval(ceil($loan_term) * 120), 2);
             $total_fees_amt = floatval($total_regular_fees_amt) + floatval($application_fee);
@@ -699,8 +759,8 @@ if($show_contact_sec){
 
 <?php if ($disable_calculator_disclaimer_section == "") { ?>
     <div class="calculator-disclaimer-section">
-        <h4><?php echo esc_attr($calculator_disclaimer_heading, 'loan-calculator-wp'); ?></h4>
-        <p><?php echo esc_attr($calculator_disclaimer_description, 'loan-calculator-wp'); ?></p>
+        <h4><?php echo wp_kses_post($calculator_disclaimer_heading, 'loan-calculator-wp'); ?></h4>
+        <p><?php echo wp_kses_post($calculator_disclaimer_description, 'loan-calculator-wp'); ?></p>
     </div>
 <?php } ?>
 </section>

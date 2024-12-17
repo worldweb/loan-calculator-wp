@@ -24,11 +24,19 @@ if (!class_exists('WW_Loan_Calculator_Script')) {
 		function ww_loan_calculator_admin_scripts()
 		{
 
+			wp_enqueue_script(
+				'jquery-validate',
+				WW_LOAN_CALCULATOR_URL . 'includes/js/jquery.validate.min.js',
+				array('jquery'),
+				WW_LOAN_CALCULATOR_VERSION,
+				true
+			);
+
 			// Add JS
 			wp_enqueue_script(
 				'loan-calculator-admin-script',
 				WW_LOAN_CALCULATOR_URL . 'includes/js/admin-script.js',
-				array('jquery', 'wp-color-picker'),
+				array('jquery', 'wp-color-picker', 'jquery-validate'),
 				WW_LOAN_CALCULATOR_VERSION,
 				true
 			);
@@ -44,9 +52,46 @@ if (!class_exists('WW_Loan_Calculator_Script')) {
 			wp_enqueue_style('fstdropdown_select', WW_LOAN_CALCULATOR_URL . 'includes/css/fstdropdown.css', array(), WW_LOAN_CALCULATOR_VERSION);
 			wp_enqueue_style('fstdropdown.min_select', WW_LOAN_CALCULATOR_URL . 'includes/css/fstdropdown.min.css', array(), WW_LOAN_CALCULATOR_VERSION);
 
+			wp_enqueue_style('admin_settings_style', WW_LOAN_CALCULATOR_URL . 'includes/css/loan_calculator_admin_settings.css', array('wp-color-picker'), WW_LOAN_CALCULATOR_VERSION);
+
 			$admin_setting_data = array(
 				"ajaxurl" => admin_url('admin-ajax.php'),
 				"is_user_logged_in" => (is_user_logged_in()) ? true : false,
+				'enter_loan_amt_label_msg' => esc_html__('Please Enter Loan Amount Field Label', 'loan-calculator-wp'),				
+				'enter_loan_amt_msg' => esc_html__('Please Enter Loan Amount Value', 'loan-calculator-wp'),
+				'enter_loan_amt_min_msg' => esc_html__('Please Enter Loan Amount Minimum Value', 'loan-calculator-wp'),
+				'enter_loan_amt_max_msg' => esc_html__('Please Enter Loan Amount Maximum Value', 'loan-calculator-wp'),
+				'enter_interest_rate_msg' => esc_html__('Please Enter Interest Rate Value', 'loan-calculator-wp'),
+				'enter_interest_rate_min_msg' => esc_html__('Please Enter Interest Rate Minimum Value', 'loan-calculator-wp'),
+				'enter_interest_rate_max_msg' => esc_html__('Please Enter Interest Rate Maximum Value', 'loan-calculator-wp'),
+				'enter_application_fee_msg' => esc_html__('Please Enter Application Fee', 'loan-calculator-wp'),
+				'enter_monthly_rate_msg' => esc_html__('Please Enter Monthly Rate', 'loan-calculator-wp'),
+				'enter_about_calcultor_label' => esc_html__('Please Enter About This Calculator Label', 'loan-calculator-wp'),
+				'enter_print_label' => esc_html__('Please Enter Print Label', 'loan-calculator-wp'),
+				'enter_summery_chart_label' => esc_html__('Please Enter Summery Chart Label', 'loan-calculator-wp'),
+				'enter_ballon_amt_per' => esc_html__('Please Enter Balloon Amount Percentage', 'loan-calculator-wp'),
+				'regular_repayment_heading' => esc_html__('Please Enter Regular Repayment Label', 'loan-calculator-wp'),
+				'total_interest_payable_label' => esc_html__('Please Enter Total Interest Payable Label', 'loan-calculator-wp'),
+				'enter_ballon_amt_heading' => esc_html__('Please Enter Balloon Amount Label', 'loan-calculator-wp'),
+				'enter_down_payment_heading' => esc_html__('Please Enter Down Payment Label', 'loan-calculator-wp'),
+				'enter_extra_payment_heading' => esc_html__('Please Enter Extra Payment Label', 'loan-calculator-wp'),
+				'enter_extra_payment_save_time_label' => esc_html__('Please Enter Extra Payment Save Time Label', 'loan-calculator-wp'),
+				'enter_extra_payment_total_label' => esc_html__('Please Enter Extra Payment Total Label', 'loan-calculator-wp'),
+				'enter_extra_payment_save_interest_label' => esc_html__('Please Enter Extra Payment Save Interest Label', 'loan-calculator-wp'),
+				'enter_application_fee_heading' => esc_html__('Please Enter Application Fee Label', 'loan-calculator-wp'),
+				'enter_monthly_fee_heading' => esc_html__('Please Enter Monthly Fee Label', 'loan-calculator-wp'),
+				'enter_total_regular_fees' => esc_html__('Please Enter Total Regular Fees Label', 'loan-calculator-wp'),
+				'enter_total_fees' => esc_html__('Please Enter Total Fees Label', 'loan-calculator-wp'),
+				'enter_repayment_chart_heading' => esc_html__('Please Enter Repayment Chart Tooltip', 'loan-calculator-wp'),				
+				'enter_loan_table_heading' => esc_html__('Please Enter Loan Amortization Table Tooltip', 'loan-calculator-wp'),
+				'enter_video_heading' => esc_html__('Please Enter Video Tab Tooltip', 'loan-calculator-wp'),
+				'enter_youtube_video_link' => esc_html__('Please Enter Youtube Video Link', 'loan-calculator-wp'),
+				'enter_contact_popup_button_heading' => esc_html__('Please Enter Contact Popup Button Label', 'loan-calculator-wp'),
+				'enter_contact_popup_content' => esc_html__('Please Enter Contact Form Content', 'loan-calculator-wp'),
+				'enter_contact_url' => esc_html__('Please Enter Contact URL', 'loan-calculator-wp'),
+				'enter_down_payment_label' => esc_html__('Please Enter Down Payment Label', 'loan-calculator-wp'),
+				'enter_down_payment_max_per' => esc_html__('Please Enter Down Payment Maximum', 'loan-calculator-wp'),
+				'enter_extra_payment_max_per' => esc_html__('Please Enter Extra Payment Maximum', 'loan-calculator-wp')
 			);
 
 			// Setting data is passed in js file using Localize 
@@ -83,6 +128,9 @@ if (!class_exists('WW_Loan_Calculator_Script')) {
 			wp_register_style('loan-calculator-frontend-style', WW_LOAN_CALCULATOR_URL . 'includes/css/frontend-style.css', array(), WW_LOAN_CALCULATOR_VERSION);
 			wp_register_script('loan-calculator-frontend-script', WW_LOAN_CALCULATOR_URL . 'includes/js/frontend-script.js', array('jquery'), WW_LOAN_CALCULATOR_VERSION, true);
 			wp_register_script('loan-calculator-frequency-payment', WW_LOAN_CALCULATOR_URL . 'includes/js/frequency_payment.js', array('jquery'), WW_LOAN_CALCULATOR_VERSION, true);
+			wp_register_script('loan-calculator-datalabels', WW_LOAN_CALCULATOR_URL . 'includes/js/chart-js/chartjs-plugin-datalabels.js', array('jquery'), WW_LOAN_CALCULATOR_VERSION, true);
+			wp_register_script('loan-calculator-break-up-of-total-payment', WW_LOAN_CALCULATOR_URL . 'includes/js/break-up-of-total-payment.js', array('jquery'), WW_LOAN_CALCULATOR_VERSION, true); 
+
 
 			$active_theme = wp_get_theme();
 			if ($active_theme->get('Name') === 'Twenty Twenty-Four' || $active_theme->get('Name') === 'Twenty Twenty-Three' || $active_theme->get('Name') === 'Twenty Twenty-Two') {
