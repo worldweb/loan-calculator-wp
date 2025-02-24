@@ -91,7 +91,14 @@ if (!class_exists('WW_Loan_Calculator_Script')) {
 				'enter_contact_url' => esc_html__('Please Enter Contact URL', 'loan-calculator-wp'),
 				'enter_down_payment_label' => esc_html__('Please Enter Down Payment Label', 'loan-calculator-wp'),
 				'enter_down_payment_max_per' => esc_html__('Please Enter Down Payment Maximum', 'loan-calculator-wp'),
-				'enter_extra_payment_max_per' => esc_html__('Please Enter Extra Payment Maximum', 'loan-calculator-wp')
+				'enter_extra_payment_max_per' => esc_html__('Please Enter Extra Payment Maximum', 'loan-calculator-wp'),
+				'enter_loan_term_field_label_msg' => esc_html__('Please Enter Loan Term Field Label', 'loan-calculator-wp'),
+				'enter_balloon_amount_field_label_msg' => esc_html__('Please Enter Balloon Amount Field Label', 'loan-calculator-wp'),
+				'enter_extra_payment_field_label_msg' => esc_html__('Please Enter Extra Payment Field Label', 'loan-calculator-wp'),
+				'enter_interest_rate_field_label_msg' => esc_html__('Please Enter Interest Rate Field Label', 'loan-calculator-wp'),
+				'enter_payment_mode_field_label_msg' => esc_html__('Please Enter Payment Mode Field Label', 'loan-calculator-wp'),
+				'repayment_frequency_field_label_msg' => esc_html__('Please Enter Repayment Frequency Field Label', 'loan-calculator-wp'),
+
 			);
 
 			// Setting data is passed in js file using Localize 

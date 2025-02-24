@@ -3,7 +3,7 @@
  * Plugin Name: Loan Calculator WP
  * Plugin URI: https://www.worldwebtechnology.com/
  * Description: Advanced Loan Calculator for Home Loans, Personal Loans, and various other types of loans. Includes features like a repayment chart, amortization table, video tab, balloon payment option, and supports all currencies. Use the contact form shortcode for easy access.
- * Version: 1.5.5
+ * Version: 1.5.6
  * Author: World Web Technology
  * Author URI: https://www.worldwebtechnology.com/
  * Text Domain: loan-calculator-wp
@@ -26,7 +26,7 @@ if (!defined('ABSPATH')) exit;
  * @since 1.0.0
  */
 if (!defined('WW_LOAN_CALCULATOR_VERSION')) {
-    define('WW_LOAN_CALCULATOR_VERSION', '1.5.5'); //version of plugin
+    define('WW_LOAN_CALCULATOR_VERSION', '1.5.6'); //version of plugin
 }
 if (!defined('WW_LOAN_CALCULATOR_TEXT_DOMAIN')) { //check if variable is not defined previous then define it
     define('WW_LOAN_CALCULATOR_TEXT_DOMAIN', 'loan-calculator-wp'); //this is for multi language support in plugin
@@ -96,9 +96,8 @@ register_activation_hook(__FILE__, 'ww_loan_calculator_register_activation');
 function ww_loan_calculator_register_activation()
 {
     
-    $loan_calculator_db_version = get_option( 'loan_calculator_db_version' );    
-
-    
+    // When plugin install or activate first time
+    $loan_calculator_db_version = get_option( 'loan_calculator_db_version' );
     if( empty( $loan_calculator_db_version ) ) {
 
         // Set default data
@@ -147,7 +146,7 @@ function ww_loan_calculator_register_activation()
         $loan_calculator_default_options['contact_popup_button_heading'] = esc_html__('Contact us now for a quote', 'loan-calculator-wp');
         $loan_calculator_default_options['calculator_disclaimer_heading'] = esc_html__('Calculator Disclaimer', 'loan-calculator-wp');
         $loan_calculator_default_options['calculator_disclaimer_description'] = esc_html__('The repayment amount shown using this calculator is an estimate, based on information you have provided. It is provided for illustrative purposes only and actual repayment amounts may vary. To find out actual repayment amounts, contact us. This calculation does not constitute a quote, loan approval, agreement or advice by My Finance. It does not take into account your personal or financial circumstances.', 'loan-calculator-wp');
-        $loan_calculator_default_options['loan_amount_tooltip'] = esc_html__('Please enter your loan amount here.', 'loan-calculator-wp');        
+        $loan_calculator_default_options['loan_amount_tooltip'] = esc_html__('Please enter your loan amount here.', 'loan-calculator-wp');
         $loan_calculator_default_options['loan_terms_tooltip'] = esc_html__('Please enter the number of years in which you plan to repay the loan.', 'loan-calculator-wp');
         $loan_calculator_default_options['payment_mode_tooltip'] = esc_html__('Please choose payment mode of the loan.', 'loan-calculator-wp');
 
@@ -183,39 +182,29 @@ function ww_loan_calculator_register_activation()
         $loan_calculator_default_options['enable_video_tab'] = '1';
         $loan_calculator_default_options['enable_loan_mortisation_tab'] = '1';
         $loan_calculator_default_options['print_option_heading'] = esc_html__('Print', 'loan-calculator-wp');
-        $loan_calculator_default_options['disable_font_awesome'] = '';         
+        $loan_calculator_default_options['disable_font_awesome'] = '';
 
-        //update loan calculator default option 
+        //update loan calculator default option
         update_option('ww_loan_option', $loan_calculator_default_options);
-        // update db version 
-        update_option('loan_calculator_db_version', '1.0.1');   
-
+        // update db version
+        update_option('loan_calculator_db_version', '1.0.1');
     }
-
 
     $loan_calculator_db_version = get_option( 'loan_calculator_db_version' );
-
     if( $loan_calculator_db_version == '1.0.1' ) {
-      
-        $loan_calculator_default_options = get_option( 'ww_loan_option' );
 
-        $loan_calculator_default_options['ww_loan_currency'] = 'USD';        
+        $loan_calculator_default_options = get_option( 'ww_loan_option' );
+        $loan_calculator_default_options['ww_loan_currency'] = 'USD';
 
         update_option('ww_loan_option', $loan_calculator_default_options);
-
         update_option( 'loan_calculator_db_version', '1.0.2' );
-
     }
 
-    $loan_calculator_db_version = get_option( 'loan_calculator_db_version' );   
-    
-    
-    if( $loan_calculator_db_version == '1.0.2' || $loan_calculator_db_version == '1.3.9') { 
+    $loan_calculator_db_version = get_option( 'loan_calculator_db_version' );
+    if( $loan_calculator_db_version == '1.0.2' || $loan_calculator_db_version == '1.3.9') {
 
         /* 1.3.9 is for plugin version that we have set before */
-
         $loan_calculator_default_options = get_option( 'ww_loan_option' );
-
         $loan_calculator_default_options['loan_amount_label'] = esc_html__('Loan Amount', 'loan-calculator-wp');
         $loan_calculator_default_options['ww_loan_total_interest_payable'] = '';
         $loan_calculator_default_options['down_payment_option'] = '';
@@ -224,101 +213,93 @@ function ww_loan_calculator_register_activation()
         $loan_calculator_default_options['down_payment_heading'] = esc_html__('Down Payment Amount', 'loan-calculator-wp');
 
         update_option('ww_loan_option', $loan_calculator_default_options);
-
         update_option( 'loan_calculator_db_version', '1.0.3' );
     }
 
-
-    $loan_calculator_db_version = get_option( 'loan_calculator_db_version' );   
-    
-    
+    $loan_calculator_db_version = get_option( 'loan_calculator_db_version' );
     if( $loan_calculator_db_version == '1.0.3') {
 
-       $loan_calculator_default_options = get_option( 'ww_loan_option' );
+        $loan_calculator_default_options = get_option( 'ww_loan_option' );
+        $loan_calculator_default_options['extra_payment_option'] = '';
+        $loan_calculator_default_options['extra_payment_tooltip'] = esc_html__('If applicable, enter the extra payment, which will be deducted from loan amount', 'loan-calculator-wp');
+        $loan_calculator_default_options['extra_payment_heading'] = esc_html__('Extra Payment Amount', 'loan-calculator-wp');      
 
+        update_option('ww_loan_option', $loan_calculator_default_options);
+        update_option( 'loan_calculator_db_version', '1.0.4' );
+    }
 
-       $loan_calculator_default_options['extra_payment_option'] = '';
-       
-       $loan_calculator_default_options['extra_payment_tooltip'] = esc_html__('If applicable, enter the extra payment, which will be deducted from loan amount', 'loan-calculator-wp');   
+    $loan_calculator_db_version = get_option( 'loan_calculator_db_version' );
+    if( $loan_calculator_db_version == '1.0.4') {
 
-       $loan_calculator_default_options['extra_payment_heading'] = esc_html__('Extra Payment Amount', 'loan-calculator-wp');      
+        $loan_calculator_default_options = get_option( 'ww_loan_option' );
+        $loan_calculator_default_options['extra_payment_save_time_label'] = esc_html__('Time Saved From Extra Payments', 'loan-calculator-wp');
 
-       update_option('ww_loan_option', $loan_calculator_default_options);
+        update_option('ww_loan_option', $loan_calculator_default_options);
+        update_option( 'loan_calculator_db_version', '1.0.5' );
+    }
 
-       update_option( 'loan_calculator_db_version', '1.0.4' );
+    $loan_calculator_db_version = get_option( 'loan_calculator_db_version' );
+    if( $loan_calculator_db_version == '1.0.5') {
 
-   }
+        $loan_calculator_default_options = get_option( 'ww_loan_option' );
+        $loan_calculator_default_options['extra_payment_total_label'] = esc_html__('Total Extra Payments', 'loan-calculator-wp');
+        $loan_calculator_default_options['hide_total_extra_payments'] = '';
+        $loan_calculator_default_options['hide_save_time_extra_payments'] = '';
+        $loan_calculator_default_options['extra_payment_save_interest_label'] = esc_html__('Interest Saved From Extra Payments', 'loan-calculator-wp'); 
+        $loan_calculator_default_options['hide_save_interest_extra_payments'] = '';
+        $loan_calculator_default_options['interest_rates_adj_disable'] = '';         
 
+        update_option('ww_loan_option', $loan_calculator_default_options);
+        update_option( 'loan_calculator_db_version', '1.0.6' );
+    }
 
-   if( $loan_calculator_db_version == '1.0.4') {
+    $loan_calculator_db_version = get_option( 'loan_calculator_db_version' );
+    if( $loan_calculator_db_version == '1.0.6' ) {
 
-       $loan_calculator_default_options = get_option( 'ww_loan_option' );         
+        $loan_calculator_default_options = get_option( 'ww_loan_option' );         
+        $loan_calculator_default_options['balance_border_color_graph'] = '#b8204c';
+        $loan_calculator_default_options['balance_point_background_color_graph'] = '#b8204c';
+        $loan_calculator_default_options['extra_payment_graph_color'] = '#00636b';
+        $loan_calculator_default_options['summary_chart_option'] = '';
+        $loan_calculator_default_options['summary_chart_label'] = esc_html__('Break-up of Total Payment', 'loan-calculator-wp');
+        $loan_calculator_default_options['summary_chart_principal_fill_color'] = '#ed8c2b';
+        $loan_calculator_default_options['summary_chart_interest_fill_color'] = '#88a825';
+        $loan_calculator_default_options['summary_chart_ballon_payment_fill_color'] = '#25649f';
+        $loan_calculator_default_options['summary_chart_down_payment_fill_color'] = '#b8204c';
+        $loan_calculator_default_options['summary_chart_extra_payment_fill_color'] = '#cf4a30';
+        $loan_calculator_default_options['down_payment_label'] = esc_html__('Down Payment', 'loan-calculator-wp');
+        $loan_calculator_default_options['down_payment_max_per'] = 100;
 
-       $loan_calculator_default_options['extra_payment_save_time_label'] = esc_html__('Time Saved From Extra Payments', 'loan-calculator-wp');  
-       
+        update_option('ww_loan_option', $loan_calculator_default_options);
+        update_option( 'loan_calculator_db_version', '1.0.7' );
+    }
 
-       update_option('ww_loan_option', $loan_calculator_default_options);
+    $loan_calculator_db_version = get_option( 'loan_calculator_db_version' );
+    if( $loan_calculator_db_version == '1.0.7' ) {
+        $loan_calculator_default_options = get_option( 'ww_loan_option' );         
 
-       update_option( 'loan_calculator_db_version', '1.0.5' );
+        $loan_calculator_default_options['loan_term_field_label'] = esc_html__('No. of Payments', 'loan-calculator-wp');
+        $loan_calculator_default_options['repayment_frequency_field_label'] = esc_html__('Repayment Frequency', 'loan-calculator-wp');
+        $loan_calculator_default_options['payment_mode_field_label'] = esc_html__('Payment Mode', 'loan-calculator-wp');   
+        $loan_calculator_default_options['interest_rate_field_label'] = esc_html__('Interest Rate', 'loan-calculator-wp');    
+        $loan_calculator_default_options['balloon_amount_field_label'] = esc_html__('Balloon Amount', 'loan-calculator-wp');
+        $loan_calculator_default_options['extra_payment_field_label'] = esc_html__('Extra Payment', 'loan-calculator-wp');   
+        $loan_calculator_default_options['hide_payment_mode'] = '';     
 
-   }
+        update_option('ww_loan_option', $loan_calculator_default_options);
+        update_option( 'loan_calculator_db_version', '1.0.8' );
+    }
 
+    $loan_calculator_db_version = get_option( 'loan_calculator_db_version' );
+    if( $loan_calculator_db_version == '1.0.8' ) {
+        // Next version code will be here.
+    }
 
-   if( $loan_calculator_db_version == '1.0.5') {
-
-       $loan_calculator_default_options = get_option( 'ww_loan_option' );         
-
-       $loan_calculator_default_options['extra_payment_total_label'] = esc_html__('Total Extra Payments', 'loan-calculator-wp');  
-
-       $loan_calculator_default_options['hide_total_extra_payments'] = '';
-       $loan_calculator_default_options['hide_save_time_extra_payments'] = '';
-
-       $loan_calculator_default_options['extra_payment_save_interest_label'] = esc_html__('Interest Saved From Extra Payments', 'loan-calculator-wp'); 
-
-       $loan_calculator_default_options['hide_save_interest_extra_payments'] = '';
-
-
-       $loan_calculator_default_options['interest_rates_adj_disable'] = '';         
-
-       update_option('ww_loan_option', $loan_calculator_default_options);
-
-       update_option( 'loan_calculator_db_version', '1.0.6' );
-
-   }
-
-   if($loan_calculator_db_version == '1.0.6'){
-
-    $loan_calculator_default_options = get_option( 'ww_loan_option' );         
-    $loan_calculator_default_options['balance_border_color_graph'] = '#b8204c';
-    $loan_calculator_default_options['balance_point_background_color_graph'] = '#b8204c';
-    $loan_calculator_default_options['extra_payment_graph_color'] = '#00636b';
-    
-    
-    $loan_calculator_default_options['summary_chart_option'] = '';
-
-    $loan_calculator_default_options['summary_chart_label'] = esc_html__('Break-up of Total Payment', 'loan-calculator-wp');
-
-    $loan_calculator_default_options['summary_chart_principal_fill_color'] = '#ed8c2b';
-    $loan_calculator_default_options['summary_chart_interest_fill_color'] = '#88a825';
-    $loan_calculator_default_options['summary_chart_ballon_payment_fill_color'] = '#25649f';
-    $loan_calculator_default_options['summary_chart_down_payment_fill_color'] = '#b8204c';
-    $loan_calculator_default_options['summary_chart_extra_payment_fill_color'] = '#cf4a30';
-
-
-    $loan_calculator_default_options['down_payment_label'] = esc_html__('Down Payment', 'loan-calculator-wp');
-    $loan_calculator_default_options['down_payment_max_per'] = 100;
-
-    update_option('ww_loan_option', $loan_calculator_default_options);
-    update_option( 'loan_calculator_db_version', '1.0.7' );
-
-}
-
-
-$plugin_activate_time =  strtotime("now");
-update_option('plugin_activation_time', $plugin_activate_time);
-update_option('lc_avoid_notice', 0);
-update_option('lc_rating_notice', 0);
-update_option('last_notice_timestamp', 0);
+    $plugin_activate_time =  strtotime( "now" );
+    update_option( 'plugin_activation_time', $plugin_activate_time );
+    update_option( 'lc_avoid_notice', 0 );
+    update_option( 'lc_rating_notice', 0 );
+    update_option( 'last_notice_timestamp', 0 );
 }
 
 /**

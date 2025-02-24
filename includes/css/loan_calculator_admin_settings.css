@@ -5,3 +5,18 @@
 #loan_calculator_form_settings .require-field-star{
     color: red;
 }
+.new-theme-fields-row,.ballon-amt-field-label-row,.downpayment-field-label-row,.extrapayment-field-label-row,.payment-mode-field-label-row,.total-interest-payable-label-row{
+    display: none;
+}
+.new-theme-fields-row.active,.ballon-amt-field-label-row.active,.downpayment-field-label-row.active,.extrapayment-field-label-row.active,.payment-mode-field-label-row.active,.total-interest-payable-label-row.active{
+    display: table-row;
+}
+#label_settings th{    
+    align-content: center;
+}
+#label_settings .lc-sett-sec-col-th{
+    padding-left: 25px;
+}
+
+
+

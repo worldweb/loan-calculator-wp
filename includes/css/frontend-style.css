@@ -2084,7 +2084,7 @@ select#repayment_freq {
     border: none;
     background-color: var(--calc-bg-light-color);
     width: auto;
-    min-height: 36px !important;
+   /*  min-height: 36px !important; */
     font-size: 15px;
     border-radius: 4px;
     letter-spacing: 0.03em;
@@ -2784,6 +2784,9 @@ body.theme-astra span.balance-legend-icon:after {content: "";position: absolute;
     display: none;
 }
 
+.loan-option-text-info-block .lc-fifty-perc-field{
+    width: 50% !important;
+}
 
 /****************************************************/
 /**************** START Media Screen ****************/
@@ -3236,6 +3239,12 @@ body.theme-astra span.balance-legend-icon:after {content: "";position: absolute;
     .loan-detail-section-child.with-summary-chart .break-up-total-payment-chart-wrap.loan-detail-cal-desc {
         width: calc(100% - 15px);
     }
+
+
+    .loan-option-text-info-block .lc-fifty-perc-field{
+        width: 100% !important;
+    }
+
 }
 
 @media only screen and (max-width: 767px) {
