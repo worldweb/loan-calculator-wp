@@ -639,6 +639,24 @@ jQuery(document).ready(function (jQuery) {
           			return jQuery("#down_payment_option").prop("checked");
         	   }     
 		     },
+		     "ww_loan_option\[loan_term_field_label\]": {
+		      required: true		     
+		     },
+		     "ww_loan_option\[balloon_amount_field_label\]": {
+		      required: true		     
+		     },
+		     "ww_loan_option\[extra_payment_field_label\]": {
+		      required: true		     
+		     },
+		     "ww_loan_option\[interest_rate_field_label\]": {
+		      required: true		     
+		     },
+		     "ww_loan_option\[payment_mode_field_label\]": {
+		      required: true		     
+		     },
+		     "ww_loan_option\[repayment_frequency_field_label\]": {
+		      required: true		     
+		     },
 		  },
 		  messages: {
 		  	"ww_loan_option\[loan_amount_label\]": {
@@ -745,7 +763,25 @@ jQuery(document).ready(function (jQuery) {
 		    },
 		    "ww_loan_option\[extra_payment_max_per\]": {
 		    	required: admin_setting_data.enter_extra_payment_max_per
-		    }		    
+		    },
+		     "ww_loan_option\[loan_term_field_label\]": {
+		    	required: admin_setting_data.enter_loan_term_field_label_msg
+		    },
+		    "ww_loan_option\[balloon_amount_field_label\]": {
+		    	required: admin_setting_data.enter_balloon_amount_field_label_msg
+		    },
+		    "ww_loan_option\[extra_payment_field_label\]": {
+		    	required: admin_setting_data.enter_extra_payment_field_label_msg
+		    },
+		    "ww_loan_option\[interest_rate_field_label\]": {
+		    	required: admin_setting_data.enter_interest_rate_field_label_msg
+		    },
+		    "ww_loan_option\[payment_mode_field_label\]": {
+		    	required: admin_setting_data.enter_payment_mode_field_label_msg
+		    },
+		    "ww_loan_option\[repayment_frequency_field_label\]": {
+		    	required: admin_setting_data.repayment_frequency_field_label_msg
+		    },		    
 
 		  },
 		  submitHandler: function(form) {
@@ -788,6 +824,22 @@ jQuery(document).ready(function (jQuery) {
 	}
 
 	/* ballon amout section hide show end */ 
+
+
+	jQuery('#hide_payment_mode').on('change', function () {
+
+		if (this.checked) {
+
+			jQuery('.payment-mode-field-row').hide(); //checked
+
+		} else {
+
+			jQuery('.payment-mode-field-row').show(); //checked
+
+		}
+
+	});
+
 
 
 });

@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Loan Calculator WP\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-17 08:31+0000\n"
+"POT-Creation-Date: 2025-02-21 08:07+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -13,163 +13,163 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/\n"
-"X-Loco-Version: 2.6.14; wp-6.7.1\n"
+"X-Loco-Version: 2.7.1; wp-6.7.2\n"
 "X-Domain: loan-calculator-wp"
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:243
+#: includes/admin/forms/ww-loan-calculator-setting.php:266
 msgid " Loan Calculator"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:1001
+#: includes/admin/forms/ww-loan-calculator-setting.php:1293
 msgid ""
 " {frequency} : Frequency will replace with the dynamic option selected in "
 "dropdown like \"Monthly\", \"Yearly\", \"Quarterly\" etc."
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:808
-#: includes/admin/forms/ww-loan-calculator-setting.php:844
+#: includes/admin/forms/ww-loan-calculator-setting.php:803
+#: includes/admin/forms/ww-loan-calculator-setting.php:823
 msgid "%"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:361
-#: includes/admin/forms/ww-loan-calculator-setting.php:708
-#: includes/admin/forms/ww-loan-calculator-setting.php:708
-#: includes/admin/forms/ww-loan-calculator-setting.php:724
-#: includes/admin/forms/ww-loan-calculator-setting.php:724
-#: includes/admin/forms/ww-loan-calculator-setting.php:740
-#: includes/admin/forms/ww-loan-calculator-setting.php:740
+#: includes/admin/forms/ww-loan-calculator-setting.php:388
+#: includes/admin/forms/ww-loan-calculator-setting.php:719
+#: includes/admin/forms/ww-loan-calculator-setting.php:719
+#: includes/admin/forms/ww-loan-calculator-setting.php:735
+#: includes/admin/forms/ww-loan-calculator-setting.php:735
+#: includes/admin/forms/ww-loan-calculator-setting.php:751
+#: includes/admin/forms/ww-loan-calculator-setting.php:751
 msgid "1"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:325
+#: includes/admin/forms/ww-loan-calculator-setting.php:352
 msgid ""
 ":  Check this box to disable about this Calculator option appear on top-"
 "right."
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:896
+#: includes/admin/forms/ww-loan-calculator-setting.php:859
 msgid ": Check this box to disable interest rate adjustment by User"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:789
+#: includes/admin/forms/ww-loan-calculator-setting.php:784
 msgid ""
 ": Check this box to enable Down Payment option. It will be visible on the "
 "calculator"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:836
+#: includes/admin/forms/ww-loan-calculator-setting.php:815
 msgid ""
 ": Check this box to enable Extra Payment option. It will be visible on the "
 "calculator"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:591
+#: includes/admin/forms/ww-loan-calculator-setting.php:618
 msgid ""
 ": Check this box to enable Pie chart visible in calcualtion result sidebar "
 "of the calculator"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:364
+#: includes/admin/forms/ww-loan-calculator-setting.php:391
 msgid ""
 ": Check this box to enable print option. It will be visible on top right of "
 "the calculator"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:306
+#: includes/admin/forms/ww-loan-calculator-setting.php:333
 msgid ": Copy this shortcode and add in any post or page"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:1074
+#: includes/admin/forms/ww-loan-calculator-setting.php:964
 msgid ""
 ": Display Application fees, monthly fees, total regular fees and total fees "
 "below calculator result"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:316
+#: includes/admin/forms/ww-loan-calculator-setting.php:343
 msgid ": Display calculator heading title"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:335
+#: includes/admin/forms/ww-loan-calculator-setting.php:362
 msgid ": Display on top right of the calculator"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:810
+#: includes/admin/forms/ww-loan-calculator-setting.php:805
 msgid ""
 ": Enter maximum percentage of loan amount for Down payment that will be "
 "allowed for User"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:846
+#: includes/admin/forms/ww-loan-calculator-setting.php:825
 msgid ""
 ": Enter maximum percentage of loan amount for extra payment that will be "
 "allowed for User"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:353
+#: includes/admin/forms/ww-loan-calculator-setting.php:380
 msgid ""
 ": Enter the about calculator information which will be displayed on click of "
 "About us calculator label"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:1248
+#: includes/admin/forms/ww-loan-calculator-setting.php:1106
 msgid ""
 ": Here you can enter any contact form shortcode. If you are using Contact "
 "Form 7, Gravity Forms, WP Forms, or any other forms. insert the shortcode as "
 "follows: [your_contact_form_shortcode]"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:417
+#: includes/admin/forms/ww-loan-calculator-setting.php:444
 msgid ""
 ": If no Repayment Frequency Options are selected, the monthly option will be "
 "automatically displayed on the frontend by default."
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:939
+#: includes/admin/forms/ww-loan-calculator-setting.php:902
 msgid ""
 ": If you enable the setting, it will use \"In Advance\" or \"In Arrears\" "
 "payment mode based on \"Default Payment method\" setting. "
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:984
+#: includes/admin/forms/ww-loan-calculator-setting.php:947
 msgid ": if you enable this option it will hide Save Interest Extra Payments"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:975
+#: includes/admin/forms/ww-loan-calculator-setting.php:938
 msgid ": if you enable this option it will hide Save Time Extra Payments"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:966
+#: includes/admin/forms/ww-loan-calculator-setting.php:929
 msgid ": if you enable this option it will hide Total Extra Payments"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:957
+#: includes/admin/forms/ww-loan-calculator-setting.php:920
 msgid ": if you enable this option it will hide Total Interest Payable Amount"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:948
+#: includes/admin/forms/ww-loan-calculator-setting.php:911
 msgid ""
 ": If you enable this setting, you can see the label ( with Year and Month "
 "Duration ) below No. of payment field."
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:929
+#: includes/admin/forms/ww-loan-calculator-setting.php:892
 msgid ""
 ": If you wish to showcase a particular payment mode selected from the "
 "options provided below, please mark the checkbox. In the absence of "
 "selection, both modes will be displayed."
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:800
+#: includes/admin/forms/ww-loan-calculator-setting.php:795
 msgid ""
 ": You can select one option from above modes to add down payment in loan "
 "calculator"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:305
+#: includes/admin/forms/ww-loan-calculator-setting.php:332
 msgid "[loan_calculator]"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:340
+#: includes/admin/forms/ww-loan-calculator-setting.php:367
 msgid "About Calculator Popup Content"
 msgstr ""
 
@@ -177,7 +177,7 @@ msgstr ""
 msgid "About this calculator"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:330
+#: includes/admin/forms/ww-loan-calculator-setting.php:357
 msgid "About This Calculator Label"
 msgstr ""
 
@@ -201,23 +201,31 @@ msgstr ""
 msgid "Algerian dinar"
 msgstr ""
 
+#: includes/admin/forms/ww-loan-calculator-setting.php:1164
+msgid "All Fields Labels"
+msgstr ""
+
 #: includes/loan-calculator-misc-functions.php:120
 msgid "Angolan kwanza"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:901
+#: includes/admin/forms/ww-loan-calculator-setting.php:864
 msgid "Application Fee"
 msgstr ""
 
 #: loan-calculator-wp.php:107
+#: includes/admin/forms/ww-loan-calculator-setting.php:48
+#: includes/admin/forms/theme-templates/default-theme/ww-loan-calculator-loan-default-theme-form.php:44
+#: includes/admin/forms/theme-templates/new-theme/ww-loan-calculator-loan-new-theme-form.php:42
 msgid "Application fee"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:1079
+#: includes/admin/forms/ww-loan-calculator-setting.php:1362
 msgid "Application Fee Label"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:653
+#: includes/admin/forms/ww-loan-calculator-setting.php:680
+#: includes/admin/forms/ww-loan-calculator-setting.php:1168
 msgid "are required fields"
 msgstr ""
 
@@ -241,11 +249,11 @@ msgstr ""
 msgid "Azerbaijani manat"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:475
+#: includes/admin/forms/ww-loan-calculator-setting.php:502
 msgid "Background Color"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:491
+#: includes/admin/forms/ww-loan-calculator-setting.php:518
 msgid "Background Light Color"
 msgstr ""
 
@@ -257,15 +265,15 @@ msgstr ""
 msgid "Bahraini dinar"
 msgstr ""
 
-#: includes/admin/forms/theme-templates/new-theme/ww-loan-calculator-loan-new-theme-form.php:734
+#: includes/admin/forms/theme-templates/new-theme/ww-loan-calculator-loan-new-theme-form.php:761
 msgid "Balance"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:541
+#: includes/admin/forms/ww-loan-calculator-setting.php:568
 msgid "Balance Graph Border Color"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:549
+#: includes/admin/forms/ww-loan-calculator-setting.php:576
 msgid "Balance Graph Point Color"
 msgstr ""
 
@@ -273,27 +281,37 @@ msgstr ""
 msgid "Ballon Amount"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:620
+#: includes/admin/forms/ww-loan-calculator-setting.php:1239
+msgid "Ballon Amount Field Label"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:647
 msgid "Ballon Payment Fill Color"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:768
+#: includes/admin/forms/ww-loan-calculator-setting.php:771
 msgid "Ballon Percentage"
 msgstr ""
 
-#: includes/admin/forms/theme-templates/new-theme/ww-loan-calculator-loan-new-theme-form.php:476
+#: loan-calculator-wp.php:325
+#: includes/admin/forms/ww-loan-calculator-setting.php:244
+#: includes/admin/forms/theme-templates/default-theme/ww-loan-calculator-loan-default-theme-form.php:269
+#: includes/admin/forms/theme-templates/new-theme/ww-loan-calculator-loan-new-theme-form.php:268
 msgid "Balloon Amount"
 msgstr ""
 
 #: loan-calculator-wp.php:141
+#: includes/admin/forms/ww-loan-calculator-setting.php:59
+#: includes/admin/forms/theme-templates/default-theme/ww-loan-calculator-loan-default-theme-form.php:62
+#: includes/admin/forms/theme-templates/new-theme/ww-loan-calculator-loan-new-theme-form.php:61
 msgid "Balloon amount"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:1014
+#: includes/admin/forms/ww-loan-calculator-setting.php:1306
 msgid "Balloon Amount Label"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:776
+#: includes/admin/forms/ww-loan-calculator-setting.php:1245
 msgid "Balloon Amount Tooltip"
 msgstr ""
 
@@ -341,7 +359,7 @@ msgstr ""
 msgid "Bolivian boliviano"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:499
+#: includes/admin/forms/ww-loan-calculator-setting.php:526
 msgid "Border Color"
 msgstr ""
 
@@ -358,6 +376,9 @@ msgid "Brazilian real"
 msgstr ""
 
 #: loan-calculator-wp.php:299
+#: includes/admin/forms/ww-loan-calculator-setting.php:226
+#: includes/admin/forms/theme-templates/default-theme/ww-loan-calculator-loan-default-theme-form.php:252
+#: includes/admin/forms/theme-templates/new-theme/ww-loan-calculator-loan-new-theme-form.php:249
 msgid "Break-up of Total Payment"
 msgstr ""
 
@@ -382,19 +403,19 @@ msgid "Burundian franc"
 msgstr ""
 
 #: loan-calculator-wp.php:148
-#: includes/admin/forms/ww-loan-calculator-setting.php:1277
+#: includes/admin/forms/ww-loan-calculator-setting.php:1135
 msgid "Calculator Disclaimer"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:1285
+#: includes/admin/forms/ww-loan-calculator-setting.php:1143
 msgid "Calculator Disclaimer Description"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:1261
+#: includes/admin/forms/ww-loan-calculator-setting.php:1119
 msgid "Calculator Disclaimer Settings "
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:311
+#: includes/admin/forms/ww-loan-calculator-setting.php:338
 msgid "Calculator Heading Title"
 msgstr ""
 
@@ -422,44 +443,44 @@ msgstr ""
 msgid "CFP franc"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:463
+#: includes/admin/forms/ww-loan-calculator-setting.php:490
 msgid "Change Chart"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:1317
+#: includes/admin/forms/ww-loan-calculator-setting.php:1409
 msgid ""
 "Check this box if you want to delete all settings data on plugin uninstall"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:1325
+#: includes/admin/forms/ww-loan-calculator-setting.php:1417
 msgid ""
 "Check this box if you want to disable font awesome css on plugin install"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:1341
+#: includes/admin/forms/ww-loan-calculator-setting.php:1433
 msgid ""
 "Check this box if you want to remove all range slider fields in the "
 "calculator form"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:1272
+#: includes/admin/forms/ww-loan-calculator-setting.php:1130
 msgid ""
 "Check this box if you want to remove Calculator Disclaimer section in loan "
 "calculator form"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:1207
+#: includes/admin/forms/ww-loan-calculator-setting.php:1065
 msgid ""
 "Check this box if you want to remove contact us section in loan calculator "
 "form"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:1333
+#: includes/admin/forms/ww-loan-calculator-setting.php:1425
 msgid ""
 "Check this box if you want to remove decimal point in loan calculator form"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:1126
+#: includes/admin/forms/ww-loan-calculator-setting.php:984
 msgid ""
 "Check this box if you want to remove tab icon section in loan calculator form"
 msgstr ""
@@ -480,7 +501,7 @@ msgstr ""
 msgid "Comorian franc"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:296
+#: includes/admin/forms/ww-loan-calculator-setting.php:323
 msgid "Configure calculator general settings."
 msgstr ""
 
@@ -488,31 +509,31 @@ msgstr ""
 msgid "Congolese franc"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:1243
+#: includes/admin/forms/ww-loan-calculator-setting.php:1101
 msgid "Contact Form Content"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:1198
+#: includes/admin/forms/ww-loan-calculator-setting.php:1056
 msgid "Contact form setting."
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:1212
+#: includes/admin/forms/ww-loan-calculator-setting.php:1070
 msgid "Contact Info Label"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:1220
+#: includes/admin/forms/ww-loan-calculator-setting.php:1078
 msgid "Contact Popup Button Label"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:1228
+#: includes/admin/forms/ww-loan-calculator-setting.php:1086
 msgid "Contact Type"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:1253
+#: includes/admin/forms/ww-loan-calculator-setting.php:1111
 msgid "Contact URL"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:270
+#: includes/admin/forms/ww-loan-calculator-setting.php:296
 msgid "Contact Us / Disclaimer"
 msgstr ""
 
@@ -520,7 +541,7 @@ msgstr ""
 msgid "Contact us now for a quote"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:1196
+#: includes/admin/forms/ww-loan-calculator-setting.php:1054
 msgid "Contact Us Settings - Setup Contact Form"
 msgstr ""
 
@@ -540,17 +561,17 @@ msgstr ""
 msgid "Cuban peso"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:377
+#: includes/admin/forms/ww-loan-calculator-setting.php:404
 msgid "Currency "
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:428
+#: includes/admin/forms/ww-loan-calculator-setting.php:455
 msgid ""
 "Customize the calculator look. Change the background color, hover color, "
 "border color etc..."
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:580
+#: includes/admin/forms/ww-loan-calculator-setting.php:607
 msgid "Customize Visual of Summary Chart"
 msgstr ""
 
@@ -562,68 +583,68 @@ msgstr ""
 msgid "Danish krone"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:934
+#: includes/admin/forms/ww-loan-calculator-setting.php:897
 msgid "Default Payment Mode"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:989
+#: includes/admin/forms/ww-loan-calculator-setting.php:1281
 msgid "Default Text for Calculation Result"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:650
+#: includes/admin/forms/ww-loan-calculator-setting.php:677
 msgid "Default Value for Amount Text Field"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:268
+#: includes/admin/forms/ww-loan-calculator-setting.php:294
 msgid "Default Value Settings"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:1314
+#: includes/admin/forms/ww-loan-calculator-setting.php:1406
 msgid "Delete Data On Uninstall"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:321
+#: includes/admin/forms/ww-loan-calculator-setting.php:348
 msgid "Disable About This Calculator Option"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:760
+#: includes/admin/forms/ww-loan-calculator-setting.php:763
 msgid "Disable Ballon"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:1269
+#: includes/admin/forms/ww-loan-calculator-setting.php:1127
 msgid "Disable Calculator Disclaimer Section"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:1204
+#: includes/admin/forms/ww-loan-calculator-setting.php:1062
 msgid "Disable Contact Us Section"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:1322
+#: includes/admin/forms/ww-loan-calculator-setting.php:1414
 msgid "Disable Font Awesome CSS"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:891
-#: includes/admin/forms/ww-loan-calculator-setting.php:894
+#: includes/admin/forms/ww-loan-calculator-setting.php:854
+#: includes/admin/forms/ww-loan-calculator-setting.php:857
 msgid "Disable Interest Rates Adjustment"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:1123
+#: includes/admin/forms/ww-loan-calculator-setting.php:981
 msgid "Disable Tabs Icon"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:426
+#: includes/admin/forms/ww-loan-calculator-setting.php:453
 msgid "Display Color Settings"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:944
+#: includes/admin/forms/ww-loan-calculator-setting.php:907
 msgid "Display Loan Term Label"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:267
+#: includes/admin/forms/ww-loan-calculator-setting.php:293
 msgid "Display Settings"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:925
+#: includes/admin/forms/ww-loan-calculator-setting.php:888
 msgid "Display Specific Payment Mode"
 msgstr ""
 
@@ -640,35 +661,44 @@ msgid "Doughnut "
 msgstr ""
 
 #: loan-calculator-wp.php:308 includes/class-ww-loan-calculator-public.php:139
+#: includes/admin/forms/ww-loan-calculator-setting.php:155
+#: includes/admin/forms/theme-templates/default-theme/ww-loan-calculator-loan-default-theme-form.php:179
+#: includes/admin/forms/theme-templates/new-theme/ww-loan-calculator-loan-new-theme-form.php:180
 msgid "Down Payment"
 msgstr ""
 
 #: loan-calculator-wp.php:224
+#: includes/admin/forms/ww-loan-calculator-setting.php:60
+#: includes/admin/forms/theme-templates/default-theme/ww-loan-calculator-loan-default-theme-form.php:174
+#: includes/admin/forms/theme-templates/new-theme/ww-loan-calculator-loan-new-theme-form.php:175
 msgid "Down Payment Amount"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:628
+#: includes/admin/forms/ww-loan-calculator-setting.php:1253
+msgid "Down Payment Field Label"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:655
 msgid "Down Payment Fill Color"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:823
-#: includes/admin/forms/ww-loan-calculator-setting.php:1022
+#: includes/admin/forms/ww-loan-calculator-setting.php:1314
 msgid "Down Payment Label"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:805
+#: includes/admin/forms/ww-loan-calculator-setting.php:800
 msgid "Down Payment Maximum"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:794
+#: includes/admin/forms/ww-loan-calculator-setting.php:789
 msgid "Down Payment Mode"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:784
+#: includes/admin/forms/ww-loan-calculator-setting.php:779
 msgid "Down Payment Option"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:815
+#: includes/admin/forms/ww-loan-calculator-setting.php:1259
 msgid "Down Payment Tooltip"
 msgstr ""
 
@@ -680,48 +710,48 @@ msgstr ""
 msgid "Egyptian pound"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:787
+#: includes/admin/forms/ww-loan-calculator-setting.php:782
 msgid "Enable Down Payment Option"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:834
+#: includes/admin/forms/ww-loan-calculator-setting.php:813
 msgid "Enable Extra Payment Option"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:1070
-#: includes/admin/forms/ww-loan-calculator-setting.php:1074
+#: includes/admin/forms/ww-loan-calculator-setting.php:960
+#: includes/admin/forms/ww-loan-calculator-setting.php:964
 msgid "Enable Fees Calculation"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:1117
+#: includes/admin/forms/ww-loan-calculator-setting.php:975
 msgid "Enable individual tab based on your need"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:1152
-#: includes/admin/forms/ww-loan-calculator-setting.php:1155
+#: includes/admin/forms/ww-loan-calculator-setting.php:1010
+#: includes/admin/forms/ww-loan-calculator-setting.php:1013
 msgid "Enable Loan Mortisation Tab"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:358
-#: includes/admin/forms/ww-loan-calculator-setting.php:362
+#: includes/admin/forms/ww-loan-calculator-setting.php:385
+#: includes/admin/forms/ww-loan-calculator-setting.php:389
 msgid "Enable Print Option"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:1131
-#: includes/admin/forms/ww-loan-calculator-setting.php:1134
+#: includes/admin/forms/ww-loan-calculator-setting.php:989
+#: includes/admin/forms/ww-loan-calculator-setting.php:992
 msgid "Enable Repayment Chart Tab"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:403
+#: includes/admin/forms/ww-loan-calculator-setting.php:430
 msgid "Enable Repayment Frequency"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:589
+#: includes/admin/forms/ww-loan-calculator-setting.php:616
 msgid "Enable Summary Chart"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:1168
-#: includes/admin/forms/ww-loan-calculator-setting.php:1171
+#: includes/admin/forms/ww-loan-calculator-setting.php:1026
+#: includes/admin/forms/ww-loan-calculator-setting.php:1029
 msgid "Enable Video Tab"
 msgstr ""
 
@@ -737,47 +767,57 @@ msgstr ""
 msgid "Euro"
 msgstr ""
 
-#: includes/class-ww-loan-calculator-public.php:149
+#: loan-calculator-wp.php:326 includes/class-ww-loan-calculator-public.php:149
+#: includes/admin/forms/ww-loan-calculator-setting.php:246
+#: includes/admin/forms/theme-templates/default-theme/ww-loan-calculator-loan-default-theme-form.php:271
+#: includes/admin/forms/theme-templates/new-theme/ww-loan-calculator-loan-new-theme-form.php:270
 msgid "Extra Payment"
 msgstr ""
 
 #: loan-calculator-wp.php:244
+#: includes/admin/forms/ww-loan-calculator-setting.php:178
+#: includes/admin/forms/theme-templates/default-theme/ww-loan-calculator-loan-default-theme-form.php:206
+#: includes/admin/forms/theme-templates/new-theme/ww-loan-calculator-loan-new-theme-form.php:208
 msgid "Extra Payment Amount"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:636
+#: includes/admin/forms/ww-loan-calculator-setting.php:1267
+msgid "Extra Payment Field Label"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:663
 msgid "Extra Payment Fill Color"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:557
+#: includes/admin/forms/ww-loan-calculator-setting.php:584
 msgid "Extra Payment Graph Color"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:1030
+#: includes/admin/forms/ww-loan-calculator-setting.php:1322
 msgid "Extra Payment Label"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:841
+#: includes/admin/forms/ww-loan-calculator-setting.php:820
 msgid "Extra Payment Maximum"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:831
+#: includes/admin/forms/ww-loan-calculator-setting.php:810
 msgid "Extra Payment Option"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:1054
+#: includes/admin/forms/ww-loan-calculator-setting.php:1346
 msgid "Extra Payment Save Interest Label"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:1038
+#: includes/admin/forms/ww-loan-calculator-setting.php:1330
 msgid "Extra Payment Save Time Label"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:851
+#: includes/admin/forms/ww-loan-calculator-setting.php:1273
 msgid "Extra Payment Tooltip"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:1046
+#: includes/admin/forms/ww-loan-calculator-setting.php:1338
 msgid "Extra Payment Total Label"
 msgstr ""
 
@@ -785,7 +825,11 @@ msgstr ""
 msgid "Falkland Islands pound"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:1062
+#: includes/admin/forms/ww-loan-calculator-setting.php:1354
+msgid "Fee Calculation Labels "
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:952
 msgid "Fee Calculation Settings "
 msgstr ""
 
@@ -797,12 +841,12 @@ msgstr ""
 msgid "Fijian dollar"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:797
+#: includes/admin/forms/ww-loan-calculator-setting.php:792
 msgid "Fixed Amount"
 msgstr ""
 
 #: includes/loan-calculator-misc-functions.php:47
-#: includes/admin/forms/ww-loan-calculator-setting.php:414
+#: includes/admin/forms/ww-loan-calculator-setting.php:441
 msgid "Fortnightly"
 msgstr ""
 
@@ -814,8 +858,8 @@ msgstr ""
 msgid "Gambian dalasi"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:266
-#: includes/admin/forms/ww-loan-calculator-setting.php:294
+#: includes/admin/forms/ww-loan-calculator-setting.php:292
+#: includes/admin/forms/ww-loan-calculator-setting.php:321
 msgid "General Settings"
 msgstr ""
 
@@ -851,19 +895,24 @@ msgstr ""
 msgid "Haitian gourde"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:980
+#: includes/admin/forms/ww-loan-calculator-setting.php:880
+#: includes/admin/forms/ww-loan-calculator-setting.php:883
+msgid "Hide Payment Mode Field"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:943
 msgid "Hide Save Interest For Extra Payments"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:971
+#: includes/admin/forms/ww-loan-calculator-setting.php:934
 msgid "Hide Save Time For Extra Payments"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:962
+#: includes/admin/forms/ww-loan-calculator-setting.php:925
 msgid "Hide Total Extra Payments"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:953
+#: includes/admin/forms/ww-loan-calculator-setting.php:916
 msgid "Hide Total Interest Payable"
 msgstr ""
 
@@ -910,18 +959,18 @@ msgid ""
 "amount"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:937
-#: includes/admin/forms/theme-templates/new-theme/ww-loan-calculator-loan-new-theme-form.php:581
-#: includes/admin/forms/theme-templates/new-theme/ww-loan-calculator-loan-new-theme-form.php:581
-#: includes/admin/forms/theme-templates/new-theme/ww-loan-calculator-loan-new-theme-form.php:589
-#: includes/admin/forms/theme-templates/new-theme/ww-loan-calculator-loan-new-theme-form.php:589
+#: includes/admin/forms/ww-loan-calculator-setting.php:900
+#: includes/admin/forms/theme-templates/new-theme/ww-loan-calculator-loan-new-theme-form.php:608
+#: includes/admin/forms/theme-templates/new-theme/ww-loan-calculator-loan-new-theme-form.php:608
+#: includes/admin/forms/theme-templates/new-theme/ww-loan-calculator-loan-new-theme-form.php:616
+#: includes/admin/forms/theme-templates/new-theme/ww-loan-calculator-loan-new-theme-form.php:616
 msgid "In Advance"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:938
-#: includes/admin/forms/theme-templates/new-theme/ww-loan-calculator-loan-new-theme-form.php:573
-#: includes/admin/forms/theme-templates/new-theme/ww-loan-calculator-loan-new-theme-form.php:590
-#: includes/admin/forms/theme-templates/new-theme/ww-loan-calculator-loan-new-theme-form.php:590
+#: includes/admin/forms/ww-loan-calculator-setting.php:901
+#: includes/admin/forms/theme-templates/new-theme/ww-loan-calculator-loan-new-theme-form.php:600
+#: includes/admin/forms/theme-templates/new-theme/ww-loan-calculator-loan-new-theme-form.php:617
+#: includes/admin/forms/theme-templates/new-theme/ww-loan-calculator-loan-new-theme-form.php:617
 msgid "In Arrears"
 msgstr ""
 
@@ -934,41 +983,50 @@ msgid "Indonesian rupiah"
 msgstr ""
 
 #: includes/class-ww-loan-calculator-public.php:124
-#: includes/admin/forms/theme-templates/new-theme/ww-loan-calculator-loan-new-theme-form.php:733
+#: includes/admin/forms/theme-templates/new-theme/ww-loan-calculator-loan-new-theme-form.php:760
 msgid "Interest"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:612
+#: includes/admin/forms/ww-loan-calculator-setting.php:639
 msgid "Interest Fill Color"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:531
+#: includes/admin/forms/ww-loan-calculator-setting.php:558
 msgid "Interest Graph Border Color"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:523
+#: includes/admin/forms/ww-loan-calculator-setting.php:550
 msgid "Interest Graph Fill Color"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:859
-#: includes/admin/forms/theme-templates/new-theme/ww-loan-calculator-loan-new-theme-form.php:430
-#: includes/admin/forms/theme-templates/new-theme/ww-loan-calculator-loan-new-theme-form.php:447
+#: loan-calculator-wp.php:324
+#: includes/admin/forms/ww-loan-calculator-setting.php:248
+#: includes/admin/forms/ww-loan-calculator-setting.php:830
+#: includes/admin/forms/theme-templates/default-theme/ww-loan-calculator-loan-default-theme-form.php:273
+#: includes/admin/forms/theme-templates/new-theme/ww-loan-calculator-loan-new-theme-form.php:272
 msgid "Interest Rate"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:875
+#: includes/admin/forms/ww-loan-calculator-setting.php:1211
+msgid "Interest Rate Field Label"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:846
 msgid "Interest Rate Max Value"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:867
+#: includes/admin/forms/ww-loan-calculator-setting.php:838
 msgid "Interest Rate Min Value"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:883
+#: includes/admin/forms/ww-loan-calculator-setting.php:1217
 msgid "Interest Rate Tooltip"
 msgstr ""
 
 #: loan-calculator-wp.php:276
+#: includes/admin/forms/ww-loan-calculator-setting.php:191
+#: includes/admin/forms/theme-templates/default-theme/ww-loan-calculator-loan-default-theme-form.php:220
+#: includes/admin/forms/theme-templates/new-theme/ww-loan-calculator-loan-new-theme-form.php:221
 msgid "Interest Saved From Extra Payments"
 msgstr ""
 
@@ -1020,6 +1078,10 @@ msgstr ""
 msgid "Kyrgyzstani som"
 msgstr ""
 
+#: includes/admin/forms/ww-loan-calculator-setting.php:297
+msgid "Label Settings"
+msgstr ""
+
 #: includes/loan-calculator-misc-functions.php:199
 msgid "Lao kip"
 msgstr ""
@@ -1044,7 +1106,7 @@ msgstr ""
 msgid "Line "
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:1237
+#: includes/admin/forms/ww-loan-calculator-setting.php:1095
 msgid "Link"
 msgstr ""
 
@@ -1052,28 +1114,31 @@ msgstr ""
 msgid "Loan Amortization Table"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:1160
+#: includes/admin/forms/ww-loan-calculator-setting.php:1018
 msgid "Loan Amortization Table Tooltip"
 msgstr ""
 
 #: loan-calculator-wp.php:219
-#: includes/admin/forms/ww-loan-calculator-setting.php:667
+#: includes/admin/forms/ww-loan-calculator-setting.php:80
+#: includes/admin/forms/ww-loan-calculator-setting.php:686
+#: includes/admin/forms/theme-templates/default-theme/ww-loan-calculator-loan-default-theme-form.php:90
+#: includes/admin/forms/theme-templates/new-theme/ww-loan-calculator-loan-new-theme-form.php:89
 msgid "Loan Amount"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:659
+#: includes/admin/forms/ww-loan-calculator-setting.php:1174
 msgid "Loan Amount Label"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:683
+#: includes/admin/forms/ww-loan-calculator-setting.php:702
 msgid "Loan Amount Max Value"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:675
+#: includes/admin/forms/ww-loan-calculator-setting.php:694
 msgid "Loan Amount Min Value"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:691
+#: includes/admin/forms/ww-loan-calculator-setting.php:1180
 msgid "Loan Amount Tooltip"
 msgstr ""
 
@@ -1088,26 +1153,29 @@ msgid "Loan Calculator WP"
 msgstr ""
 
 #: loan-calculator-wp.php:142
+#: includes/admin/forms/ww-loan-calculator-setting.php:63
+#: includes/admin/forms/theme-templates/default-theme/ww-loan-calculator-loan-default-theme-form.php:67
+#: includes/admin/forms/theme-templates/new-theme/ww-loan-calculator-loan-new-theme-form.php:66
 msgid "Loan Product Features"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:699
+#: includes/admin/forms/ww-loan-calculator-setting.php:710
 msgid "Loan Term"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:736
+#: includes/admin/forms/ww-loan-calculator-setting.php:1188
+msgid "Loan Term Field Label"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:747
 msgid "Loan Term Max Value"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:720
+#: includes/admin/forms/ww-loan-calculator-setting.php:731
 msgid "Loan Term Min Value"
 msgstr ""
 
-#: includes/admin/forms/theme-templates/new-theme/ww-loan-calculator-loan-new-theme-form.php:353
-msgid "Loan Terms"
-msgstr ""
-
-#: includes/admin/forms/ww-loan-calculator-setting.php:752
+#: includes/admin/forms/ww-loan-calculator-setting.php:1194
 msgid "Loan Terms Tooltip"
 msgstr ""
 
@@ -1151,8 +1219,8 @@ msgstr ""
 msgid "Mexican peso"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:271
-#: includes/admin/forms/ww-loan-calculator-setting.php:1308
+#: includes/admin/forms/ww-loan-calculator-setting.php:298
+#: includes/admin/forms/ww-loan-calculator-setting.php:1400
 msgid "Misc Settings"
 msgstr ""
 
@@ -1169,15 +1237,18 @@ msgid "Month(s)"
 msgstr ""
 
 #: includes/loan-calculator-misc-functions.php:43
-#: includes/admin/forms/ww-loan-calculator-setting.php:406
+#: includes/admin/forms/ww-loan-calculator-setting.php:433
 msgid "Monthly"
 msgstr ""
 
 #: loan-calculator-wp.php:108
+#: includes/admin/forms/ww-loan-calculator-setting.php:49
+#: includes/admin/forms/theme-templates/default-theme/ww-loan-calculator-loan-default-theme-form.php:47
+#: includes/admin/forms/theme-templates/new-theme/ww-loan-calculator-loan-new-theme-form.php:45
 msgid "Monthly fee"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:1087
+#: includes/admin/forms/ww-loan-calculator-setting.php:1370
 msgid "Monthly Fee Label"
 msgstr ""
 
@@ -1185,7 +1256,7 @@ msgstr ""
 msgid "Monthly for "
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:909
+#: includes/admin/forms/ww-loan-calculator-setting.php:872
 msgid "Monthly Rate"
 msgstr ""
 
@@ -1230,6 +1301,13 @@ msgstr ""
 msgid "No, thanks"
 msgstr ""
 
+#: loan-calculator-wp.php:321
+#: includes/admin/forms/ww-loan-calculator-setting.php:240
+#: includes/admin/forms/theme-templates/default-theme/ww-loan-calculator-loan-default-theme-form.php:267
+#: includes/admin/forms/theme-templates/new-theme/ww-loan-calculator-loan-new-theme-form.php:264
+msgid "No. of Payments"
+msgstr ""
+
 #: includes/loan-calculator-misc-functions.php:194
 msgid "North Korean won"
 msgstr ""
@@ -1238,31 +1316,32 @@ msgstr ""
 msgid "Norwegian krone"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:306
-#: includes/admin/forms/ww-loan-calculator-setting.php:316
-#: includes/admin/forms/ww-loan-calculator-setting.php:325
-#: includes/admin/forms/ww-loan-calculator-setting.php:335
-#: includes/admin/forms/ww-loan-calculator-setting.php:353
-#: includes/admin/forms/ww-loan-calculator-setting.php:364
-#: includes/admin/forms/ww-loan-calculator-setting.php:417
-#: includes/admin/forms/ww-loan-calculator-setting.php:591
-#: includes/admin/forms/ww-loan-calculator-setting.php:653
-#: includes/admin/forms/ww-loan-calculator-setting.php:789
-#: includes/admin/forms/ww-loan-calculator-setting.php:800
-#: includes/admin/forms/ww-loan-calculator-setting.php:810
-#: includes/admin/forms/ww-loan-calculator-setting.php:836
-#: includes/admin/forms/ww-loan-calculator-setting.php:846
-#: includes/admin/forms/ww-loan-calculator-setting.php:896
+#: includes/admin/forms/ww-loan-calculator-setting.php:333
+#: includes/admin/forms/ww-loan-calculator-setting.php:343
+#: includes/admin/forms/ww-loan-calculator-setting.php:352
+#: includes/admin/forms/ww-loan-calculator-setting.php:362
+#: includes/admin/forms/ww-loan-calculator-setting.php:380
+#: includes/admin/forms/ww-loan-calculator-setting.php:391
+#: includes/admin/forms/ww-loan-calculator-setting.php:444
+#: includes/admin/forms/ww-loan-calculator-setting.php:618
+#: includes/admin/forms/ww-loan-calculator-setting.php:680
+#: includes/admin/forms/ww-loan-calculator-setting.php:784
+#: includes/admin/forms/ww-loan-calculator-setting.php:795
+#: includes/admin/forms/ww-loan-calculator-setting.php:805
+#: includes/admin/forms/ww-loan-calculator-setting.php:815
+#: includes/admin/forms/ww-loan-calculator-setting.php:825
+#: includes/admin/forms/ww-loan-calculator-setting.php:859
+#: includes/admin/forms/ww-loan-calculator-setting.php:892
+#: includes/admin/forms/ww-loan-calculator-setting.php:902
+#: includes/admin/forms/ww-loan-calculator-setting.php:911
+#: includes/admin/forms/ww-loan-calculator-setting.php:920
 #: includes/admin/forms/ww-loan-calculator-setting.php:929
-#: includes/admin/forms/ww-loan-calculator-setting.php:939
-#: includes/admin/forms/ww-loan-calculator-setting.php:948
-#: includes/admin/forms/ww-loan-calculator-setting.php:957
-#: includes/admin/forms/ww-loan-calculator-setting.php:966
-#: includes/admin/forms/ww-loan-calculator-setting.php:975
-#: includes/admin/forms/ww-loan-calculator-setting.php:984
-#: includes/admin/forms/ww-loan-calculator-setting.php:1001
-#: includes/admin/forms/ww-loan-calculator-setting.php:1074
-#: includes/admin/forms/ww-loan-calculator-setting.php:1248
+#: includes/admin/forms/ww-loan-calculator-setting.php:938
+#: includes/admin/forms/ww-loan-calculator-setting.php:947
+#: includes/admin/forms/ww-loan-calculator-setting.php:964
+#: includes/admin/forms/ww-loan-calculator-setting.php:1106
+#: includes/admin/forms/ww-loan-calculator-setting.php:1168
+#: includes/admin/forms/ww-loan-calculator-setting.php:1293
 msgid "Note"
 msgstr ""
 
@@ -1271,7 +1350,10 @@ msgid "Omani rial"
 msgstr ""
 
 #: loan-calculator-wp.php:140
-#: includes/admin/forms/theme-templates/new-theme/ww-loan-calculator-loan-new-theme-form.php:814
+#: includes/admin/forms/ww-loan-calculator-setting.php:58
+#: includes/admin/forms/theme-templates/default-theme/ww-loan-calculator-loan-default-theme-form.php:61
+#: includes/admin/forms/theme-templates/new-theme/ww-loan-calculator-loan-new-theme-form.php:60
+#: includes/admin/forms/theme-templates/new-theme/ww-loan-calculator-loan-new-theme-form.php:841
 msgid "over"
 msgstr ""
 
@@ -1291,23 +1373,33 @@ msgstr ""
 msgid "Paraguayan guaran&iacute;"
 msgstr ""
 
-#: includes/admin/forms/theme-templates/new-theme/ww-loan-calculator-loan-new-theme-form.php:729
+#: includes/admin/forms/theme-templates/new-theme/ww-loan-calculator-loan-new-theme-form.php:756
 msgid "Payment"
 msgstr ""
 
-#: includes/admin/forms/theme-templates/new-theme/ww-loan-calculator-loan-new-theme-form.php:561
+#: loan-calculator-wp.php:323
+#: includes/admin/forms/ww-loan-calculator-setting.php:250
+#: includes/admin/forms/theme-templates/default-theme/ww-loan-calculator-loan-default-theme-form.php:275
+#: includes/admin/forms/theme-templates/new-theme/ww-loan-calculator-loan-new-theme-form.php:274
 msgid "Payment Mode"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:917
+#: includes/admin/forms/ww-loan-calculator-setting.php:1225
+msgid "Payment Mode Field Label"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:1231
 msgid "Payment Mode Tooltip"
 msgstr ""
 
 #: loan-calculator-wp.php:134
+#: includes/admin/forms/ww-loan-calculator-setting.php:55
+#: includes/admin/forms/theme-templates/default-theme/ww-loan-calculator-loan-default-theme-form.php:58
+#: includes/admin/forms/theme-templates/new-theme/ww-loan-calculator-loan-new-theme-form.php:57
 msgid "Per month for"
 msgstr ""
 
-#: includes/admin/forms/theme-templates/new-theme/ww-loan-calculator-loan-new-theme-form.php:728
+#: includes/admin/forms/theme-templates/new-theme/ww-loan-calculator-loan-new-theme-form.php:755
 msgid "Period"
 msgstr ""
 
@@ -1333,6 +1425,10 @@ msgstr ""
 
 #: includes/class-ww-loan-calculator-scripts.php:81
 msgid "Please Enter Application Fee Label"
+msgstr ""
+
+#: includes/class-ww-loan-calculator-scripts.php:96
+msgid "Please Enter Balloon Amount Field Label"
 msgstr ""
 
 #: includes/class-ww-loan-calculator-scripts.php:75
@@ -1364,6 +1460,10 @@ msgstr ""
 msgid "Please Enter Down Payment Maximum"
 msgstr ""
 
+#: includes/class-ww-loan-calculator-scripts.php:97
+msgid "Please Enter Extra Payment Field Label"
+msgstr ""
+
 #: includes/class-ww-loan-calculator-scripts.php:77
 msgid "Please Enter Extra Payment Label"
 msgstr ""
@@ -1382,6 +1482,10 @@ msgstr ""
 
 #: includes/class-ww-loan-calculator-scripts.php:79
 msgid "Please Enter Extra Payment Total Label"
+msgstr ""
+
+#: includes/class-ww-loan-calculator-scripts.php:98
+msgid "Please Enter Interest Rate Field Label"
 msgstr ""
 
 #: includes/class-ww-loan-calculator-scripts.php:66
@@ -1416,12 +1520,20 @@ msgstr ""
 msgid "Please Enter Loan Amount Value"
 msgstr ""
 
+#: includes/class-ww-loan-calculator-scripts.php:95
+msgid "Please Enter Loan Term Field Label"
+msgstr ""
+
 #: includes/class-ww-loan-calculator-scripts.php:82
 msgid "Please Enter Monthly Fee Label"
 msgstr ""
 
 #: includes/class-ww-loan-calculator-scripts.php:68
 msgid "Please Enter Monthly Rate"
+msgstr ""
+
+#: includes/class-ww-loan-calculator-scripts.php:99
+msgid "Please Enter Payment Mode Field Label"
 msgstr ""
 
 #: includes/class-ww-loan-calculator-scripts.php:70
@@ -1434,6 +1546,10 @@ msgstr ""
 
 #: includes/class-ww-loan-calculator-scripts.php:85
 msgid "Please Enter Repayment Chart Tooltip"
+msgstr ""
+
+#: includes/class-ww-loan-calculator-scripts.php:100
+msgid "Please Enter Repayment Frequency Field Label"
 msgstr ""
 
 #: includes/class-ww-loan-calculator-scripts.php:71
@@ -1468,7 +1584,7 @@ msgstr ""
 msgid "Please Enter Youtube Video Link"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:1306
+#: includes/admin/forms/ww-loan-calculator-setting.php:1398
 msgid "Plugin Misc Settings"
 msgstr ""
 
@@ -1480,7 +1596,7 @@ msgstr ""
 msgid "Polish z&#x142;oty"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:1233
+#: includes/admin/forms/ww-loan-calculator-setting.php:1091
 msgid "Popup"
 msgstr ""
 
@@ -1492,23 +1608,26 @@ msgstr ""
 msgid "Principal"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:604
+#: includes/admin/forms/ww-loan-calculator-setting.php:631
 msgid "Principal Fill Color"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:515
+#: includes/admin/forms/ww-loan-calculator-setting.php:542
 msgid "Principal Graph Border Color"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:507
+#: includes/admin/forms/ww-loan-calculator-setting.php:534
 msgid "Principal Graph Fill Color"
 msgstr ""
 
 #: loan-calculator-wp.php:158 loan-calculator-wp.php:185
+#: includes/admin/forms/ww-loan-calculator-setting.php:90
+#: includes/admin/forms/theme-templates/default-theme/ww-loan-calculator-loan-default-theme-form.php:104
+#: includes/admin/forms/theme-templates/new-theme/ww-loan-calculator-loan-new-theme-form.php:98
 msgid "Print"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:369
+#: includes/admin/forms/ww-loan-calculator-setting.php:396
 msgid "Print Option Label"
 msgstr ""
 
@@ -1517,7 +1636,7 @@ msgid "Qatari riyal"
 msgstr ""
 
 #: includes/loan-calculator-misc-functions.php:44
-#: includes/admin/forms/ww-loan-calculator-setting.php:408
+#: includes/admin/forms/ww-loan-calculator-setting.php:435
 msgid "Quarterly"
 msgstr ""
 
@@ -1529,28 +1648,37 @@ msgstr ""
 msgid "Radar "
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:997
+#: includes/admin/forms/ww-loan-calculator-setting.php:1289
 msgid "Regular Repayment Label"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:1338
+#: includes/admin/forms/ww-loan-calculator-setting.php:1430
 msgid "Remove All Range Sliders"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:1330
+#: includes/admin/forms/ww-loan-calculator-setting.php:1422
 msgid "Remove Decimal Points"
 msgstr ""
 
 #: loan-calculator-wp.php:144
+#: includes/admin/forms/ww-loan-calculator-setting.php:66
+#: includes/admin/forms/theme-templates/default-theme/ww-loan-calculator-loan-default-theme-form.php:70
+#: includes/admin/forms/theme-templates/new-theme/ww-loan-calculator-loan-new-theme-form.php:69
 msgid "Repayment Chart"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:1144
+#: includes/admin/forms/ww-loan-calculator-setting.php:1002
 msgid "Repayment Chart Tooltip"
 msgstr ""
 
-#: includes/admin/forms/theme-templates/new-theme/ww-loan-calculator-loan-new-theme-form.php:376
+#: loan-calculator-wp.php:322
+#: includes/admin/forms/ww-loan-calculator-setting.php:242
+#: includes/admin/forms/theme-templates/new-theme/ww-loan-calculator-loan-new-theme-form.php:266
 msgid "Repayment Frequency"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:1203
+msgid "Repayment Frequency Field Label"
 msgstr ""
 
 #: includes/loan-calculator-misc-functions.php:235
@@ -1585,15 +1713,15 @@ msgstr ""
 msgid "Scatter "
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:438
+#: includes/admin/forms/ww-loan-calculator-setting.php:465
 msgid "Select Font"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:567
+#: includes/admin/forms/ww-loan-calculator-setting.php:594
 msgid "Select Theme"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:483
+#: includes/admin/forms/ww-loan-calculator-setting.php:510
 msgid "Selected Color"
 msgstr ""
 
@@ -1601,29 +1729,37 @@ msgstr ""
 msgid "Serbian dinar"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:991
+#: includes/admin/forms/ww-loan-calculator-setting.php:1166
+msgid "Set the calculation fields labels"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:1283
 msgid "Set the calculation results labels"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:652
+#: includes/admin/forms/ww-loan-calculator-setting.php:679
 msgid "Set the default value for all amount text fields"
+msgstr ""
+
+#: includes/admin/forms/ww-loan-calculator-setting.php:1356
+msgid "Set the fee calculation results labels"
 msgstr ""
 
 #: includes/loan-calculator-misc-functions.php:241
 msgid "Seychellois rupee"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:302
+#: includes/admin/forms/ww-loan-calculator-setting.php:329
 msgid "Shortcode"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:1064
+#: includes/admin/forms/ww-loan-calculator-setting.php:954
 msgid ""
 "Show application fees, monthly fees, total regular fees and total fees. "
 "Customize each fees label."
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:1263
+#: includes/admin/forms/ww-loan-calculator-setting.php:1121
 msgid "Show disclaimer notice at the end of calculator."
 msgstr ""
 
@@ -1671,15 +1807,15 @@ msgstr ""
 msgid "Sudanese pound"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:596
+#: includes/admin/forms/ww-loan-calculator-setting.php:623
 msgid "Summary Chart Main Label"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:586
+#: includes/admin/forms/ww-loan-calculator-setting.php:613
 msgid "Summary Chart Option"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:578
+#: includes/admin/forms/ww-loan-calculator-setting.php:605
 msgid "Summary Chart Visual Settings"
 msgstr ""
 
@@ -1703,11 +1839,11 @@ msgstr ""
 msgid "Syrian pound"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:269
+#: includes/admin/forms/ww-loan-calculator-setting.php:295
 msgid "Tab Field"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:1115
+#: includes/admin/forms/ww-loan-calculator-setting.php:973
 msgid "Tab Settings Field"
 msgstr ""
 
@@ -1741,10 +1877,13 @@ msgid ""
 msgstr ""
 
 #: loan-calculator-wp.php:257
+#: includes/admin/forms/ww-loan-calculator-setting.php:181
+#: includes/admin/forms/theme-templates/default-theme/ww-loan-calculator-loan-default-theme-form.php:209
+#: includes/admin/forms/theme-templates/new-theme/ww-loan-calculator-loan-new-theme-form.php:211
 msgid "Time Saved From Extra Payments"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:763
+#: includes/admin/forms/ww-loan-calculator-setting.php:766
 msgid ""
 "To enable the balloon amount in the loan calculator form, uncheck this box."
 msgstr ""
@@ -1754,6 +1893,9 @@ msgid "Tongan pa&#x2bb;anga"
 msgstr ""
 
 #: loan-calculator-wp.php:271
+#: includes/admin/forms/ww-loan-calculator-setting.php:183
+#: includes/admin/forms/theme-templates/default-theme/ww-loan-calculator-loan-default-theme-form.php:212
+#: includes/admin/forms/theme-templates/new-theme/ww-loan-calculator-loan-new-theme-form.php:214
 msgid "Total Extra Payments"
 msgstr ""
 
@@ -1761,7 +1903,7 @@ msgstr ""
 msgid "Total fees"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:1103
+#: includes/admin/forms/ww-loan-calculator-setting.php:1386
 msgid "Total Fees Label"
 msgstr ""
 
@@ -1770,10 +1912,13 @@ msgid "Total Interest"
 msgstr ""
 
 #: loan-calculator-wp.php:139
+#: includes/admin/forms/ww-loan-calculator-setting.php:57
+#: includes/admin/forms/theme-templates/default-theme/ww-loan-calculator-loan-default-theme-form.php:60
+#: includes/admin/forms/theme-templates/new-theme/ww-loan-calculator-loan-new-theme-form.php:59
 msgid "Total interest payable"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:1006
+#: includes/admin/forms/ww-loan-calculator-setting.php:1298
 msgid "Total Interest Payable Label"
 msgstr ""
 
@@ -1781,7 +1926,7 @@ msgstr ""
 msgid "Total regular fees"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:1095
+#: includes/admin/forms/ww-loan-calculator-setting.php:1378
 msgid "Total Regular Fees Label"
 msgstr ""
 
@@ -1842,10 +1987,13 @@ msgid "Venezuelan bol&iacute;var"
 msgstr ""
 
 #: loan-calculator-wp.php:143
+#: includes/admin/forms/ww-loan-calculator-setting.php:64
+#: includes/admin/forms/theme-templates/default-theme/ww-loan-calculator-loan-default-theme-form.php:68
+#: includes/admin/forms/theme-templates/new-theme/ww-loan-calculator-loan-new-theme-form.php:67
 msgid "Video"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:1176
+#: includes/admin/forms/ww-loan-calculator-setting.php:1034
 msgid "Video Tab Tooltip"
 msgstr ""
 
@@ -1854,7 +2002,7 @@ msgid "Vietnamese &#x111;&#x1ed3;ng"
 msgstr ""
 
 #: includes/loan-calculator-misc-functions.php:46
-#: includes/admin/forms/ww-loan-calculator-setting.php:412
+#: includes/admin/forms/ww-loan-calculator-setting.php:439
 msgid "Weekly"
 msgstr ""
 
@@ -1866,7 +2014,7 @@ msgstr ""
 msgid "West African CFA franc"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:798
+#: includes/admin/forms/ww-loan-calculator-setting.php:793
 msgid "With %  Amount"
 msgstr ""
 
@@ -1879,7 +2027,7 @@ msgid "Year(s)"
 msgstr ""
 
 #: includes/loan-calculator-misc-functions.php:45
-#: includes/admin/forms/ww-loan-calculator-setting.php:410
+#: includes/admin/forms/ww-loan-calculator-setting.php:437
 msgid "Yearly"
 msgstr ""
 
@@ -1888,6 +2036,9 @@ msgid "Yearly for "
 msgstr ""
 
 #: loan-calculator-wp.php:135
+#: includes/admin/forms/ww-loan-calculator-setting.php:56
+#: includes/admin/forms/theme-templates/default-theme/ww-loan-calculator-loan-default-theme-form.php:59
+#: includes/admin/forms/theme-templates/new-theme/ww-loan-calculator-loan-new-theme-form.php:58
 msgid "years"
 msgstr ""
 
@@ -1907,7 +2058,7 @@ msgid ""
 "leave a review?"
 msgstr ""
 
-#: includes/admin/forms/ww-loan-calculator-setting.php:1184
+#: includes/admin/forms/ww-loan-calculator-setting.php:1042
 msgid "Youtube Video Link"
 msgstr ""
 
@@ -1916,5 +2067,8 @@ msgid "Zambian kwacha"
 msgstr ""
 
 #: loan-calculator-wp.php:133
+#: includes/admin/forms/ww-loan-calculator-setting.php:54
+#: includes/admin/forms/theme-templates/default-theme/ww-loan-calculator-loan-default-theme-form.php:57
+#: includes/admin/forms/theme-templates/new-theme/ww-loan-calculator-loan-new-theme-form.php:55
 msgid "{frequency} Payment"
 msgstr ""
