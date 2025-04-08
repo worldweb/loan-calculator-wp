@@ -9,10 +9,10 @@ Author URI:        https://worldwebtechnology.com
 Requires at least: 5.8
 Requires PHP:      7.4
 Tested up to:      6.7.1
-Stable tag:        1.5.6
+Stable tag:        1.5.7
 License:           GPLv2 or later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
-Version:           1.5.6
+Version:           1.5.7
 
 Loan / EMI Calculator for Home Loan and Personal Loan
 
@@ -127,6 +127,10 @@ The Loan Calculator WP Pro plugin allows you to create a wide range of advanced 
   You can enable/disable loan fee calculation from the WP admin. Go to the loan calculator > click on the "Default value settings" tab and search for "Enable Fee Calculation" and enable/disable according to your needs.
 
 == Changelog ==
+
+= 1.5.7 (Apr 07, 2025) =
+* Resolved Balloon Rate Inconsistency.
+* Revised Advanced payment mode calculation.
 
 = 1.5.6 (Feb 24, 2025) =
 * Added "Label Settings" to manage label text.
