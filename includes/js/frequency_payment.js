@@ -4,7 +4,7 @@ function cal_emi_amount_frequency_payment_options(frp_option,lamount, interest_r
   if (frp_option === 'Quarterly') {
     
     var interest = interest_rates / (100 * 4);
-    var emi_amount = ((lamount - ballon_amounts) * interest * Math.pow(1 + interest, parseInt(nofpayment))) / (Math.pow(1 + interest, parseInt(nofpayment)) - 1);
+    var emi_amount = (((lamount - ballon_amounts) * interest * Math.pow(1 + interest, parseInt(nofpayment))) / (Math.pow(1 + interest, parseInt(nofpayment)) - 1));
     var total_interests = (emi_amount * parseInt(nofpayment)) - lamount;
     //newArr['total_interest'] = total_interests.toFixed(2);
     
@@ -23,7 +23,7 @@ function cal_emi_amount_frequency_payment_options(frp_option,lamount, interest_r
 
 
 
-    newArr['emi_amount'] = emi_amount.toFixed(2);
+    newArr['emi_amount'] = parseFloat(emi_amount.toFixed(2));
 
 
 
@@ -52,7 +52,7 @@ function cal_emi_amount_frequency_payment_options(frp_option,lamount, interest_r
     }       
 
 
-    newArr['emi_amount'] = emi_amount.toFixed(2);
+    newArr['emi_amount'] = parseFloat(emi_amount.toFixed(2));
 
   } else if (frp_option === 'Yearly') {
     
@@ -76,7 +76,7 @@ function cal_emi_amount_frequency_payment_options(frp_option,lamount, interest_r
 
 
 
-    newArr['emi_amount'] = emi_amount.toFixed(2);
+    newArr['emi_amount'] = parseFloat(emi_amount.toFixed(2));
   
   } else if (frp_option === 'Weekly') {
     
@@ -101,7 +101,7 @@ function cal_emi_amount_frequency_payment_options(frp_option,lamount, interest_r
 
 
 
-     newArr['emi_amount'] = emi_amount.toFixed(2);
+     newArr['emi_amount'] = parseFloat(emi_amount.toFixed(2));
        
   }
   else if(frp_option === 'Fortnight'){
@@ -124,7 +124,7 @@ function cal_emi_amount_frequency_payment_options(frp_option,lamount, interest_r
     }  
 
 
-    newArr['emi_amount'] = emi_amount.toFixed(2);
+    newArr['emi_amount'] = parseFloat(emi_amount.toFixed(2));
 
   }
   
@@ -217,7 +217,7 @@ function cal_interest_amount_by_fre_payment_option(frp_option, loan_terms_months
     }  
 
 
-    return monthlyInterestAmount;
+    return parseFloat(monthlyInterestAmount).toFixed(2);
 
   } else if (frp_option === 'Yearly') {
     
@@ -529,21 +529,40 @@ function cal_numbers_of_payment_by_frequency_val(frp_option,old_repayment_freq,d
 function cal_advance_loan_amount_by_frequency_val(frp_option,actual_loan_amount,interest_rates){
    var adv_loan_amount = 0;
     if(frp_option == 'Monthly'){
-     adv_loan_amount = actual_loan_amount- parseInt(actual_loan_amount*interest_rates/(100 * 12));
+     adv_loan_amount = actual_loan_amount- parseFloat(actual_loan_amount*interest_rates/(100 * 12)).toFixed(2);
     }
     if(frp_option == 'Quarterly'){
-     adv_loan_amount = actual_loan_amount- parseInt(actual_loan_amount*interest_rates/(100 * 4));
+     adv_loan_amount = actual_loan_amount- parseFloat(actual_loan_amount*interest_rates/(100 * 4)).toFixed(2);
     }
      if(frp_option == 'Yearly'){
-     adv_loan_amount = actual_loan_amount- parseInt(actual_loan_amount*interest_rates/(100 * 1));
+     adv_loan_amount = actual_loan_amount- parseFloat(actual_loan_amount*interest_rates/(100 * 1)).toFixed(2);
     }
      if(frp_option == 'Weekly'){
-     adv_loan_amount = actual_loan_amount- parseInt(actual_loan_amount*interest_rates/(100 * 52));
+     adv_loan_amount = actual_loan_amount- parseFloat(actual_loan_amount*interest_rates/(100 * 52)).toFixed(2);
     }
      if(frp_option == 'Fortnight'){
-     adv_loan_amount = actual_loan_amount- parseInt(actual_loan_amount*interest_rates/(100 * 26));
+     adv_loan_amount = actual_loan_amount- parseFloat(actual_loan_amount*interest_rates/(100 * 26)).toFixed(2);
     } 
 
 
     return adv_loan_amount;
+}
+/* calculate total balloon amount interest */
+function cal_total_interest_on_balloon_amount(frp_option,ballon_amounts,interest_rates,loan_terms){
+
+  var interest = 0;
+  
+  if (frp_option === 'Monthly') {  
+    interest = interest_rates / 12;
+  }else if (frp_option === 'Quarterly') {  
+    interest = interest_rates / 4;
+  }else if (frp_option === 'Yearly') {  
+    interest = interest_rates;
+  }else if (frp_option === 'Weekly') {  
+    interest = interest_rates / 52 ;
+  }else if (frp_option === 'Fortnight') {  
+    interest = interest_rates / 26 ;
+  }
+  var total_balloon_interest = (((ballon_amounts * interest) / 100) * loan_terms);
+  return total_balloon_interest;
 }

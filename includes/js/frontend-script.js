@@ -27,10 +27,6 @@ jQuery(document).ready(function ($) {
 
     jQuery("input[name='current_repayment_freq']").val(repayment_frequency_val);
 
-    /* if (!loan_amount.startsWith(currency_symbol)) {
-      jQuery("#loan_amount").val(currency_symbol + jQuery("#loan_amount").val());
-    } */
-
     var ballon_amounts_per_sign = jQuery("#ballon_amounts_per").val();
     if (!ballon_amounts_per_sign.endsWith("%")) {
       jQuery("#ballon_amounts_per").val(ballon_amounts_per_sign + "%");
@@ -293,7 +289,7 @@ jQuery(document).ready(function ($) {
           );
         var advance_cal = loan_advance_interest_cal(
           repayment_frequency_val,
-          adloan_amount,
+          loan_amount,
           interest_rates
           );
         loan_advance_interest = advance_cal.loan_advance_interest;
@@ -484,34 +480,15 @@ jQuery(document).ready(function ($) {
 
       monthly_payment = parseInt(emi_cal.emi_amount);
 
-      var total_interests = monthly_payment * loan_terms_month - loan_amount;
+      var total_interests = (monthly_payment * loan_terms_month) - loan_amount;
 
 
       var per_month_ballon_amt = 0;
       var ballon_amt_interest = 0;
       if (ballon_amounts > 0) {
 
-        ballon_amt_interest = (ballon_amounts * interest_rates) / 100;
-
-        if(repayment_frequency_val=='Fortnight'){       
-
-          var total_months_terms_fortnight = 26;
-          per_month_ballon_amt = ballon_amt_interest / total_months_terms_fortnight;        
-
-        }
-        else if(repayment_frequency_val=='Weekly'){
-
-          var total_months_terms_weekly = 52;
-          per_month_ballon_amt = ballon_amt_interest / total_months_terms_weekly;
-
-        }
-        else{
-
-          per_month_ballon_amt = ballon_amt_interest / total_months_terms;
-
-        }
-
-
+        ballon_amt_interest = cal_total_interest_on_balloon_amount(repayment_frequency_val,ballon_amounts,interest_rates,loan_terms_month);
+        per_month_ballon_amt = ballon_amt_interest / loan_terms_month;
       }
     } else {
       var emi_cal = cal_emi_amount_frequency_payment_options(
@@ -523,33 +500,14 @@ jQuery(document).ready(function ($) {
         );
       monthly_payment = emi_cal.emi_amount;
 
-      var total_interests = monthly_payment * loan_terms_month - loan_amount;
+      var total_interests = (monthly_payment * loan_terms_month) - loan_amount;
 
       var per_month_ballon_amt = 0;
       var ballon_amt_interest = 0;
       if (ballon_amounts > 0) {
 
-        ballon_amt_interest = (ballon_amounts * interest_rates) / 100;      
-
-
-        if(repayment_frequency_val=='Fortnight'){       
-
-          var total_months_terms_fortnight = 26;
-          per_month_ballon_amt = ballon_amt_interest / total_months_terms_fortnight;        
-
-        }
-        else if(repayment_frequency_val=='Weekly'){
-
-          var total_months_terms_weekly = 52;
-          per_month_ballon_amt = ballon_amt_interest / total_months_terms_weekly;
-
-        }
-        else{
-
-          per_month_ballon_amt = ballon_amt_interest / total_months_terms;
-
-        }
-
+        ballon_amt_interest = cal_total_interest_on_balloon_amount(repayment_frequency_val,ballon_amounts,interest_rates,loan_terms_month);     
+          per_month_ballon_amt = ballon_amt_interest / loan_terms_month;
       }
     }
 
@@ -580,7 +538,7 @@ jQuery(document).ready(function ($) {
      total_interests =
      parseInt(total_interests) +
      parseInt(ballon_amounts) +
-     parseInt(ballon_amt_interest) * loan_terms;
+     parseInt(ballon_amt_interest);
      monthly_payment =
      parseInt(monthly_payment) + parseInt(per_month_ballon_amt);
 
@@ -610,7 +568,7 @@ jQuery(document).ready(function ($) {
     total_interests =
     parseFloat(total_interests) +
     parseFloat(ballon_amounts) +
-    parseFloat(ballon_amt_interest) * loan_terms;
+    parseFloat(ballon_amt_interest);
     monthly_payment =
     parseFloat(monthly_payment) + parseFloat(per_month_ballon_amt);
   }
@@ -798,16 +756,7 @@ if (setting_data.remove_decimal_point == 1) {
   } else {
 
     var total_sum_interests =
-    total_interests < loan_advance_interest
-    ? addCommas(
-      parseFloat(total_interests).toFixed(2)
-      )
-    : addCommas(
-      (
-        parseFloat(total_interests) -
-        parseFloat(loan_advance_interest)
-        ).toFixed(2)
-      );
+    total_interests < loan_advance_interest ? parseFloat(total_interests).toFixed(2):parseFloat(total_interests).toFixed(2);
 
 
        /* check for NAN value */  
@@ -842,15 +791,23 @@ if (setting_data.down_payment_option == '1') {
     if (setting_data.remove_decimal_point == 1) {
 
       var table_down_payment = currency_symbols+parseInt(down_payment);
-      var table_loan_amout = currency_symbols+parseInt(loan_amount);
+      if(loan_advance_interest > 0){
+        var table_loan_amout = parseInt(loan_amount) + parseInt(loan_advance_interest);
+      }else{
+        var table_loan_amout = parseInt(loan_amount);
+      }
       var table_int_rate = currency_symbols+'0';
 
     }
     else{
 
-      var table_down_payment = currency_symbols+parseInt(down_payment)+'.00';
-      var table_loan_amout = currency_symbols+parseInt(loan_amount)+'.00';
-      var table_int_rate = currency_symbols+'0.00';
+      var table_down_payment = currency_symbols+parseFloat(down_payment).toFixed(2);
+      if(loan_advance_interest > 0){
+        var table_loan_amout = (parseFloat(loan_amount) + parseFloat(loan_advance_interest)).toFixed(2);
+      }else{
+        var table_loan_amout = parseFloat(loan_amount).toFixed(2);
+      }
+      var table_int_rate = currency_symbols+'0';
 
     }
 
@@ -862,7 +819,7 @@ if (setting_data.down_payment_option == '1') {
       table_data += '<td class="extra-payment-column">'+currency_symbols+'0.00'+'</td>';
     }
     table_data += '<td>'+table_int_rate+'</td>';
-    table_data += '<td>' +table_loan_amout+ '</td>';
+    table_data += '<td>'+currency_symbols+''+table_loan_amout + '</td>';
     table_data += '</tr>';
 
   }
@@ -878,6 +835,19 @@ if (setting_data.extra_payment_option == '1') {
 } 
 
 
+if (payment_type == "In Advance") {
+
+     table_data += '<tr>';
+        table_data += '<td>*</td>';
+        table_data += '<td>'+currency_symbols+'0.00'+'</td>';
+        if(setting_data.extra_payment_option == '1'){
+          table_data += '<td class="extra-payment-column">'+currency_symbols+'0.00'+'</td>';
+        }
+        table_data += '<td>'+currency_symbols+''+(setting_data.remove_decimal_point == 1 ? parseInt(loan_advance_interest): parseFloat(loan_advance_interest).toFixed(2))+'<span style="font-weight: bold;font-size:12px;"> (Advanced)</span></td>';
+        table_data += '<td>'+currency_symbols+ '' +(setting_data.remove_decimal_point == 1 ? parseInt(loan_amount) : parseFloat(loan_amount) )+ '</td>';
+        table_data += '</tr>';
+}
+
 
 for (var i = 1; i <= loan_terms_month; i++) {
   if (setting_data.remove_decimal_point == 1) {
@@ -886,11 +856,7 @@ for (var i = 1; i <= loan_terms_month; i++) {
     rmv_decimal = 0;
   }
 
-  if (payment_type == "In Advance" && i == 1) {
-    is_advanced = ' <span style="font-weight: bold;font-size:12px;">(Advanced)</span>';
-  } else {
-    is_advanced = "";
-  }
+
 
   count = loan_terms_month - i;
 
@@ -928,7 +894,7 @@ for (var i = 1; i <= loan_terms_month; i++) {
 
 
 
-table_data += "<tr>";
+table_data += "<tr class='emi-row'>";
 table_data += "<td>" + i + "</td>";
 if (setting_data.remove_decimal_point == 1) {
   var display_monthly_payment = Math.ceil(monthly_payment);
@@ -963,15 +929,15 @@ if(setting_data.extra_payment_option == '1' && extra_payment > 0 && parseInt(bal
 
       if(ballon_amounts > old_balance_for_extra_pay){
 
-        Updated_EMI = old_balance_for_extra_pay+interest;
+        Updated_EMI = Number(old_balance_for_extra_pay)+Number(interest);
 
       }
       else{
 
-        Updated_EMI = old_balance_for_extra_pay+interest+parseFloat(ballon_amounts);
+        Updated_EMI = Number(old_balance_for_extra_pay)+Number(interest)+parseFloat(ballon_amounts);
 
         if(Updated_EMI > old_balance_for_extra_pay){
-          Updated_EMI = old_balance_for_extra_pay+interest;
+          Updated_EMI = Number(old_balance_for_extra_pay)+Number(interest);
         }
 
 
@@ -980,7 +946,7 @@ if(setting_data.extra_payment_option == '1' && extra_payment > 0 && parseInt(bal
 
     }
     else{
-      Updated_EMI = old_balance_for_extra_pay+interest;
+      Updated_EMI = Number(old_balance_for_extra_pay)+Number(interest);
     }
 
     if (setting_data.remove_decimal_point == 1) {
@@ -1171,15 +1137,13 @@ if (setting_data.remove_decimal_point == 1) {
   table_data +=
   "<td>" +
   currency_symbols +
-  parseInt(interest) +
-  is_advanced +
+  parseInt(interest)
   "</td>";
 } else {
   table_data +=
   "<td>" +
   currency_symbols +
-  interest.toFixed(2) +
-  is_advanced +
+ parseFloat(interest).toFixed(2)
   "</td>";
 }
 
@@ -1215,7 +1179,7 @@ if(setting_data.extra_payment_option == '1'){
 
      if (payment_type == "In Advance" && i==1) { 
 
-         total_interest_for_extra_pay = parseInt(total_interest_for_extra_pay);
+         total_interest_for_extra_pay = parseInt(total_interest_for_extra_pay) + parseInt(interest);
 
      }
      else{
@@ -1227,7 +1191,7 @@ if(setting_data.extra_payment_option == '1'){
 
     if (payment_type == "In Advance" && i==1) { 
 
-      total_interest_for_extra_pay = parseFloat(total_interest_for_extra_pay); 
+      total_interest_for_extra_pay = parseFloat(total_interest_for_extra_pay) + parseFloat(interest);
 
     }
     else{
@@ -1391,7 +1355,7 @@ for (var p = 1; p <= loan_terms_month; p++) {
     rmv_decimal
     );
   
-  var principal = monthly_payment - parseFloat(interest.toFixed(2));
+  var principal = monthly_payment - parseFloat(interest).toFixed(2);
   
   if (p == loan_terms_month) {
     balance = balance - principal - ballon_amounts;
@@ -1456,7 +1420,7 @@ if (loan_terms_month > 120) {
       balance_arr.push(parseInt(principal));
     }
   } else {
-    remainig_interests.push(parseFloat(interest.toFixed(2)));
+    remainig_interests.push(parseFloat(interest).toFixed(2));
     if(setting_data.chart_types == 'stacked_bar'){
       balance_arr.push(parseFloat(balance.toFixed(2)));
       total_monthly_payment.push(parseFloat(monthly_payment.toFixed(2)));
@@ -2126,6 +2090,10 @@ jQuery("#interest_rate_range_dis").html(
 loan_calculation_process();
 });
 jQuery("#ballon_amounts_per").blur(function () {
+  if (jQuery("#extra_payment").length) {
+    jQuery("#extra_payment").val(0);   
+    jQuery("#extra_payment_range").val(0);   
+  }
   var currency_symbol = setting_data.currency_symbols;
   jQuery("#ballon_amount_range").val(
     jQuery("#ballon_amounts_per").val().replaceAll("%", "")
@@ -2371,6 +2339,10 @@ var loan_terms_range = document.getElementById("loan_terms_range");
 
     // Update the current slider value (each time you drag the slider handle)
     ballon_amount_range.oninput = function () {
+      if (jQuery("#extra_payment").length) {
+        jQuery("#extra_payment").val(0);   
+        jQuery("#extra_payment_range").val(0);   
+      }
       jQuery("#ballon_amounts_per").val(this.value);
       jQuery("#ballon_amounts_per_dis").html(this.value + "%");
       if (setting_data.remove_decimal_point == 1) {
@@ -2769,7 +2741,11 @@ var loan_terms_range = document.getElementById("loan_terms_range");
 
        /* check if down payment value entered */
    jQuery("#extra_payment").on("blur", function () {
-
+    if (jQuery("#ballon_amounts").length) {
+      jQuery("#ballon_amounts").val(0);
+      jQuery("#ballon_amounts_per").val(0);   
+      jQuery("#ballon_amount_range").val(0);   
+    }
     var extra_payment = $(this).val();
     var loan_amount = jQuery("#loan_amount").val();
 
@@ -2814,7 +2790,11 @@ var loan_terms_range = document.getElementById("loan_terms_range");
 
       // Update the current slider value (each time you drag the slider handle)
    extra_payment_range.oninput = function (e) {
-
+    if (jQuery("#ballon_amounts").length) {
+      jQuery("#ballon_amounts").val(0);
+      jQuery("#ballon_amounts_per").val(0);   
+      jQuery("#ballon_amount_range").val(0);   
+    }
     jQuery("#extra_payment").val(addCommas(this.value));       
 
     value = parseInt(
@@ -3082,7 +3062,7 @@ loan_calculation_process(); // call function
           );
         var advance_cal = loan_advance_interest_cal(
           repayment_frequency_val,
-          adloan_amount,
+          loan_amount,
           interest_rates
           );
         loan_advance_interest = advance_cal.loan_advance_interest;
@@ -3284,30 +3264,8 @@ loan_calculation_process(); // call function
       if (ballon_amounts > 0) {     
 
 
-        ballon_amt_interest = (ballon_amounts * interest_rates) / 100;        
-
-
-        if(repayment_frequency_val=='Fortnight'){       
-
-          var total_months_terms_fortnight = 26;
-          per_month_ballon_amt = ballon_amt_interest / total_months_terms_fortnight;        
-
-        }
-        else if(repayment_frequency_val=='Weekly'){
-
-          var total_months_terms_weekly = 52;
-          per_month_ballon_amt = ballon_amt_interest / total_months_terms_weekly;
-
-        }
-        else{
-
-          per_month_ballon_amt = ballon_amt_interest / total_months_terms;
-
-        }
-
-
-
-
+        ballon_amt_interest = cal_total_interest_on_balloon_amount(repayment_frequency_val,ballon_amounts,interest_rates,loan_terms_month);      
+          per_month_ballon_amt = ballon_amt_interest / loan_terms_month;
       }
     } else {
       var emi_cal = cal_emi_amount_frequency_payment_options(
@@ -3320,35 +3278,15 @@ loan_calculation_process(); // call function
 
       monthly_payment = emi_cal.emi_amount;
 
-      var total_interests = monthly_payment * loan_terms_month - loan_amount;     
-
+      var total_interests = (monthly_payment * loan_terms_month) - loan_amount;     
       var per_month_ballon_amt = 0;
       var ballon_amt_interest = 0;
 
       if (ballon_amounts > 0) {
 
 
-        ballon_amt_interest = (ballon_amounts * interest_rates) / 100;
-
-
-        if(repayment_frequency_val=='Fortnight'){       
-
-          var total_months_terms_fortnight = 26;
-          per_month_ballon_amt = ballon_amt_interest / total_months_terms_fortnight;        
-
-        }
-        else if(repayment_frequency_val=='Weekly'){
-
-          var total_months_terms_weekly = 52;
-          per_month_ballon_amt = ballon_amt_interest / total_months_terms_weekly;
-
-        }
-        else{
-
-          per_month_ballon_amt = ballon_amt_interest / total_months_terms;
-
-        }
-
+        ballon_amt_interest = cal_total_interest_on_balloon_amount(repayment_frequency_val,ballon_amounts,interest_rates,loan_terms_month);
+        per_month_ballon_amt = ballon_amt_interest / loan_terms_month;
       }
     }
 
@@ -3384,7 +3322,7 @@ loan_calculation_process(); // call function
      total_interests =
      parseInt(total_interests) +
      parseInt(ballon_amounts) +
-     parseInt(ballon_amt_interest) * loan_terms;
+     parseInt(ballon_amt_interest);
      monthly_payment =
      parseInt(monthly_payment) + parseInt(per_month_ballon_amt);   
 
@@ -3415,10 +3353,8 @@ loan_calculation_process(); // call function
     total_interests =
     parseFloat(total_interests) +
     parseFloat(ballon_amounts) +
-    parseFloat(ballon_amt_interest) * loan_terms;
-    monthly_payment =
-    parseFloat(monthly_payment) + parseFloat(per_month_ballon_amt);
-
+    parseFloat(ballon_amt_interest);
+    monthly_payment = parseFloat(monthly_payment) + parseFloat(per_month_ballon_amt);
 
   }
   
@@ -3621,16 +3557,7 @@ if (setting_data.remove_decimal_point == 1) {
 
 
     var total_sum_interests =
-    total_interests < loan_advance_interest
-    ? addCommas(
-      parseFloat(total_interests).toFixed(2)
-      )
-    : addCommas(
-      (
-        parseFloat(total_interests) -
-        parseFloat(loan_advance_interest)
-        ).toFixed(2)
-      );      
+    total_interests < loan_advance_interest ? parseFloat(total_interests).toFixed(2):parseFloat(total_interests).toFixed(2);      
 
 
       /* check for NAN value */ 
@@ -3643,8 +3570,6 @@ if (setting_data.remove_decimal_point == 1) {
 
   }
 }
-
-    //jQuery("#total_interests_years").html(display_year_str);
 
 var currency_symbols = setting_data.currency_symbols;
 
@@ -3666,16 +3591,24 @@ if (setting_data.down_payment_option == '1') {
 
     if (setting_data.remove_decimal_point == 1) {
 
-      var table_down_payment = currency_symbols+down_payment;
-      var table_loan_amout = currency_symbols+loan_amount;
+      var table_down_payment = currency_symbols+parseInt(down_payment);
+      if(loan_advance_interest > 0){
+        var table_loan_amout = parseInt(loan_amount) + parseInt(loan_advance_interest);
+      }else{
+        var table_loan_amout = parseInt(loan_amount);
+      }
       var table_int_rate = currency_symbols+'0';
 
     }
     else{
 
-      var table_down_payment = currency_symbols+down_payment+'.00';
-      var table_loan_amout = currency_symbols+loan_amount+'.00';
-      var table_int_rate = currency_symbols+'0.00';
+      var table_down_payment = currency_symbols+parseFloat(down_payment).toFixed(2);
+      if(loan_advance_interest > 0){
+        var table_loan_amout = (parseFloat(loan_amount) + parseFloat(loan_advance_interest)).toFixed(2);
+      }else{
+        var table_loan_amout = parseFloat(loan_amount).toFixed(2);
+      }
+      var table_int_rate = currency_symbols+'0';
 
     }
 
@@ -3687,7 +3620,7 @@ if (setting_data.down_payment_option == '1') {
       table_data += '<td class="extra-payment-column">'+currency_symbols+'0.00'+'</td>';
     }
     table_data += '<td>'+table_int_rate+'</td>';
-    table_data += '<td>' +table_loan_amout+ '</td>';
+    table_data += '<td>'+currency_symbols+''+table_loan_amout + '</td>';
     table_data += '</tr>';
 
   }
@@ -3702,7 +3635,18 @@ if (setting_data.extra_payment_option == '1') {
   var total_extra_payment = 0;
 }   
 
+if (payment_type == "In Advance") {
 
+     table_data += '<tr>';
+        table_data += '<td>*</td>';
+        table_data += '<td>'+currency_symbols+'0.00'+'</td>';
+        if(setting_data.extra_payment_option == '1'){
+          table_data += '<td class="extra-payment-column">'+currency_symbols+'0.00'+'</td>';
+        }
+        table_data += '<td>'+currency_symbols+''+(setting_data.remove_decimal_point == 1 ? parseInt(loan_advance_interest): parseFloat(loan_advance_interest).toFixed(2))+'<span style="font-weight: bold;font-size:12px;"> (Advanced)</span></td>';
+        table_data += '<td>'+currency_symbols+ '' +(setting_data.remove_decimal_point == 1 ? parseInt(loan_amount) : parseFloat(loan_amount) )+ '</td>';
+        table_data += '</tr>';
+}
 
 
 for (var i = 1; i <= loan_terms_month; i++) {
@@ -3712,18 +3656,11 @@ for (var i = 1; i <= loan_terms_month; i++) {
     rmv_decimal = 0;
   }
   
-  if (payment_type == "In Advance" && i == 1) {
-    is_advanced = ' <span style="font-weight: bold;font-size:12px;">(Advanced)</span>';
-  } else {
-    is_advanced = "";
-  }
-  
-  count = loan_terms_month - i;
-  
+  count = loan_terms_month - i; 
   var interest = cal_interest_amount_by_fre_payment_option(
     repayment_frequency_val,
     count,
-    balance,
+    parseFloat(balance).toFixed(2),
     interest_rates,
     rmv_decimal
     );
@@ -3752,10 +3689,9 @@ for (var i = 1; i <= loan_terms_month; i++) {
       /* deduct extra payment from  balance in table entry */
 
 
-
-
-table_data += "<tr>";
+table_data += "<tr class='emi-row'>";
 table_data += "<td>" + i + "</td>";
+
 if (setting_data.remove_decimal_point == 1) {
   var display_monthly_payment = Math.ceil(monthly_payment);
 } else {
@@ -3789,15 +3725,15 @@ if(setting_data.extra_payment_option == '1' && extra_payment > 0 && parseInt(bal
 
       if(ballon_amounts > old_balance_for_extra_pay){
 
-        Updated_EMI = old_balance_for_extra_pay+interest;
+        Updated_EMI = Number(old_balance_for_extra_pay)+Number(interest);
 
       }
       else{
 
-        Updated_EMI = old_balance_for_extra_pay+interest+parseFloat(ballon_amounts);
+        Updated_EMI = Number(old_balance_for_extra_pay)+Number(interest)+parseFloat(ballon_amounts);
 
         if(Updated_EMI > old_balance_for_extra_pay){
-          Updated_EMI = old_balance_for_extra_pay+interest;
+          Updated_EMI = Number(old_balance_for_extra_pay)+Number(interest);
         }
 
 
@@ -3806,7 +3742,7 @@ if(setting_data.extra_payment_option == '1' && extra_payment > 0 && parseInt(bal
 
     }
     else{
-      Updated_EMI = old_balance_for_extra_pay+interest;
+      Updated_EMI =   Number(old_balance_for_extra_pay) + Number(interest);
     }
 
     if (setting_data.remove_decimal_point == 1) {
@@ -3998,14 +3934,12 @@ if (setting_data.remove_decimal_point == 1) {
   "<td>" +
   currency_symbols +
   parseInt(interest) +
-  is_advanced +
   "</td>";
 } else {
   table_data +=
   "<td>" +
   currency_symbols +
-  interest.toFixed(2) +
-  is_advanced +
+  parseFloat(interest).toFixed(2) +
   "</td>";
 }
 
@@ -4034,16 +3968,13 @@ if (parseInt(balance) < 0) {
 
 table_data += "</tr>";
 
-
-/* extra payment calculate total interest and break loop of table entry wnen balance get 0 */
-
 if(setting_data.extra_payment_option == '1'){
 
    if (setting_data.remove_decimal_point == 1) {
 
      if (payment_type == "In Advance" && i==1) { 
 
-         total_interest_for_extra_pay = parseInt(total_interest_for_extra_pay);
+         total_interest_for_extra_pay = parseInt(total_interest_for_extra_pay) + parseInt(interest);
 
      }
      else{
@@ -4054,8 +3985,7 @@ if(setting_data.extra_payment_option == '1'){
   else{
 
     if (payment_type == "In Advance" && i==1) { 
-
-      total_interest_for_extra_pay = parseFloat(total_interest_for_extra_pay); 
+      total_interest_for_extra_pay = parseFloat(total_interest_for_extra_pay) + parseFloat(interest);
 
     }
     else{
@@ -4215,7 +4145,7 @@ for (var p = 1; p <= loan_terms_month; p++) {
     rmv_decimal
     );
   
-  var principal = monthly_payment - parseFloat(interest.toFixed(2));
+  var principal = monthly_payment - parseFloat(interest).toFixed(2);
   
   if (p == loan_terms_month) {
     balance = balance - principal - ballon_amounts;
@@ -4280,7 +4210,7 @@ if (loan_terms_month > 120) {
       balance_arr.push(parseInt(principal));
     }
   } else {
-    remainig_interests.push(parseFloat(interest.toFixed(2)));
+    remainig_interests.push(parseFloat(interest).toFixed(2));
     if(setting_data.chart_types == 'stacked_bar'){
       balance_arr.push(parseFloat(balance.toFixed(2)));
       total_monthly_payment.push(parseFloat(monthly_payment.toFixed(2)));
@@ -4964,6 +4894,10 @@ loan_calculation_process();
 });
 
 jQuery("#ballon_amounts_per").blur(function () {
+  if (jQuery("#extra_payment").length) {
+    jQuery("#extra_payment").val(0);   
+    jQuery("#extra_payment_range").val(0);   
+  }
   var currency_symbol = setting_data.currency_symbols;
   jQuery("#ballon_amount_range").val(
     jQuery("#ballon_amounts_per").val().replaceAll("%", "")
@@ -5290,7 +5224,10 @@ value +
 
     // Update the current slider value (each time you drag the slider handle)
 ballon_amount_range.oninput = function (e) {      
-
+  if (jQuery("#extra_payment").length) {
+    jQuery("#extra_payment").val(0);   
+    jQuery("#extra_payment_range").val(0);   
+  }
   jQuery("#ballon_amounts_per").val(this.value);
   jQuery("#ballon_amounts_per_dis").html(this.value + "%");
   if (setting_data.remove_decimal_point == 1) {
@@ -5726,7 +5663,11 @@ if (setting_data.extra_payment_option == '1') {
 
        /* check if down payment value entered */
  jQuery("#extra_payment").on("blur", function () {
-
+  if (jQuery("#ballon_amounts").length) {
+    jQuery("#ballon_amounts").val(0);
+    jQuery("#ballon_amounts_per").val(0);   
+    jQuery("#ballon_amount_range").val(0);   
+  }
   var extra_payment = $(this).val();
   var loan_amount = jQuery("#loan_amount").val();
 
@@ -5771,7 +5712,11 @@ if (setting_data.extra_payment_option == '1') {
 
       // Update the current slider value (each time you drag the slider handle)
  extra_payment_range.oninput = function (e) {
-
+  if (jQuery("#ballon_amounts").length) {
+    jQuery("#ballon_amounts").val(0);
+    jQuery("#ballon_amounts_per").val(0);   
+    jQuery("#ballon_amount_range").val(0);   
+  }
   jQuery("#extra_payment").val(addCommas(this.value));       
 
   value = parseInt(
@@ -5897,14 +5842,7 @@ function convert_total_terms_to_year_month(loan_terms,repayment_frequency_val){
 
   if (setting_data.extra_payment_option == '1' && parseInt(jQuery('#extra_payment').val().replaceAll(",", "")) > 0) {      
 
-      loan_terms = parseInt(jQuery('#loan_table_data tr').length);
-
-      if(setting_data.down_payment_option == '1' && parseInt(jQuery('#down_payment').val()) > 0){
-
-        loan_terms = loan_terms - 1;
-
-      }    
-
+      loan_terms = parseInt(jQuery('#loan_table_data tr.emi-row').length); 
 
   }
 
@@ -6388,27 +6326,8 @@ function get_total_interest_without_extra_payment(){
       if (ballon_amounts > 0) {     
 
 
-        ballon_amt_interest = (ballon_amounts * interest_rates) / 100;        
-
-
-        if(repayment_frequency_val=='Fortnight'){       
-
-          var total_months_terms_fortnight = 26;
-          per_month_ballon_amt = ballon_amt_interest / total_months_terms_fortnight;        
-
-        }
-        else if(repayment_frequency_val=='Weekly'){
-
-          var total_months_terms_weekly = 52;
-          per_month_ballon_amt = ballon_amt_interest / total_months_terms_weekly;
-
-        }
-        else{
-
-          per_month_ballon_amt = ballon_amt_interest / total_months_terms;
-
-        }
-
+        ballon_amt_interest = cal_total_interest_on_balloon_amount(repayment_frequency_val,ballon_amounts,interest_rates,loan_terms_month);       
+          per_month_ballon_amt = ballon_amt_interest / loan_terms_month;
       }
     } else {
 
@@ -6422,7 +6341,7 @@ function get_total_interest_without_extra_payment(){
 
       monthly_payment = emi_cal.emi_amount;
 
-      var total_interests = monthly_payment * loan_terms_month - loan_amount;     
+      var total_interests = (monthly_payment * loan_terms_month) - loan_amount;     
 
       var per_month_ballon_amt = 0;
       var ballon_amt_interest = 0;
@@ -6430,27 +6349,8 @@ function get_total_interest_without_extra_payment(){
       if (ballon_amounts > 0) {
 
 
-        ballon_amt_interest = (ballon_amounts * interest_rates) / 100;
-
-
-        if(repayment_frequency_val=='Fortnight'){       
-
-          var total_months_terms_fortnight = 26;
-          per_month_ballon_amt = ballon_amt_interest / total_months_terms_fortnight;        
-
-        }
-        else if(repayment_frequency_val=='Weekly'){
-
-          var total_months_terms_weekly = 52;
-          per_month_ballon_amt = ballon_amt_interest / total_months_terms_weekly;
-
-        }
-        else{
-
-          per_month_ballon_amt = ballon_amt_interest / total_months_terms;
-
-        }
-
+        ballon_amt_interest = cal_total_interest_on_balloon_amount(repayment_frequency_val,ballon_amounts,interest_rates,loan_terms_month);
+        per_month_ballon_amt = ballon_amt_interest / loan_terms_month;
       }
     }
 
@@ -6483,7 +6383,7 @@ function get_total_interest_without_extra_payment(){
      total_interests =
      parseInt(total_interests) +
      parseInt(ballon_amounts) +
-     parseInt(ballon_amt_interest) * loan_terms;
+     parseInt(ballon_amt_interest);
      monthly_payment =
      parseInt(monthly_payment) + parseInt(per_month_ballon_amt);   
 
