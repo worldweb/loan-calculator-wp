@@ -3,7 +3,7 @@
  * Plugin Name: Loan Calculator WP
  * Plugin URI: https://www.worldwebtechnology.com/
  * Description: Advanced Loan Calculator for Home Loans, Personal Loans, and various other types of loans. Includes features like a repayment chart, amortization table, video tab, balloon payment option, and supports all currencies. Use the contact form shortcode for easy access.
- * Version: 1.5.7
+ * Version: 2.0.0
  * Author: World Web Technology
  * Author URI: https://www.worldwebtechnology.com/
  * Text Domain: loan-calculator-wp
@@ -23,10 +23,10 @@ if (!defined('ABSPATH')) exit;
  * Define Some needed predefined variables
  * 
  * @package Loan Calculator
- * @since 1.0.0
+ * @since 2.0.0
  */
 if (!defined('WW_LOAN_CALCULATOR_VERSION')) {
-    define('WW_LOAN_CALCULATOR_VERSION', '1.5.7'); //version of plugin
+    define('WW_LOAN_CALCULATOR_VERSION', '2.0.0'); //version of plugin
 }
 if (!defined('WW_LOAN_CALCULATOR_TEXT_DOMAIN')) { //check if variable is not defined previous then define it
     define('WW_LOAN_CALCULATOR_TEXT_DOMAIN', 'loan-calculator-wp'); //this is for multi language support in plugin
@@ -370,38 +370,42 @@ add_filter('plugin_action_links_' . plugin_basename(__FILE__), 'loan_calculator_
 
 add_filter( 'upgrader_install_package_result', 'lcp_upgrader_install_package_result', 10, 2 );
 function lcp_upgrader_install_package_result( $result, $hook_extra ) {
-    if (strpos($result['destination_name'], 'worldweb-loan-calculator-wp-pro-') !== false) {
-        if( ! empty( $result['destination'] ) ) {
-            //first rename the plugin directory downloaded from git as it contains username and release informations.
-            $plugin_dir       = WP_PLUGIN_DIR; // Plugin directory path
-            $desired_folder   = 'loan-calculator-wp-pro'; // Correct plugin folder name
-            $plugin_main_file = 'loan-calculator-wp-pro.php'; // Main plugin file name
-            $old_folder_path  = $plugin_dir . '/' . $result['destination_name'];
-            $new_folder_path  = $plugin_dir . '/' . $desired_folder;
 
-            // Get the active plugins list
-            $active_plugins = get_option('active_plugins');
+    if( isset($result->errors['folder_exists'][0]) && $result->errors['folder_exists'][0] != "Destination folder already exists." ) {
 
-            // Deactivate the plugin before renaming if it's active
-            $was_active = in_array($result['destination_name'] . '/' . $plugin_main_file, $active_plugins);
+        if (strpos($result['destination_name'], 'worldweb-loan-calculator-wp-pro-') !== false) {
+            if( ! empty( $result['destination'] ) ) {
+                //first rename the plugin directory downloaded from git as it contains username and release informations.
+                $plugin_dir       = WP_PLUGIN_DIR; // Plugin directory path
+                $desired_folder   = 'loan-calculator-wp-pro'; // Correct plugin folder name
+                $plugin_main_file = 'loan-calculator-wp-pro.php'; // Main plugin file name
+                $old_folder_path  = $plugin_dir . '/' . $result['destination_name'];
+                $new_folder_path  = $plugin_dir . '/' . $desired_folder;
 
-            if ($was_active) {
-                deactivate_plugins($result['destination_name'] . '/' . $plugin_main_file);
-            }
+                // Get the active plugins list
+                $active_plugins = get_option('active_plugins');
 
-            // Rename the folder
-            if (@rename($old_folder_path, $new_folder_path)) {
-                // Update WordPress option to reference new path
-                $plugin_slug = $desired_folder . '/' . $plugin_main_file;
+                // Deactivate the plugin before renaming if it's active
+                $was_active = in_array($result['destination_name'] . '/' . $plugin_main_file, $active_plugins);
 
                 if ($was_active) {
-                    activate_plugin($plugin_slug);
+                    deactivate_plugins($result['destination_name'] . '/' . $plugin_main_file);
                 }
 
-                $result['destination']      = $new_folder_path;
-                $result['destination_name'] = $desired_folder;  
-            } else {
-                error_log("Failed to rename plugin folder.");
+                // Rename the folder
+                if (@rename($old_folder_path, $new_folder_path)) {
+                    // Update WordPress option to reference new path
+                    $plugin_slug = $desired_folder . '/' . $plugin_main_file;
+
+                    if ($was_active) {
+                        activate_plugin($plugin_slug);
+                    }
+
+                    $result['destination']      = $new_folder_path;
+                    $result['destination_name'] = $desired_folder;  
+                } else {
+                        error_log("Failed to rename plugin folder.");
+                }
             }
         }
     }
