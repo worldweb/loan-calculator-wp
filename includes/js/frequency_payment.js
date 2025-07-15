@@ -216,8 +216,7 @@ function cal_interest_amount_by_fre_payment_option(frp_option, loan_terms_months
 
     }  
 
-
-    return parseFloat(monthlyInterestAmount).toFixed(2);
+    return monthlyInterestAmount;
 
   } else if (frp_option === 'Yearly') {
     
