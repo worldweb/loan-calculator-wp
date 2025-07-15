@@ -61,7 +61,8 @@ if (!class_exists('WW_Loan_Calculator_Admin_Pages')) {
 						$avoid_notice = get_option('lc_avoid_notice');
 						$display_notice_yes = get_option('lc_rating_notice');
 						$last_notice_timestamp = get_option('last_notice_timestamp');
-						$future_popup_date = strtotime("+7 days");
+						$future_popup_date = strtotime("+7 days",$last_notice_timestamp);
+						$current_time = strtotime('now');
 
 						if (get_option('plugin_activation_time')) {
 							if ($display_notice_yes == 0 && $avoid_notice == 0) {
@@ -78,7 +79,7 @@ if (!class_exists('WW_Loan_Calculator_Admin_Pages')) {
 								</div>
 
 								<?php
-							} else if ($last_notice_timestamp >= $future_popup_date && $avoid_notice == 1) {
+							} else if ($current_time >= $future_popup_date && $avoid_notice == 1) {
 								?>
 
 								<div class="admin_notice_hide notice notice-info is-dismissible">

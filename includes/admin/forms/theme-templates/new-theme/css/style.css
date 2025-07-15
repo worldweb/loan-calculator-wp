@@ -39,10 +39,14 @@
     border: none !important;
 }
 .loan-option-text-info .slider::-moz-range-thumb {
-    width: 11px !important;
-    height: 25px !important;
-    background: #4caf50;
+    width: 25px;
+    height: 25px;
+    background: var(--calc-background-color);
+    border-radius: 50%;
     cursor: pointer;
+    border: none;
+    border: none !important;
+    margin-top: 0;
 }
 .tabs-dropdown {
     display: none;

@@ -29,10 +29,14 @@
 }
 
 .ctm_main_wrap .slider::-moz-range-thumb {
-    width: 11px;
+    width: 25px;
     height: 25px;
-    background: #4caf50;
+    background: var(--calc-background-color);
+    border-radius: 50%;
     cursor: pointer;
+    border: none;
+    border: none !important;
+    margin-top: 0;
 }
 
 .ctm_main_wrap .slider::-webkit-slider-runnable-track {

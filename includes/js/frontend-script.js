@@ -2830,7 +2830,13 @@ loan_calculation_process(); // call function
       repayment_frequency_val
       );  
 
-
+    var default_nop_value = jQuery("input[name='loan_terms']").val();
+    /* visible note below chart */
+    if(default_nop_value > 120){
+      jQuery('body').find('.chart-note').show();
+    }else{
+      jQuery('body').find('.chart-note').hide();
+    }
     var loan_amount = jQuery("#loan_amount").val();
     if (setting_data.remove_decimal_point == 1) {
       loan_amount = parseInt(loan_amount.replaceAll(",", ""));
