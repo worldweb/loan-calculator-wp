@@ -19,4 +19,66 @@
 }
 
 
+/* Start css for Repayment Frequency */
+.sortable-container {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.sortable-wrapper {
+    flex: 1;
+    min-width: 250px;
+}
+
+.sortable-wrapper h4 {
+    font-size: 14px;
+    margin: 8px 0 8px 0;
+    
+}
+
+.sortable-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    background: #f9f9f9;
+    border: 1px solid #ccc;
+    min-height: 40px;
+}
+
+.sortable-list li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    background: #fff;
+    display: flex;
+    align-items: center;
+}
+
+.sortable-list li:last-child {
+    border-bottom: none;
+}
+
+.sortable-list input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+.disabled-options li {
+    cursor: default;
+    opacity: 0.8;
+}
+
+.enabled-options li {
+    cursor: move;
+}
+.drag-handle {
+    cursor: move;
+    margin-right: 10px;
+    font-size: 18px;
+    color: #888;
+    user-select: none; /* prevent text selection on drag */
+}
+
+
+/* end css for Repayment Frequency */
+
 

@@ -2464,6 +2464,11 @@ body.theme-astra span.balance-legend-icon:after {content: "";position: absolute;
 #total_interests_amt_hidden{
     display: none;
 }
+select.single-val-option {
+    appearance: none;
+    pointer-events: none;
+    padding: 10px;
+}
 
 /****************************************************/
 /**************** START Media Screen ****************/
