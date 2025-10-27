@@ -413,11 +413,15 @@ $chart_types = isset($loan_all_setting_data['chart_types']) ? $loan_all_setting_
 
                                         <div class="input-container">
                                             <?php $backgroud_arrow_logo = WW_LOAN_CALCULATOR_URL.'includes/images/down-arrow.svg'; ?>
-                                            <style type="text/css"> .site-wrap-repayment-freq-section:after {background-image: url(<?php echo esc_attr($backgroud_arrow_logo); ?>); } </style>
+                                            <style type="text/css"> 
+                                            .site-wrap-repayment-freq-section:after {background-image: url(<?php echo esc_attr($backgroud_arrow_logo); ?>); } 
+                                            .site-wrap-repayment-freq-section.single-val-option-main:after {background-image: none; }
+                                            </style>
                                             <?php if (!empty($get_repayment_frequency)) {
                                                 $rpfclass = (count($get_repayment_frequency) == 1 ? 'single-val-option' : '');
+                                                $rpfmainclass = (count($get_repayment_frequency) == 1 ? 'single-val-option-main' : '');
                                                 ?>
-                                                <div class="site-wrap-repayment-freq-section">
+                                                <div class="site-wrap-repayment-freq-section <?php echo esc_attr($rpfmainclass); ?>">
                                                     <select name="repayment_freq" id="repayment_freq" class="payment-opt-drop <?php echo esc_attr($rpfclass); ?>">
                                                         <?php
                                                         foreach ($get_repayment_frequency as $key => $value) {

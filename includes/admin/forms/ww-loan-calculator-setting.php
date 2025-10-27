@@ -430,18 +430,71 @@ if($hide_payment_mode == '1'){
                         <label for="repayment_frequency"><strong><?php esc_html_e('Enable Repayment Frequency', 'loan-calculator-wp'); ?></strong></label>
                     </th>
                     <td>
-                        <input type="checkbox" name="ww_loan_option[repayment_frequency][]" id="repayment_frequency_option_monthly" value="Monthly" class="regular-text" <?php echo ((!empty($get_repayment_frequency) && in_array('Monthly', $get_repayment_frequency)) ? "checked" : ""); ?>><label for="repayment_frequency_option_monthly"><?php esc_html_e('Monthly', 'loan-calculator-wp'); ?></label>
-                        &nbsp;|&nbsp;
-                        <input type="checkbox" name="ww_loan_option[repayment_frequency][]" id="repayment_frequency_option_quarterly" value="Quarterly" class="regular-text" <?php echo ((!empty($get_repayment_frequency) && in_array('Quarterly', $get_repayment_frequency)) ? "checked" : ""); ?>><label for="repayment_frequency_option_quarterly"><?php esc_html_e('Quarterly', 'loan-calculator-wp'); ?></label>
-                        &nbsp;|&nbsp;
-                        <input type="checkbox" name="ww_loan_option[repayment_frequency][]" id="repayment_frequency_option_yearly" value="Yearly" class="regular-text" <?php echo ((!empty($get_repayment_frequency) && in_array('Yearly', $get_repayment_frequency)) ? "checked" : ""); ?>><label for="repayment_frequency_option_yearly"><?php esc_html_e('Yearly', 'loan-calculator-wp'); ?></label>
-                        &nbsp;|&nbsp;
-                        <input type="checkbox" name="ww_loan_option[repayment_frequency][]" id="repayment_frequency_option_weekly" value="Weekly" class="regular-text" <?php echo ((!empty($get_repayment_frequency) && in_array('Weekly', $get_repayment_frequency)) ? "checked" : ""); ?>><label for="repayment_frequency_option_weekly"><?php esc_html_e('Weekly', 'loan-calculator-wp'); ?></label>
-                         &nbsp;|&nbsp;
-                        <input type="checkbox" name="ww_loan_option[repayment_frequency][]" id="repayment_frequency_option_fortnight" value="Fortnight" class="regular-text" <?php echo ((!empty($get_repayment_frequency) && in_array('Fortnight', $get_repayment_frequency)) ? "checked" : ""); ?>><label for="repayment_frequency_option_fortnight"><?php esc_html_e('Fortnightly', 'loan-calculator-wp'); ?></label>
-                        </br>
-                        </br>
-                        <i><b style="color:red"><?php esc_html_e('Note', 'loan-calculator-wp') ?></b><?php esc_attr_e(": If no Repayment Frequency Options are selected, the monthly option will be automatically displayed on the frontend by default.", 'loan-calculator-wp') ?></i>
+                        <?php
+                        $frequencies = [
+                            'Monthly'   => __('Monthly', 'loan-calculator-wp'),
+                            'Yearly'    => __('Yearly', 'loan-calculator-wp'),
+                            'Quarterly' => __('Quarterly', 'loan-calculator-wp'),
+                            'Fortnight' => __('Fortnightly', 'loan-calculator-wp'),
+                            'Weekly'    => __('Weekly', 'loan-calculator-wp'),
+                        ];
+
+                        // Get saved selected repayment frequencies in order
+                        $saved_selection = $get_repayment_frequency ?? []; // e.g. ['Yearly', 'Monthly']
+
+                        // Ensure default if nothing selected
+                        if (empty($saved_selection)) {
+                            $saved_selection = ['Monthly'];
+                        }
+
+                        $selected_items = array_values(array_filter($saved_selection, function ($key) use ($saved_selection) {
+                            return in_array($key, $saved_selection);
+                        }));
+
+                        // Get unselected options
+                        $default_order = array_keys($frequencies);
+                        $unselected_items = array_diff($default_order, $selected_items);
+
+                    ?>
+                            <div class="sortable-container">
+                                <!-- Unselected + Not Sortable -->
+                                <div class="sortable-wrapper">
+                                    <h4><?php esc_html_e('Disabled Options', 'loan-calculator-wp'); ?></h4>
+                                    <ul id="sortable-disabled" class="sortable-list disabled-options">
+                                        <?php foreach ($unselected_items as $key): ?>
+                                            <li data-key="<?= esc_attr($key); ?>">
+                                                <label>
+                                                    <input type="checkbox"
+                                                           name="ww_loan_option[repayment_frequency][]"
+                                                           value="<?= esc_attr($key); ?>" class="toggle-repayment">
+                                                    <?= esc_html($frequencies[$key]); ?>
+                                                </label>
+                                            </li>
+                                        <?php endforeach; ?>
+                                    </ul>
+                                </div>
+
+                                <!-- Selected + Sortable -->
+                                <div class="sortable-wrapper">
+                                    <h4><?php esc_html_e('Enabled Options ( Drag to Reorder )', 'loan-calculator-wp'); ?></h4>
+                                    <ul id="sortable-enabled" class="sortable-list enabled-options">
+                                        <?php foreach ($selected_items as $key): ?>
+                                           <li data-key="<?= esc_attr($key); ?>">
+                                                <span class="drag-handle" title="<?php esc_attr_e('Drag to reorder', 'loan-calculator-wp'); ?>">⋮⋮</span>
+                                                <label>
+                                                    <input type="checkbox" checked
+                                                           name="ww_loan_option[repayment_frequency][]"
+                                                           value="<?= esc_attr($key); ?>" class="toggle-repayment">
+                                                    <?= esc_html($frequencies[$key]); ?>
+                                                </label>
+                                            </li>
+
+                                        <?php endforeach; ?>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        <p><i><b style="color:red"><?php esc_html_e('Note', 'loan-calculator-wp'); ?></b> <?php esc_html_e('If no Repayment Frequency Options are selected, the monthly option will be automatically displayed on the frontend by default.', 'loan-calculator-wp'); ?></i></p>
                     </td>
                 </tr>
             </tbody>

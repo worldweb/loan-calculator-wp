@@ -19,7 +19,16 @@ jQuery(document).ready(function ($) {
  if (element != null && element.classList.contains("new-theme-template-section")) {
     //Condition For New theme
     function loan_calculation_process() {
-     var currency_symbol = setting_data.currency_symbols; 
+      var currency_symbol = setting_data.currency_symbols; 
+
+      var default_nop_value = jQuery("input[name='loan_terms']").val();
+      /* visible note below chart */
+      if(default_nop_value > 120){
+        jQuery('body').find('.chart-note').show();
+      }else{
+        jQuery('body').find('.chart-note').hide();
+      }
+
      var loan_amount = jQuery("#loan_amount").val();     
 
      var monthly_payment = 0;
@@ -1966,7 +1975,7 @@ jQuery("#loan_amount").blur(function () {
 });
 
 jQuery("#loan_terms").on("blur", function () {
-    /*on filled input check min max values 6-7-2023*/
+    /*on filled input check min max values*/
   var repayment_freq = jQuery("#repayment_freq option:selected").val();
   var old_repayment_freq = jQuery(
     "input[name='current_repayment_freq']"
@@ -2451,7 +2460,6 @@ var loan_terms_range = document.getElementById("loan_terms_range");
       loan_calculation_process();
     });
     $(document).on("input", "#repayment_freq", function () {
-    /*========start 6-7-2023=========*/
       var repayment_freq = jQuery("#repayment_freq option:selected").val();
       var old_repayment_freq = jQuery(
         "input[name='current_repayment_freq']"
@@ -2510,8 +2518,6 @@ var loan_terms_range = document.getElementById("loan_terms_range");
       "%, " +
       setting_data.back_ground_color +
       " 100%)";
-
-    /*========End 6-7-2023=========*/
       loan_calculation_process();
     });
 
@@ -4764,7 +4770,7 @@ loan_calculation_process();
 });
 
 jQuery("#loan_terms").on("blur", function () {  
-    /*on filled input check min max values 6-7-2023*/
+    /*on filled input check min max values */
   var repayment_freq = jQuery("#repayment_freq option:selected").val();
   var old_repayment_freq = jQuery(
     "input[name='current_repayment_freq']"
@@ -5373,7 +5379,7 @@ $("#payment_type").change(function () {
 
 
 $(document).on("input", "#repayment_freq", function () {
-    /*========start 6-7-2023=========*/
+
   var repayment_freq = jQuery("#repayment_freq option:selected").val();
 
   var old_repayment_freq = jQuery(
@@ -5438,7 +5444,6 @@ $(document).on("input", "#repayment_freq", function () {
   value1 +
   "%,  #c9a208 100%)";
 
-    /*========End 6-7-2023=========*/
   loan_calculation_process();
 });
 

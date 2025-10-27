@@ -3,7 +3,7 @@
  * Plugin Name: Loan Calculator WP
  * Plugin URI: https://www.worldwebtechnology.com/
  * Description: Advanced Loan Calculator for Home Loans, Personal Loans, and various other types of loans. Includes features like a repayment chart, amortization table, video tab, balloon payment option, and supports all currencies. Use the contact form shortcode for easy access.
- * Version: 2.0.3
+ * Version: 2.1.0
  * Author: World Web Technology
  * Author URI: https://www.worldwebtechnology.com/
  * Text Domain: loan-calculator-wp
@@ -26,7 +26,7 @@ if (!defined('ABSPATH')) exit;
  * @since 2.0.0
  */
 if (!defined('WW_LOAN_CALCULATOR_VERSION')) {
-    define('WW_LOAN_CALCULATOR_VERSION', '2.0.3'); //version of plugin
+    define('WW_LOAN_CALCULATOR_VERSION', '2.1.0'); //version of plugin
 }
 if (!defined('WW_LOAN_CALCULATOR_TEXT_DOMAIN')) { //check if variable is not defined previous then define it
     define('WW_LOAN_CALCULATOR_TEXT_DOMAIN', 'loan-calculator-wp'); //this is for multi language support in plugin

@@ -841,6 +841,51 @@ jQuery(document).ready(function (jQuery) {
 	});
 
 
+	/* Start Drag and drop ability js for Repayment Frequency options */
+	function updateOrderField() {
+		var selectedKeys = jQuery('#sortable-enabled li').map(function() {
+			return jQuery(this).data('key');
+		}).get();
+		jQuery('#repayment_frequency_order').val(selectedKeys.join(','));
+	}
+
+				    // Init sortable with drag handle
+	jQuery('#sortable-enabled').sortable({
+		handle: '.drag-handle',
+		update: updateOrderField
+	});
+
+				    // When checkbox toggled
+	jQuery('.toggle-repayment').on('change', function() {
+		var li = jQuery(this).closest('li');
+
+		if (this.checked) {
+				            // Add drag handle span if missing
+			if (li.find('.drag-handle').length === 0) {
+				li.prepend('<span class=\"drag-handle\" title=\"Drag to reorder\">⋮⋮</span>');
+			}
+			li.css('cursor', 'auto');
+			jQuery('#sortable-enabled').append(li);
+		} else {
+				            // Remove drag handle
+			li.find('.drag-handle').remove();
+			li.css('cursor', 'default');
+			jQuery('#sortable-disabled').append(li);
+		}
+		updateOrderField();
+	});
+
+				    // Set initial cursor & drag handle states
+	jQuery('#sortable-disabled li').css('cursor', 'default').find('.drag-handle').remove();
+	jQuery('#sortable-enabled li').css('cursor', 'auto').each(function() {
+		if (jQuery(this).find('.drag-handle').length === 0) {
+			jQuery(this).prepend('<span class=\"drag-handle\" title=\"Drag to reorder\">⋮⋮</span>');
+		}
+	});
+
+	updateOrderField();
+	/* End Drag and drop ability js for Repayment Frequency options */
+
 
 });
 

@@ -32,6 +32,9 @@ if (!class_exists('WW_Loan_Calculator_Script')) {
 				true
 			);
 
+			// add jquery UI for Repayment Frequency drag & drop ability
+			wp_enqueue_script('jquery-ui-sortable');
+
 			// Add JS
 			wp_enqueue_script(
 				'loan-calculator-admin-script',
